@@ -1,0 +1,26 @@
+@use "/styles/mixins" as *;
+@use "/styles/layout" as *;
+
+.header {
+	background-color: white;
+	height: $headerHeight-mobile;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+
+	position: relative;
+	z-index: 3;
+
+	@include mq-desktop {
+		height: $headerHeight-desktop;
+	}
+
+	&Content {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: $padding-section;
+	}
+}

@@ -1,0 +1,29 @@
+@use "/styles/colors" as *;
+@use "/styles/mixins" as *;
+
+.logoText {
+	font-weight: 600;
+	font-size: 2rem;
+	color: $color-secondary;
+}
+
+.mobile {
+	display: block;
+	@include mq-desktop {
+		display: none;
+	}
+}
+
+.desktop {
+	display: none;
+
+	@include mq-desktop {
+		display: block;
+	}
+
+	&Content {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+}

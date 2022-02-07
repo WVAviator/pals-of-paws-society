@@ -1,0 +1,20 @@
+@use "/styles/variables" as *;
+
+$backgroundColor: white;
+
+.menu {
+	transition: all $transition-menuSlides ease-in-out 0ms;
+	z-index: 2;
+	width: calc(100% + $padding-section);
+	background-color: $backgroundColor;
+	position: absolute;
+}
+
+.open {
+	transform: translate(0);
+}
+
+.closed {
+	//top: calc(-1 * ($mobileMenuHeight - $headerHeight-mobile));
+	transform: translateY(-10rem);
+}

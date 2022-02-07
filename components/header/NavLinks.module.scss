@@ -1,0 +1,28 @@
+@use "/styles/variables" as *;
+
+$fontSize: 1.5rem;
+
+.navLinks {
+	list-style: none;
+	text-align: center;
+	color: $color-secondary;
+	font-weight: $fontWeight-bold;
+	font-size: $fontSize;
+
+	li {
+		width: 100%;
+		height: 1.5em;
+
+		cursor: pointer;
+
+		transition: background-color $transition-hoverDuration ease-in-out 0ms;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			background-color: darken(white, 10%);
+		}
+	}
+}

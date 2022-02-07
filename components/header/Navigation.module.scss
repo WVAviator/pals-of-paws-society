@@ -1,0 +1,13 @@
+@use "/styles/variables" as *;
+
+.nav {
+	ul {
+		display: none;
+
+		@include mq-desktop {
+			display: flex;
+			align-content: center;
+			justify-content: space-between;
+		}
+	}
+}
