@@ -43,6 +43,5 @@ $fontSize: 1.25rem;
 }
 
 .closed {
-	//top: calc(-1 * ($mobileMenuHeight - $headerHeight-mobile));
 	transform: translateY(-10rem);
 }
