@@ -23,11 +23,12 @@
 
 		li {
 			transition: color $transition-hoverDuration ease-in-out 0ms;
-		}
 
-		li:hover {
-			background-color: transparent;
-			color: $color-primary;
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				color: $color-primary;
+			}
 		}
 	}
 }

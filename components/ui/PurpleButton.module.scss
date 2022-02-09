@@ -2,7 +2,7 @@
 
 .btn {
 	padding: 0.75em 1.5em;
-	font-weight: $fontWeight-bold;
+	font-weight: $fontWeight-regular;
 	background-image: linear-gradient(
 		to bottom,
 		$color-primary,
@@ -18,7 +18,7 @@
 	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
 	font-size: 1rem;
 	@include mq-desktop {
-		font-size: $fontSize-navigation;
+		font-size: 1.3125rem;
 	}
 
 	cursor: pointer;

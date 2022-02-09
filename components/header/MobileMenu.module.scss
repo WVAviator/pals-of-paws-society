@@ -6,7 +6,7 @@ $fontSize: 1.25rem;
 .menu {
 	transition: all $transition-menuSlides ease-in-out 0ms;
 	z-index: 2;
-	width: calc(100% + $padding-section);
+	width: 100%;
 	background-color: $backgroundColor;
 	position: absolute;
 	padding: 0.5rem 0;
