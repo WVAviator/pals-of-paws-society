@@ -1,0 +1,20 @@
+@use "/styles/variables" as *;
+
+.section {
+	background-color: $color-grayBackground;
+	width: 100vw;
+	overflow: hidden;
+	position: relative;
+}
+
+.pawprints {
+	opacity: 15%;
+}
+
+.imageContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: max(87.5rem, 100vw);
+	transform-origin: center;
+}

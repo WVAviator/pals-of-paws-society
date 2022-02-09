@@ -1,0 +1,25 @@
+@use "/styles/variables" as *;
+
+.contentContainer {
+	width: 100vw;
+	overflow: hidden;
+	padding: $padding-section;
+}
+
+.cardContent {
+	display: flex;
+	justify-content: center;
+
+	align-items: center;
+	flex-wrap: wrap;
+
+	gap: 2rem;
+
+	@include mq-custom(50rem) {
+		justify-content: space-between;
+	}
+
+	> * {
+		flex-basis: 33%;
+	}
+}

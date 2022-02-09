@@ -2,7 +2,7 @@ import Image from "next/image";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import ArrowIcon from "../ui/ArrowIcon";
 import PurpleButton from "../ui/PurpleButton";
-import styles from "./hero.module.scss";
+import styles from "./Hero.module.scss";
 import heroImage from "/public/images/hero.jpg";
 
 const Hero = () => {
