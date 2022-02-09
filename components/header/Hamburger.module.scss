@@ -1,84 +1,82 @@
 @use "/styles/variables" as *;
 
+$iconSize: 30px;
+$iconBarWidth: 5px;
+$iconBarBorderRadius: 2px;
+$iconBarColor: $color-secondary;
+
+$animationTime: 300ms;
+$timingFunctionOpenSlide: ease-in-out;
+$timingFunctionOpenRotate: ease-in-out;
+$timingFunctionCloseRotate: ease-in-out;
+$timingFunctionCloseSlide: ease-in-out;
+
 .menuIcon {
-	@include mq-desktop {
-		display: none;
-	}
+	top: 50%;
+	transform: translateY(-50%);
 
-	display: block;
-
-	margin-right: 1rem;
-	position: relative;
-	z-index: 2;
-
-	width: 30px;
-	height: 30px;
-
-	cursor: pointer;
-
-	> * {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-}
-
-@mixin bar {
-	height: 5px;
-	width: 30px;
-	background-color: $color-secondary;
-	border-radius: 2px;
-	transform-origin: center;
-}
-
-.closed {
-	@include bar;
-	opacity: 100%;
-	transition: all 0ms 250ms;
-
-	&::before {
-		content: "";
-		@include bar;
-		position: absolute;
-		left: 0;
-		bottom: 10px;
-		transition: bottom 250ms 250ms ease-in-out, transform 250ms ease-in-out;
-	}
-
+	&,
+	&::before,
 	&::after {
 		content: "";
-		@include bar;
+		width: 100%;
+		height: $iconBarWidth;
+		background-color: $iconBarColor;
+		border-radius: $iconBarBorderRadius;
+		transform-origin: center;
 		position: absolute;
-		left: 0;
-		bottom: -10px;
-		transition: bottom 250ms 250ms ease-in-out, transform 250ms ease-in-out;
+	}
+
+	&Container {
+		display: block;
+		width: $iconSize;
+		height: $iconSize;
+		margin-right: 1rem;
+		position: relative;
+		cursor: pointer;
+		@include mq-desktop {
+			display: none;
+		}
+	}
+}
+
+$animationTimeSplit: ($animationTime * 0.5);
+$iconSpacing: ($iconSize / 3);
+
+.closed {
+	transition: all 0ms $animationTimeSplit;
+
+	&::before {
+		bottom: $iconSpacing;
+		transition: bottom $animationTimeSplit $animationTimeSplit
+				$timingFunctionOpenSlide,
+			transform $animationTimeSplit $timingFunctionOpenRotate;
+	}
+	&::after {
+		bottom: -$iconSpacing;
+		transition: bottom $animationTimeSplit $animationTimeSplit
+				$timingFunctionOpenSlide,
+			transform $animationTimeSplit $timingFunctionOpenRotate;
 	}
 }
 
 .open {
-	@include bar;
-	transition: all 0ms 250ms;
-	background-color: rgba($color-secondary, 0);
+	background-color: transparent;
+	transition: all 0ms $animationTimeSplit;
 
 	&::before {
-		content: "";
-
-		@include bar;
-		position: absolute;
-		left: 0;
 		bottom: 0;
 		transform: rotate(-45deg);
-		transition: bottom 250ms ease-in-out, transform 250ms 250ms ease-in-out;
+		transition: bottom $animationTimeSplit $timingFunctionCloseSlide,
+			transform $animationTimeSplit $animationTimeSplit
+				$timingFunctionCloseRotate;
 	}
 
 	&::after {
-		content: "";
-
-		@include bar;
-		position: absolute;
-		left: 0;
 		bottom: 0;
 		transform: rotate(45deg);
-		transition: bottom 250ms ease-in-out, transform 250ms 250ms ease-in-out;
+		transition: bottom $animationTimeSplit $timingFunctionCloseSlide,
+			transform $animationTimeSplit $animationTimeSplit
+				$timingFunctionCloseRotate;
 	}
 }

@@ -19,6 +19,7 @@
 
 .content {
 	z-index: 2;
+	pointer-events: none;
 	position: relative;
 	width: min(100%, $contentMaxWidth);
 	margin: 0 auto;
