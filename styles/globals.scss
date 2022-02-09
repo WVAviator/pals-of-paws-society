@@ -6,6 +6,10 @@ body {
 	font-weight: $fontWeight-regular;
 }
 
+main {
+	//overflow: hidden;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;

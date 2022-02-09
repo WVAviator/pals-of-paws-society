@@ -12,15 +12,25 @@
 	position: relative;
 	z-index: 3;
 
+	box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.3);
+
 	@include mq-desktop {
 		height: $headerHeight-desktop;
 	}
 
 	&Content {
-		width: 100%;
+		width: min(100%, $contentMaxWidth);
+		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: $padding-section;
+	}
+
+	.btn {
+		display: none;
+		@include mq-desktop {
+			display: inline-block;
+		}
 	}
 }

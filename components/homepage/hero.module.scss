@@ -1,8 +1,54 @@
-.background {
-	background-image: url(/images/hero.png);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: 75%;
+@use "/styles/variables" as *;
 
-	height: 80vh;
+.background {
+	background-color: $color-grayBackground;
+	position: relative;
+
+	height: 40rem;
+	@include mq-tablet {
+		height: 47.5rem;
+	}
+	@include mq-desktop {
+		height: 55rem;
+	}
+}
+
+.image {
+	clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.content {
+	z-index: 2;
+	position: relative;
+	width: min(100%, $contentMaxWidth);
+	margin: 0 auto;
+	padding: 0 $padding-section;
+}
+
+.headingContainer {
+	padding: 16rem 0rem 8rem 0rem;
+	width: min(70%, 35rem);
+	@include mq-custom(53.5rem) {
+		padding: 12rem 0rem 12rem 0rem;
+	}
+
+	h1 {
+		color: white;
+		font-size: 2.2rem;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+		margin-bottom: 1em;
+
+		@include mq-tablet {
+			font-size: 3rem;
+		}
+		@include mq-desktop {
+			font-size: 4rem;
+		}
+	}
+}
+
+.btnContent {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
 }

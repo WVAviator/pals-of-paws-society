@@ -1,13 +1,33 @@
 @use "/styles/variables" as *;
 
 .nav {
+	@include mq-desktop {
+		margin: 0 auto 0 5rem;
+	}
+
 	ul {
 		display: none;
+		list-style: none;
+		text-align: center;
+		gap: 3rem;
+		margin: 0 auto 0 auto;
+		color: $color-secondary;
+		font-weight: $fontWeight-bold;
+		font-size: $fontSize-navigation;
 
 		@include mq-desktop {
 			display: flex;
 			align-content: center;
 			justify-content: space-between;
+		}
+
+		li {
+			transition: color $transition-hoverDuration ease-in-out 0ms;
+		}
+
+		li:hover {
+			background-color: transparent;
+			color: $color-primary;
 		}
 	}
 }

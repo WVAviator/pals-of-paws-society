@@ -1,6 +1,7 @@
 @use "/styles/variables" as *;
 
 $backgroundColor: white;
+$fontSize: 1.25rem;
 
 .menu {
 	transition: all $transition-menuSlides ease-in-out 0ms;
@@ -8,6 +9,33 @@ $backgroundColor: white;
 	width: calc(100% + $padding-section);
 	background-color: $backgroundColor;
 	position: absolute;
+	padding: 0.5rem 0;
+	box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.3);
+
+	ul {
+		list-style: none;
+		text-align: center;
+		color: $color-secondary;
+		font-weight: $fontWeight-bold;
+		font-size: $fontSize;
+
+		li {
+			width: 100%;
+			height: 1.5em;
+
+			cursor: pointer;
+
+			transition: background-color $transition-hoverDuration ease-in-out 0ms;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&:hover {
+				background-color: darken(white, 10%);
+			}
+		}
+	}
 }
 
 .open {
