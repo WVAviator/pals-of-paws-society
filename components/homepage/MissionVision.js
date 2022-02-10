@@ -30,7 +30,7 @@ const MissionVision = () => {
 						</div>
 						<div className={styles.missionSummaryItem}>
 							<Image src={vetIcon} />
-							<p>Veterinary financial assistance</p>
+							<p>Provide veterinary financial assistance</p>
 						</div>
 						<div className={styles.missionSummaryItem}>
 							<Image src={rescueIcon} />

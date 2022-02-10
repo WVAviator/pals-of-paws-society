@@ -43,7 +43,6 @@ export default function Home() {
 				pawprintRotation={170}
 				backgroundColor="white"
 				pawprintOpacity={0.05}
-				enableShadow={true}
 			>
 				<MissionVision />
 			</PawprintSection>

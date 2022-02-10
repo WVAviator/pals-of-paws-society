@@ -1,7 +1,8 @@
 @use "/styles/variables" as *;
 
 $backgroundColor: white;
-$fontSize: 1.25rem;
+$fontSize: $fontSize-navigation;
+$itemHeight: 2.5rem;
 
 .menu {
 	transition: all $transition-menuSlides ease-in-out 0ms;
@@ -9,8 +10,11 @@ $fontSize: 1.25rem;
 	width: 100%;
 	background-color: $backgroundColor;
 	position: absolute;
-	padding: 0.5rem 0;
 	box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.3);
+
+	@include mq-desktop {
+		display: none;
+	}
 
 	ul {
 		list-style: none;
@@ -21,7 +25,7 @@ $fontSize: 1.25rem;
 
 		li {
 			width: 100%;
-			height: 1.5em;
+			height: $itemHeight;
 
 			cursor: pointer;
 
@@ -42,6 +46,8 @@ $fontSize: 1.25rem;
 	transform: translate(0);
 }
 
+$slideDistance: $itemHeight * 4;
+
 .closed {
-	transform: translateY(-10rem);
+	transform: translateY(-$slideDistance);
 }
