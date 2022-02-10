@@ -1,9 +1,9 @@
 @use "/styles/variables" as *;
 
 .contentContainer {
-	width: 100vw;
+	@include restrict-width;
 	overflow: hidden;
-	padding: $padding-section;
+	padding: 3rem $padding-section;
 }
 
 .cardContent {
@@ -15,11 +15,7 @@
 
 	gap: 2rem;
 
-	@include mq-custom(50rem) {
+	@include mq-custom(83.3125rem) {
 		justify-content: space-between;
-	}
-
-	> * {
-		flex-basis: 33%;
 	}
 }

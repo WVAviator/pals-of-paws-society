@@ -1,0 +1,27 @@
+@use "./layout" as *;
+
+$mobileBreakpoint: 35rem;
+$tabletBreakpoint: 65.625rem;
+
+@mixin mq-desktop() {
+	@media (min-width: $tabletBreakpoint) {
+		@content;
+	}
+}
+
+@mixin mq-tablet() {
+	@media (min-width: $mobileBreakpoint) {
+		@content;
+	}
+}
+
+@mixin mq-custom($minWidth) {
+	@media (min-width: $minWidth) {
+		@content;
+	}
+}
+
+@mixin restrict-width {
+	width: min(100%, $contentMaxWidth);
+	margin: 0 auto;
+}

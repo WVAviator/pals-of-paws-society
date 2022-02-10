@@ -1,4 +1,4 @@
-@use "./typography" as *;
+@use "./variables" as *;
 
 html,
 body {
@@ -7,7 +7,7 @@ body {
 }
 
 main {
-	//overflow: hidden;
+	font-size: 1.3125rem;
 }
 
 a {

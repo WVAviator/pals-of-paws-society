@@ -1,5 +1,4 @@
-@use "/styles/mixins" as *;
-@use "/styles/layout" as *;
+@use "/styles/variables" as *;
 
 .header {
 	background-color: white;
@@ -19,8 +18,7 @@
 	}
 
 	&Content {
-		width: min(100%, $contentMaxWidth);
-		margin: 0 auto;
+		@include restrict-width;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
