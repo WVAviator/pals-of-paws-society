@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import ArrowIcon from "../ui/ArrowIcon";
 import PurpleButton from "../ui/PurpleButton";
@@ -8,7 +9,11 @@ import heroImage from "/public/images/hero.jpg";
 const Hero = () => {
 	const { height, width } = useWindowDimensions();
 
-	const imagePosition = width > 1150 ? "center top" : "75%";
+	let imagePosition = "center 15%";
+
+	useEffect(() => {
+		imagePosition = width > 1150 ? "center 15%" : "75%";
+	}, [width]);
 
 	return (
 		<section className={styles.background}>

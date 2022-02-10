@@ -1,0 +1,26 @@
+@use "/styles/variables" as *;
+
+.nav {
+	ul {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 3rem;
+
+		@include mq-desktop {
+			flex-wrap: nowrap;
+			align-items: center;
+		}
+	}
+
+	li {
+		width: 100%;
+		@include mq-desktop {
+			width: auto;
+		}
+	}
+
+	.btn {
+		margin: 1.5rem auto;
+	}
+}

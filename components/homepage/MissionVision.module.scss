@@ -1,0 +1,89 @@
+@use "/styles/variables" as *;
+
+$sectionHeight: 20rem;
+
+.mission {
+	min-height: $sectionHeight;
+
+	&Content {
+		padding: $padding-section;
+
+		@include mq-desktop {
+			@include restrict-width;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 10rem;
+		}
+	}
+
+	&Summary {
+		display: none;
+		@include mq-desktop {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			//width: 100%;
+		}
+
+		&Item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			gap: 1rem;
+		}
+	}
+}
+
+.description {
+	h2 {
+		font-size: 3rem;
+		margin: 1em 0;
+	}
+	p {
+		margin-bottom: 1em;
+	}
+	text-align: center;
+	@include mq-desktop {
+		text-align: left;
+	}
+}
+
+.vision {
+	min-height: $sectionHeight;
+
+	&Image {
+		display: none;
+		img {
+			border-radius: 1.5rem;
+		}
+		@include mq-desktop {
+			display: block;
+		}
+	}
+
+	&Content {
+		padding: $padding-section;
+		@include mq-desktop {
+			@include restrict-width;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 10rem;
+		}
+	}
+
+	&Button {
+		margin: 3rem auto;
+
+		background-image: none;
+		background-color: $color-softPurple;
+		color: $color_primary;
+		display: flex;
+		gap: 1.25rem;
+		align-items: center;
+
+		@include mq-desktop {
+			margin: 3rem 0rem;
+		}
+	}
+}

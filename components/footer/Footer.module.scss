@@ -1,0 +1,31 @@
+@use "/styles/variables" as *;
+
+.footer {
+	background-color: $color-darkNavy;
+	color: white;
+	font-size: 1rem;
+	text-align: center;
+
+	&Content {
+		@include restrict-width;
+		padding: 2rem 2rem;
+
+		@include mq-desktop {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+
+			> *:first-child {
+				order: 3;
+				margin-left: auto;
+			}
+		}
+	}
+}
+
+.copyright {
+	margin-top: 1.5rem;
+	@include mq-desktop {
+		margin: 0;
+	}
+}
