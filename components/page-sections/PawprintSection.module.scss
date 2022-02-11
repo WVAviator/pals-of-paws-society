@@ -5,6 +5,7 @@
 	width: 100vw;
 	overflow: hidden;
 	position: relative;
+	z-index: -1;
 }
 
 .imageContainer {
@@ -13,4 +14,5 @@
 	left: 50%;
 	width: max(175rem, 100vw);
 	transform-origin: center;
+	z-index: -1;
 }

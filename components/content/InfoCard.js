@@ -6,19 +6,21 @@ import styles from "./InfoCard.module.scss";
 const InfoCard = ({ image, heading, description, callToAction }) => {
 	return (
 		<Link href="#">
-			<div className={styles.card}>
-				<div className={styles.cardContent}>
-					<div className={styles.cardImage}>
-						<Image src={image} />
-					</div>
-					<h2>{heading}</h2>
-					<p>{description}</p>
-					<div className={styles.cardAction}>
-						<span>{callToAction}</span>
-						<ArrowIcon color="#9c84b6" width="18" height="18" />
+			<a>
+				<div className={styles.card}>
+					<div className={styles.cardContent}>
+						<div className={styles.cardImage}>
+							<Image src={image} />
+						</div>
+						<h2>{heading}</h2>
+						<p>{description}</p>
+						<div className={styles.cardAction}>
+							<span>{callToAction}</span>
+							<ArrowIcon color="#9c84b6" width="18" height="18" />
+						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</Link>
 	);
 };

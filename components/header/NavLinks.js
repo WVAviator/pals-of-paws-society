@@ -4,16 +4,24 @@ const NavLinks = () => {
 	return (
 		<ul>
 			<li>
-				<Link href="/">Home</Link>
+				<Link href="/">
+					<a>Home</a>
+				</Link>
 			</li>
 			<li>
-				<Link href="#">About</Link>
+				<Link href="#">
+					<a>About</a>
+				</Link>
 			</li>
 			<li>
-				<Link href="#">Contact</Link>
+				<Link href="#">
+					<a>Contact</a>
+				</Link>
 			</li>
 			<li>
-				<Link href="#">Events</Link>
+				<Link href="#">
+					<a>Events</a>
+				</Link>
 			</li>
 		</ul>
 	);

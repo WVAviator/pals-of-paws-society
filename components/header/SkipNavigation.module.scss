@@ -1,0 +1,19 @@
+@use "/styles/variables" as *;
+
+.skipNav {
+	background-color: $color-softPurple;
+	color: $color-secondary;
+	border-radius: 0 0 0.625rem 0;
+	padding: 1rem;
+	z-index: 99;
+
+	position: absolute;
+	left: 0;
+	transform: translateX(-120%);
+
+	transition: transform 200ms ease-in-out;
+
+	&:focus-within {
+		transform: translateX(0);
+	}
+}

@@ -7,7 +7,7 @@ const PageLayout = ({ children }) => {
 		<>
 			<DefaultHead />
 			<Header />
-			<main>{children}</main>
+			<main id="main">{children}</main>
 			<Footer />
 		</>
 	);

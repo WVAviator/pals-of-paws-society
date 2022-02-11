@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "./Hamburger.module.scss";
 
 const Hamburger = ({ open, setOpen }) => {
@@ -7,7 +6,12 @@ const Hamburger = ({ open, setOpen }) => {
 	}`;
 
 	return (
-		<div className={styles.menuIconContainer} onClick={() => setOpen(!open)}>
+		<div
+			tabIndex={2}
+			aria-label="Menu"
+			className={styles.menuIconContainer}
+			onClick={() => setOpen(!open)}
+		>
 			<div className={activeClass}></div>
 		</div>
 	);

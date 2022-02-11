@@ -9,6 +9,7 @@ const PawprintSection = ({
 	backgroundColor = "#DBDBDB",
 	pawprintOpacity = 0.15,
 	enableShadow = false,
+	sectionTitle,
 }) => {
 	const pawprintStyle = {
 		transform: `translate(-50%, -50%) rotate(${pawprintRotation}deg)`,
@@ -22,7 +23,11 @@ const PawprintSection = ({
 	};
 
 	return (
-		<section className={styles.section} style={backgroundStyle}>
+		<section
+			aria-label={sectionTitle}
+			className={styles.section}
+			style={backgroundStyle}
+		>
 			<div className={styles.imageContainer} style={pawprintStyle}>
 				<Image src={pawprints} />
 			</div>

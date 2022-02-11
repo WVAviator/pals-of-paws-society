@@ -1,12 +1,11 @@
 import styles from "./HeaderLogo.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import mobileLogo from "/public/images/mobile-logo.svg";
+import desktopLogo from "/public/images/desktop-logo.svg";
 
 const HeaderLogo = () => {
-	const mobileLogoImagePath = "/images/mobile-logo.svg";
 	const mobileSize = 90;
-
-	const desktopLogoImagePath = "/images/desktop-logo.svg";
 	const desktopSize = 95;
 
 	const altText =
@@ -14,27 +13,29 @@ const HeaderLogo = () => {
 
 	return (
 		<Link href="/">
-			<div className={styles.logo}>
-				<div className={styles.mobile}>
-					<Image
-						src={mobileLogoImagePath}
-						alt={altText}
-						width={mobileSize}
-						height={mobileSize}
-					/>
-				</div>
-				<div className={styles.desktop}>
-					<div className={styles.desktopContent}>
+			<a>
+				<div className={styles.logo}>
+					<div className={styles.mobile}>
 						<Image
-							src={desktopLogoImagePath}
+							src={mobileLogo}
 							alt={altText}
-							width={desktopSize}
-							height={desktopSize}
+							width={mobileSize}
+							height={mobileSize}
 						/>
-						<h2 className={styles.logoText}>Pals of Paws Society</h2>
+					</div>
+					<div className={styles.desktop}>
+						<div className={styles.desktopContent}>
+							<Image
+								src={desktopLogo}
+								alt={altText}
+								width={desktopSize}
+								height={desktopSize}
+							/>
+							<h2 className={styles.logoText}>Pals of Paws Society</h2>
+						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</Link>
 	);
 };

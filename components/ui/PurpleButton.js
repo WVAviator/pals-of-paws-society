@@ -7,7 +7,9 @@ const PurpleButton = ({ children, href, className }) => {
 
 	return (
 		<div className={appliedClasses}>
-			<Link href={href}>{children}</Link>
+			<Link href={href}>
+				<a>{children}</a>
+			</Link>
 		</div>
 	);
 };

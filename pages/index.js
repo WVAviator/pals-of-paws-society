@@ -15,9 +15,9 @@ import MissionVision from "../components/homepage/MissionVision";
 
 export default function Home() {
 	return (
-		<main>
+		<>
 			<Hero />
-			<PawprintSection pawprintRotation={10}>
+			<PawprintSection sectionTitle="About Us" pawprintRotation={10}>
 				<CardContent>
 					<InfoCard
 						image={aboutImage01}
@@ -40,13 +40,14 @@ export default function Home() {
 				</CardContent>
 			</PawprintSection>
 			<PawprintSection
+				sectionTitle="Our Mission and Vision"
 				pawprintRotation={170}
 				backgroundColor="white"
 				pawprintOpacity={0.05}
 			>
 				<MissionVision />
 			</PawprintSection>
-			<PawprintSection>
+			<PawprintSection sectionTitle="Volunteer Opportunities">
 				<CardContent heading="Get involved today">
 					<InfoCard
 						image={volunteerImage01}
@@ -68,6 +69,6 @@ export default function Home() {
 					/>
 				</CardContent>
 			</PawprintSection>
-		</main>
+		</>
 	);
 }
