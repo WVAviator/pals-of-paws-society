@@ -1,0 +1,11 @@
+@use "/styles/variables" as *;
+
+.content {
+	text-align: center;
+	width: 18.75rem;
+	margin: 0 auto;
+	@include mq-desktop {
+		text-align: left;
+		margin: 0 0;
+	}
+}

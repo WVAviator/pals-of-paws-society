@@ -3,9 +3,9 @@ import Link from "next/link";
 import ArrowIcon from "../ui/ArrowIcon";
 import styles from "./InfoCard.module.scss";
 
-const InfoCard = ({ image, heading, description, callToAction }) => {
+const InfoCard = ({ image, heading, description, callToAction, href }) => {
 	return (
-		<Link href="#">
+		<Link href={href}>
 			<a>
 				<div className={styles.card}>
 					<div className={styles.cardContent}>

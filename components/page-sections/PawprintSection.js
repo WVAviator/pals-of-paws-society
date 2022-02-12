@@ -10,6 +10,8 @@ const PawprintSection = ({
 	pawprintOpacity = 0.15,
 	enableShadow = false,
 	sectionTitle,
+	minimumHeight = "20rem",
+	addPawprints = true,
 }) => {
 	const pawprintStyle = {
 		transform: `translate(-50%, -50%) rotate(${pawprintRotation}deg)`,
@@ -20,6 +22,7 @@ const PawprintSection = ({
 	const backgroundStyle = {
 		backgroundColor,
 		boxShadow: enableShadow ? "0 2px 3px 3px rgba(0, 0, 0, 0.3)" : "none",
+		minHeight: minimumHeight,
 	};
 
 	return (
@@ -28,9 +31,11 @@ const PawprintSection = ({
 			className={styles.section}
 			style={backgroundStyle}
 		>
-			<div className={styles.imageContainer} style={pawprintStyle}>
-				<Image src={pawprints} />
-			</div>
+			{addPawprints ? (
+				<div className={styles.imageContainer} style={pawprintStyle}>
+					<Image src={pawprints} />
+				</div>
+			) : null}
 			{children}
 		</section>
 	);

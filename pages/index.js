@@ -24,18 +24,21 @@ export default function Home() {
 						heading="Adoption Marketing"
 						description="We provide our local animal shelters and rescue organizations with assistance in marketing animals for adoption."
 						callToAction="Learn More"
+						href="/about/adoption"
 					/>
 					<InfoCard
 						image={aboutImage02}
 						heading="Animal Transports"
 						description="We work with our rescue partners to move unadopted animals to areas where adoption demand is higher."
 						callToAction="Learn More"
+						href="/about/transports"
 					/>
 					<InfoCard
 						image={aboutImage03}
 						heading="Spay & Neuter Financing"
 						description="We provide financial assistance for spays and neuters through our vet partners."
 						callToAction="Learn More"
+						href="/about/veterinary"
 					/>
 				</CardContent>
 			</PawprintSection>
@@ -54,18 +57,21 @@ export default function Home() {
 						heading="Volunteer"
 						description="Help us with adoption events, transporting animals to their new homes, and fundraising."
 						callToAction="Get Started"
+						href="/volunteer"
 					/>
 					<InfoCard
 						image={volunteerImage02}
 						heading="Foster"
 						description="Fostering a pet in your home gives them a safe and warm environment while we search for their new family or prepare them for transport."
 						callToAction="Get Started"
+						href="/volunteer/foster"
 					/>
 					<InfoCard
 						image={volunteerImage03}
 						heading="Donate"
 						description="100% of all proceeds go towards our mission of reducing pet overpopulation in Northwest Mississippi."
 						callToAction="Get Started"
+						href="/donate"
 					/>
 				</CardContent>
 			</PawprintSection>

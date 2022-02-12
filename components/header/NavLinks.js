@@ -9,18 +9,19 @@ const NavLinks = () => {
 				</Link>
 			</li>
 			<li>
-				<Link href="#">
+				<Link href="/about">
 					<a>About</a>
 				</Link>
 			</li>
+
 			<li>
-				<Link href="#">
-					<a>Contact</a>
+				<Link href="/fundraisers">
+					<a>Fundraisers</a>
 				</Link>
 			</li>
 			<li>
-				<Link href="#">
-					<a>Events</a>
+				<Link href="/adopt">
+					<a>Adopt</a>
 				</Link>
 			</li>
 		</ul>

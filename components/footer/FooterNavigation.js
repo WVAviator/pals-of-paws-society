@@ -7,13 +7,13 @@ const FooterNavigation = () => {
 		<nav className={styles.nav}>
 			<ul>
 				<li>
-					<Link href="#">Privacy Policy</Link>
+					<Link href="/privacy">Privacy Policy</Link>
 				</li>
 				<li>
-					<Link href="#">Terms of Service</Link>
+					<Link href="/terms">Terms of Service</Link>
 				</li>
 				<li>
-					<PurpleButton href="#" className={styles.btn}>
+					<PurpleButton href="/donate" className={styles.btn}>
 						Donate
 					</PurpleButton>
 				</li>

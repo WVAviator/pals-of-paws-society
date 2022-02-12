@@ -20,7 +20,7 @@ const Header = () => {
 						mobileMenuOpen={mobileMenuOpen}
 						setMobileMenuOpen={setMobileMenuOpen}
 					/>
-					<PurpleButton href="#" className={styles.btn}>
+					<PurpleButton href="/donate" className={styles.btn}>
 						Donate
 					</PurpleButton>
 				</div>

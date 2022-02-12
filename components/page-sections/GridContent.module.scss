@@ -1,0 +1,17 @@
+@use "/styles/variables" as *;
+
+.gridContent {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	@include restrict-width;
+	grid-gap: 3rem;
+
+	> * {
+		padding: 1rem 0rem;
+		max-height: 40rem;
+	}
+}
+
+.gridOuter {
+	padding: $padding-section;
+}
