@@ -4,6 +4,7 @@
 	@include restrict-width;
 	overflow: hidden;
 	padding: 3rem $padding-section;
+	position: relative;
 }
 
 .cardContent {
