@@ -1,14 +1,14 @@
 import axios from "axios";
 import Image from "next/image";
-import { useEffect } from "react";
+import getShelterluvAnimals from "/src/api/Shelterluv.ts";
 
-const Adopt = ({ data }) => {
-	console.log(data);
+const Adopt = ({ animals }) => {
+	console.log(animals);
 
-	const mappedAnimals = data.animals.map((animal) => {
+	const mappedAnimals = animals.map((animal) => {
 		return (
 			<div
-				key={animal.id}
+				key={animal.ID}
 				style={{
 					display: "flex",
 					flexDirection: "column",
@@ -41,19 +41,10 @@ const Adopt = ({ data }) => {
 };
 
 export async function getStaticProps() {
-	const key = process.env.SHELTERLUV_API_KEY;
-
-	const response = await axios.get(
-		"https://www.shelterluv.com/api/v1/animals",
-		{
-			headers: {
-				"X-Api-Key": key,
-			},
-		}
-	);
+	const animals = await getShelterluvAnimals();
 
 	return {
-		props: { data: response.data },
+		props: { animals },
 	};
 }
 

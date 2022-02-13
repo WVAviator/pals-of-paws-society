@@ -1,5 +1,3 @@
-import { Organization } from "./Organization";
-
 export interface PetfinderAnimal {
 	id: number;
 	organization_id: string;
