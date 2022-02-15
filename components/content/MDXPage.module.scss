@@ -1,0 +1,9 @@
+@use "/styles/variables" as *;
+
+.section {
+    background-color: white;
+}
+
+.content {
+    @include restrict-width;
+}
