@@ -18,7 +18,7 @@ const getShelterluvAnimals = async () => {
 
 	let animals = new Array<ShelterluvAnimal>();
 
-	response.data.animals.forEach((animal) => {
+	(response.data.animals as ShelterluvAnimal[]).forEach((animal) => {
 		if (!animal.Name) return;
 
 		animals.push(animal as ShelterluvAnimal);

@@ -3,7 +3,7 @@ module.exports = {
 		domains: [
 			"www.shelterluv.com",
 			"sl-prod-v2-cdn.shelterluv.com",
-			"cloudfront.net",
+			"dl5zpyw5k3jeb.cloudfront.net",
 		],
 	},
 	reactStrictMode: true,

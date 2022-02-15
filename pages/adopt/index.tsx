@@ -1,14 +1,15 @@
-import axios from "axios";
-import Image from "next/image";
 import PetCard from "../../components/content/PetCard";
-import { getAnimals } from "/src/api/GetAnimals.ts";
+import { Animal } from "../../src/types/Animal";
+import { getAnimals } from "../../src/api/GetAnimals";
 
-const Adopt = ({ animals }) => {
-	console.log(animals);
+const Adopt = (props: { animals: Animal[] }) => {
+	console.log(props.animals);
 
-	const mappedAnimals = animals.map((animal) => {
+	const mappedAnimals = props.animals.map((animal) => {
 		return <PetCard animal={animal} />;
 	});
+
+	console.log(mappedAnimals);
 
 	return (
 		<div
@@ -25,7 +26,8 @@ const Adopt = ({ animals }) => {
 };
 
 export async function getStaticProps() {
-	const animals = await getAnimals();
+	const animals: Animal[] = await getAnimals();
+	console.log(animals);
 
 	return {
 		props: { animals },

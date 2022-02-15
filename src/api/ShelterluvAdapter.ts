@@ -8,7 +8,7 @@ export const convertShelterluvAnimal = (shelterluvAnimal: ShelterluvAnimal) => {
 		sex: shelterluvAnimal.Sex.toLowerCase(),
 		ageString: parseAgeString(shelterluvAnimal.Age),
 		breed: shelterluvAnimal.Breed,
-		location: shelterluvAnimal.CurrentLocation ?? "Hernando, MS",
+		location: "Hernando, MS",
 		organization: "Pals of Paws Society",
 		organizationEmail: "palsofpawssociety@gmail.com",
 		organizationPhone: "954-224-9779",
