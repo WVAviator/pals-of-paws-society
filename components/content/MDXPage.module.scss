@@ -1,9 +1,33 @@
 @use "/styles/variables" as *;
 
 .section {
-    background-color: white;
+	background-color: white;
 }
 
 .content {
-    @include restrict-width;
+	@include restrict-width;
+	padding: $padding-section;
+
+	h1,
+	h2 {
+		padding: 1em 0;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	p {
+		font-size: 1rem;
+	}
+	a {
+		font-size: 1rem;
+		color: $color_primary;
+	}
+	ul {
+		padding: 2rem 1rem;
+		font-size: 1rem;
+	}
 }

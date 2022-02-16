@@ -41,7 +41,7 @@ $timingFunctionCloseSlide: ease-in-out;
 }
 
 $animationTimeSplit: ($animationTime * 0.5);
-$iconSpacing: ($iconSize / 3);
+$iconSpacing: calc($iconSize / 3);
 
 .closed {
 	transition: all 0ms $animationTimeSplit;

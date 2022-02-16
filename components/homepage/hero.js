@@ -27,7 +27,7 @@ const Hero = () => {
 				priority
 			/>
 			<div className={styles.content}>
-				<div class={styles.headingContainer}>
+				<div className={styles.headingContainer}>
 					<h1>Fighting pet overpopulation one adoption at a time</h1>
 					<PurpleButton href="#">
 						<div className={styles.btnContent}>

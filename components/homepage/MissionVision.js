@@ -10,7 +10,7 @@ import ArrowIcon from "../ui/ArrowIcon";
 const MissionVision = () => {
 	return (
 		<section>
-			<div classname={styles.mission}>
+			<div className={styles.mission}>
 				<div className={styles.missionContent}>
 					<div className={styles.description}>
 						<h2>Our mission</h2>
@@ -20,7 +20,7 @@ const MissionVision = () => {
 							areas of higher adoption demand, and remediate animal
 							overpopulation through community outreach, education, financial
 							assistance for veterinary care, and coordination with local,
-							national, and international animal rescue groups.{" "}
+							national, and international animal rescue groups.
 						</p>
 					</div>
 					<div className={styles.missionSummary}>

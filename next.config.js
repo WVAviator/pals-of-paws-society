@@ -3,8 +3,9 @@ const withMDX = require("@next/mdx")({
 	options: {
 		remarkPlugins: [],
 		rehypePlugins: [],
+		providerInputSource: "@mdx-js/react",
 	},
-})
+});
 
 module.exports = withMDX({
 	images: {
@@ -15,5 +16,5 @@ module.exports = withMDX({
 		],
 	},
 	reactStrictMode: true,
-	pageExtensions: ["js", "jsx", "md", "mdx"]
+	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 });

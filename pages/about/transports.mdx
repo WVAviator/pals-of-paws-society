@@ -1,14 +1,14 @@
-import transportImage from '/public/images/Transport.png'
-import Image from 'next/image'
-import MDXPage from '/components/content/MDXPage.tsx'
+import Image from "next/image";
+import MDXPage from "/components/content/MDXPage";
+import transport from "/public/images/Transport.png";
 
 export const meta = {
-    title: "Animal Transports"
-    description: "As part of our mission, Pals of Paws Society arranges animal transports to move unadopted animals out of Northwest Mississippi to other parts of the US and Canada where adoption demand is higher."
-}
+	title: "Animal Transports",
+	description:
+		"As part of our mission, Pals of Paws Society arranges animal transports to move unadopted animals out of Northwest Mississippi to other parts of the US and Canada where adoption demand is higher.",
+};
 
-export default ({children}) => <MDXPage meta={meta}>{children}</MDXPage>
-
+export default ({ children }) => <MDXPage meta={meta}>{children}</MDXPage>;
 
 # Animal Transports
 
@@ -26,7 +26,11 @@ Local adoptions are always the best possible outcome for any homeless pet in Nor
 
 [Read more about how we manage adoptions](/about/adoption).
 
-<Image src={transportImage} alt="A graphical flow chart explaining the decision-making process regarding local adoption versus animal transport." longdesc="/public/descriptions/transports.txt" />
+<Image
+	src={transport}
+	alt="A graphical flow chart explaining the decision-making process regarding local adoption versus animal transport."
+	longdesc="/public/descriptions/transports.txt"
+/>
 
 ## Where do the animals go?
 
@@ -45,6 +49,6 @@ In addition to networking and forming relationships with animal rescue organizat
 
 ## How can I help?
 
-While we have partnered with a few local transportation services to occasionally provide mass-transport capabilites, we often still need help with short-range animal transports. If you are able and willing to use your own vehicle to help move animals for short haul transports, anywhere from one to three hour driving distances, we could definitely use your help in accomplishing our mission. Additionally, if you have mass-transport capabilities and are willing to assist with long-haul transports, we can handle setting you up with any required certifications, equipment, and provide education on APHIS interstate animal transport compliance. 
+While we have partnered with a few local transportation services to occasionally provide mass-transport capabilites, we often still need help with short-range animal transports. If you are able and willing to use your own vehicle to help move animals for short haul transports, anywhere from one to three hour driving distances, we could definitely use your help in accomplishing our mission. Additionally, if you have mass-transport capabilities and are willing to assist with long-haul transports, we can handle setting you up with any required certifications, equipment, and provide education on APHIS interstate animal transport compliance.
 
-Please visit our [volunteer page](/volunteer) if you're interested in helping.
+Please visit our [volunteer](/volunteer) page if you're interested in helping.
