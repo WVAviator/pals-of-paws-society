@@ -3,3 +3,39 @@
 .title {
 	text-transform: capitalize;
 }
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+.card {
+	background-color: white;
+	border-radius: 0.625rem;
+	box-shadow: $boxShadow-card;
+	padding: 1rem;
+}
+
+.featured {
+	background-color: $color-softPurple;
+}
+
+.image {
+	border-radius: 0.625rem;
+	overflow: hidden;
+	aspect-ratio: 1;
+}
+
+.content {
+	ul {
+		list-style: none;
+		font-size: 1rem;
+		margin-top: 1em;
+	}
+	p {
+		font-size: 0.9rem;
+		margin-top: 2em;
+	}
+}

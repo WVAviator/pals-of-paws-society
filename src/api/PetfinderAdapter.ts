@@ -8,7 +8,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
 		id: pfAnimal.id,
 		name: pfAnimal.name ?? "Unnamed",
-		type: pfAnimal.type ?? "Other",
+		type: pfAnimal.type.toLowerCase() ?? "Other",
 		sex: pfAnimal.gender ?? "Unknown",
 		ageString: pfAnimal.age ?? "Unknown",
 		breed: extractBreed(pfAnimal),

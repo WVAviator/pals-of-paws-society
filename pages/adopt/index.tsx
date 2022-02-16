@@ -3,13 +3,13 @@ import { Animal } from "../../src/types/Animal";
 import { getAnimals } from "../../src/api/GetAnimals";
 
 const Adopt = (props: { animals: Animal[] }) => {
-	console.log(props.animals);
-
 	const mappedAnimals = props.animals.map((animal) => {
-		return <PetCard animal={animal} />;
+		return (
+			<div key={animal.id}>
+				<PetCard animal={animal} />
+			</div>
+		);
 	});
-
-	console.log(mappedAnimals);
 
 	return (
 		<div
@@ -18,6 +18,7 @@ const Adopt = (props: { animals: Animal[] }) => {
 				display: "flex",
 				flexWrap: "wrap",
 				gap: "2rem",
+				backgroundColor: "lightgray",
 			}}
 		>
 			{mappedAnimals}
@@ -27,7 +28,6 @@ const Adopt = (props: { animals: Animal[] }) => {
 
 export async function getStaticProps() {
 	const animals: Animal[] = await getAnimals();
-	console.log(animals);
 
 	return {
 		props: { animals },
