@@ -1,0 +1,12 @@
+@use "/styles/variables" as *;
+
+.image {
+	margin: 3rem 0;
+	@include mq-desktop {
+		margin: 5rem 5rem;
+	}
+	box-shadow: $boxShadow-card;
+	border-radius: 0.25rem;
+	overflow: hidden;
+	background-color: white;
+}

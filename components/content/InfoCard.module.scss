@@ -7,7 +7,7 @@
 	height: 38rem;
 	padding: 1.5rem;
 	z-index: 2;
-	box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: $boxShadow-card;
 
 	&Content {
 		display: flex;

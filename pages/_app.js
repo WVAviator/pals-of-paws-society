@@ -1,9 +1,12 @@
 import PageLayout from "../components/layout/PageLayout";
 import "../styles/globals.scss";
-import Link from "next/link";
+import MDXLink from "../components/mdx/MDXLink";
+import MDXImage from "../components/mdx/MDXImage";
 
 const components = {
-	a: Link,
+	a: MDXLink,
+	img: MDXImage,
+	MDXImage,
 };
 
 function MyApp({ Component, pageProps }) {

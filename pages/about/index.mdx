@@ -1,0 +1,71 @@
+import MDXPage from "/components/content/MDXPage";
+import ProfileCard from "/components/content/ProfileCard";
+import testProfile from "/public/images/kitten01.jpg";
+
+export const meta = {
+	title: "About Us",
+	description:
+		"Pals of Paws Society is an organization dedicated to reducing pet overpopulation in Nortwest Mississippi through adoption assistance, veterinary financial support, implementation of trap-nueter-release (TNR) programs, and arranging animal transportation to areas where adoption demand is higher.",
+};
+
+export default ({ children }) => <MDXPage meta={meta}>{children}</MDXPage>;
+
+# About Us
+
+Pals of Paws Society is a non-profit organization dedicated to reducing the pet overpopulation problem in Northwest Mississippi. We accomplish this mission by [increasing adoption visibility](/about/adoption) for animal rescue and shelter organizations, [arranging transportation](/about/transports) for animals into areas of higher adoption demand, and through [community outreach](/fundraisers), education, [financial assistance for veterinary care](/about/spayneuter), and coordination with local, national, and international [animal rescue groups](/partners).
+
+## Our services
+
+Click any of the below links to learn more about the services we provide.
+
+- [Adoption Assistance](/about/adoption)
+- [Animal Transports](/about/transports)
+- [TNR (Trap Neuter Release)](/about/tnr)
+- [Spay and Neuter Assitance](/about/spayneuter)
+- [Heartworm Treatment](/about/heartworms)
+
+## Who We are
+
+We are a small group of independent volunteers, each with experience in collaborating with animal rescue organizations, fundraising on behalf of animal welfare, facilitating animal adoptions, coordinating veterinary care needs, and arranging animal transportation services.
+
+<ProfileCard
+	src={testProfile}
+	alt="test image"
+	name="Crystal Lyles"
+	title="President"
+	description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque alias quisquam odit? Similique minus error ut, cum, adipisci maiores vitae quidem consequuntur libero voluptas odio necessitatibus voluptatem ad debitis rerum!"
+/>
+<ProfileCard
+	src={testProfile}
+	alt="test image"
+	name="Dana Davis"
+	title="Vice-President"
+	description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque alias quisquam odit? Similique minus error ut, cum, adipisci maiores vitae quidem consequuntur libero voluptas odio necessitatibus voluptatem ad debitis rerum!"
+/>
+<ProfileCard
+	src={testProfile}
+	alt="test image"
+	name="Catherine Wilson"
+	title="Treasurer"
+	description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque alias quisquam odit? Similique minus error ut, cum, adipisci maiores vitae quidem consequuntur libero voluptas odio necessitatibus voluptatem ad debitis rerum!"
+/>
+<ProfileCard
+	src={testProfile}
+	alt="test image"
+	name="Shelly Capps"
+	title="Fundraising Coordinator"
+	description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque alias quisquam odit? Similique minus error ut, cum, adipisci maiores vitae quidem consequuntur libero voluptas odio necessitatibus voluptatem ad debitis rerum!"
+/>
+<ProfileCard
+	src={testProfile}
+	alt="test image"
+	name="Kala Durham"
+	title="Secretary"
+	description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque alias quisquam odit? Similique minus error ut, cum, adipisci maiores vitae quidem consequuntur libero voluptas odio necessitatibus voluptatem ad debitis rerum!"
+/>
+
+Are you interested in joining forces with us to accomplish our mission? Please check out the links below to get involved, or check out our [fundraisers](/fundraisers).
+
+- [Volunteer](/volunteer)
+- [Foster](/volunteer/foster)
+- [Donate](/donate)

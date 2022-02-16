@@ -1,7 +1,7 @@
 @use "/styles/variables" as *;
 
 .section {
-	background-color: white;
+	background-color: $color-grayBackground;
 }
 
 .content {
@@ -15,19 +15,30 @@
 
 	h1 {
 		font-size: 2rem;
+		@include mq-desktop {
+			font-size: 2.5rem;
+		}
 	}
 	h2 {
 		font-size: 1.5rem;
+		@include mq-desktop {
+			font-size: 1.825rem;
+		}
 	}
-	p {
-		font-size: 1rem;
-	}
-	a {
-		font-size: 1rem;
-		color: $color_primary;
-	}
+
 	ul {
 		padding: 2rem 1rem;
+	}
+
+	p,
+	a,
+	ul {
 		font-size: 1rem;
+		font-family: "Inter", sans-serif;
+		font-weight: 500;
+		@include mq-desktop {
+			font-size: 1.25rem;
+		}
+		margin-bottom: 1em;
 	}
 }
