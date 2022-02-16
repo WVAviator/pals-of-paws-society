@@ -131,7 +131,9 @@ export class Petfinder {
 					(a) =>
 						a.name === newAnimal.name &&
 						a.organization_id === newAnimal.organization_id
-				)
+				) &&
+				(newAnimal.type.toLowerCase() === "cat" ||
+					newAnimal.type.toLowerCase() === "dog")
 			) {
 				filteredResults.push(newAnimal);
 			}

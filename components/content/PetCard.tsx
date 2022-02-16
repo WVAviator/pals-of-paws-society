@@ -21,8 +21,8 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 					<Image
 						src={animal.photos[0] ?? placeholder}
 						alt={`A ${animal.breed} ${animal.type}`}
-						width={300}
-						height={300}
+						width={280}
+						height={280}
 						objectFit="cover"
 					/>
 				</div>
@@ -31,7 +31,7 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 					<li>Breed: {animal.breed}</li>
 					<li>Location: {animal.location}</li>
 				</ul>
-				<div>
+				<div className={styles.org}>
 					<p>{animal.organization}</p>
 				</div>
 			</div>

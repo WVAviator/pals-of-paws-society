@@ -1,28 +1,11 @@
-import PetCard from "../../components/content/PetCard";
 import { Animal } from "../../src/types/Animal";
+import PetCardContent from "../../components/page-sections/PetCardContent";
 import { getAnimals } from "../../src/api/GetAnimals";
 
-const Adopt = (props: { animals: Animal[] }) => {
-	const mappedAnimals = props.animals.map((animal) => {
-		return (
-			<div key={animal.id}>
-				<PetCard animal={animal} />
-			</div>
-		);
-	});
-
+const Adopt = ({ animals }: { animals: Animal[] }) => {
 	return (
-		<div
-			style={{
-				padding: "3rem",
-				display: "flex",
-				flexWrap: "wrap",
-				gap: "2rem",
-				backgroundColor: "lightgray",
-				justifyContent: "center",
-			}}
-		>
-			{mappedAnimals}
+		<div>
+			<PetCardContent animals={animals} />
 		</div>
 	);
 };

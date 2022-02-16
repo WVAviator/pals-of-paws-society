@@ -1,0 +1,23 @@
+@use "/styles/variables" as *;
+
+.contents {
+	padding: 3rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+
+	justify-content: center;
+	@include restrict-width;
+}
+
+.section {
+	background-color: $color-grayBackground;
+	padding: $padding-section;
+}
+
+.header {
+	@include restrict-width;
+	h1 {
+		margin-bottom: 1em;
+	}
+}
