@@ -19,6 +19,7 @@ const Adopt = (props: { animals: Animal[] }) => {
 				flexWrap: "wrap",
 				gap: "2rem",
 				backgroundColor: "lightgray",
+				justifyContent: "center",
 			}}
 		>
 			{mappedAnimals}
