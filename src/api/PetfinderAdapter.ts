@@ -1,5 +1,8 @@
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "./../types/PetfinderAnimal";
+import { Petfinder } from "./Petfinder";
+
+const pf = Petfinder.getInstance();
 
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
@@ -10,7 +13,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 		ageString: pfAnimal.age ?? "Unknown",
 		breed: extractBreed(pfAnimal),
 		location: `${pfAnimal.contact.address.city}, ${pfAnimal.contact.address.state}`,
-		organization: "Powered by Petfinder",
+		organization: pfAnimal.orgName,
 		organizationEmail: pfAnimal.contact.email,
 		organizationPhone: pfAnimal.contact.phone,
 		description: pfAnimal.description,

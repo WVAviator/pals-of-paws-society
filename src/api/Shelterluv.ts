@@ -1,9 +1,9 @@
 import axios from "axios";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 
-const getShelterluvAnimals = async () => {
-	const key = process.env.SHELTERLUV_API_KEY;
+const key = process.env.SHELTERLUV_API_KEY;
 
+const getShelterluvAnimals = async () => {
 	const response = await axios.get(
 		"https://www.shelterluv.com/api/v1/animals",
 		{
@@ -20,6 +20,7 @@ const getShelterluvAnimals = async () => {
 
 	(response.data.animals as ShelterluvAnimal[]).forEach((animal) => {
 		if (!animal.Name) return;
+		if (animal.Photos.length === 0) return;
 
 		animals.push(animal as ShelterluvAnimal);
 	});

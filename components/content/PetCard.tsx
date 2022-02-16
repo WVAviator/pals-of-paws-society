@@ -8,7 +8,7 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 
 	return (
 		<div key={animal.id}>
-			<h2>{animal.name}</h2>
+			<h2 className={styles.title}>{animal.name}</h2>
 			<Image
 				src={animal.photos[0] ?? placeholder}
 				alt={`A ${animal.breed} ${animal.type}`}

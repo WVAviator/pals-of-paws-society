@@ -1,6 +1,7 @@
 export interface PetfinderAnimal {
 	id: number;
 	organization_id: string;
+	orgName: string;
 	url: string;
 	type: string;
 	breeds: {

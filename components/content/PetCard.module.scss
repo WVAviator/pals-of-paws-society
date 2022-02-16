@@ -1,1 +1,5 @@
 @use "/styles/variables" as *;
+
+.title {
+	text-transform: capitalize;
+}

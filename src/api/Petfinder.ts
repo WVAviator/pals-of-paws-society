@@ -1,6 +1,14 @@
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 
+interface Organization {
+	id: string;
+	name: string;
+	email: string;
+	phone: string;
+	url: string;
+}
+
 export class Petfinder {
 	private static instance: Petfinder;
 
@@ -10,6 +18,8 @@ export class Petfinder {
 	private accessToken: Promise<string>;
 	private expiration: Date;
 	private url = "https://api.petfinder.com/v2";
+
+	private organizations: Promise<Organization[]>;
 
 	constructor() {
 		this.expiration = new Date("Jan 1, 1900 00:00:01");
@@ -56,7 +66,11 @@ export class Petfinder {
 		const queryUrl = `${this.url}/animals`;
 		const response = await this.fetchAnimalData(queryUrl);
 
-		return response.data.animals as PetfinderAnimal[];
+		return this.filterResults(response.data.animals as PetfinderAnimal[]);
+	}
+
+	public async getOrganization(id: string) {
+		return (await this.getOrganizations()).find((o) => o.id === id);
 	}
 
 	public async getAnimal(id: number) {
@@ -75,8 +89,61 @@ export class Petfinder {
 			params: {
 				location: this.searchLocation,
 				distance: this.searchRadius,
+				limit: 100,
 			},
 		});
 		return response;
+	}
+
+	public async getOrganizations() {
+		if (this.organizations) return this.organizations;
+
+		const token = await this.getAccessToken();
+		const response = await axios.get(
+			"https://api.petfinder.com/v2/organizations",
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				params: {
+					location: this.searchLocation,
+					distance: this.searchRadius,
+					limit: 100,
+				},
+			}
+		);
+		this.organizations = response.data.organizations;
+		return this.organizations;
+	}
+
+	private async filterResults(animals: PetfinderAnimal[]) {
+		const filteredResults: PetfinderAnimal[] = [];
+
+		animals.forEach((animal) => {
+			const newAnimal = animal;
+
+			//Some orgs use all caps - CSS text transform will fix
+			newAnimal.name = animal.name.toLowerCase();
+
+			//Some orgs post the same animal multiple times
+			if (
+				!filteredResults.find(
+					(a) =>
+						a.name === newAnimal.name &&
+						a.organization_id === newAnimal.organization_id
+				)
+			) {
+				filteredResults.push(newAnimal);
+			}
+		});
+
+		for (let i = 0; i < filteredResults.length; i++) {
+			const org = await this.getOrganization(
+				filteredResults[i].organization_id
+			);
+			filteredResults[i].orgName = org.name;
+		}
+
+		return filteredResults;
 	}
 }
