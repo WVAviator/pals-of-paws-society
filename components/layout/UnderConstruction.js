@@ -17,7 +17,7 @@ const UnderConstruction = () => {
 						This page is under construction. We apologize.
 					</div>
 					<div className={styles.content}>
-						<Image src={image} />
+						<Image src={image} alt="A construction barricade icon" />
 					</div>
 				</GridContent>
 			</PawprintSection>
