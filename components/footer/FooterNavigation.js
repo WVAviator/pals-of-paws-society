@@ -1,5 +1,4 @@
 import Link from "next/link";
-import PurpleButton from "../ui/PurpleButton";
 import styles from "./FooterNavigation.module.scss";
 import { Button } from "@mui/material";
 
@@ -14,14 +13,11 @@ const FooterNavigation = () => {
 					<Link href="/terms">Terms of Service</Link>
 				</li>
 				<li>
-					<Button
-						href="/donate"
-						className={styles.btn}
-						size="large"
-						variant="contained"
-					>
-						Donate
-					</Button>
+					<Link href="/donate" passHref>
+						<Button className={styles.btn} size="large" variant="contained">
+							Donate
+						</Button>
+					</Link>
 				</li>
 			</ul>
 		</nav>

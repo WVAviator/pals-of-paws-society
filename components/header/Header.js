@@ -4,9 +4,9 @@ import { useState } from "react";
 import HeaderLogo from "./HeaderLogo";
 import MobileMenu from "./MobileMenu";
 import Navigation from "./Navigation";
-import PurpleButton from "../ui/PurpleButton";
 import { Button } from "@mui/material";
 import SkipNavigation from "./SkipNavigation";
+import Link from "next/link";
 
 const Header = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,15 +21,11 @@ const Header = () => {
 						mobileMenuOpen={mobileMenuOpen}
 						setMobileMenuOpen={setMobileMenuOpen}
 					/>
-
-					<Button
-						variant="contained"
-						href="/donate"
-						size="large"
-						className={styles.btn}
-					>
-						Donate
-					</Button>
+					<Link href="/donate" passHref>
+						<Button variant="contained" size="large" className={styles.btn}>
+							Donate
+						</Button>
+					</Link>
 				</div>
 			</div>
 			<MobileMenu open={mobileMenuOpen} />

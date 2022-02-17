@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
+import Link from "next/link";
 
 import heroImage from "/public/images/hero.jpg";
 import styles from "./Hero.module.scss";
@@ -28,15 +29,16 @@ const Hero = () => {
 				<div className={styles.headingContainer}>
 					<h1>Fighting pet overpopulation one adoption at a time</h1>
 
-					<Button
-						variant="contained"
-						size="large"
-						endIcon={<ArrowForwardIcon />}
-						className={styles.btn}
-						href="/about"
-					>
-						Learn More
-					</Button>
+					<Link href="/about" passHref>
+						<Button
+							variant="contained"
+							size="large"
+							endIcon={<ArrowForwardIcon />}
+							className={styles.btn}
+						>
+							Learn More
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</section>
