@@ -4,8 +4,9 @@ import overpopulationIcon from "/public/images/overpopulation.png";
 import vetIcon from "/public/images/vetcare.png";
 import rescueIcon from "/public/images/rescue.png";
 import kitten from "/public/images/kitten02.png";
-import PurpleButton from "../ui/PurpleButton";
-import ArrowIcon from "../ui/ArrowIcon";
+import { Button } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Link from "next/link";
 
 const MissionVision = () => {
 	return (
@@ -25,15 +26,30 @@ const MissionVision = () => {
 					</div>
 					<div className={styles.missionSummary}>
 						<div className={styles.missionSummaryItem}>
-							<Image src={overpopulationIcon} />
+							<Image
+								src={overpopulationIcon}
+								alt="An icon of three small circles varying in size"
+								width={128}
+								height={128}
+							/>
 							<p>Remediate animal overpopulation</p>
 						</div>
 						<div className={styles.missionSummaryItem}>
-							<Image src={vetIcon} />
+							<Image
+								src={vetIcon}
+								alt="An icon of a heart with an EKG line overlay"
+								width={128}
+								height={128}
+							/>
 							<p>Provide veterinary financial assistance</p>
 						</div>
 						<div className={styles.missionSummaryItem}>
-							<Image src={rescueIcon} />
+							<Image
+								src={rescueIcon}
+								alt="An icon of a small house"
+								width={128}
+								height={128}
+							/>
 							<p>Coordinate with rescue groups</p>
 						</div>
 					</div>
@@ -42,7 +58,12 @@ const MissionVision = () => {
 			<div className={styles.vision}>
 				<div className={styles.visionContent}>
 					<div className={styles.visionImage}>
-						<Image src={kitten} />
+						<Image
+							src={kitten}
+							alt="A kitten sitting on a brick wall in a garden"
+							width={567}
+							height={567}
+						/>
 					</div>
 					<div className={styles.description}>
 						<h2>Our vision</h2>
@@ -59,11 +80,16 @@ const MissionVision = () => {
 							Through our fundraising and networking efforts, we hope to
 							eliminate the pet overpopulation problem in our community.
 						</p>
-						<PurpleButton href="#" className={styles.visionButton}>
-							<>
-								Learn More <ArrowIcon color="#9C84B6" />
-							</>
-						</PurpleButton>
+						<Link href="/about" passHref>
+							<Button
+								variant="outlined"
+								size="large"
+								endIcon={<ArrowForwardIcon />}
+								className={styles.btn}
+							>
+								Learn About Us
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

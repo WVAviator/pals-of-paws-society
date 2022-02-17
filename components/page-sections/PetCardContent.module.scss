@@ -13,6 +13,7 @@
 .section {
 	background-color: $color-grayBackground;
 	padding: $padding-section;
+	min-height: 75rem;
 }
 
 .header {

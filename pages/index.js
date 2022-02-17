@@ -25,6 +25,7 @@ export default function Home() {
 						description="We provide our local animal shelters and rescue organizations with assistance in marketing animals for adoption."
 						callToAction="Learn More"
 						href="/about/adoption"
+						alt="A gray kitten"
 					/>
 					<InfoCard
 						image={aboutImage02}
@@ -32,6 +33,7 @@ export default function Home() {
 						description="We work with our rescue partners to move unadopted animals to areas where adoption demand is higher."
 						callToAction="Learn More"
 						href="/about/transports"
+						alt="A van driving on a road"
 					/>
 					<InfoCard
 						image={aboutImage03}
@@ -39,6 +41,7 @@ export default function Home() {
 						description="We provide financial assistance for spays and neuters through our vet partners."
 						callToAction="Learn More"
 						href="/about/veterinary"
+						alt="A rottweiler"
 					/>
 				</CardContent>
 			</PawprintSection>
@@ -58,6 +61,7 @@ export default function Home() {
 						description="Help us with adoption events, transporting animals to their new homes, and fundraising."
 						callToAction="Get Started"
 						href="/volunteer"
+						alt="A woman holding a small dog"
 					/>
 					<InfoCard
 						image={volunteerImage02}
@@ -65,6 +69,7 @@ export default function Home() {
 						description="Fostering a pet in your home gives them a safe and warm environment while we search for their new family or prepare them for transport."
 						callToAction="Get Started"
 						href="/volunteer/foster"
+						alt="A dog indoors laying on a dog bed"
 					/>
 					<InfoCard
 						image={volunteerImage03}
@@ -72,6 +77,7 @@ export default function Home() {
 						description="100% of all proceeds go towards our mission of reducing pet overpopulation in Northwest Mississippi."
 						callToAction="Get Started"
 						href="/donate"
+						alt="A bulldog sitting on an exam table at the vet"
 					/>
 				</CardContent>
 			</PawprintSection>

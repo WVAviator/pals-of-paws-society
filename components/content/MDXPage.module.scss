@@ -25,15 +25,37 @@
 			font-size: 1.825rem;
 		}
 	}
+	h3,
+	h4 {
+		text-align: center;
+		@include mq-desktop {
+			text-align: left;
+		}
+	}
+
+	h3 {
+		font-size: 1.35rem;
+	}
+
+	h4 {
+		color: $color-darkNavy;
+		font-weight: $fontWeight-regular;
+	}
 
 	ul {
 		padding: 2rem 1rem;
+		li {
+			margin-bottom: 0.5rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	p,
 	a,
 	ul {
-		font-size: 1rem;
+		font-size: 1.1rem;
 		font-family: "Inter", sans-serif;
 		font-weight: 500;
 		@include mq-desktop {

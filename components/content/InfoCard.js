@@ -3,14 +3,14 @@ import Link from "next/link";
 import ArrowIcon from "../ui/ArrowIcon";
 import styles from "./InfoCard.module.scss";
 
-const InfoCard = ({ image, heading, description, callToAction, href }) => {
+const InfoCard = ({ image, heading, description, callToAction, href, alt }) => {
 	return (
 		<Link href={href}>
 			<a>
 				<div className={styles.card}>
 					<div className={styles.cardContent}>
 						<div className={styles.cardImage}>
-							<Image src={image} />
+							<Image src={image} alt={alt} width={357} height={357} />
 						</div>
 						<h2>{heading}</h2>
 						<p>{description}</p>

@@ -33,7 +33,7 @@ const PawprintSection = ({
 		>
 			{addPawprints ? (
 				<div className={styles.imageContainer} style={pawprintStyle}>
-					<Image src={pawprints} />
+					<Image src={pawprints} alt="" width={2800} height={230} />
 				</div>
 			) : null}
 			{children}

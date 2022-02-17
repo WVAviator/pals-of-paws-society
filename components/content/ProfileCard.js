@@ -5,13 +5,13 @@ const ProfileCard = (props) => {
 	return (
 		<article className={styles.card}>
 			<div className={styles.content}>
-				<div className={styles.image}>
+				{/* <div className={styles.image}>
 					<Image {...props} />
-				</div>
+				</div> */}
 				<div className={styles.text}>
 					<h3>{props.name}</h3>
 					<h4>{props.title}</h4>
-					<p>{props.description}</p>
+					{/* <p>{props.description}</p> */}
 				</div>
 			</div>
 		</article>

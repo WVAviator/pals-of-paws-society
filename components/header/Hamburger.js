@@ -6,14 +6,18 @@ const Hamburger = ({ open, setOpen }) => {
 	}`;
 
 	return (
-		<div
-			tabIndex={2}
+		<button
+			tabIndex={0}
+			aria-expanded={open}
 			aria-label="Menu"
 			className={styles.menuIconContainer}
-			onClick={() => setOpen(!open)}
+			onClick={(e) => {
+				e.preventDefault();
+				setOpen(!open);
+			}}
 		>
-			<div className={activeClass}></div>
-		</div>
+			<div className={activeClass} aria-hidden="true" focusable="false"></div>
+		</button>
 	);
 };
 

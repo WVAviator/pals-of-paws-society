@@ -87,3 +87,11 @@ $sectionHeight: 20rem;
 		}
 	}
 }
+
+.btn {
+	text-transform: capitalize;
+	font-size: 1rem;
+	@include mq-desktop {
+		font-size: 1.2rem;
+	}
+}

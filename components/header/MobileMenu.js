@@ -4,9 +4,12 @@ import NavLinks from "./NavLinks";
 
 const MobileMenu = ({ open }) => {
 	return (
-		<div className={`${styles.menu} ${open ? styles.open : styles.closed}`}>
+		<nav
+			role="navigation"
+			className={`${styles.menu} ${open ? styles.open : styles.closed}`}
+		>
 			<NavLinks />
-		</div>
+		</nav>
 	);
 };
 

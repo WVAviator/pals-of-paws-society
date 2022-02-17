@@ -5,9 +5,6 @@ import mobileLogo from "/public/images/mobile-logo.svg";
 import desktopLogo from "/public/images/desktop-logo.svg";
 
 const HeaderLogo = () => {
-	const mobileSize = 90;
-	const desktopSize = 95;
-
 	const altText =
 		"Pals of Paws Society logo - a silhouette of a cat and a dog looking up.";
 
@@ -16,21 +13,11 @@ const HeaderLogo = () => {
 			<a>
 				<div className={styles.logo}>
 					<div className={styles.mobile}>
-						<Image
-							src={mobileLogo}
-							alt={altText}
-							width={mobileSize}
-							height={mobileSize}
-						/>
+						<Image src={mobileLogo} alt={altText} width={95} height={95} />
 					</div>
 					<div className={styles.desktop}>
 						<div className={styles.desktopContent}>
-							<Image
-								src={desktopLogo}
-								alt={altText}
-								width={desktopSize}
-								height={desktopSize}
-							/>
+							<Image src={desktopLogo} alt={altText} width={95} height={95} />
 							<h2 className={styles.logoText}>Pals of Paws Society</h2>
 						</div>
 					</div>
