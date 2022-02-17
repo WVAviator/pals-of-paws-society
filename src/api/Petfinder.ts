@@ -139,6 +139,7 @@ export class Petfinder {
 			}
 		});
 
+		//The org name is found at a different API endpoint
 		for (let i = 0; i < filteredResults.length; i++) {
 			const org = await this.getOrganization(
 				filteredResults[i].organization_id

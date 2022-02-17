@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PurpleButton from "../ui/PurpleButton";
 import styles from "./FooterNavigation.module.scss";
+import { Button } from "@mui/material";
 
 const FooterNavigation = () => {
 	return (
@@ -13,9 +14,14 @@ const FooterNavigation = () => {
 					<Link href="/terms">Terms of Service</Link>
 				</li>
 				<li>
-					<PurpleButton href="/donate" className={styles.btn}>
+					<Button
+						href="/donate"
+						className={styles.btn}
+						size="large"
+						variant="contained"
+					>
 						Donate
-					</PurpleButton>
+					</Button>
 				</li>
 			</ul>
 		</nav>

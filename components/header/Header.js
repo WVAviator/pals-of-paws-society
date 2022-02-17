@@ -5,6 +5,7 @@ import HeaderLogo from "./HeaderLogo";
 import MobileMenu from "./MobileMenu";
 import Navigation from "./Navigation";
 import PurpleButton from "../ui/PurpleButton";
+import { Button } from "@mui/material";
 import SkipNavigation from "./SkipNavigation";
 
 const Header = () => {
@@ -20,9 +21,15 @@ const Header = () => {
 						mobileMenuOpen={mobileMenuOpen}
 						setMobileMenuOpen={setMobileMenuOpen}
 					/>
-					<PurpleButton href="/donate" className={styles.btn}>
+
+					<Button
+						variant="contained"
+						href="/donate"
+						size="large"
+						className={styles.btn}
+					>
 						Donate
-					</PurpleButton>
+					</Button>
 				</div>
 			</div>
 			<MobileMenu open={mobileMenuOpen} />

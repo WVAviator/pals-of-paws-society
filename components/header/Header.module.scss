@@ -24,11 +24,13 @@
 		justify-content: space-between;
 		padding: $padding-section;
 	}
+}
 
-	.btn {
-		display: none;
-		@include mq-desktop {
-			display: inline-block;
-		}
+.btn {
+	display: none;
+	@include mq-desktop {
+		display: inline-flex;
+		text-transform: capitalize;
+		font-size: $fontSize-navigation;
 	}
 }

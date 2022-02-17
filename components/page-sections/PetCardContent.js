@@ -1,14 +1,19 @@
 import styles from "./PetCardContent.module.scss";
 import PetCard from "../../components/content/PetCard";
+import { CircularProgress } from "@mui/material";
 
 const PetCardContent = ({ animals }) => {
-	const mappedAnimals = animals.map((animal) => {
-		return (
-			<div key={animal.id}>
-				<PetCard animal={animal} />
-			</div>
-		);
-	});
+	const mappedAnimals = animals ? (
+		animals.map((animal) => {
+			return (
+				<div key={animal.id}>
+					<PetCard animal={animal} />
+				</div>
+			);
+		})
+	) : (
+		<CircularProgress />
+	);
 	return (
 		<section className={styles.section} aria-label="Adoptable Pets">
 			<div className={styles.header}>

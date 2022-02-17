@@ -3,6 +3,7 @@
 .background {
 	background-color: $color-grayBackground;
 	position: relative;
+	z-index: 0;
 
 	height: 40rem;
 	@include mq-tablet {
@@ -15,11 +16,12 @@
 
 .image {
 	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+	z-index: 1;
 }
 
 .content {
-	z-index: 2;
-	pointer-events: none;
+	z-index: 1;
+
 	position: relative;
 	width: min(100%, $contentMaxWidth);
 	margin: 0 auto;
@@ -48,8 +50,10 @@
 	}
 }
 
-.btnContent {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
+.btn {
+	text-transform: capitalize;
+	font-size: 1rem;
+	@include mq-desktop {
+		font-size: 1.2rem;
+	}
 }

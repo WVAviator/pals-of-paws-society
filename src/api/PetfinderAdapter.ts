@@ -7,9 +7,9 @@ const pf = Petfinder.getInstance();
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
 		id: pfAnimal.id,
-		name: pfAnimal.name ?? "Unnamed",
+		name: pfAnimal.name.toLowerCase() ?? "Unnamed",
 		type: pfAnimal.type.toLowerCase() ?? "Other",
-		sex: pfAnimal.gender ?? "Unknown",
+		sex: pfAnimal.gender.toLowerCase() ?? "Unknown",
 		ageString: pfAnimal.age ?? "Unknown",
 		breed: extractBreed(pfAnimal),
 		location: `${pfAnimal.contact.address.city}, ${pfAnimal.contact.address.state}`,
