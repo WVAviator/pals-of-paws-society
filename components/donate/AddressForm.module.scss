@@ -1,0 +1,62 @@
+@use "/styles/variables" as *;
+
+.form {
+	width: 100%;
+	min-height: 37.5rem;
+	padding: $padding-section;
+}
+
+.formGroup {
+	height: 100%;
+	width: 100%;
+	h2 {
+		font-size: 1.25rem;
+		margin-bottom: 1em;
+	}
+}
+
+.buttonGroup {
+	width: 100%;
+	justify-content: center;
+
+	[aria-pressed="true"] {
+		background-color: lighten($color_primary, 20%) !important;
+	}
+
+	button {
+		flex-basis: 6rem;
+		min-width: 0;
+	}
+}
+
+.name {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5em;
+	> * {
+		flex-basis: 100%;
+	}
+}
+
+.address {
+	margin-top: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	> * {
+		width: 100%;
+		flex-basis: 100%;
+	}
+
+	@include mq-desktop {
+		display: grid;
+		grid-template-columns: 4;
+	}
+}
+
+.btn {
+	text-transform: capitalize;
+	font-size: 1rem;
+	width: 100%;
+	margin-top: 1em;
+}

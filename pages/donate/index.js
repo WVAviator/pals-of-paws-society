@@ -1,7 +1,12 @@
 import UnderConstruction from "/components/layout/UnderConstruction";
+import DonateHero from "/components/donate/DonateHero";
 
 const Donate = () => {
-	return <UnderConstruction />;
+	return (
+		<div>
+			<DonateHero />
+		</div>
+	);
 };
 
 export default Donate;

@@ -1,0 +1,50 @@
+@use "/styles/variables" as *;
+
+.section {
+	min-height: 60rem;
+	position: relative;
+	background-color: $color-grayBackground;
+	@include mq-desktop {
+		background-color: transparent;
+		background-image: linear-gradient(
+			to right,
+			rgba($color-grayBackground, 0) 0%,
+			rgba($color-grayBackground, 0) 45%,
+			$color-grayBackground 55%,
+			$color-grayBackground 100%
+		);
+	}
+}
+
+.image {
+	z-index: -1;
+	display: none;
+	@include mq-desktop {
+		display: block;
+	}
+}
+
+.content {
+	@include restrict-width;
+	padding: $padding-section;
+
+	min-height: min-content;
+
+	z-index: 1;
+
+	@include mq-desktop {
+		height: 60rem;
+	}
+}
+
+.form {
+	position: relative;
+
+	width: min(90vw, 31.5rem);
+
+	margin: 0 auto;
+
+	@include mq-desktop {
+		margin: 5rem 0 0 auto;
+	}
+}

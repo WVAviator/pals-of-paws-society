@@ -1,0 +1,73 @@
+import { Button, Paper } from "@mui/material";
+import { useState } from "react";
+import styles from "./AddressForm.module.scss";
+import Billing from "./Billing";
+import Donation from "./Donation";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Checkout from "../stripe/Checkout";
+
+export interface BillingInfo {
+	firstName: string;
+	lastName: string;
+	streetAddress: string;
+	aptOrSuite: string;
+	city: string;
+	state: string;
+	zip: string;
+	email: string;
+	receiveUpdates: boolean;
+}
+
+const PaymentForm = () => {
+	const [donationAmount, setDonationAmount] = useState(0);
+	const [formData, setFormData] = useState<BillingInfo>({
+		firstName: "",
+		lastName: "",
+		streetAddress: "",
+		aptOrSuite: "",
+		city: "",
+		state: "",
+		zip: "",
+		email: "",
+		receiveUpdates: false,
+	});
+	const [checkoutOpen, setCheckoutOpen] = useState(false);
+
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setCheckoutOpen(true);
+	};
+
+	return (
+		<>
+			<Paper elevation={3} className={styles.form}>
+				<form action="" className={styles.formGroup} onSubmit={handleSubmit}>
+					<Donation setDonationAmount={setDonationAmount} />
+					<Billing formData={formData} setFormData={setFormData} />
+					<Button
+						variant="contained"
+						size="large"
+						endIcon={<ArrowForwardIcon />}
+						className={styles.btn}
+						type="submit"
+					>
+						Continue
+					</Button>
+				</form>
+			</Paper>
+			<Checkout
+				open={checkoutOpen}
+				setOpen={setCheckoutOpen}
+				products={[
+					{ name: "Donation", quantity: 1, priceTotal: donationAmount },
+				]}
+				onSuccess={() => {
+					console.log("Success!");
+					setCheckoutOpen(false);
+				}}
+			/>
+		</>
+	);
+};
+
+export default PaymentForm;
