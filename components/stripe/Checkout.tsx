@@ -5,10 +5,8 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	useTheme,
 } from "@mui/material";
 import React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 export interface Product {
 	name: string;
@@ -32,9 +30,6 @@ const getTotal = (products: Product[]): number => {
 };
 
 const Checkout = ({ open, setOpen, products, onSuccess }: CheckoutProps) => {
-	const theme = useTheme();
-	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
 	const total = getTotal(products);
 
 	const handleCancelled = () => {
