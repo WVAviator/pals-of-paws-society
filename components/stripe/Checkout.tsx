@@ -1,24 +1,29 @@
 import {
+	Alert,
 	Button,
+	CircularProgress,
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogContentText,
 	DialogTitle,
 } from "@mui/material";
-import React from "react";
-
-export interface Product {
-	name: string;
-	quantity: number;
-	priceTotal: number;
-}
+import {
+	Appearance,
+	ConfirmPaymentData,
+	loadStripe,
+	StripeElementsOptions,
+} from "@stripe/stripe-js";
+import React, { useEffect, useState } from "react";
+import styles from "./Checkout.module.scss";
+import { Product } from "../../src/types/Product";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 type CheckoutProps = {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	products: Product[];
-	onSuccess: () => void;
+	confirmParams: ConfirmPaymentData;
 };
 
 const getTotal = (products: Product[]): number => {
@@ -29,46 +34,99 @@ const getTotal = (products: Product[]): number => {
 	return total;
 };
 
-const Checkout = ({ open, setOpen, products, onSuccess }: CheckoutProps) => {
+const stripePromise = loadStripe(
+	process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLE_KEY
+);
+
+const Checkout = ({
+	open,
+	setOpen,
+	products,
+	confirmParams,
+}: CheckoutProps) => {
 	const total = getTotal(products);
 
+	const [clientSecret, setClientSecret] = useState("");
+
 	const handleCancelled = () => {
-		console.log("Cancelled.");
+		setClientSecret("");
 		setOpen(false);
 	};
 
-	const handleSubmit = () => {
-		console.log("Submitting...");
-		onSuccess();
+	useEffect(() => {
+		if (!open) return;
+
+		fetch("/api/payment", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ products }),
+		})
+			.then((res) => res.json())
+			.then((data) => setClientSecret(data.clientSecret));
+	}, [open]);
+
+	const renderedProducts = products.map((product) => {
+		return (
+			<div key={product.name} className={styles.item}>
+				<span>{product.name} </span>
+				<span>x{product.quantity}</span>
+
+				<span>
+					${" "}
+					{product.priceTotal.toLocaleString("en-US", {
+						maximumFractionDigits: 2,
+						minimumFractionDigits: 2,
+					})}
+				</span>
+			</div>
+		);
+	});
+
+	const appearance: Appearance = {
+		theme: "flat",
+		variables: {
+			colorPrimary: "#9c84b6",
+			colorBackground: "#ffffff",
+			colorText: "#0f172a",
+		},
+	};
+	const options: StripeElementsOptions = {
+		clientSecret,
+		appearance,
 	};
 
 	return (
-		<Dialog open={open} onClose={handleCancelled} fullWidth maxWidth="md">
+		<Dialog open={open} fullWidth maxWidth="md">
 			<DialogTitle>Secure Checkout</DialogTitle>
 			<DialogContent>
-				<DialogContentText>
-					{products.map((product) => {
-						<div>
-							<span>
-								{product.name} x{product.quantity}
-							</span>
-							<span>{product.priceTotal}</span>
-						</div>;
-					})}
-					<div>
+				<div className={styles.summary}>
+					{renderedProducts}
+					<hr />
+					<div className={`${styles.total} ${styles.item}`}>
 						<span>Total</span>
-						<span>{total}</span>
+						<span>
+							${" "}
+							{total.toLocaleString("en-US", {
+								maximumFractionDigits: 2,
+								minimumFractionDigits: 2,
+							})}
+						</span>
 					</div>
-				</DialogContentText>
+				</div>
+
+				<div className="stripe">
+					{clientSecret ? (
+						<Elements options={options} stripe={stripePromise}>
+							<CheckoutForm
+								confirmParams={confirmParams}
+								handleCancelled={handleCancelled}
+							/>
+						</Elements>
+					) : (
+						<CircularProgress />
+					)}
+				</div>
 			</DialogContent>
-			<DialogActions>
-				<Button variant="contained" size="large" onClick={handleCancelled}>
-					Cancel
-				</Button>
-				<Button variant="contained" size="large" onClick={handleSubmit}>
-					Submit Payment
-				</Button>
-			</DialogActions>
 		</Dialog>
 	);
 };

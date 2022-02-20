@@ -5,6 +5,7 @@ import Billing from "./Billing";
 import Donation from "./Donation";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Checkout from "../stripe/Checkout";
+import { Product } from "../../src/types/Product";
 
 export interface BillingInfo {
 	firstName: string;
@@ -38,6 +39,11 @@ const PaymentForm = () => {
 		setCheckoutOpen(true);
 	};
 
+	const confirmParams = {
+		return_url: "http://localhost:3000/donate/thankyou",
+		receipt_email: formData.email,
+	};
+
 	return (
 		<>
 			<Paper elevation={3} className={styles.form}>
@@ -58,13 +64,12 @@ const PaymentForm = () => {
 			<Checkout
 				open={checkoutOpen}
 				setOpen={setCheckoutOpen}
-				products={[
-					{ name: "Donation", quantity: 1, priceTotal: donationAmount },
-				]}
-				onSuccess={() => {
-					console.log("Success!");
-					setCheckoutOpen(false);
-				}}
+				products={
+					[
+						{ name: "Donation", quantity: 1, priceTotal: donationAmount },
+					] as Product[]
+				}
+				confirmParams={confirmParams}
 			/>
 		</>
 	);

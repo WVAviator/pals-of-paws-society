@@ -1,0 +1,27 @@
+@use "/styles/variables" as *;
+
+.item {
+	display: flex;
+	gap: 2rem;
+
+	> *:last-child {
+		margin-left: auto;
+	}
+}
+
+.total {
+	font-weight: 600;
+	margin: 1em 0;
+}
+
+.summary {
+	background-color: $color-grayBackground;
+}
+
+.stripe {
+	height: 25rem;
+	width: 100%;
+	> * {
+		margin: 0 auto;
+	}
+}
