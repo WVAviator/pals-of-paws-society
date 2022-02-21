@@ -1,6 +1,11 @@
 import styles from "./GridContent.module.scss";
 
-const GridContent = ({ columnLayout = "1fr 1fr", children }) => {
+interface GridContentProps {
+	columnLayout: string;
+	children: JSX.Element;
+}
+
+const GridContent = ({ columnLayout = "1fr 1fr", children }: GridContentProps) => {
 	const gridStyle = {
 		gridTemplateColumns: columnLayout,
 	};

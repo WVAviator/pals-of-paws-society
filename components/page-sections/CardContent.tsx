@@ -1,6 +1,11 @@
 import styles from "./CardContent.module.scss";
 
-const CardContent = ({ children, heading = null }) => {
+interface CardContentProps {
+	children: JSX.Element;
+	heading: string;
+}
+
+const CardContent = ({ children, heading = null }: CardContentProps) => {
 	const optionalHeading = heading ? (
 		<h2 className={styles.heading}>{heading}</h2>
 	) : null;

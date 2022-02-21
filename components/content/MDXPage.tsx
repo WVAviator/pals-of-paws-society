@@ -1,7 +1,15 @@
 import Head from "next/head";
 import styles from "./MDXPage.module.scss";
 
-const MDXPage = (props) => {
+interface MDXPageProps {
+	meta: {
+		title: string;
+		description: string;
+	}
+	children: JSX.Element
+}
+
+const MDXPage = (props: MDXPageProps) => {
 	return (
 		<>
 			<Head>

@@ -2,6 +2,18 @@ import Image from "next/image";
 import styles from "./PawprintSection.module.scss";
 import pawprints from "/public/images/pawprints01.svg";
 
+interface PawprintSectionProps {
+	children: JSX.Element;
+	pawprintRotation: number;
+	pawprintPosition: string;
+	backgroundColor: string;
+	pawprintOpacity: number;
+	enableShadow: boolean;
+	sectionTitle: string;
+	minimumHeight: string;
+	addPawprints: boolean;
+}
+
 const PawprintSection = ({
 	children,
 	pawprintRotation = 0,
@@ -12,7 +24,7 @@ const PawprintSection = ({
 	sectionTitle,
 	minimumHeight = "20rem",
 	addPawprints = true,
-}) => {
+}: PawprintSectionProps) => {
 	const pawprintStyle = {
 		transform: `translate(-50%, -50%) rotate(${pawprintRotation}deg)`,
 		top: pawprintPosition,

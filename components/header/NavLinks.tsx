@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-const NavLinks = ({ onClick = () => {} }) => {
+interface NavLinksProps {
+	onClick: () => void;
+}
+
+const NavLinks = ({ onClick = () => {} }: NavLinksProps) => {
 	return (
 		<ul>
 			<li onClick={onClick}>

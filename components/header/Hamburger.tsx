@@ -1,6 +1,11 @@
 import styles from "./Hamburger.module.scss";
 
-const Hamburger = ({ open, setOpen }) => {
+interface HamburgerProps {
+	open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Hamburger = ({ open, setOpen }: HamburgerProps) => {
 	const activeClass = `${styles.menuIcon} ${
 		open ? styles.open : styles.closed
 	}`;

@@ -10,7 +10,7 @@ import Link from "next/link";
 import CustomButton from "../ui/CustomButton";
 
 const Header = () => {
-	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
 	return (
 		<header>

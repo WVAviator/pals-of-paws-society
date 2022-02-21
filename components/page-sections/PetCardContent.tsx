@@ -2,7 +2,11 @@ import styles from "./PetCardContent.module.scss";
 import PetCard from "../../components/content/PetCard";
 import { CircularProgress } from "@mui/material";
 
-const PetCardContent = ({ animals }) => {
+interface PetCardContentProps {
+	animals: Animal[];
+}
+
+const PetCardContent = ({ animals }: PetCardContentProps) => {
 	const mappedAnimals = animals ? (
 		animals.map((animal) => {
 			return (

@@ -5,6 +5,11 @@ import dogIcon from "/public/images/dogIcon.svg";
 import styles from "./AnimalIcons.module.scss";
 import Image from "next/image";
 
+interface AnimalIconsProps {
+	sex: string;
+	type: string;
+}
+
 const AnimalIcons = ({ sex, type }) => {
 	const sexIcon = (
 		<Image src={sex === "female" ? femaleIcon : maleIcon} alt={sex} />

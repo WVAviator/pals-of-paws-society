@@ -4,7 +4,11 @@ import DefaultHead from "./DefaultHead";
 import { MDXProvider } from "@mdx-js/react";
 import Link from "next/link";
 
-const PageLayout = ({ children }) => {
+interface PageLayoutProps {
+	children: JSX.Element;
+}
+
+const PageLayout = ({ children }: PageLayoutProps) => {
 	return (
 		<>
 			<DefaultHead />

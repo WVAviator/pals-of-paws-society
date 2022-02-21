@@ -2,7 +2,12 @@ import React from "react";
 import styles from "./MobileMenu.module.scss";
 import NavLinks from "./NavLinks";
 
-const MobileMenu = ({ open, setOpen }) => {
+interface MobileMenuProps {
+	open: boolean;
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
 	const onLinkClicked = () => {
 		setOpen(false);
 	};

@@ -3,7 +3,16 @@ import Link from "next/link";
 import ArrowIcon from "../ui/ArrowIcon";
 import styles from "./InfoCard.module.scss";
 
-const InfoCard = ({ image, heading, description, callToAction, href, alt }) => {
+interface InfoCardProps {
+	image: any;
+	heading: string;
+	description: string;
+	callToAction: string;
+	href: string;
+	alt: string;
+}
+
+const InfoCard = ({ image, heading, description, callToAction, href, alt }: InfoCardProps) => {
 	return (
 		<Link href={href}>
 			<a>
