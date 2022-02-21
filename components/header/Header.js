@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 import { Button } from "@mui/material";
 import SkipNavigation from "./SkipNavigation";
 import Link from "next/link";
+import CustomButton from "../ui/CustomButton";
 
 const Header = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,14 +22,12 @@ const Header = () => {
 						mobileMenuOpen={mobileMenuOpen}
 						setMobileMenuOpen={setMobileMenuOpen}
 					/>
-					<Link href="/donate" passHref>
-						<Button variant="contained" size="large" className={styles.btn}>
-							Donate
-						</Button>
-					</Link>
+					<CustomButton className={styles.btn} href="/donate">
+						Donate
+					</CustomButton>
 				</div>
 			</div>
-			<MobileMenu open={mobileMenuOpen} />
+			<MobileMenu open={mobileMenuOpen} setOpen={setMobileMenuOpen} />
 		</header>
 	);
 };

@@ -13,7 +13,7 @@ const calculateAmount = (products: Product[]): number => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
-		const { products } = req.body;
+		const { products, description = "Donation", metadata } = req.body;
 
 		const paymentIntent = await stripe.paymentIntents.create({
 			amount: calculateAmount(products as Product[]),
@@ -21,6 +21,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			automatic_payment_methods: {
 				enabled: true,
 			},
+			description,
+			metadata,
 		});
 
 		res.send({

@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from "@mui/material";
+import Link from "next/link";
 
 const CustomButton = (props: ButtonProps) => {
 	const style = {
@@ -6,6 +7,20 @@ const CustomButton = (props: ButtonProps) => {
 		fontSize: "1.15rem",
 	};
 
-	return <Button variant="contained" size="large" sx={style} {...props} />;
+	const button = (
+		<Button variant="contained" size="large" sx={style} {...props} />
+	);
+
+	return (
+		<>
+			{props.href ? (
+				<Link href={props.href} passHref>
+					{button}
+				</Link>
+			) : (
+				button
+			)}
+		</>
+	);
 };
 export default CustomButton;

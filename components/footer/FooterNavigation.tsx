@@ -13,9 +13,9 @@ const FooterNavigation = () => {
 					<Link href="/terms">Terms of Service</Link>
 				</li>
 				<li>
-					<Link href="/donate" passHref>
-						<CustomButton className={styles.btn}>Donate</CustomButton>
-					</Link>
+					<CustomButton className={styles.btn} href="/donate">
+						Donate
+					</CustomButton>
 				</li>
 			</ul>
 		</nav>

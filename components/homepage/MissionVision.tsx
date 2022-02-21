@@ -81,15 +81,15 @@ const MissionVision = () => {
 							Through our fundraising and networking efforts, we hope to
 							eliminate the pet overpopulation problem in our community.
 						</p>
-						<Link href="/about" passHref>
-							<CustomButton
-								variant="outlined"
-								endIcon={<ArrowForwardIcon />}
-								className={styles.btn}
-							>
-								Learn About Us
-							</CustomButton>
-						</Link>
+
+						<CustomButton
+							variant="outlined"
+							endIcon={<ArrowForwardIcon />}
+							className={styles.btn}
+							href="/about"
+						>
+							Learn About Us
+						</CustomButton>
 					</div>
 				</div>
 			</div>

@@ -15,12 +15,15 @@ import styles from "./Checkout.module.scss";
 import { Product } from "../../src/types/Product";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { BillingInfo } from "../donate/PaymentForm";
 
 type CheckoutProps = {
 	open: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	products: Product[];
 	confirmParams: ConfirmPaymentData;
+	metadata: BillingInfo;
+	description?: string;
 };
 
 const getTotal = (products: Product[]): number => {
@@ -40,6 +43,8 @@ const Checkout = ({
 	setOpen,
 	products,
 	confirmParams,
+	description = "Donation",
+	metadata,
 }: CheckoutProps) => {
 	const total = getTotal(products);
 
@@ -56,7 +61,7 @@ const Checkout = ({
 		fetch("/api/payment", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ products }),
+			body: JSON.stringify({ products, description, metadata }),
 		})
 			.then((res) => res.json())
 			.then((data) => setClientSecret(data.clientSecret));

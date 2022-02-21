@@ -31,11 +31,13 @@ const Hero = () => {
 				<div className={styles.headingContainer}>
 					<h1>Fighting pet overpopulation one adoption at a time</h1>
 
-					<Link href="/about" passHref>
-						<CustomButton endIcon={<ArrowForwardIcon />} className={styles.btn}>
-							Learn About Us
-						</CustomButton>
-					</Link>
+					<CustomButton
+						endIcon={<ArrowForwardIcon />}
+						className={styles.btn}
+						href="/about"
+					>
+						Learn About Us
+					</CustomButton>
 				</div>
 			</div>
 		</section>

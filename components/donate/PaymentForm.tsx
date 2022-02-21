@@ -69,6 +69,7 @@ const PaymentForm = () => {
 					] as Product[]
 				}
 				confirmParams={confirmParams}
+				metadata={formData}
 			/>
 		</>
 	);
