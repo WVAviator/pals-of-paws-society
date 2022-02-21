@@ -7,6 +7,7 @@ import kitten from "/public/images/kitten02.png";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from "next/link";
+import CustomButton from "../ui/CustomButton";
 
 const MissionVision = () => {
 	return (
@@ -81,14 +82,13 @@ const MissionVision = () => {
 							eliminate the pet overpopulation problem in our community.
 						</p>
 						<Link href="/about" passHref>
-							<Button
+							<CustomButton
 								variant="outlined"
-								size="large"
 								endIcon={<ArrowForwardIcon />}
 								className={styles.btn}
 							>
 								Learn About Us
-							</Button>
+							</CustomButton>
 						</Link>
 					</div>
 				</div>

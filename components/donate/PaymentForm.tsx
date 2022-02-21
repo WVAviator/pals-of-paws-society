@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { useState } from "react";
 import styles from "./AddressForm.module.scss";
 import Billing from "./Billing";
@@ -6,6 +6,7 @@ import Donation from "./Donation";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Checkout from "../stripe/Checkout";
 import { Product } from "../../src/types/Product";
+import CustomButton from "../ui/CustomButton";
 
 export interface BillingInfo {
 	firstName: string;
@@ -50,15 +51,13 @@ const PaymentForm = () => {
 				<form action="" className={styles.formGroup} onSubmit={handleSubmit}>
 					<Donation setDonationAmount={setDonationAmount} />
 					<Billing formData={formData} setFormData={setFormData} />
-					<Button
-						variant="contained"
-						size="large"
+					<CustomButton
 						endIcon={<ArrowForwardIcon />}
 						className={styles.btn}
 						type="submit"
 					>
 						Continue
-					</Button>
+					</CustomButton>
 				</form>
 			</Paper>
 			<Checkout

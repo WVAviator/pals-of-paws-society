@@ -1,9 +1,6 @@
 import {
-	Alert,
-	Button,
 	CircularProgress,
 	Dialog,
-	DialogActions,
 	DialogContent,
 	DialogTitle,
 } from "@mui/material";
@@ -113,20 +110,21 @@ const Checkout = ({
 						</span>
 					</div>
 				</div>
-
-				<div className="stripe">
-					{clientSecret ? (
-						<Elements options={options} stripe={stripePromise}>
-							<CheckoutForm
-								confirmParams={confirmParams}
-								handleCancelled={handleCancelled}
-							/>
-						</Elements>
-					) : (
-						<CircularProgress />
-					)}
-				</div>
 			</DialogContent>
+			<div className={styles.stripe}>
+				{clientSecret ? (
+					<Elements options={options} stripe={stripePromise}>
+						<CheckoutForm
+							confirmParams={confirmParams}
+							handleCancelled={handleCancelled}
+						/>
+					</Elements>
+				) : (
+					<div className={styles.center}>
+						<CircularProgress />
+					</div>
+				)}
+			</div>
 		</Dialog>
 	);
 };

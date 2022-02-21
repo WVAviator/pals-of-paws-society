@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import heroImage from "/public/images/hero.jpg";
 import styles from "./Hero.module.scss";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import CustomButton from "../ui/CustomButton";
 
 const widthToShiftImage = 1150;
 const mobileShift = "75%";
@@ -32,14 +32,9 @@ const Hero = () => {
 					<h1>Fighting pet overpopulation one adoption at a time</h1>
 
 					<Link href="/about" passHref>
-						<Button
-							variant="contained"
-							size="large"
-							endIcon={<ArrowForwardIcon />}
-							className={styles.btn}
-						>
+						<CustomButton endIcon={<ArrowForwardIcon />} className={styles.btn}>
 							Learn About Us
-						</Button>
+						</CustomButton>
 					</Link>
 				</div>
 			</div>

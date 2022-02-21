@@ -13,6 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { ConfirmPaymentData } from "@stripe/stripe-js";
 import React, { useEffect, useState } from "react";
+import CustomButton from "../ui/CustomButton";
 
 type CheckoutFormProps = {
 	confirmParams: ConfirmPaymentData;
@@ -85,26 +86,28 @@ const CheckoutForm = ({
 
 	return (
 		<form id="payment-form" onSubmit={handleSubmit}>
-			<PaymentElement id="payment-element" />
-
-			<DialogActions>
-				<Button
-					variant="contained"
+			<DialogContent sx={{ minHeight: "20rem" }}>
+				<PaymentElement id="payment-element" />
+			</DialogContent>
+			<DialogActions sx={{ marginTop: "auto" }}>
+				<CustomButton
 					size="large"
+					variant="outlined"
+					style={{ fontSize: "1rem" }}
 					onClick={handleCancelled}
 					disabled={isLoading}
 				>
 					Cancel
-				</Button>
-				<Button
-					variant="contained"
+				</CustomButton>
+				<CustomButton
 					id="submit"
 					size="large"
 					type="submit"
+					style={{ fontSize: "1rem" }}
 					disabled={isLoading || !stripe || !elements}
 				>
 					{isLoading ? <CircularProgress /> : "Submit Payment"}
-				</Button>
+				</CustomButton>
 			</DialogActions>
 			{message && (
 				<Alert severity="error" id="payment-message">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./FooterNavigation.module.scss";
-import { Button } from "@mui/material";
+import CustomButton from "../ui/CustomButton";
 
 const FooterNavigation = () => {
 	return (
@@ -14,9 +14,7 @@ const FooterNavigation = () => {
 				</li>
 				<li>
 					<Link href="/donate" passHref>
-						<Button className={styles.btn} size="large" variant="contained">
-							Donate
-						</Button>
+						<CustomButton className={styles.btn}>Donate</CustomButton>
 					</Link>
 				</li>
 			</ul>

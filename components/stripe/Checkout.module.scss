@@ -15,13 +15,12 @@
 }
 
 .summary {
-	background-color: $color-grayBackground;
+	border-radius: 0.625rem;
+	border-width: 0.125rem;
+	border-color: gray;
 }
 
 .stripe {
-	height: 25rem;
+	min-height: 20rem;
 	width: 100%;
-	> * {
-		margin: 0 auto;
-	}
 }
