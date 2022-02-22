@@ -5,8 +5,8 @@ interface MDXPageProps {
 	meta: {
 		title: string;
 		description: string;
-	}
-	children: JSX.Element
+	};
+	children: React.ReactNode;
 }
 
 const MDXPage = (props: MDXPageProps) => {

@@ -1,8 +1,8 @@
 import styles from "./CardContent.module.scss";
 
 interface CardContentProps {
-	children: JSX.Element;
-	heading: string;
+	children: React.ReactNode;
+	heading?: string;
 }
 
 const CardContent = ({ children, heading = null }: CardContentProps) => {

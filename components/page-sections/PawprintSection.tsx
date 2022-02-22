@@ -3,15 +3,15 @@ import styles from "./PawprintSection.module.scss";
 import pawprints from "/public/images/pawprints01.svg";
 
 interface PawprintSectionProps {
-	children: JSX.Element;
-	pawprintRotation: number;
-	pawprintPosition: string;
-	backgroundColor: string;
-	pawprintOpacity: number;
-	enableShadow: boolean;
+	children?: React.ReactNode;
+	pawprintRotation?: number;
+	pawprintPosition?: string;
+	backgroundColor?: string;
+	pawprintOpacity?: number;
+	enableShadow?: boolean;
 	sectionTitle: string;
-	minimumHeight: string;
-	addPawprints: boolean;
+	minimumHeight?: string;
+	addPawprints?: boolean;
 }
 
 const PawprintSection = ({

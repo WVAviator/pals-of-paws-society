@@ -4,9 +4,7 @@ import { useState } from "react";
 import HeaderLogo from "./HeaderLogo";
 import MobileMenu from "./MobileMenu";
 import Navigation from "./Navigation";
-import { Button } from "@mui/material";
 import SkipNavigation from "./SkipNavigation";
-import Link from "next/link";
 import CustomButton from "../ui/CustomButton";
 
 const Header = () => {

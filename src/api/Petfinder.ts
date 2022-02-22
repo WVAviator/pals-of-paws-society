@@ -1,76 +1,39 @@
+import { PetfinderOrganizations } from "./PetfinderOrganizations";
+import { PetfinderAuth } from "./PetfinderAuth";
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 
-interface Organization {
-	id: string;
-	name: string;
-	email: string;
-	phone: string;
-	url: string;
-}
-
 export class Petfinder {
-	private static instance: Petfinder;
-
 	private searchLocation = "34.688609, -90.000388";
 	private searchRadius = "23";
 
-	private accessToken: Promise<string>;
-	private expiration: Date;
 	private url = "https://api.petfinder.com/v2";
 
-	private organizations: Promise<Organization[]>;
+	public async getAllAnimals() {
+		let lastPage = false;
+		let animals = new Array<PetfinderAnimal>();
+		let page = 1;
 
-	constructor() {
-		this.expiration = new Date("Jan 1, 1900 00:00:01");
-		this.accessToken = null;
-	}
+		while (!lastPage) {
+			const queryUrl = `${this.url}/animals?page=${page}`;
+			const response = await this.fetchAnimalData(queryUrl);
 
-	public static getInstance(): Petfinder {
-		if (!Petfinder.instance) {
-			Petfinder.instance = new Petfinder();
+			const totalPages = response.data.pagination.total_pages;
+			console.log(`Extracted animals from page ${page} out of ${totalPages}`);
+
+			lastPage = page >= totalPages;
+			animals.push(...response.data.animals);
+			page++;
 		}
-		return Petfinder.instance;
+
+		return this.filterResults(animals);
 	}
 
-	private async getAccessToken() {
-		if (this.accessToken && !this.tokenExpired()) return this.accessToken;
-
-		const apiKey = process.env.NEXT_PUBLIC_PETFINDER_API_KEY;
-		const secret = process.env.PETFINDER_SECRET_KEY;
-
-		const authenticationUrl = `${this.url}/oauth2/token`;
-
-		const dataString = `grant_type=client_credentials&client_id=${apiKey}&client_secret=${secret}`;
-
-		const response = await axios.post(authenticationUrl, dataString);
-
-		this.accessToken = response.data.access_token;
-		const now = new Date();
-		this.expiration = new Date(now.getTime() + response.data.expires_in * 1000);
-
-		console.log(
-			"New Petfinder access token retrieved. Expires " +
-				this.expiration.toLocaleTimeString()
-		);
-
-		return this.accessToken;
-	}
-
-	private tokenExpired() {
-		const now = new Date();
-		return this.expiration.getTime() - now.getTime() <= 0;
-	}
-
-	public async getAnimals() {
+	public async getFewAnimals() {
 		const queryUrl = `${this.url}/animals`;
-		const response = await this.fetchAnimalData(queryUrl);
+		const response = await this.fetchAnimalData(queryUrl, 50);
 
 		return this.filterResults(response.data.animals as PetfinderAnimal[]);
-	}
-
-	public async getOrganization(id: string) {
-		return (await this.getOrganizations()).find((o) => o.id === id);
 	}
 
 	public async getAnimal(id: number) {
@@ -80,8 +43,8 @@ export class Petfinder {
 		return response.data.animal as PetfinderAnimal;
 	}
 
-	private async fetchAnimalData(queryUrl: string) {
-		const token = await this.getAccessToken();
+	private async fetchAnimalData(queryUrl: string, limit: number = 100) {
+		const token = await PetfinderAuth.getToken();
 		const response = await axios.get(queryUrl, {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -89,31 +52,10 @@ export class Petfinder {
 			params: {
 				location: this.searchLocation,
 				distance: this.searchRadius,
-				limit: 100,
+				limit,
 			},
 		});
 		return response;
-	}
-
-	public async getOrganizations() {
-		if (this.organizations) return this.organizations;
-
-		const token = await this.getAccessToken();
-		const response = await axios.get(
-			"https://api.petfinder.com/v2/organizations",
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-				params: {
-					location: this.searchLocation,
-					distance: this.searchRadius,
-					limit: 100,
-				},
-			}
-		);
-		this.organizations = response.data.organizations;
-		return this.organizations;
 	}
 
 	private async filterResults(animals: PetfinderAnimal[]) {
@@ -122,8 +64,22 @@ export class Petfinder {
 		animals.forEach((animal) => {
 			const newAnimal = animal;
 
-			//Some orgs use all caps - CSS text transform will fix
-			newAnimal.name = animal.name.toLowerCase();
+			let newName: string;
+
+			//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
+			newName = animal.name.toLowerCase();
+
+			//Some orgs put additional information like litter size in the name - usually separated by a hyphen
+			newName = newName.split(" -")[0];
+
+			//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
+			newName = newName.replace("&amp;", "&");
+
+			//Some orgs put "zcl" in the name, not sure why
+			newName = newName.replace("zcl ", "");
+			newName = newName.replace("zcl-", "");
+
+			newAnimal.name = newName;
 
 			//Some orgs post the same animal multiple times
 			if (
@@ -141,7 +97,7 @@ export class Petfinder {
 
 		//The org name is found at a different API endpoint
 		for (let i = 0; i < filteredResults.length; i++) {
-			const org = await this.getOrganization(
+			const org = await PetfinderOrganizations.getOrganization(
 				filteredResults[i].organization_id
 			);
 			filteredResults[i].orgName = org.name;

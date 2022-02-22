@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import ArrowIcon from "../ui/ArrowIcon";
 import styles from "./InfoCard.module.scss";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 interface InfoCardProps {
 	image: any;
@@ -12,7 +12,14 @@ interface InfoCardProps {
 	alt: string;
 }
 
-const InfoCard = ({ image, heading, description, callToAction, href, alt }: InfoCardProps) => {
+const InfoCard = ({
+	image,
+	heading,
+	description,
+	callToAction,
+	href,
+	alt,
+}: InfoCardProps) => {
 	return (
 		<Link href={href}>
 			<a>
@@ -25,7 +32,7 @@ const InfoCard = ({ image, heading, description, callToAction, href, alt }: Info
 						<p>{description}</p>
 						<div className={styles.cardAction}>
 							<span>{callToAction}</span>
-							<ArrowIcon color="#9c84b6" width="18" height="18" />
+							<ArrowForwardIcon />
 						</div>
 					</div>
 				</div>

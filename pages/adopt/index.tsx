@@ -1,17 +1,27 @@
-import { Animal } from "../../src/types/Animal";
 import PetCardContent from "../../components/page-sections/PetCardContent";
-import { getAnimals } from "../../src/api/GetAnimals";
 import axios from "axios";
 import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const Adopt = () => {
+	const [animalData, setAnimalData] = useState([]);
+
+	const { data: initialData, error: initialError } = useSWR(
+		"/api/animals/subset",
+		fetcher
+	);
 	const { data, error } = useSWR("/api/animals", fetcher);
+
+	useEffect(() => {
+		if (!data) setAnimalData(initialData);
+		else setAnimalData(data);
+	}, [data, initialData]);
 
 	return (
 		<div>
-			<PetCardContent animals={data} />
+			<PetCardContent animals={animalData} />
 		</div>
 	);
 };

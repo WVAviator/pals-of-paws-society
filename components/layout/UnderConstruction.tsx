@@ -21,7 +21,11 @@ const UnderConstruction = () => {
 					</div>
 				</GridContent>
 			</PawprintSection>
-			<PawprintSection backgroundColor="white" pawprintOpacity={0.05} />
+			<PawprintSection
+				sectionTitle=""
+				backgroundColor="white"
+				pawprintOpacity={0.05}
+			/>
 		</>
 	);
 };

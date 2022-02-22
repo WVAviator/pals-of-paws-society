@@ -2,11 +2,10 @@ import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "./../types/PetfinderAnimal";
 import { Petfinder } from "./Petfinder";
 
-const pf = Petfinder.getInstance();
-
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
 		id: pfAnimal.id,
+		service: "petfinder",
 		name: pfAnimal.name.toLowerCase() ?? "Unnamed",
 		type: pfAnimal.type.toLowerCase() ?? "Other",
 		sex: pfAnimal.gender.toLowerCase() ?? "Unknown",

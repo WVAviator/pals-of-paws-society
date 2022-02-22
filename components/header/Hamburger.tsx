@@ -2,7 +2,7 @@ import styles from "./Hamburger.module.scss";
 
 interface HamburgerProps {
 	open: boolean;
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Hamburger = ({ open, setOpen }: HamburgerProps) => {
@@ -21,7 +21,7 @@ const Hamburger = ({ open, setOpen }: HamburgerProps) => {
 				setOpen(!open);
 			}}
 		>
-			<div className={activeClass} aria-hidden="true" focusable="false"></div>
+			<div className={activeClass} aria-hidden="true"></div>
 		</button>
 	);
 };

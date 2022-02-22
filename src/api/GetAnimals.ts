@@ -4,10 +4,20 @@ import getShelterluvAnimals from "./Shelterluv";
 import { convertShelterluvAnimal } from "./ShelterluvAdapter";
 import { Animal } from "../types/Animal";
 
-const pf = Petfinder.getInstance();
+const pf = new Petfinder();
 
-export const getAnimals = async () => {
-	const pfAnimals = await pf.getAnimals();
+export const getAllAnimals = async () => {
+	return await getAnimals();
+};
+
+export const getSomeAnimals = async () => {
+	return await getAnimals(false);
+};
+
+const getAnimals = async (getAll: boolean = true) => {
+	const pfAnimals = getAll
+		? await pf.getAllAnimals()
+		: await pf.getFewAnimals();
 	const shelterluvAnimals = await getShelterluvAnimals();
 
 	const convertedPetfinderAnimals = pfAnimals.map((animal) =>

@@ -4,9 +4,7 @@ import overpopulationIcon from "/public/images/overpopulation.png";
 import vetIcon from "/public/images/vetcare.png";
 import rescueIcon from "/public/images/rescue.png";
 import kitten from "/public/images/kitten02.png";
-import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Link from "next/link";
 import CustomButton from "../ui/CustomButton";
 
 const MissionVision = () => {

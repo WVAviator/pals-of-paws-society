@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface NavLinksProps {
-	onClick: () => void;
+	onClick?: () => void;
 }
 
 const NavLinks = ({ onClick = () => {} }: NavLinksProps) => {

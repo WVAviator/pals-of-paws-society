@@ -10,7 +10,7 @@ interface AnimalIconsProps {
 	type: string;
 }
 
-const AnimalIcons = ({ sex, type }) => {
+const AnimalIcons = ({ sex, type }: AnimalIconsProps) => {
 	const sexIcon = (
 		<Image src={sex === "female" ? femaleIcon : maleIcon} alt={sex} />
 	);
