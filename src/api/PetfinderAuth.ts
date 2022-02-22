@@ -1,12 +1,12 @@
 import axios from "axios";
 import cache from "memory-cache";
 
-export class PetfinderAuth {
-	private static instance: PetfinderAuth;
+// export class PetfinderAuth {
+// 	private static instance: PetfinderAuth;
 
 	//private accessToken: Promise<string>;
 	//private expiration: Date;
-	private url = "https://api.petfinder.com/v2";
+	const url = "https://api.petfinder.com/v2";
 
 	// constructor() {
 	// 	this.expiration = new Date("Jan 1, 1900 00:00:01");
@@ -20,13 +20,16 @@ export class PetfinderAuth {
 	// 	return PetfinderAuth.instance;
 	// }
 
-	public static async getToken() {
+	const getToken = async () => {
 		//return await PetfinderAuth.getInstance().getAccessToken();
-		token = cache.get("token");
-		if (!token) token = getAccessToken();
+		let token: string = cache.get("token");
+		if (token) console.log("Cached token retrieved");
+		
+		if (!token) token = await getAccessToken();
+		return token;
 	}
 
-	private async getAccessToken() {
+	const getAccessToken = async () => {
 		//if (this.accessToken && !this.tokenExpired()) return this.accessToken;
 
 		const apiKey = process.env.NEXT_PUBLIC_PETFINDER_API_KEY;
@@ -50,8 +53,10 @@ export class PetfinderAuth {
 		return put("token", response.data.access_token, response.data.expires_in * 1000);
 	}
 
+	export default getToken;
+
 	// private tokenExpired() {
 	// 	const now = new Date();
 	// 	return this.expiration.getTime() - now.getTime() <= 0;
 	// }
-}
+// }

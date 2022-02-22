@@ -1,5 +1,5 @@
-import { PetfinderOrganizations } from "./PetfinderOrganizations";
-import { PetfinderAuth } from "./PetfinderAuth";
+import getOrg from "./PetfinderOrganizations";
+import getToken from "./PetfinderAuth";
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 
@@ -44,7 +44,7 @@ export class Petfinder {
 	}
 
 	private async fetchAnimalData(queryUrl: string, limit: number = 100) {
-		const token = await PetfinderAuth.getToken();
+		const token = await getToken();
 		const response = await axios.get(queryUrl, {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ export class Petfinder {
 
 		//The org name is found at a different API endpoint
 		for (let i = 0; i < filteredResults.length; i++) {
-			const org = await PetfinderOrganizations.getOrganization(
+			const org = await getOrg(
 				filteredResults[i].organization_id
 			);
 			filteredResults[i].orgName = org.name;

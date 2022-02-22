@@ -22,9 +22,10 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	return animal;
 };
 
-const extractBreed = (pfAnimal: PetfinderAnimal) => {
-	if (pfAnimal.breeds.mixed && pfAnimal.breeds.primary)
-		return `Mixed ${pfAnimal.breeds.primary}`;
-	if (pfAnimal.breeds.primary) return pfAnimal.breeds.primary;
+const extractBreed = ({ breeds }: PetfinderAnimal) => {
+	if (breeds.secondary && breeds.primary) return `${breeds.primary}/${breeds.secondary} Mix`;
+	if (breeds.mixed && breeds.primary)
+		return `Mixed ${breeds.primary}`;
+	if (breeds.primary) return breeds.primary;
 	return "Mixed";
 };
