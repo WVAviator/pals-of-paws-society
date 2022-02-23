@@ -2,18 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getAllAnimals } from "../../../src/api/GetAnimals";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	// let animals = cache.get("allAnimals");
-
-	// if (!animals) {
-	// 	console.log("AllAnimals cache expired. Pulling in new data.");
-	// 	animals = await getAllAnimals();
-
-	// 	cache.put("allAnimals", animals, 1200000);
-	// }
-
 	const animals = await getAllAnimals();
+	const { id } = req.query;
 
-	res.status(200).send(animals);
+	const animal = animals.find((a) => a.id === id);
+
+	animal ? res.status(200).send(animal) : res.status(404);
 };
 
 export default handler;

@@ -1,5 +1,5 @@
 export interface Animal {
-	id: number;
+	id: string;
 	service: "petfinder" | "shelterluv";
 	name: string;
 	type: string;

@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 
 interface PetCardContentProps {
 	animals: Animal[];
+	loadingAll: boolean;
 }
 
 const pageOffset = 25;
 
-const PetCardContent = ({ animals }: PetCardContentProps) => {
+const PetCardContent = ({ animals, loadingAll }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,15 +34,28 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 		<CircularProgress />
 	);
 
-	const pagination = (
-		<Pagination
-			count={pageCount}
-			color="primary"
-			page={currentPage}
-			onChange={(event: any, value) => setCurrentPage(value)}
-			size="large"
-		/>
-	);
+	const handlePageChange = (event: any, value: number) => {
+		setCurrentPage(value);
+		window.scrollTo(0, 0);
+	};
+
+	const pagination = animals ? (
+		<div className={styles.pagination}>
+			{loadingAll ? (
+				<div className={styles.pageLoad}>
+					<CircularProgress />
+				</div>
+			) : (
+				<Pagination
+					count={pageCount}
+					color="primary"
+					page={currentPage}
+					onChange={handlePageChange}
+					size="large"
+				/>
+			)}
+		</div>
+	) : null;
 
 	return (
 		<section className={styles.section} aria-label="Adoptable Pets">
@@ -53,9 +67,9 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 					organizations in Northwest Mississippi.
 				</p>
 			</div>
-			<div className={styles.pagination}>{pagination}</div>
+			{pagination}
 			<div className={styles.contents}>{mappedAnimals}</div>
-			<div className={styles.pagination}>{pagination}</div>
+			{pagination}
 		</section>
 	);
 };

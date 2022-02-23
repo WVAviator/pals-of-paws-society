@@ -4,7 +4,7 @@ import { Petfinder } from "./Petfinder";
 
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
-		id: pfAnimal.id,
+		id: `pf${pfAnimal.id}`,
 		service: "petfinder",
 		name: pfAnimal.name.toLowerCase() ?? "Unnamed",
 		type: pfAnimal.type.toLowerCase() ?? "Other",
@@ -23,9 +23,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 };
 
 const extractBreed = ({ breeds }: PetfinderAnimal) => {
-	if (breeds.secondary && breeds.primary) return `${breeds.primary}/${breeds.secondary} Mix`;
-	if (breeds.mixed && breeds.primary)
-		return `Mixed ${breeds.primary}`;
+	if (breeds.mixed && breeds.primary) return `Mixed ${breeds.primary}`;
 	if (breeds.primary) return breeds.primary;
 	return "Mixed";
 };

@@ -2,7 +2,7 @@ import { Animal } from "../types/Animal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 export const convertShelterluvAnimal = (shelterluvAnimal: ShelterluvAnimal) => {
 	const animal: Animal = {
-		id: shelterluvAnimal["Internal-ID"],
+		id: `sl${shelterluvAnimal["Internal-ID"]}`,
 		service: "shelterluv",
 		name: shelterluvAnimal.Name,
 		type: shelterluvAnimal.Type.toLowerCase(),

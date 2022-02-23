@@ -21,7 +21,7 @@ const Adopt = () => {
 
 	return (
 		<div>
-			<PetCardContent animals={animalData} />
+			<PetCardContent animals={animalData} loadingAll={!data} />
 		</div>
 	);
 };

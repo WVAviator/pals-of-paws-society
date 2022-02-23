@@ -1,4 +1,4 @@
-import getOrg from "./PetfinderOrganizations";
+import getOrganization from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
@@ -19,7 +19,6 @@ export class Petfinder {
 			const response = await this.fetchAnimalData(queryUrl);
 
 			const totalPages = response.data.pagination.total_pages;
-			console.log(`Extracted animals from page ${page} out of ${totalPages}`);
 
 			lastPage = page >= totalPages;
 			animals.push(...response.data.animals);
@@ -97,9 +96,7 @@ export class Petfinder {
 
 		//The org name is found at a different API endpoint
 		for (let i = 0; i < filteredResults.length; i++) {
-			const org = await getOrg(
-				filteredResults[i].organization_id
-			);
+			const org = await getOrganization(filteredResults[i].organization_id);
 			filteredResults[i].orgName = org.name;
 		}
 
