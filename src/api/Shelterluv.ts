@@ -4,6 +4,7 @@ import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 const key = process.env.SHELTERLUV_API_KEY;
 
 const getShelterluvAnimals = async () => {
+
 	const response = await axios.get(
 		"https://www.shelterluv.com/api/v1/animals",
 		{
@@ -16,16 +17,22 @@ const getShelterluvAnimals = async () => {
 		}
 	);
 
-	let animals = new Array<ShelterluvAnimal>();
+	const animals = response.data.animals as ShelterluvAnimal[];
 
-	(response.data.animals as ShelterluvAnimal[]).forEach((animal) => {
+	return filterResults(animals);
+};
+
+const filterResults = (animals: ShelterluvAnimal[]) => {
+	let filteredAnimals = new Array<ShelterluvAnimal>();
+
+	animals.forEach((animal) => {
 		if (!animal.Name) return;
 		if (animal.Photos.length === 0) return;
 
-		animals.push(animal as ShelterluvAnimal);
+		filteredAnimals.push(animal);
 	});
 
-	return animals;
-};
+	return filteredAnimals;
+}
 
 export default getShelterluvAnimals;

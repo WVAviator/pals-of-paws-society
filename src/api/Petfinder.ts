@@ -2,6 +2,7 @@ import getOrganization from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
+import { PetfinderConnectionError } from "./PetfinderOrganizations";
 
 export class Petfinder {
 	private searchLocation = "34.688609, -90.000388";
@@ -43,6 +44,7 @@ export class Petfinder {
 	}
 
 	private async fetchAnimalData(queryUrl: string, limit: number = 100) {
+
 		const token = await getToken();
 		const response = await axios.get(queryUrl, {
 			headers: {
@@ -54,6 +56,7 @@ export class Petfinder {
 				limit,
 			},
 		});
+
 		return response;
 	}
 

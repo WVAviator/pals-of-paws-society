@@ -6,6 +6,7 @@ import cache from "memory-cache";
 const url = "https://api.petfinder.com/v2/organizations";
 const cacheExpiration = 86400000; // 24 hours
 
+
 const getAllOrganizations = async () => {
 	return (
 		(cache.get("orgs") as Organization[]) ?? (await retrieveNewOrganizations())
@@ -13,6 +14,7 @@ const getAllOrganizations = async () => {
 };
 
 const retrieveNewOrganizations = async () => {
+	
 	const token = await getToken();
 	const response = await axios.get(url, {
 		headers: {
@@ -24,9 +26,9 @@ const retrieveNewOrganizations = async () => {
 			limit: 100,
 		},
 	});
-	const organizations = response.data.organizations as Organization[];
+	const organizations = cache.put("orgs", response.data.organizations as Organization[], cacheExpiration);
 
-	return cache.put("orgs", organizations, cacheExpiration);
+	return organizations;
 };
 
 const getOrganization = async (orgId: string) => {

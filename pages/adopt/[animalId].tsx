@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { getStaticProps } from ".";
 import { Animal } from "../../src/types/Animal";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -18,5 +19,11 @@ const AnimalPage = () => {
 
 	return <div>{JSON.stringify(animal)}</div>;
 };
+
+export async function getStaticProps(context) {
+
+	
+
+}
 
 export default AnimalPage;

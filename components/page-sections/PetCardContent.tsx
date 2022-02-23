@@ -6,21 +6,20 @@ import { useEffect, useState } from "react";
 
 interface PetCardContentProps {
 	animals: Animal[];
-	loadingAll: boolean;
 }
 
 const pageOffset = 25;
 
-const PetCardContent = ({ animals, loadingAll }: PetCardContentProps) => {
+const PetCardContent = ({ animals }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	useEffect(() => {
-		if (!animals) return;
-		setPageCount(Math.ceil(animals.length / pageOffset));
-	}, [animals]);
+	// useEffect(() => {
+	// 	if (!animals) return;
+	// 	setPageCount(Math.ceil(animals.length / pageOffset));
+	// }, [animals]);
 
-	const mappedAnimals = animals ? (
+	const mappedAnimals = 
 		animals
 			.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
 			.map((animal) => {
@@ -30,22 +29,15 @@ const PetCardContent = ({ animals, loadingAll }: PetCardContentProps) => {
 					</div>
 				);
 			})
-	) : (
-		<CircularProgress />
-	);
 
 	const handlePageChange = (event: any, value: number) => {
 		setCurrentPage(value);
 		window.scrollTo(0, 0);
 	};
 
-	const pagination = animals ? (
+	const pagination = 
 		<div className={styles.pagination}>
-			{loadingAll ? (
-				<div className={styles.pageLoad}>
-					<CircularProgress />
-				</div>
-			) : (
+			
 				<Pagination
 					count={pageCount}
 					color="primary"
@@ -53,9 +45,8 @@ const PetCardContent = ({ animals, loadingAll }: PetCardContentProps) => {
 					onChange={handlePageChange}
 					size="large"
 				/>
-			)}
-		</div>
-	) : null;
+			
+		</div>;
 
 	return (
 		<section className={styles.section} aria-label="Adoptable Pets">

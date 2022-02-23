@@ -13,22 +13,41 @@ export const getAllAnimals = async () => {
 		(cache.get("allAnimals") as Animal[]) ??
 		cache.put("allAnimals", await getAnimals(), cacheTimeout)
 	);
-	//return await getAnimals();
 };
+
+export const getAnimalById = async (animalId: string) => {
+	const id = animalId.slice(2);
+	const service = animalId.slice(0, 2);
+	
+}
 
 export const getSomeAnimals = async () => {
 	return (
 		(cache.get("subsetAnimals") as Animal[]) ??
 		cache.put("subsetAnimals", await getAnimals(false), cacheTimeout)
 	);
-	//return await getAnimals(false);
 };
 
 const getAnimals = async (getAll: boolean = true) => {
-	const pfAnimals = getAll
+	
+	let pfAnimals: PetfinderAnimal[];
+	let shelterluvAnimals: ShelterluvAnimals[];
+
+	try {
+		pfAnimals = getAll
 		? await pf.getAllAnimals()
 		: await pf.getFewAnimals();
-	const shelterluvAnimals = await getShelterluvAnimals();
+	} catch(error) {
+		console.error("Error occurred while attempting to retrieve data from Petfinder.", error);	
+	}
+
+	try {
+		shelterluvAnimals = await getShelterluvAnimals();
+	} catch (error) {
+		console.error("Error occurred while attempting to retrieve data from Shelterluv.", error);
+		
+	}
+	
 
 	const convertedPetfinderAnimals = pfAnimals.map((animal) =>
 		convertPetfinderAnimal(animal)
