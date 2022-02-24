@@ -8,7 +8,7 @@ import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 import { getPetfinderAnimal } from "./Petfinder";
 
-const cacheTimeout = 60 * 19 * 1000; // 19 minutes
+const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
 	return (
