@@ -14,39 +14,37 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// useEffect(() => {
-	// 	if (!animals) return;
-	// 	setPageCount(Math.ceil(animals.length / pageOffset));
-	// }, [animals]);
+	useEffect(() => {
+		if (!animals) return;
+		setPageCount(Math.ceil(animals.length / pageOffset));
+	}, [animals]);
 
-	const mappedAnimals = 
-		animals
-			.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
-			.map((animal) => {
-				return (
-					<div key={animal.id}>
-						<PetCard animal={animal} />
-					</div>
-				);
-			})
+	const mappedAnimals = animals
+		.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
+		.map((animal) => {
+			return (
+				<div key={animal.id}>
+					<PetCard animal={animal} />
+				</div>
+			);
+		});
 
 	const handlePageChange = (event: any, value: number) => {
 		setCurrentPage(value);
 		window.scrollTo(0, 0);
 	};
 
-	const pagination = 
+	const pagination = (
 		<div className={styles.pagination}>
-			
-				<Pagination
-					count={pageCount}
-					color="primary"
-					page={currentPage}
-					onChange={handlePageChange}
-					size="large"
-				/>
-			
-		</div>;
+			<Pagination
+				count={pageCount}
+				color="primary"
+				page={currentPage}
+				onChange={handlePageChange}
+				size="large"
+			/>
+		</div>
+	);
 
 	return (
 		<section className={styles.section} aria-label="Adoptable Pets">

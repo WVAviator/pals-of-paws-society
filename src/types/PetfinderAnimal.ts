@@ -1,7 +1,9 @@
+import { Organization } from "./Organization";
+
 export interface PetfinderAnimal {
 	id: number;
 	organization_id: string;
-	orgName: string;
+	organization: Organization;
 	url: string;
 	type: string;
 	breeds: {

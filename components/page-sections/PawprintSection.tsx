@@ -12,6 +12,7 @@ interface PawprintSectionProps {
 	sectionTitle: string;
 	minimumHeight?: string;
 	addPawprints?: boolean;
+	pawprintColor?: string;
 }
 
 const PawprintSection = ({

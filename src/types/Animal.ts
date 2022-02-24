@@ -1,3 +1,4 @@
+import { Organization } from "./Organization";
 export interface Animal {
 	id: string;
 	service: "petfinder" | "shelterluv";
@@ -8,7 +9,7 @@ export interface Animal {
 	breed: string;
 	location: string;
 
-	organization: string;
+	organization: Organization;
 	organizationEmail: string;
 	organizationPhone: string;
 

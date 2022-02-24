@@ -1,0 +1,18 @@
+@use "/styles/variables" as *;
+
+.imageContainer {
+	width: min(100vw, 31.25rem);
+	height: min(100vw, 31.25rem);
+	position: relative;
+}
+
+.carousel {
+	background-color: transparent;
+	font-size: 1rem;
+	max-width: 60rem;
+	margin: 0 auto;
+
+	&Container {
+		background-color: $color-darkNavy;
+	}
+}

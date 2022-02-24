@@ -1,3 +1,5 @@
+import { createTheme } from "@mui/material";
+
 export const muiTheme = createTheme({
 	palette: {
 		primary: {
@@ -10,7 +12,7 @@ export const muiTheme = createTheme({
 			dark: "#0F172A",
 			contrastText: "#ffffff",
 		},
-		contrastTheshold: 3,
+		contrastThreshold: 3,
 		tonalOffset: 0.2,
 	},
 	typography: {

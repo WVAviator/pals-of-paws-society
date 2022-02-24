@@ -1,29 +1,45 @@
-import axios from "axios";
+import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
-import { getStaticProps } from ".";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { getAnimalById } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
+import PetCarousel from "../../components/content/PetCarousel";
+import PetBio from "../../components/content/PetBio";
+import OrgBio from "../../components/content/OrgBio";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+interface AnimalPageProps {
+	animal: Animal;
+}
 
-const AnimalPage = () => {
-	const [animal, setAnimal] = useState<Animal>(null);
+const AnimalPage = ({ animal }: AnimalPageProps) => {
 	const router = useRouter();
-	const { animalId } = router.query;
-	const { data, error } = useSWR(`/api/animals/${animalId}`, fetcher);
 
-	useEffect(() => {
-		setAnimal(data as Animal);
-	}, [data]);
+	if (router.isFallback) {
+		return <CircularProgress />;
+	}
 
-	return <div>{JSON.stringify(animal)}</div>;
+	return (
+		<div>
+			<PetCarousel animal={animal} />
+			<PetBio animal={animal} />
+			<OrgBio org={animal.organization} />
+		</div>
+	);
 };
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
+	const animal = await getAnimalById(context.params.animalId as string);
 
-	
+	return {
+		props: { animal },
+	};
+};
 
-}
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		paths: [],
+		fallback: true,
+	};
+};
 
 export default AnimalPage;

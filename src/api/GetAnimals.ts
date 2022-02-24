@@ -4,9 +4,11 @@ import getShelterluvAnimals from "./Shelterluv";
 import { convertShelterluvAnimal } from "./ShelterluvAdapter";
 import cache from "memory-cache";
 import { Animal } from "../types/Animal";
+import { PetfinderAnimal } from "../types/PetfinderAnimal";
+import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 
 const pf = new Petfinder();
-const cacheTimeout = 60 * 20 * 1000;
+const cacheTimeout = 60 * 19 * 1000; // 19 minutes
 
 export const getAllAnimals = async () => {
 	return (
@@ -16,38 +18,32 @@ export const getAllAnimals = async () => {
 };
 
 export const getAnimalById = async (animalId: string) => {
-	const id = animalId.slice(2);
-	const service = animalId.slice(0, 2);
-	
-}
+	console.log(`Getting animal with id: ${animalId}`);
 
-export const getSomeAnimals = async () => {
-	return (
-		(cache.get("subsetAnimals") as Animal[]) ??
-		cache.put("subsetAnimals", await getAnimals(false), cacheTimeout)
-	);
+	return (await getAllAnimals()).find((a) => a.id === animalId);
 };
 
-const getAnimals = async (getAll: boolean = true) => {
-	
+const getAnimals = async () => {
 	let pfAnimals: PetfinderAnimal[];
-	let shelterluvAnimals: ShelterluvAnimals[];
+	let shelterluvAnimals: ShelterluvAnimal[];
 
 	try {
-		pfAnimals = getAll
-		? await pf.getAllAnimals()
-		: await pf.getFewAnimals();
-	} catch(error) {
-		console.error("Error occurred while attempting to retrieve data from Petfinder.", error);	
+		pfAnimals = await pf.getAllAnimals();
+	} catch (error) {
+		console.error(
+			"Error occurred while attempting to retrieve data from Petfinder.",
+			error
+		);
 	}
 
 	try {
 		shelterluvAnimals = await getShelterluvAnimals();
 	} catch (error) {
-		console.error("Error occurred while attempting to retrieve data from Shelterluv.", error);
-		
+		console.error(
+			"Error occurred while attempting to retrieve data from Shelterluv.",
+			error
+		);
 	}
-	
 
 	const convertedPetfinderAnimals = pfAnimals.map((animal) =>
 		convertPetfinderAnimal(animal)

@@ -2,7 +2,6 @@ import getOrganization from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
 import axios from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
-import { PetfinderConnectionError } from "./PetfinderOrganizations";
 
 export class Petfinder {
 	private searchLocation = "34.688609, -90.000388";
@@ -36,15 +35,14 @@ export class Petfinder {
 		return this.filterResults(response.data.animals as PetfinderAnimal[]);
 	}
 
-	public async getAnimal(id: number) {
-		const queryUrl = `${this.url}/animals/${id}`;
-		const response = await this.fetchAnimalData(queryUrl);
+	// public async getAnimal(id: string) {
+	// 	const queryUrl = `${this.url}/animals/${id}`;
+	// 	const response = await this.fetchAnimalData(queryUrl);
 
-		return response.data.animal as PetfinderAnimal;
-	}
+	// 	return filterResults(response.data.animal as PetfinderAnimal);
+	// }
 
 	private async fetchAnimalData(queryUrl: string, limit: number = 100) {
-
 		const token = await getToken();
 		const response = await axios.get(queryUrl, {
 			headers: {
@@ -100,7 +98,7 @@ export class Petfinder {
 		//The org name is found at a different API endpoint
 		for (let i = 0; i < filteredResults.length; i++) {
 			const org = await getOrganization(filteredResults[i].organization_id);
-			filteredResults[i].orgName = org.name;
+			filteredResults[i].organization = org;
 		}
 
 		return filteredResults;

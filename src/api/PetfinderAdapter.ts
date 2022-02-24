@@ -12,7 +12,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 		ageString: pfAnimal.age ?? "Unknown",
 		breed: extractBreed(pfAnimal),
 		location: `${pfAnimal.contact.address.city}, ${pfAnimal.contact.address.state}`,
-		organization: pfAnimal.orgName,
+		organization: pfAnimal.organization,
 		organizationEmail: pfAnimal.contact.email,
 		organizationPhone: pfAnimal.contact.phone,
 		description: pfAnimal.description,
