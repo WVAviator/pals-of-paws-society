@@ -4,12 +4,20 @@ import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 const key = process.env.SHELTERLUV_API_KEY;
 const baseUrl = "https://www.shelterluv.com/api/v1";
 
-const getShelterluvAnimals = async () => {
+export const getShelterluvAnimals = async () => {
 	const response = await fetchAnimalData(`${baseUrl}/animals`);
 
 	const animals = response.data.animals as ShelterluvAnimal[];
 
 	return filterResults(animals);
+};
+
+export const getShelterluvAnimal = async (id: string) => {
+	const response = await fetchAnimalData(`${baseUrl}/animals/${id}`);
+
+	const animal = response.data as ShelterluvAnimal;
+
+	return animal;
 };
 
 const fetchAnimalData = async (queryUrl: string) => {
@@ -24,14 +32,6 @@ const fetchAnimalData = async (queryUrl: string) => {
 	return response;
 };
 
-// export const getShelterluvAnimal = async (id: string) => {
-// 	const response = await fetchAnimalData(`${baseUrl}/animals/${id}`);
-
-// 	const animal = response.data as ShelterluvAnimal;
-
-// 	return animal;
-// };
-
 const filterResults = (animals: ShelterluvAnimal[]) => {
 	let filteredAnimals = new Array<ShelterluvAnimal>();
 
@@ -44,5 +44,3 @@ const filterResults = (animals: ShelterluvAnimal[]) => {
 
 	return filteredAnimals;
 };
-
-export default getShelterluvAnimals;

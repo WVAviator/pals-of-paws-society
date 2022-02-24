@@ -1,11 +1,12 @@
 import { getPetfinderAnimals } from "./Petfinder";
 import { convertPetfinderAnimal } from "./PetfinderAdapter";
-import getShelterluvAnimals from "./Shelterluv";
+import { getShelterluvAnimals, getShelterluvAnimal } from "./Shelterluv";
 import { convertShelterluvAnimal } from "./ShelterluvAdapter";
 import cache from "memory-cache";
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
+import { getPetfinderAnimal } from "./Petfinder";
 
 const cacheTimeout = 60 * 19 * 1000; // 19 minutes
 
@@ -23,8 +24,21 @@ export const getAnimals = async (maxResults: number) => {
 
 export const getAnimalById = async (animalId: string) => {
 	console.log(`Getting animal with id: ${animalId}`);
+	const service = animalId.slice(0, 2);
+	const id = animalId.slice(2);
 
-	return (await getAllAnimals()).find((a) => a.id === animalId);
+	const animal: Animal;
+
+	try {
+
+		service === "pf" ? convertPetfinderAnimal(getPetfinderAnimal(id)) : convertShelterluvAnimal(getShelterluvAnimal(id));
+
+	} catch (error) {
+		console.error(`Error occurred while trying to retrieve animal by id ${animalId}`, error);
+		
+	}
+
+	return animal;
 };
 
 const retrieveAnimalData = async (limit = 0) => {

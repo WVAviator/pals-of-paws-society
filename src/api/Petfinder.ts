@@ -39,6 +39,20 @@ export const getPetfinderAnimals = async (limit = 0) => {
 	return filterResults(response.data.animals as PetfinderAnimal[]);
 };
 
+export const getPetfinderAnimal = async (id: string) => {
+	const token = await getToken();
+	const response = await axios.get(`${url}/animals/${id}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	const animal = transformResult(response.data as PetfinderAnimal);
+	animal.organization = await getOrganization(animal.organization_id);
+	
+	return animal;
+}
+
 const fetchAnimalData = async (
 	token: string,
 	queryUrl: string,
@@ -64,24 +78,7 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 	const filteredResults: PetfinderAnimal[] = [];
 
 	animals.forEach((animal) => {
-		const newAnimal = animal;
-
-		let newName: string;
-
-		//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
-		newName = animal.name.toLowerCase();
-
-		//Some orgs put additional information like litter size in the name - usually separated by a hyphen
-		newName = newName.split(" -")[0];
-
-		//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
-		newName = newName.replace("&amp;", "&");
-
-		//Some orgs put "zcl" in the name, not sure why
-		newName = newName.replace("zcl ", "");
-		newName = newName.replace("zcl-", "");
-
-		newAnimal.name = newName;
+		const newAnimal = transformResult(animal);
 
 		//Some orgs post the same animal multiple times
 		if (
@@ -105,3 +102,26 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 
 	return filteredResults;
 };
+
+const transformResult = (animal: PetfinderAnimal) => {
+	const newAnimal = animal;
+
+		let newName: string;
+
+		//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
+		newName = animal.name.toLowerCase();
+
+		//Some orgs put additional information like litter size in the name - usually separated by a hyphen
+		newName = newName.split(" -")[0];
+
+		//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
+		newName = newName.replace("&amp;", "&");
+
+		//Some orgs put "zcl" in the name, not sure why
+		newName = newName.replace("zcl ", "");
+		newName = newName.replace("zcl-", "");
+
+		newAnimal.name = newName;
+
+	return newAnimal;
+}

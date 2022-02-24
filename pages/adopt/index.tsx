@@ -19,7 +19,8 @@ const Adopt = ({ initialAnimals }: AdoptProps) => {
 
 	useEffect(() => {
 		if (data) setAnimals(data);
-	}, [data]);
+		else setAnimals(initialAnimals);
+	}, [data, initialAnimals]);
 
 	return (
 		<div>
