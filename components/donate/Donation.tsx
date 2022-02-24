@@ -15,24 +15,26 @@ type DonationProps = {
 
 const Donation = ({ setDonationAmount }: DonationProps) => {
 	const [buttonSelection, setButtonSelection] = useState("5");
-	const [otherAmount, setOtherAmount] = useState("");
+	const [otherAmount, setOtherAmount] = useState("1");
+	const [otherAmountError, setOtherAmountError] = useState(false);
 
 	const handleDonationSelection = (event: any, newSelection: string) => {
 		if (newSelection === null) return;
 		setButtonSelection(newSelection);
 	};
 
-	const handleOtherAmountEntry = (event: any) => {
-		const { value } = event.target;
+	// const handleOtherAmountEntry = (event: any) => {
+	// 	const { value } = event.target;
 
-		if (/\D/.test(value)) return;
+	// 	if (/\D/.test(value)) return;
 
-		setOtherAmount(value);
-	};
+	// 	setOtherAmount(value);
+	// };
 
 	const usingOtherAmount = buttonSelection === "Other";
 
 	useEffect(() => {
+		setOtherAmountError(usingOtherAmount && (!otherAmount || otherAmount < 1 || !parseInt(otherAmount)));
 		setDonationAmount(
 			parseInt(usingOtherAmount ? otherAmount : buttonSelection)
 		);
@@ -69,13 +71,18 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 				</InputLabel>
 				<OutlinedInput
 					id="outlined-adornment-amount"
+					aria-describedby="other-amount-helper"
 					value={otherAmount}
-					onChange={handleOtherAmountEntry}
+					error={otherAmountError}
+					helperText="Must be greater than 0"
+					onChange={() => setOtherAmount(value)}
 					startAdornment={<InputAdornment position="start">$</InputAdornment>}
 					label="Other Amount"
 					disabled={!usingOtherAmount}
 					required={usingOtherAmount}
+					inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
 				/>
+				<FormHelperText id="other-amount-helper">Enter the desired donation amount</FormHelperText>
 			</FormControl>
 		</>
 	);

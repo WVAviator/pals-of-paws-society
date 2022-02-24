@@ -24,6 +24,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 			<h2>Billing Information</h2>
 			<div className={styles.address}>
 				<TextField
+					id="first-name"
 					label="First Name"
 					required
 					sx={{ gridColumn: "span 2" }}
@@ -32,6 +33,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					onChange={handleChange("firstName")}
 				/>
 				<TextField
+					id="last-name"
 					label="Last Name"
 					required
 					sx={{ gridColumn: "span 2" }}
@@ -41,6 +43,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 				/>
 
 				<TextField
+					id="street-address"
 					label="Address"
 					required
 					sx={{ gridColumn: "span 4", marginTop: "1em" }}
@@ -49,6 +52,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					onChange={handleChange("streetAddress")}
 				/>
 				<TextField
+					id="apt-suite"
 					label="Apt/Suite/Bldg"
 					sx={{ gridColumn: "span 2" }}
 					variant="outlined"
@@ -56,6 +60,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					onChange={handleChange("aptOrSuite")}
 				/>
 				<TextField
+					id="city"
 					label="City"
 					required
 					sx={{ gridColumn: "span 2" }}
@@ -74,6 +79,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					renderInput={(params) => (
 						<TextField
 							{...params}
+							id="state"
 							label="State"
 							variant="outlined"
 							required
@@ -82,6 +88,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					)}
 				/>
 				<TextField
+					id="zip-code"
 					label="Zip Code"
 					required
 					sx={{ gridColumn: "span 2" }}
@@ -90,8 +97,10 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					onChange={handleChange("zip")}
 				/>
 				<TextField
+					id="email"
 					label="Email Address"
 					required
+					inputProps={type="email"}
 					sx={{ gridColumn: "span 4", marginTop: "1em" }}
 					variant="outlined"
 					value={formData.email}
