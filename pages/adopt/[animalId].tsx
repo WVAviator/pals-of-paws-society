@@ -15,7 +15,14 @@ const AnimalPage = ({ animal }: AnimalPageProps) => {
 	const router = useRouter();
 
 	if (router.isFallback) {
-		return <CircularProgress />;
+		const fallbackStyle = {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			width: "100vw",
+			height: "100vh"
+		}
+		return <div style={fallbackStyle}><CircularProgress /></div>;
 	}
 
 	return (
