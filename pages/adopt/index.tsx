@@ -1,12 +1,26 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
 import PetCardContent from "../../components/page-sections/PetCardContent";
-import { getAllAnimals } from "../../src/api/GetAnimals";
+import { getAllAnimals, getAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
 
 interface AdoptProps {
-	animals: Animal[];
+	initialAnimals: Animal[];
 }
 
-const Adopt = ({ animals }: AdoptProps) => {
+type AnimalFetcher = (url: string) => Promise<Animal[]>;
+
+const fetcher: AnimalFetcher = (url) => axios.get(url).then((res) => res.data);
+
+const Adopt = ({ initialAnimals }: AdoptProps) => {
+	const [animals, setAnimals] = useState<Animal[]>(initialAnimals);
+	const { data, error } = useSWR("/api/animals", fetcher);
+
+	useEffect(() => {
+		if (data) setAnimals(data);
+	}, [data]);
+
 	return (
 		<div>
 			<PetCardContent animals={animals} />
@@ -15,12 +29,12 @@ const Adopt = ({ animals }: AdoptProps) => {
 };
 
 export async function getStaticProps() {
-	const animals: Animal[] = await getAllAnimals();
+	const animals: Animal[] = await getAnimals(24);
 	return {
 		props: {
-			animals,
+			initialAnimals: animals,
 		},
-		revalidate: 1200,
+		revalidate: 600,
 	};
 }
 

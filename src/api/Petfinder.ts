@@ -1,106 +1,107 @@
 import getOrganization from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 
-export class Petfinder {
-	private searchLocation = "34.688609, -90.000388";
-	private searchRadius = "23";
+const searchLocation = "34.688609, -90.000388";
+const searchRadius = "23";
+const url = "https://api.petfinder.com/v2";
 
-	private url = "https://api.petfinder.com/v2";
+export const getPetfinderAnimals = async (limit = 0) => {
+	const token = await getToken();
+	if (!limit) {
+		const response = await fetchAnimalData(token, `${url}/animals`);
+		const totalPages = response.data.pagination.total_pages;
+		console.log(`Total pages: ${totalPages}`);
 
-	public async getAllAnimals() {
-		let lastPage = false;
-		let animals = new Array<PetfinderAnimal>();
-		let page = 1;
+		const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
-		while (!lastPage) {
-			const queryUrl = `${this.url}/animals?page=${page}`;
-			const response = await this.fetchAnimalData(queryUrl);
-
-			const totalPages = response.data.pagination.total_pages;
-
-			lastPage = page >= totalPages;
-			animals.push(...response.data.animals);
-			page++;
+		for (let i = 2; i <= totalPages; i++) {
+			const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
+			apiCalls.push(promise);
 		}
 
-		return this.filterResults(animals);
+		console.log(`Beginning to resolve promises...`);
+
+		const responseArray = await Promise.all(apiCalls);
+		console.log("Promises resolved.");
+
+		const animals = responseArray
+			.map((res) => {
+				return res.data.animals as PetfinderAnimal[];
+			})
+			.flat();
+
+		return filterResults(animals);
 	}
 
-	public async getFewAnimals() {
-		const queryUrl = `${this.url}/animals`;
-		const response = await this.fetchAnimalData(queryUrl, 50);
+	const response = await fetchAnimalData(token, `${url}/animals`, limit);
+	return filterResults(response.data.animals as PetfinderAnimal[]);
+};
 
-		return this.filterResults(response.data.animals as PetfinderAnimal[]);
-	}
+const fetchAnimalData = async (
+	token: string,
+	queryUrl: string,
+	limit: number = 100
+) => {
+	console.log(`Retrieving ${limit} PF animals from ${queryUrl}`);
 
-	// public async getAnimal(id: string) {
-	// 	const queryUrl = `${this.url}/animals/${id}`;
-	// 	const response = await this.fetchAnimalData(queryUrl);
+	const response = await axios.get(queryUrl, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		params: {
+			location: searchLocation,
+			distance: searchRadius,
+			limit,
+		},
+	});
 
-	// 	return filterResults(response.data.animal as PetfinderAnimal);
-	// }
+	return response;
+};
 
-	private async fetchAnimalData(queryUrl: string, limit: number = 100) {
-		const token = await getToken();
-		const response = await axios.get(queryUrl, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-			params: {
-				location: this.searchLocation,
-				distance: this.searchRadius,
-				limit,
-			},
-		});
+const filterResults = async (animals: PetfinderAnimal[]) => {
+	const filteredResults: PetfinderAnimal[] = [];
 
-		return response;
-	}
+	animals.forEach((animal) => {
+		const newAnimal = animal;
 
-	private async filterResults(animals: PetfinderAnimal[]) {
-		const filteredResults: PetfinderAnimal[] = [];
+		let newName: string;
 
-		animals.forEach((animal) => {
-			const newAnimal = animal;
+		//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
+		newName = animal.name.toLowerCase();
 
-			let newName: string;
+		//Some orgs put additional information like litter size in the name - usually separated by a hyphen
+		newName = newName.split(" -")[0];
 
-			//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
-			newName = animal.name.toLowerCase();
+		//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
+		newName = newName.replace("&amp;", "&");
 
-			//Some orgs put additional information like litter size in the name - usually separated by a hyphen
-			newName = newName.split(" -")[0];
+		//Some orgs put "zcl" in the name, not sure why
+		newName = newName.replace("zcl ", "");
+		newName = newName.replace("zcl-", "");
 
-			//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
-			newName = newName.replace("&amp;", "&");
+		newAnimal.name = newName;
 
-			//Some orgs put "zcl" in the name, not sure why
-			newName = newName.replace("zcl ", "");
-			newName = newName.replace("zcl-", "");
-
-			newAnimal.name = newName;
-
-			//Some orgs post the same animal multiple times
-			if (
-				!filteredResults.find(
-					(a) =>
-						a.name === newAnimal.name &&
-						a.organization_id === newAnimal.organization_id
-				) &&
-				(newAnimal.type.toLowerCase() === "cat" ||
-					newAnimal.type.toLowerCase() === "dog")
-			) {
-				filteredResults.push(newAnimal);
-			}
-		});
-
-		//The org name is found at a different API endpoint
-		for (let i = 0; i < filteredResults.length; i++) {
-			const org = await getOrganization(filteredResults[i].organization_id);
-			filteredResults[i].organization = org;
+		//Some orgs post the same animal multiple times
+		if (
+			!filteredResults.find(
+				(a) =>
+					a.name === newAnimal.name &&
+					a.organization_id === newAnimal.organization_id
+			) &&
+			(newAnimal.type.toLowerCase() === "cat" ||
+				newAnimal.type.toLowerCase() === "dog")
+		) {
+			filteredResults.push(newAnimal);
 		}
+	});
 
-		return filteredResults;
+	//The org name is found at a different API endpoint
+	for (let i = 0; i < filteredResults.length; i++) {
+		const org = await getOrganization(filteredResults[i].organization_id);
+		filteredResults[i].organization = org;
 	}
-}
+
+	return filteredResults;
+};

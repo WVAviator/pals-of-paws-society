@@ -1,6 +1,5 @@
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "./../types/PetfinderAnimal";
-import { Petfinder } from "./Petfinder";
 
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {

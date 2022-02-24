@@ -36,13 +36,19 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 
 	const pagination = (
 		<div className={styles.pagination}>
-			<Pagination
-				count={pageCount}
-				color="primary"
-				page={currentPage}
-				onChange={handlePageChange}
-				size="large"
-			/>
+			{pageCount > 1 ? (
+				<Pagination
+					count={pageCount}
+					color="primary"
+					page={currentPage}
+					onChange={handlePageChange}
+					size="large"
+				/>
+			) : (
+				<div className={styles.pageLoad}>
+					<CircularProgress />
+				</div>
+			)}
 		</div>
 	);
 

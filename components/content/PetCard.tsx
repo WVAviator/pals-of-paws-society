@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const PetCard = ({ animal }: { animal: Animal }) => {
 	const cardStyle =
-		animal.organization === "Pals of Paws Society"
+		animal.organization.name === "Pals of Paws Society"
 			? `${styles.card} ${styles.featured}`
 			: styles.card;
 
@@ -34,7 +34,7 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 						<li>Location: {animal.location}</li>
 					</ul>
 					<div className={styles.org}>
-						<p>{animal.organization}</p>
+						<p>{animal.organization.name}</p>
 					</div>
 				</div>
 			</div>
