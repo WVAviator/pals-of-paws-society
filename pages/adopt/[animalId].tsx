@@ -6,6 +6,7 @@ import { Animal } from "../../src/types/Animal";
 import PetCarousel from "../../components/content/PetCarousel";
 import PetBio from "../../components/content/PetBio";
 import OrgBio from "../../components/content/OrgBio";
+import Fallback from "../../components/layout/Fallback";
 
 interface AnimalPageProps {
 	animal: Animal;
@@ -15,14 +16,7 @@ const AnimalPage = ({ animal }: AnimalPageProps) => {
 	const router = useRouter();
 
 	if (router.isFallback) {
-		const fallbackStyle = {
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			width: "100vw",
-			height: "100vh"
-		}
-		return <div style={fallbackStyle}><CircularProgress /></div>;
+		return <Fallback />;
 	}
 
 	return (

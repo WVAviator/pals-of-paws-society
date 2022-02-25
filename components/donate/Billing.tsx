@@ -100,7 +100,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					id="email"
 					label="Email Address"
 					required
-					inputProps={type="email"}
+					inputProps={{ type: "email" }}
 					sx={{ gridColumn: "span 4", marginTop: "1em" }}
 					variant="outlined"
 					value={formData.email}

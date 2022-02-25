@@ -30,9 +30,15 @@ export const getAnimalById = async (animalId: string) => {
 	let animal: Animal;
 
 	try {
-		service === "pf"
-			? convertPetfinderAnimal(await getPetfinderAnimal(id))
-			: convertShelterluvAnimal(await getShelterluvAnimal(id));
+		if (service === "pf") {
+			const petfinderAnimal = await getPetfinderAnimal(id);
+			console.log(petfinderAnimal);
+
+			animal = convertPetfinderAnimal(petfinderAnimal);
+		} else if (service === "sl") {
+			const shelterluvAnimal = await getShelterluvAnimal(id);
+			animal = convertShelterluvAnimal(shelterluvAnimal);
+		}
 	} catch (error) {
 		console.error(
 			`Error occurred while trying to retrieve animal by id ${animalId}`,

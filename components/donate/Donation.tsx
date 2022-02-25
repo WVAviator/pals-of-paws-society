@@ -1,8 +1,10 @@
 import {
 	FormControl,
+	FormHelperText,
 	InputAdornment,
 	InputLabel,
 	OutlinedInput,
+	TextField,
 	ToggleButton,
 	ToggleButtonGroup,
 } from "@mui/material";
@@ -23,18 +25,19 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 		setButtonSelection(newSelection);
 	};
 
-	// const handleOtherAmountEntry = (event: any) => {
-	// 	const { value } = event.target;
+	const handleOtherAmountEntry = (event: any) => {
+		const { value } = event.target;
 
-	// 	if (/\D/.test(value)) return;
+		if (/\D/.test(value)) return;
 
-	// 	setOtherAmount(value);
-	// };
+		setOtherAmount(value);
+	};
 
 	const usingOtherAmount = buttonSelection === "Other";
 
 	useEffect(() => {
-		setOtherAmountError(usingOtherAmount && (!otherAmount || otherAmount < 1 || !parseInt(otherAmount)));
+		const amount = parseInt(otherAmount);
+		setOtherAmountError(usingOtherAmount && (!amount || amount < 1));
 		setDonationAmount(
 			parseInt(usingOtherAmount ? otherAmount : buttonSelection)
 		);
@@ -57,33 +60,37 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 				<ToggleButton value={"50"}>$50</ToggleButton>
 				<ToggleButton value={"Other"}>Other</ToggleButton>
 			</ToggleButtonGroup>
-			<FormControl
-				fullWidth
-				sx={{
+			<div
+				style={{
 					margin: "1em 0",
 					transformOrigin: "top",
 					transition: "all 150ms",
 					transform: usingOtherAmount ? "scaleY(100%)" : "scaleY(0%)",
+					width: "100%",
 				}}
 			>
-				<InputLabel htmlFor="outlined-adornment-amount">
-					Other Amount
-				</InputLabel>
-				<OutlinedInput
+				<TextField
 					id="outlined-adornment-amount"
+					fullWidth
 					aria-describedby="other-amount-helper"
+					helperText="Enter desired donation amount"
 					value={otherAmount}
 					error={otherAmountError}
-					helperText="Must be greater than 0"
-					onChange={() => setOtherAmount(value)}
-					startAdornment={<InputAdornment position="start">$</InputAdornment>}
+					onChange={handleOtherAmountEntry}
 					label="Other Amount"
 					disabled={!usingOtherAmount}
 					required={usingOtherAmount}
-					inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
-				/>
-				<FormHelperText id="other-amount-helper">Enter the desired donation amount</FormHelperText>
-			</FormControl>
+					inputProps={{
+						inputMode: "numeric",
+						pattern: "[0-9]*",
+						type: "number",
+						min: 1,
+					}}
+					InputProps={{
+						startAdornment: <InputAdornment position="start">$</InputAdornment>,
+					}}
+				></TextField>
+			</div>
 		</>
 	);
 };

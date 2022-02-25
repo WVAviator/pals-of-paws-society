@@ -20,16 +20,18 @@ const InfoCard = ({
 	href,
 	alt,
 }: InfoCardProps) => {
+	const id = heading.replaceAll(" ", "");
+
 	return (
 		<Link href={href}>
-			<a>
+			<a aria-labelledby={`heading-${id}`} aria-describedby={`desc-${id}`}>
 				<div className={styles.card}>
 					<div className={styles.cardContent}>
 						<div className={styles.cardImage}>
 							<Image src={image} alt={alt} width={357} height={357} />
 						</div>
-						<h2>{heading}</h2>
-						<p>{description}</p>
+						<h2 id={`heading-${id}`}>{heading}</h2>
+						<p id={`desc-${id}`}>{description}</p>
 						<div className={styles.cardAction}>
 							<span>{callToAction}</span>
 							<ArrowForwardIcon />

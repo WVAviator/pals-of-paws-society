@@ -17,7 +17,7 @@ const MDXPage = (props: MDXPageProps) => {
 				<meta name="description" content={props.meta.description} />
 			</Head>
 			<section
-				role="content"
+				role="article"
 				aria-label={props.meta.title}
 				className={styles.section}
 			>

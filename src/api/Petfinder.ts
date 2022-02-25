@@ -47,11 +47,12 @@ export const getPetfinderAnimal = async (id: string) => {
 		},
 	});
 
-	const animal = transformResult(response.data as PetfinderAnimal);
+	const animal = transformResult(response.data.animal as PetfinderAnimal);
+
 	animal.organization = await getOrganization(animal.organization_id);
-	
+
 	return animal;
-}
+};
 
 const fetchAnimalData = async (
 	token: string,
@@ -106,22 +107,22 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 const transformResult = (animal: PetfinderAnimal) => {
 	const newAnimal = animal;
 
-		let newName: string;
+	let newName: string;
 
-		//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
-		newName = animal.name.toLowerCase();
+	//Some orgs use all caps - CSS 'text-transform: capitalize' will fix
+	newName = animal.name.toLowerCase();
 
-		//Some orgs put additional information like litter size in the name - usually separated by a hyphen
-		newName = newName.split(" -")[0];
+	//Some orgs put additional information like litter size in the name - usually separated by a hyphen
+	newName = newName.split(" -")[0];
 
-		//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
-		newName = newName.replace("&amp;", "&");
+	//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
+	newName = newName.replace("&amp;", "&");
 
-		//Some orgs put "zcl" in the name, not sure why
-		newName = newName.replace("zcl ", "");
-		newName = newName.replace("zcl-", "");
+	//Some orgs put "zcl" in the name, not sure why
+	newName = newName.replace("zcl ", "");
+	newName = newName.replace("zcl-", "");
 
-		newAnimal.name = newName;
+	newAnimal.name = newName;
 
 	return newAnimal;
-}
+};

@@ -1,11 +1,12 @@
 @use "/styles/variables" as *;
 
 .link {
-	color: $color_primary;
+	color: $color_highContrast;
 
 	transition: all 150ms;
 
 	&:hover {
 		color: darken($color_primary, 10%);
+		text-decoration: underline;
 	}
 }
