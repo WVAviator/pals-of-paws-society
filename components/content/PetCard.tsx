@@ -31,10 +31,10 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 					<ul>
 						<li>Age: {animal.ageString}</li>
 						<li>Breed: {animal.breed}</li>
-						<li>Location: {animal.location}</li>
+						<li>Location: <span itemRef="organization" itemProp="location">{animal.location}</span></li>
 					</ul>
-					<div className={styles.org}>
-						<p>{animal.organization.name}</p>
+					<div id="organization" className={styles.org} itemScope itemType="https://schema.org/AnimalShelter">
+						<p itemProp="legalName">{animal.organization.name}</p>
 					</div>
 				</div>
 			</div>
