@@ -27,15 +27,17 @@ export const getAnimalById = async (animalId: string) => {
 	const service = animalId.slice(0, 2);
 	const id = animalId.slice(2);
 
-	const animal: Animal;
+	let animal: Animal;
 
 	try {
-
-		service === "pf" ? convertPetfinderAnimal(getPetfinderAnimal(id)) : convertShelterluvAnimal(getShelterluvAnimal(id));
-
+		service === "pf"
+			? convertPetfinderAnimal(await getPetfinderAnimal(id))
+			: convertShelterluvAnimal(await getShelterluvAnimal(id));
 	} catch (error) {
-		console.error(`Error occurred while trying to retrieve animal by id ${animalId}`, error);
-		
+		console.error(
+			`Error occurred while trying to retrieve animal by id ${animalId}`,
+			error
+		);
 	}
 
 	return animal;
