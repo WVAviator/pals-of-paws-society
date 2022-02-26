@@ -1,0 +1,26 @@
+@use "/styles/variables" as *;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.card {
+	position: relative;
+	height: 100%;
+	padding: $padding-section;
+	p {
+		margin-bottom: 1em;
+		text-align: center;
+
+		font-size: 1rem;
+
+		@include mq-tablet {
+			font-size: 1.1rem;
+		}
+		@include mq-desktop {
+			font-size: 1.2rem;
+		}
+	}
+}

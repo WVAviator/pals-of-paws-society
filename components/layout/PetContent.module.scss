@@ -1,0 +1,18 @@
+@use "/styles/variables" as *;
+
+.content {
+	@include restrict-width;
+	padding: $padding-section;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	@include mq-desktop {
+		grid-template-columns: 2fr 1fr;
+	}
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}

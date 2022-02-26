@@ -1,9 +1,5 @@
 @use "/styles/variables" as *;
 
-.capitalize {
-	text-transform: capitalize;
-}
-
 .card {
 	z-index: 2;
 	position: relative;
@@ -11,8 +7,6 @@
 	margin: 0 auto;
 	grid: span 1;
 	padding: $padding-section;
-	display: flex;
-	justify-content: space-between;
 
 	p {
 		font-size: 1rem;

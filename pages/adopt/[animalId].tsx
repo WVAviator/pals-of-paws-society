@@ -7,6 +7,8 @@ import PetCarousel from "../../components/content/PetCarousel";
 import PetBio from "../../components/content/PetBio";
 import OrgBio from "../../components/content/OrgBio";
 import Fallback from "../../components/layout/Fallback";
+import PawprintSection from "../../components/page-sections/PawprintSection";
+import PetContent from "../../components/layout/PetContent";
 
 interface AnimalPageProps {
 	animal: Animal;
@@ -22,8 +24,9 @@ const AnimalPage = ({ animal }: AnimalPageProps) => {
 	return (
 		<div>
 			<PetCarousel animal={animal} />
-			<PetBio animal={animal} />
-			<OrgBio org={animal.organization} />
+			<PawprintSection pawprintRotation={170} sectionTitle={animal.name}>
+				<PetContent animal={animal} />
+			</PawprintSection>
 		</div>
 	);
 };
