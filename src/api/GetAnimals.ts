@@ -2,19 +2,22 @@ import { getPetfinderAnimals } from "./Petfinder";
 import { convertPetfinderAnimal } from "./PetfinderAdapter";
 import { getShelterluvAnimals, getShelterluvAnimal } from "./Shelterluv";
 import { convertShelterluvAnimal } from "./ShelterluvAdapter";
-import cache from "memory-cache";
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 import { getPetfinderAnimal } from "./Petfinder";
 
+const cache = require("memory-cache");
 const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
-	return (
-		(cache.get("allAnimals") as Animal[]) ??
-		cache.put("allAnimals", await retrieveAnimalData(), cacheTimeout)
-	);
+	let allAnimals: Animal[] = cache.get("allAnimals");
+
+	if (!allAnimals) {
+		allAnimals = await retrieveAnimalData();
+	}
+
+	return cache.put("allAnimals", allAnimals, cacheTimeout);
 };
 
 export const getAnimals = async (maxResults: number) => {
@@ -24,6 +27,10 @@ export const getAnimals = async (maxResults: number) => {
 
 export const getAnimalById = async (animalId: string) => {
 	console.log(`Getting animal with id: ${animalId}`);
+
+	const allAnimals: Animal[] = cache.get("allAnimals");
+	if (allAnimals) return allAnimals.find((a) => a.id === animalId);
+
 	const service = animalId.slice(0, 2);
 	const id = animalId.slice(2);
 

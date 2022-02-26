@@ -8,7 +8,7 @@ interface PetCardContentProps {
 	animals: Animal[];
 }
 
-const pageOffset = 25;
+const pageOffset = 24;
 
 const PetCardContent = ({ animals }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);

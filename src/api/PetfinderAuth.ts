@@ -1,5 +1,6 @@
 import axios from "axios";
-import cache from "memory-cache";
+
+const cache = require("memory-cache");
 
 const apiKey = process.env.NEXT_PUBLIC_PETFINDER_API_KEY;
 const secret = process.env.PETFINDER_SECRET_KEY;

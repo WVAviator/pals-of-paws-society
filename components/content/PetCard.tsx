@@ -11,6 +11,12 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 			? `${styles.card} ${styles.featured}`
 			: styles.card;
 
+	const orgSchema = (orgName: string) => {
+		return orgName.toLowerCase().includes("shelter")
+			? "https://schema.org/AnimalShelter"
+			: "https://schema.org/LocalBusiness";
+	};
+
 	return (
 		<Link href={`/adopt/${animal.id}`}>
 			<div key={animal.id} className={cardStyle}>
@@ -31,10 +37,18 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 					<ul>
 						<li>Age: {animal.ageString}</li>
 						<li>Breed: {animal.breed}</li>
-						<li>Location: <span itemRef="organization" itemProp="location">{animal.location}</span></li>
+						<li>Location: {animal.location}</li>
 					</ul>
-					<div id="organization" className={styles.org} itemScope itemType="https://schema.org/AnimalShelter">
-						<p itemProp="legalName">{animal.organization.name}</p>
+					<div
+						id="organization"
+						className={styles.org}
+						itemScope
+						itemType={orgSchema(animal.organization.name)}
+					>
+						<p itemProp="name">{animal.organization.name}</p>
+						<meta itemProp="location" content={animal.location} />
+						<meta itemProp="email" content={animal.organization.email} />
+						<meta itemProp="url" content={animal.organization.website} />
 					</div>
 				</div>
 			</div>
