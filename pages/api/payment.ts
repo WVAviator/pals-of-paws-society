@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Product } from "../../src/types/Product";
 
-const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const calculateAmount = (products: Product[]): number => {
 	let total = 0;
