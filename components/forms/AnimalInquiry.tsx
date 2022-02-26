@@ -56,8 +56,12 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 				</a>
 			)}
 			their{" "}
-			<a href={animal.organization._links?.self?.href}>Petfinder profile</a>, or
-			contact them via email at {animal.organization.email}.
+			<a
+				href={`https://www.petfinder.com${animal.organization._links?.self?.href}`}
+			>
+				Petfinder profile
+			</a>
+			, or contact them via email at {animal.organization.email}.
 		</p>
 	);
 
