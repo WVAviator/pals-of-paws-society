@@ -1,0 +1,13 @@
+@use "/styles/variables" as *;
+
+.content {
+	@include restrict-width;
+	padding: $padding-section;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 3rem;
+
+	@include mq-desktop {
+		grid-template-columns: 1fr 1fr;
+	}
+}
