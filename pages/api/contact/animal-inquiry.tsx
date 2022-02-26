@@ -4,7 +4,7 @@ import { ContactInformation } from "../../../src/types/ContactInformation";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const optOutEmailAddresses = ["wvaviator@gmail.com"];
+const optOutEmailAddresses = ["palsofpawssociety@gmail.com"];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
@@ -13,8 +13,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			animal: Animal;
 		};
 
+		console.log(
+			`Does ${optOutEmailAddresses} include ${
+				animal.organization.email
+			}? ${optOutEmailAddresses.includes(animal.organization.email)}`
+		);
+
 		if (optOutEmailAddresses.includes(animal.organization.email)) {
-			res.status(400);
+			res
+				.status(500)
+				.send({ error: "Organization opted out of receiving emails." });
 			return;
 		}
 

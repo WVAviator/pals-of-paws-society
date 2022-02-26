@@ -31,12 +31,14 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		setIsSending(true);
-		const response = await axios.post("/api/contact/animal-inquiry", {
-			formData,
-			animal,
-		});
-
-		setSendError(response.status !== 200);
+		try {
+			const response = await axios.post("/api/contact/animal-inquiry", {
+				formData,
+				animal,
+			});
+		} catch {
+			setSendError(true);
+		}
 
 		setIsSending(false);
 		setSent(true);
@@ -85,11 +87,20 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 
 	const failMessage = (
 		<div>
-			<p>
-				An unexpected error occurred. We were not able to send your message to{" "}
-				{animal.organization.name}.
-			</p>
-			{contactNote()}
+			{animal.organization.id === "1" ? (
+				<p>
+					An unexpected error occurred. Please reach out to us at{" "}
+					{animal.organization.email}
+				</p>
+			) : (
+				<>
+					<p>
+						An unexpected error occurred. We were not able to send your message
+						to {animal.organization.name}.
+					</p>
+					{contactNote()}
+				</>
+			)}
 		</div>
 	);
 
