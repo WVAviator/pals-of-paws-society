@@ -1,57 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { Animal } from "../../../src/types/Animal";
-import { ContactInformation } from "../../../src/types/ContactInformation";
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	if (req.method === "POST") {
-		const { formData, animal } = req.body as {
-			formData: ContactInformation;
-			animal: Animal;
-		};
-
-		const msg = {
-			to: "wvaviator@gmail.com", // Change to your recipient
-			from: "wvaviator@gmail.com", // Change to your verified sender
-			subject: `Adopter for ${animal.name}`,
-			text: `We have found a potential adopter for ${
-				animal.name
-			}.\nWhile browsing our website https://www.palsofpawssociety.org/, which contains animals publicly listed on Petfinder, the following individual expressed interest in ${
-				animal.name
-			} by filling out a contact form:\n\nName: ${
-				formData.name
-			}\nEmail Address: ${formData.email}\nPhone Number: ${
-				formData.phone
-			}\nComments:\n${
-				formData.comments
-			}\n\nPlease reach out to them and direct them to begin your offical process for adoption.\nWe hope everything works out and ${
-				animal.name
-			} can find ${
-				animal.sex === "male" ? "his" : "her"
-			} new home!\n\nPals of Paws Society`,
-			html: getHtml(animal, formData),
-		};
-		sgMail
-			.send(msg)
-			.then(() => {
-				console.log("Email sent");
-				res.send(200);
-			})
-			.catch((error: any) => {
-				console.error(error);
-				res.send(500);
-			});
-	} else {
-		res.send(400);
-	}
-};
-
-export default handler;
-
-const getHtml = (animal: Animal, formData: ContactInformation) => {
-	return `
-	<head>
+<head>
 	<style>
 		body {
 			background-color: #dbdbdb;
@@ -121,9 +68,8 @@ const getHtml = (animal: Animal, formData: ContactInformation) => {
 		</p>
 		<p>
 			Please feel free to reach out to us with any questions. We hope everything
-			works out and ${animal.name} can find ${
-		animal.sex === "male" ? "his" : "her"
-	} new home!
+			works out and ${animal.name} can find ${animal.sex === "male" ? "his" :
+			"her"} new home!
 		</p>
 		<br />
 		<div style="display: flex">
@@ -141,6 +87,3 @@ const getHtml = (animal: Animal, formData: ContactInformation) => {
 	</div>
 	<div class="banner"></div>
 </body>
-
-    `;
-};

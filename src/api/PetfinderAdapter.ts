@@ -5,7 +5,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
 		id: `pf${pfAnimal.id}`,
 		service: "petfinder",
-		name: pfAnimal.name.toLowerCase() ?? "Unnamed",
+		name: capitalize(pfAnimal.name.toLowerCase()) ?? "Unnamed",
 		type: pfAnimal.type.toLowerCase() ?? "Other",
 		sex: pfAnimal.gender.toLowerCase() ?? "Unknown",
 		ageString: pfAnimal.age ?? "Unknown",
@@ -25,4 +25,14 @@ const extractBreed = ({ breeds }: PetfinderAnimal) => {
 	if (breeds.mixed && breeds.primary) return `Mixed ${breeds.primary}`;
 	if (breeds.primary) return breeds.primary;
 	return "Mixed";
+};
+
+const capitalize = (str: string) => {
+	const words = str.split(" ");
+
+	return words
+		.map((word) => {
+			return word[0].toUpperCase() + word.substring(1);
+		})
+		.join(" ");
 };
