@@ -6,8 +6,10 @@ import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 import { getPetfinderAnimal } from "./Petfinder";
+import cache from "memory-cache";
 
-const cache = require("memory-cache");
+class AnimalNotFoundError extends Error {}
+
 const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
@@ -29,7 +31,13 @@ export const getAnimalById = async (animalId: string) => {
 	console.log(`Getting animal with id: ${animalId}`);
 
 	const allAnimals: Animal[] = cache.get("allAnimals");
-	if (allAnimals) return allAnimals.find((a) => a.id === animalId);
+	if (allAnimals) {
+		console.log(`Cache exists. Searching for ${animalId}`);
+		const animalSearch = allAnimals.find((a) => a.id === animalId);
+		if (!animalSearch) console.log("Animal not found.");
+
+		if (animalSearch) return animalSearch;
+	}
 
 	const service = animalId.slice(0, 2);
 	const id = animalId.slice(2);
@@ -39,7 +47,6 @@ export const getAnimalById = async (animalId: string) => {
 	try {
 		if (service === "pf") {
 			const petfinderAnimal = await getPetfinderAnimal(id);
-			console.log(petfinderAnimal);
 
 			animal = convertPetfinderAnimal(petfinderAnimal);
 		} else if (service === "sl") {
@@ -73,6 +80,7 @@ const retrievePetfinderData = async (limit = 0) => {
 			"Error occurred while attempting to retrieve data from Petfinder.",
 			error
 		);
+		throw new AnimalNotFoundError();
 	}
 	return pfAnimals.map((animal) => convertPetfinderAnimal(animal));
 };

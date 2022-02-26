@@ -8,7 +8,7 @@
 
 .card {
 	position: relative;
-	height: 100%;
+	height: 31.25rem;
 	padding: $padding-section;
 	p {
 		margin-bottom: 1em;
@@ -21,6 +21,25 @@
 		}
 		@include mq-desktop {
 			font-size: 1.2rem;
+		}
+	}
+}
+
+.loading {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.sent {
+	a {
+		cursor: pointer;
+		color: $color-highContrast;
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 }

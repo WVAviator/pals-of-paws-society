@@ -2,6 +2,8 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ThankYouContent from "../../components/donate/ThankYouContent";
+import PawprintSection from "../../components/page-sections/PawprintSection";
 
 const thankyou = () => {
 	const router = useRouter();
@@ -12,12 +14,13 @@ const thankyou = () => {
 
 	useEffect(() => {
 		if (!payment_intent) return;
+
 		const getConfirmationDetails = async () => {
 			const response = await axios.get(
 				`https://api.stripe.com/v1/payment_intents/${payment_intent}`,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLE_KEY}`,
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
 					},
 					params: {
 						client_secret: payment_intent_client_secret,
@@ -31,20 +34,13 @@ const thankyou = () => {
 	}, [payment_intent]);
 
 	return (
-		<div style={{ minHeight: "40rem" }}>
-			{confirmationDetails ? (
-				<div>{`Thank you for your $${(
-					confirmationDetails.amount / 100
-				).toLocaleString("en-US", {
-					maximumFractionDigits: 2,
-					minimumFractionDigits: 2,
-				})} donation! A receipt has been sent to ${
-					confirmationDetails.receipt_email
-				}`}</div>
-			) : (
-				<CircularProgress />
-			)}
-		</div>
+		<PawprintSection
+			sectionTitle="Payment Confirmation"
+			pawprintRotation={190}
+			minimumHeight="40rem"
+		>
+			<ThankYouContent confirmationDetails={confirmationDetails} />
+		</PawprintSection>
 	);
 };
 

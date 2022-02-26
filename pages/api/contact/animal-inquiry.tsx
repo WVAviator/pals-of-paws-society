@@ -4,12 +4,19 @@ import { ContactInformation } from "../../../src/types/ContactInformation";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const optOutEmailAddresses = ["wvaviator@gmail.com"];
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
 		const { formData, animal } = req.body as {
 			formData: ContactInformation;
 			animal: Animal;
 		};
+
+		if (optOutEmailAddresses.includes(animal.organization.email)) {
+			res.status(400);
+			return;
+		}
 
 		const msg = {
 			to: "wvaviator@gmail.com", // Change to your recipient
@@ -25,9 +32,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				formData.phone
 			}\nComments:\n${
 				formData.comments
-			}\n\nPlease reach out to them and direct them to begin your offical process for adoption.\nWe hope everything works out and ${
-				animal.name
-			} can find ${
+			}\n\nPlease reach out to them and direct them to begin your offical process for adoption.\nWe're happy to continue providing this service for free in alignment with
+			our mission. If you want us to stop forwarding you messages from potential
+			adopters, simply reply to this email. Also feel free to reach out to us
+			with any questions.\nWe hope everything works out and ${animal.name} can find ${
 				animal.sex === "male" ? "his" : "her"
 			} new home!\n\nPals of Paws Society`,
 			html: getHtml(animal, formData),
@@ -35,7 +43,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		sgMail
 			.send(msg)
 			.then(() => {
-				console.log("Email sent");
 				res.send(200);
 			})
 			.catch((error: any) => {
@@ -120,10 +127,16 @@ const getHtml = (animal: Animal, formData: ContactInformation) => {
 			<a href="https://www.palsofpawssociety.org/about/tnr">TNR program.</a>
 		</p>
 		<p>
-			Please feel free to reach out to us with any questions. We hope everything
-			works out and ${animal.name} can find ${
+			We're happy to continue providing this service for free in alignment with
+			our mission. If you want us to stop forwarding you messages from potential
+			adopters, simply reply to this email. Also feel free to reach out to us
+			with any questions.
+		</p>
+		<p>
+			We hope everything works out and ${animal.name} can find ${
 		animal.sex === "male" ? "his" : "her"
-	} new home!
+	} new home! Please feel free to reach out to us with
+			any questions.
 		</p>
 		<br />
 		<div style="display: flex">

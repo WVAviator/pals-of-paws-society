@@ -38,4 +38,7 @@ const PalsOfPawsSociety: Organization = {
 		country: "United States",
 	},
 	website: "https://www.palsofpawssociety.org/",
+	social_media: {
+		facebook: "https://www.facebook.com/PalsofPawsSociety/",
+	},
 };

@@ -1,0 +1,37 @@
+@use "/styles/variables" as *;
+
+.content {
+	@include restrict-width;
+	padding: $padding-section;
+}
+
+.thankyou {
+	margin: 3rem auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	height: 30rem;
+	h1,
+	p {
+		text-align: center;
+	}
+
+	nav {
+		position: relative;
+		margin-top: auto;
+		margin-bottom: 3rem;
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+			font-size: 1.25rem;
+			list-style: none;
+		}
+
+		color: $color-highContrast;
+		a:hover {
+			text-decoration: underline;
+		}
+		text-align: center;
+	}
+}
