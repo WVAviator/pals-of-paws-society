@@ -21,7 +21,11 @@ function PetCarousel({ animal }: { animal: Animal }): JSX.Element {
 	});
 
 	return (
-		<PawprintSection sectionTitle="Image carousel" backgroundColor="#0f172a">
+		<PawprintSection
+			addPawprints={false}
+			sectionTitle="Image carousel"
+			backgroundColor="#0f172a"
+		>
 			<Carousel
 				isLoop={true}
 				hasMediaButton={false}

@@ -7,4 +7,25 @@
 	margin: 0 auto;
 	grid: span 1;
 	padding: $padding-section;
+
+	p {
+		font-size: 1rem;
+		word-break: break-all;
+		white-space: normal;
+		@include mq-tablet {
+			font-size: 1.1rem;
+		}
+		@include mq-desktop {
+			font-size: 1.2rem;
+		}
+	}
+	h2 {
+		font-size: 1.3rem;
+		@include mq-tablet {
+			font-size: 1.4rem;
+		}
+		@include mq-desktop {
+			font-size: 1.5rem;
+		}
+	}
 }

@@ -7,9 +7,13 @@ import styles from "./PetContent.module.scss";
 const PetContent = ({ animal }: { animal: Animal }) => {
 	return (
 		<div className={styles.content}>
-			<PetBio animal={animal} />
-			<AnimalInquiry />
-			<OrgBio org={animal.organization} />
+			<div className={styles.info}>
+				<PetBio animal={animal} />
+				<OrgBio org={animal.organization} />
+			</div>
+			<div className={styles.form}>
+				<AnimalInquiry animal={animal} />
+			</div>
 		</div>
 	);
 };

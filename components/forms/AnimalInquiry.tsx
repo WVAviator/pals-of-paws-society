@@ -1,5 +1,7 @@
 import { Paper, TextField } from "@mui/material";
 import { useState } from "react";
+import { Animal } from "../../src/types/Animal";
+import CustomButton from "../ui/CustomButton";
 import styles from "./AnimalInquiry.module.scss";
 
 interface FormData {
@@ -9,7 +11,11 @@ interface FormData {
 	comments: string;
 }
 
-const AnimalInquiry = () => {
+interface AnimalInquiryProps {
+	animal: Animal;
+}
+
+const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 	const [formData, setFormData] = useState<FormData>({
 		name: "",
 		email: "",
@@ -23,8 +29,12 @@ const AnimalInquiry = () => {
 		};
 
 	return (
-		<Paper elevation={3}>
-			<form action="">
+		<Paper elevation={3} className={styles.card}>
+			<p>
+				Let {animal.organization.name} know that you're interested in{" "}
+				<span style={{ textTransform: "capitalize" }}>{animal.name}</span>.
+			</p>
+			<form action="" className={styles.form}>
 				<TextField
 					variant="outlined"
 					label="Name"
@@ -33,14 +43,14 @@ const AnimalInquiry = () => {
 				/>
 				<TextField
 					variant="outlined"
-					label="Email"
+					label="Email Address"
 					type="email"
 					value={formData.email}
 					onChange={handleChange("email")}
 				/>
 				<TextField
 					variant="outlined"
-					label="Phone"
+					label="Phone Number"
 					value={formData.phone}
 					onChange={handleChange("phone")}
 				/>
@@ -50,7 +60,9 @@ const AnimalInquiry = () => {
 					multiline
 					value={formData.comments}
 					onChange={handleChange("comments")}
+					rows={3}
 				/>
+				<CustomButton type="submit">Send</CustomButton>
 			</form>
 		</Paper>
 	);

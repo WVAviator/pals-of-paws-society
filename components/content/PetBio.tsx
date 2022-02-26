@@ -1,18 +1,24 @@
 import { Paper } from "@mui/material";
 import { Animal } from "../../src/types/Animal";
+import AnimalIcons from "../ui/AnimalIcons";
 import styles from "./PetBio.module.scss";
 
 const PetBio = ({ animal }: { animal: Animal }) => {
 	return (
-		<section aria-label={`Bio for ${animal.name}`}>
+		<article aria-label={`Bio for ${animal.name}`}>
 			<Paper elevation={3} className={styles.card}>
-				<h1 className={styles.capitalize}>{animal.name}</h1>
-				<p>Age: {animal.ageString}</p>
-				<p className={styles.capitalize}>Gender: {animal.sex}</p>
-				<p>Breed: {animal.breed}</p>
-				<p>{animal.description}</p>
+				<div>
+					<h2 className={styles.capitalize}>{animal.name}</h2>
+					<p>Age: {animal.ageString}</p>
+					<p className={styles.capitalize}>Gender: {animal.sex}</p>
+					<p>Breed: {animal.breed}</p>
+					<p>{animal.description}</p>
+				</div>
+				<div>
+					<AnimalIcons sex={animal.sex} type={animal.type} />
+				</div>
 			</Paper>
-		</section>
+		</article>
 	);
 };
 export default PetBio;
