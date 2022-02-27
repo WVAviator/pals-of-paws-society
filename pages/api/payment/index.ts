@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Product } from "../../src/types/Product";
+import { Product } from "../../../src/types/Product";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
