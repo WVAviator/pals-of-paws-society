@@ -16,6 +16,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 		organizationPhone: pfAnimal.contact.phone,
 		description: pfAnimal.description,
 		photos: pfAnimal.photos?.map((photo) => photo.large) ?? [],
+		link: pfAnimal._links.self.href,
 	};
 
 	return animal;

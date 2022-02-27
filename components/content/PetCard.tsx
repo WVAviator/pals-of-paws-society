@@ -5,7 +5,12 @@ import { Animal } from "../../src/types/Animal";
 import AnimalIcons from "../ui/AnimalIcons";
 import Link from "next/link";
 
-const PetCard = ({ animal }: { animal: Animal }) => {
+interface PetCardProps {
+	animal: Animal;
+	isPriority?: boolean;
+}
+
+const PetCard = ({ animal, isPriority = false }: PetCardProps) => {
 	const cardStyle =
 		animal.organization.name === "Pals of Paws Society"
 			? `${styles.card} ${styles.featured}`
@@ -32,6 +37,7 @@ const PetCard = ({ animal }: { animal: Animal }) => {
 							width={280}
 							height={280}
 							objectFit="cover"
+							priority={isPriority}
 						/>
 					</div>
 					<ul>

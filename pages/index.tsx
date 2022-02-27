@@ -40,7 +40,7 @@ export default function Home() {
 						heading="Spay & Neuter Financing"
 						description="We provide financial assistance for spays and neuters through our vet partners."
 						callToAction="Learn More"
-						href="/about/veterinary"
+						href="/about/spayneuter"
 						alt="A rottweiler"
 					/>
 				</CardContent>

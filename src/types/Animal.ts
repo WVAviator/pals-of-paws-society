@@ -9,6 +9,8 @@ export interface Animal {
 	breed: string;
 	location: string;
 
+	link?: string;
+
 	organization: Organization;
 	organizationEmail: string;
 	organizationPhone: string;

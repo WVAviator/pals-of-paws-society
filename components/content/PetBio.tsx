@@ -12,7 +12,14 @@ const PetBio = ({ animal }: { animal: Animal }) => {
 					<p>Age: {animal.ageString}</p>
 					<p className={styles.capitalize}>Gender: {animal.sex}</p>
 					<p>Breed: {animal.breed}</p>
-					<p>{animal.description}</p>
+					<p>
+						{animal.description}
+						{animal.link ? (
+							<span>
+								<a href={animal.link}> Read More</a>
+							</span>
+						) : null}
+					</p>
 				</div>
 				<div>
 					<AnimalIcons sex={animal.sex} type={animal.type} />

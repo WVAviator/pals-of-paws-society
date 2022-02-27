@@ -33,6 +33,7 @@
   "devDependencies": {
     "@types/mdx": "^2.0.1",
     "@types/memory-cache": "^0.2.2",
+    "@types/micro": "^7.3.6",
     "@types/node": "^17.0.18",
     "@types/react": "^17.0.39",
     "@types/react-gallery-carousel": "^0.2.2",

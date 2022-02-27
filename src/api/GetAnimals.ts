@@ -30,37 +30,46 @@ export const getAnimals = async (maxResults: number) => {
 export const getAnimalById = async (animalId: string) => {
 	console.log(`Getting animal with id: ${animalId}`);
 
-	const allAnimals: Animal[] = cache.get("allAnimals");
-	if (allAnimals) {
-		console.log(`Cache exists. Searching for ${animalId}`);
-		const animalSearch = allAnimals.find((a) => a.id === animalId);
-		if (!animalSearch) console.log("Animal not found.");
+	const allAnimals: Animal[] = await getAllAnimals();
+	// const animalSearch = allAnimals.find((a) => a.id === animalId);
+	// if (!animalSearch) console.log("Animal not found.");
 
-		if (animalSearch) return animalSearch;
-	}
+	// if (animalSearch) return animalSearch;
 
-	const service = animalId.slice(0, 2);
-	const id = animalId.slice(2);
+	for (let i = 0; i < allAnimals.length; i++) {
+		if (allAnimals[i].id === animalId) {
+			console.log(`Animal found in cache: ${allAnimals[i].name}`);
 
-	let animal: Animal;
-
-	try {
-		if (service === "pf") {
-			const petfinderAnimal = await getPetfinderAnimal(id);
-
-			animal = convertPetfinderAnimal(petfinderAnimal);
-		} else if (service === "sl") {
-			const shelterluvAnimal = await getShelterluvAnimal(id);
-			animal = convertShelterluvAnimal(shelterluvAnimal);
+			return allAnimals[i];
 		}
-	} catch (error) {
-		console.error(
-			`Error occurred while trying to retrieve animal by id ${animalId}`,
-			error
-		);
 	}
 
-	return animal;
+	throw new AnimalNotFoundError();
+
+	// console.log("Animal. was not found");
+
+	// const service = animalId.slice(0, 2);
+	// const id = animalId.slice(2);
+
+	// let animal: Animal;
+
+	// try {
+	// 	if (service === "pf") {
+	// 		const petfinderAnimal = await getPetfinderAnimal(id);
+
+	// 		animal = convertPetfinderAnimal(petfinderAnimal);
+	// 	} else if (service === "sl") {
+	// 		const shelterluvAnimal = await getShelterluvAnimal(id);
+	// 		animal = convertShelterluvAnimal(shelterluvAnimal);
+	// 	}
+	// } catch (error) {
+	// 	console.error(
+	// 		`Error occurred while trying to retrieve animal by id ${animalId}`,
+	// 		error
+	// 	);
+	// }
+
+	// return animal;
 };
 
 const retrieveAnimalData = async (limit = 0) => {

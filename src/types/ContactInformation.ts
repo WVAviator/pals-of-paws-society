@@ -3,4 +3,5 @@ export interface ContactInformation {
 	email: string;
 	phone: string;
 	comments?: string;
+	volunteer?: string[];
 }

@@ -23,11 +23,18 @@ const HeaderLogo = () => {
 							width={95}
 							height={95}
 							itemProp="image"
+							priority
 						/>
 					</div>
 					<div className={styles.desktop}>
 						<div className={styles.desktopContent}>
-							<Image src={desktopLogo} alt={altText} width={95} height={95} />
+							<Image
+								src={desktopLogo}
+								alt={altText}
+								width={95}
+								height={95}
+								priority
+							/>
 							<h2 className={styles.logoText} itemProp="name">
 								Pals of Paws Society
 							</h2>

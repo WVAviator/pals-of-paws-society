@@ -21,10 +21,10 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 
 	const mappedAnimals = animals
 		.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
-		.map((animal) => {
+		.map((animal, index) => {
 			return (
 				<div key={animal.id}>
-					<PetCard animal={animal} />
+					<PetCard animal={animal} isPriority={index < 8} />
 				</div>
 			);
 		});

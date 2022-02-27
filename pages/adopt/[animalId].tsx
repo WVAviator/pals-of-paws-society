@@ -8,23 +8,29 @@ import { ArrowLeft } from "@mui/icons-material";
 import Fallback from "../../components/layout/Fallback";
 import PawprintSection from "../../components/page-sections/PawprintSection";
 import PetContent from "../../components/layout/PetContent";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import axios from "axios";
 
-interface AnimalPageProps {
-	animal: Animal;
-	isError: boolean;
-}
+type AnimalFetcher = (url: string) => Promise<Animal>;
+const fetcher: AnimalFetcher = (url) => axios.get(url).then((res) => res.data);
 
-const AnimalPage = ({ animal }: AnimalPageProps) => {
+const AnimalPage = () => {
+	const [animal, setAnimal] = useState(null);
 	const router = useRouter();
 
 	useEffect(() => {
-		if (!animal) router.push("/adopt");
+		const { animalId } = router.query;
+		if (!animalId) return;
+
+		const queryAnimal = async () => {
+			const response = await axios.get(`/api/animals/${animalId}`);
+			setAnimal(response.data as Animal);
+		};
+		queryAnimal();
 	}, []);
 
-	if (router.isFallback) {
-		return <Fallback />;
-	}
+	if (!animal) return <Fallback />;
 
 	const backStyle = {
 		backgroundColor: "#0f172a",
@@ -36,39 +42,46 @@ const AnimalPage = ({ animal }: AnimalPageProps) => {
 	};
 
 	return (
-		<>
-			{animal && (
-				<div>
-					<div style={backStyle} onClick={() => router.back()}>
-						<ArrowLeft htmlColor="white" />
-						Back to Results
-					</div>
-					<PetCarousel animal={animal} />
-					<PawprintSection pawprintRotation={170} sectionTitle={animal.name}>
-						<PetContent animal={animal} />
-					</PawprintSection>
-				</div>
-			)}
-		</>
+		<div>
+			<div style={backStyle} onClick={router.back}>
+				<ArrowLeft htmlColor="white" />
+				Back to Results
+			</div>
+			<PetCarousel animal={animal} />
+			<PawprintSection pawprintRotation={170} sectionTitle={animal.name}>
+				<PetContent animal={animal} />
+			</PawprintSection>
+		</div>
 	);
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-	let animal: Animal;
-	try {
-		animal = await getAnimalById(context.params.animalId as string);
-	} catch (error) {}
+// export const getStaticProps: GetStaticProps = async (context) => {
+// 	console.log(
+// 		"Generating static props for animal with ID: " + context.params.animalId
+// 	);
 
-	return {
-		props: { animal: animal ?? null },
-	};
-};
+// 	let animal: Animal;
+// 	try {
+// 		animal = await getAnimalById(context.params.animalId as string);
+// 	} catch (error) {
+// 		console.log(
+// 			`Animal with ID ${context.params.animalId} was not found.`,
+// 			error.message
+// 		);
+// 	}
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: [],
-		fallback: true,
-	};
-};
+// 	if (!animal) return { props: { animal: null } };
+
+// 	return {
+// 		props: { animal },
+// 	};
+// };
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+// 	return {
+// 		paths: [],
+// 		fallback: "blocking",
+// 	};
+// };
 
 export default AnimalPage;

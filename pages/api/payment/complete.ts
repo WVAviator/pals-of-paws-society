@@ -24,12 +24,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		if (event.type === "payment_intent.succeeded") {
 			paymentIntent = event.data.object;
+			res.send(200);
 		} else {
 			return res.send(200);
 		}
-		res.send(200);
-
-		if (!paymentIntent) return;
 
 		console.log(paymentIntent.metadata);
 		//What should we do with the metadata?

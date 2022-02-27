@@ -23,8 +23,6 @@ const Hero = () => {
 				objectPosition={width > widthToShiftImage ? desktopShift : mobileShift}
 				layout="fill"
 				className={styles.image}
-				//width={1377}
-				//height={880}
 				priority
 			/>
 			<div className={styles.content}>

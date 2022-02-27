@@ -115,7 +115,7 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 							<CircularProgress />
 						</div>
 					) : (
-						<div>
+						<div className={styles.formElements}>
 							<p>
 								Let {animal.organization.name} know that you're interested in{" "}
 								{animal.name}.
@@ -151,9 +151,11 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 									onChange={handleChange("comments")}
 									rows={3}
 								/>
-								<CustomButton type="submit" endIcon={<SendIcon />}>
-									Send
-								</CustomButton>
+								<div className={styles.button}>
+									<CustomButton type="submit" endIcon={<SendIcon />}>
+										Send
+									</CustomButton>
+								</div>
 							</form>
 						</div>
 					)}
