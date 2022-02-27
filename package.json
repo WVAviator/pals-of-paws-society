@@ -20,6 +20,7 @@
     "@stripe/stripe-js": "^1.23.0",
     "axios": "^0.25.0",
     "memory-cache": "^0.2.0",
+    "micro": "^9.3.4",
     "next": "^12.1.0",
     "nodeenv": "^3.0.74",
     "react": "17.0.2",
