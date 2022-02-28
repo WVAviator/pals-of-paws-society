@@ -61,7 +61,7 @@ const VolunteerForm = () => {
 	const successMessage = (
 		<div className={styles.upperCenter}>
 			<DoneIcon color="primary" aria-label="Message Sent" fontSize="large" />
-			<p>Your information has been sent! We'll be in touch!</p>
+			<p>Your information has been sent! We will be in touch!</p>
 			<p>
 				<Link href="/">Return Home</Link>
 			</p>
@@ -100,7 +100,7 @@ const VolunteerForm = () => {
 							<div className={styles.form}>
 								<div className={styles.volunteer}>
 									<p>
-										Select all the activites you're interested in helping us
+										Select all the activites you are interested in helping us
 										with:
 									</p>
 									<Autocomplete

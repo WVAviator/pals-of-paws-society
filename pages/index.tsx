@@ -2,7 +2,7 @@ import Head from "next/head";
 import Hero from "../components/homepage/Hero";
 import CardContent from "../components/page-sections/CardContent";
 import InfoCard from "../components/content/InfoCard";
-import PawprintSection from "/components/page-sections/PawprintSection";
+import PawprintSection from "../components/page-sections/PawprintSection";
 
 import aboutImage01 from "/public/images/kitten01.jpg";
 import aboutImage02 from "/public/images/van.jpg";
