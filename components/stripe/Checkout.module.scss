@@ -24,3 +24,10 @@
 	min-height: 20rem;
 	width: 100%;
 }
+
+.center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
