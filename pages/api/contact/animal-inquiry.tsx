@@ -4,7 +4,7 @@ import { ContactInformation } from "../../../src/types/ContactInformation";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const optOutEmailAddresses = [""];
+const optOutEmailAddresses = ["hasadoptions@gmail.com"];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
@@ -27,9 +27,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 
 		const msg = {
-			to: "wvaviator@gmail.com", // Change to your recipient
+			to: animal.organization.email,
 			from: "Pals of Paws Society <adoptions@palsofpawssociety.org>",
-			fromName: "Pals of Paws Society",
 			replyTo: "kalacdurham@gmail.com", // Change to your verified sender
 			subject: `Adopter for ${animal.name}`,
 			text: `We found a potential adopter for ${
