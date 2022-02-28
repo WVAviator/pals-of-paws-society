@@ -12,6 +12,7 @@ import volunteerImage02 from "/public/images/dogInHome.png";
 import volunteerImage03 from "/public/images/dogAtVet.png";
 
 import MissionVision from "../components/homepage/MissionVision";
+import UpdatesContent from "../components/page-sections/UpdatesContent";
 
 export default function Home() {
 	return (
@@ -46,14 +47,25 @@ export default function Home() {
 				</CardContent>
 			</PawprintSection>
 			<PawprintSection
+				sectionTitle="Updates"
+				backgroundColor="white"
+				pawprintRotation={165}
+				pawprintOpacity={0.05}
+			>
+				<UpdatesContent />
+			</PawprintSection>
+			<PawprintSection
 				sectionTitle="Our Mission and Vision"
-				pawprintRotation={170}
+				pawprintRotation={5}
 				backgroundColor="white"
 				pawprintOpacity={0.05}
 			>
 				<MissionVision />
 			</PawprintSection>
-			<PawprintSection sectionTitle="Volunteer Opportunities">
+			<PawprintSection
+				pawprintRotation={190}
+				sectionTitle="Volunteer Opportunities"
+			>
 				<CardContent heading="Get involved today">
 					<InfoCard
 						image={volunteerImage01}

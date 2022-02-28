@@ -1,0 +1,27 @@
+@use "/styles/variables" as *;
+
+.counters {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	padding: $padding-section;
+	p {
+		font-size: 2rem;
+	}
+}
+
+.icon {
+	position: relative;
+	width: 5rem;
+	height: 4rem;
+}
+
+.petCounter {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}

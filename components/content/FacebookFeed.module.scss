@@ -1,0 +1,25 @@
+@use "/styles/variables" as *;
+
+.container {
+	padding: $padding-section;
+
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	a {
+		color: $color-highContrast;
+		cursor: pointer;
+		margin-bottom: 1em;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.iframe {
+	margin: 0 auto;
+}
