@@ -20,7 +20,7 @@ const InfoCard = ({
 	href,
 	alt,
 }: InfoCardProps) => {
-	const id = heading.replaceAll(" ", "");
+	const id = heading.split(" ").join("-");
 
 	return (
 		<Link href={href}>
