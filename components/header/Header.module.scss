@@ -30,7 +30,5 @@
 	display: none;
 	@include mq-desktop {
 		display: inline-flex;
-		text-transform: capitalize;
-		font-size: $fontSize-navigation;
 	}
 }

@@ -20,9 +20,11 @@ const Header = () => {
 						mobileMenuOpen={mobileMenuOpen}
 						setMobileMenuOpen={setMobileMenuOpen}
 					/>
-					<CustomButton className={styles.btn} href="/donate">
-						Donate
-					</CustomButton>
+					<div className={styles.btn}>
+						<CustomButton className={styles.btn} href="/donate">
+							Donate
+						</CustomButton>
+					</div>
 				</div>
 			</div>
 			<MobileMenu open={mobileMenuOpen} setOpen={setMobileMenuOpen} />
