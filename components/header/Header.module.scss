@@ -27,7 +27,7 @@
 }
 
 .btn {
-	display: none;
+	display: none !important;
 	@include mq-desktop {
 		display: inline-flex;
 	}
