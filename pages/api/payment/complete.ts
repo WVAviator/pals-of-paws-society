@@ -3,8 +3,7 @@ import { buffer } from "micro";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const endpointSecret =
-	"whsec_ea545bdcb3c53e8909547d452d8b8d1d46906be4b5e1e85494a9ddad9a8eca20";
+const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET; //whsec_QwpcYQnhaGlHOpFYS3tczEDYobaMLOAA
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
