@@ -1,5 +1,4 @@
-import UnderConstruction from "/components/layout/UnderConstruction";
-import DonateHero from "/components/donate/DonateHero";
+import DonateHero from "../../components/donate/DonateHero";
 
 const Donate = () => {
 	return (
