@@ -68,7 +68,7 @@ export default function Home() {
 						heading="Foster"
 						description="Fostering a pet in your home gives them a safe and warm environment while we search for their new family or prepare them for transport."
 						callToAction="Get Started"
-						href="/volunteer/foster"
+						href="/volunteer"
 						alt="A dog indoors laying on a dog bed"
 					/>
 					<InfoCard
