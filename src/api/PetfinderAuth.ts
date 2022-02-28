@@ -13,7 +13,9 @@ const dataString = `grant_type=client_credentials&client_id=${apiKey}&client_sec
 class PetfinderAuthError extends Error {}
 
 const getToken = async () => {
-	return (cache.get("token") as string) ?? (await retrieveNewToken());
+	//return (cache.get("token") as string) ?? (await retrieveNewToken());
+	const token = await retrieveNewToken();
+	return token;
 };
 
 const retrieveNewToken = async () => {
@@ -21,12 +23,12 @@ const retrieveNewToken = async () => {
 
 	try {
 		const response = await axios.post(authenticationUrl, dataString);
-
-		token = cache.put(
-			"token",
-			response.data.access_token as string,
-			response.data.expires_in * 1000
-		) as string;
+		token = response.data.access_token;
+		// token = cache.put(
+		// 	"token",
+		// 	response.data.access_token as string,
+		// 	response.data.expires_in * 1000
+		// ) as string;
 	} catch (error) {
 		console.error(
 			"Error occurred while attempting to retrieve Petfinder access token."

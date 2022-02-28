@@ -26,7 +26,7 @@ const fetchAnimalData = async (queryUrl: string) => {
 			"X-Api-Key": key,
 		},
 		params: {
-			//status_type: "publishable",
+			status_type: "publishable",
 		},
 	});
 	return response;

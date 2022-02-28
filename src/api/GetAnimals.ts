@@ -13,13 +13,17 @@ class AnimalNotFoundError extends Error {}
 const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
-	let allAnimals: Animal[] = cache.get("allAnimals");
+	//let allAnimals: Animal[] = cache.get("allAnimals");
 
-	if (!allAnimals) {
-		allAnimals = await retrieveAnimalData();
-	}
+	//if (!allAnimals) {
+	// 	allAnimals = await retrieveAnimalData();
+	// }
 
-	return cache.put("allAnimals", allAnimals, cacheTimeout);
+	// return cache.put("allAnimals", allAnimals, cacheTimeout);
+
+	const allAnimals = await retrieveAnimalData();
+	if (!allAnimals) throw new AnimalNotFoundError();
+	return allAnimals;
 };
 
 export const getAnimals = async (maxResults: number) => {
@@ -28,48 +32,49 @@ export const getAnimals = async (maxResults: number) => {
 };
 
 export const getAnimalById = async (animalId: string) => {
-	console.log(`Getting animal with id: ${animalId}`);
+	// console.log(`Getting animal with id: ${animalId}`);
 
-	const allAnimals: Animal[] = await getAllAnimals();
-	// const animalSearch = allAnimals.find((a) => a.id === animalId);
-	// if (!animalSearch) console.log("Animal not found.");
+	// const allAnimals: Animal[] = await getAllAnimals();
+	// // const animalSearch = allAnimals.find((a) => a.id === animalId);
+	// // if (!animalSearch) console.log("Animal not found.");
 
-	// if (animalSearch) return animalSearch;
+	// // if (animalSearch) return animalSearch;
 
-	for (let i = 0; i < allAnimals.length; i++) {
-		if (allAnimals[i].id === animalId) {
-			console.log(`Animal found in cache: ${allAnimals[i].name}`);
+	// for (let i = 0; i < allAnimals.length; i++) {
+	// 	if (allAnimals[i].id === animalId) {
+	// 		console.log(`Animal found in cache: ${allAnimals[i].name}`);
 
-			return allAnimals[i];
-		}
-	}
+	// 		return allAnimals[i];
+	// 	}
+	// }
 
-	throw new AnimalNotFoundError();
+	// throw new AnimalNotFoundError();
 
 	// console.log("Animal. was not found");
 
-	// const service = animalId.slice(0, 2);
-	// const id = animalId.slice(2);
+	const service = animalId.slice(0, 2);
+	const id = animalId.slice(2);
 
-	// let animal: Animal;
+	let animal: Animal;
 
-	// try {
-	// 	if (service === "pf") {
-	// 		const petfinderAnimal = await getPetfinderAnimal(id);
+	try {
+		if (service === "pf") {
+			const petfinderAnimal = await getPetfinderAnimal(id);
 
-	// 		animal = convertPetfinderAnimal(petfinderAnimal);
-	// 	} else if (service === "sl") {
-	// 		const shelterluvAnimal = await getShelterluvAnimal(id);
-	// 		animal = convertShelterluvAnimal(shelterluvAnimal);
-	// 	}
-	// } catch (error) {
-	// 	console.error(
-	// 		`Error occurred while trying to retrieve animal by id ${animalId}`,
-	// 		error
-	// 	);
-	// }
+			animal = convertPetfinderAnimal(petfinderAnimal);
+		} else if (service === "sl") {
+			const shelterluvAnimal = await getShelterluvAnimal(id);
+			animal = convertShelterluvAnimal(shelterluvAnimal);
+		}
+	} catch (error) {
+		console.error(
+			`Error occurred while trying to retrieve animal by id ${animalId}`,
+			error
+		);
+	}
 
-	// return animal;
+	if (!animal) throw new AnimalNotFoundError();
+	return animal;
 };
 
 const retrieveAnimalData = async (limit = 0) => {
@@ -89,7 +94,6 @@ const retrievePetfinderData = async (limit = 0) => {
 			"Error occurred while attempting to retrieve data from Petfinder.",
 			error
 		);
-		throw new AnimalNotFoundError();
 	}
 	return pfAnimals.map((animal) => convertPetfinderAnimal(animal));
 };

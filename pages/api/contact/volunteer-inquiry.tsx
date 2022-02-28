@@ -12,8 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const volunteerActivities = formData.volunteer.join("\n");
 
 		const msg = {
-			to: "wvaviator@gmail.com", // Change to your recipient
-			from: "wvaviator@gmail.com", // Change to your verified sender
+			to: "volunteer@palsofpawssociety.org", // Change to your recipient
+			from: "POP Volunteer <volunteer@palsofpawssociety.org>", // Change to your verified sender
 			subject: `Volunteer Request - ${formData.name}`,
 			text: `A volunteer application has been submitted on the website. ${formData.name} has indicated that they are interested in helping with the following activities:\n\n${volunteerActivities}\nComments:\n${formData.comments}\n\nHere is their contact information:\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nThe website has informed them that that someone will reach out as soon as possible.`,
 			html: getHtml(formData),
@@ -51,27 +51,6 @@ const getHtml = (formData: ContactInformation) => {
 		.banner {
 			height: 30px;
 			width: 100%;
-
-			background-color: #9c84b6;
-		}
-		a {
-			color: #692fa8;
-			text-decoration: none;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		ul {
-			list-style: none;
-		}
-		address {
-			font-style: normal;
-		}
-		img {
-			margin-right: 2rem;
-			max-height: 5.625rem;
-		}
-	</style>
 </head>
 <body>
 	<div class="banner"></div>

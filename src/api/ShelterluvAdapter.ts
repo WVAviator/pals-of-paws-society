@@ -12,7 +12,7 @@ export const convertShelterluvAnimal = (shelterluvAnimal: ShelterluvAnimal) => {
 		breed: shelterluvAnimal.Breed,
 		location: "Hernando, MS",
 		organization: PalsOfPawsSociety,
-		organizationEmail: "palsofpawssociety@gmail.com",
+		organizationEmail: "adoptions@palsofpawssociety.org",
 		organizationPhone: "954-224-9779",
 		description: shelterluvAnimal.Description,
 		photos: shelterluvAnimal.Photos,
@@ -28,10 +28,10 @@ const parseAgeString = (ageInMonths: number) => {
 const PalsOfPawsSociety: Organization = {
 	id: "1",
 	name: "Pals of Paws Society",
-	email: "palsofpawssociety@gmail.com",
+	email: "info@palsofpawssociety.org",
 	phone: "(954) 224-8463",
 	address: {
-		address1: "2466 Tragg Ave.",
+		address1: "12 W Commerce St Unit 49",
 		city: "Hernando",
 		state: "Mississippi",
 		postcode: "38632",

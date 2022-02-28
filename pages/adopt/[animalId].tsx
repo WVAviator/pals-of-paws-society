@@ -12,9 +12,6 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import axios from "axios";
 
-type AnimalFetcher = (url: string) => Promise<Animal>;
-const fetcher: AnimalFetcher = (url) => axios.get(url).then((res) => res.data);
-
 const AnimalPage = () => {
 	const [animal, setAnimal] = useState(null);
 	const router = useRouter();

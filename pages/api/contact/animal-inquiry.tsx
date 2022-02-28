@@ -4,7 +4,7 @@ import { ContactInformation } from "../../../src/types/ContactInformation";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const optOutEmailAddresses = ["palsofpawssociety@gmail.com"];
+const optOutEmailAddresses = [""];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
@@ -28,9 +28,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const msg = {
 			to: "wvaviator@gmail.com", // Change to your recipient
-			from: "wvaviator@gmail.com", // Change to your verified sender
+			from: "Pals of Paws Society <adoptions@palsofpawssociety.org>",
+			fromName: "Pals of Paws Society",
+			replyTo: "kalacdurham@gmail.com", // Change to your verified sender
 			subject: `Adopter for ${animal.name}`,
-			text: `We have found a potential adopter for ${
+			text: `We found a potential adopter for ${
 				animal.name
 			}.\nWhile browsing our website https://www.palsofpawssociety.org/, which contains animals publicly listed on Petfinder, the following individual expressed interest in ${
 				animal.name
@@ -42,7 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				formData.comments
 			}\n\nPlease reach out to them and direct them to begin your offical process for adoption.\nWe're happy to continue providing this service for free in alignment with
 			our mission. If you want us to stop forwarding you messages from potential
-			adopters, simply reply to this email. Also feel free to reach out to us
+			adopters, just let us know. Feel free to reach out to us
 			with any questions.\nWe hope everything works out and ${animal.name} can find ${
 				animal.sex === "male" ? "his" : "her"
 			} new home!\n\nPals of Paws Society`,
@@ -65,6 +67,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 export default handler;
 
 const getHtml = (animal: Animal, formData: ContactInformation) => {
+	const currentTime = new Date();
+	let timeOfDay = "morning";
+	if (currentTime.getHours() > 13) timeOfDay = "afternoon";
+	if (currentTime.getHours() > 19) timeOfDay = "evening";
+
 	return `
 	<head>
 	<style>
@@ -77,36 +84,17 @@ const getHtml = (animal: Animal, formData: ContactInformation) => {
 
 			background-color: #9c84b6;
 		}
-		a {
-			color: #692fa8;
-			text-decoration: none;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		ul {
-			list-style: none;
-		}
-		address {
-			font-style: normal;
-		}
-		img {
-			margin-right: 2rem;
-			max-height: 5.625rem;
-		}
 	</style>
 </head>
 <body>
 	<div class="banner"></div>
 	<div>
-		<p>We have found a potential adopter for ${animal.name}!</p>
+		<p>Good ${timeOfDay},</p>
+		<p>We found a potential adopter for ${animal.name}.</p>
 		<p>
-			While browsing our
-			<a href="https://www.palsofpawssociety.org/">website</a>, which contains
-			<a href="https://www.palsofpawssociety.org/adopt">animal listings</a>
-			posted publicly on <a href="https://www.petfinder.com/">Petfinder</a>, the
-			following adopter filled out a form to indicate their interest in
-			${animal.name}:
+			While browsing our website at https://www.palsofpawssociety.org/, which
+			contains animal listings posted publicly on Petfinder, the following
+			adopter filled out a form to indicate their interest in ${animal.name}:
 		</p>
 		<br />
 		<ul>
@@ -124,38 +112,30 @@ const getHtml = (animal: Animal, formData: ContactInformation) => {
 			Finding adopters for all homeless pets in Mississippi is a huge part of
 			our mission at Pals of Paws Society, which is why we have decided to
 			provide free animal marketing for all Northwest Mississippi animal rescues
-			and shelters using public data available from Petfinder. Please visit our
-			<a href="https://www.palsofpawssociety.org/">website</a> to learn more
-			about our services, including
-			<a href="https://www.palsofpawssociety.org/about/adoptions"
-				>adoption assistance</a
-			>,
-			<a href="https://www.palsofpawssociety.org/about/transports">transports</a
-			>, and our
-			<a href="https://www.palsofpawssociety.org/about/tnr">TNR program.</a>
+			and shelters using public data available from Petfinder.
 		</p>
 		<p>
 			We're happy to continue providing this service for free in alignment with
 			our mission. If you want us to stop forwarding you messages from potential
-			adopters, simply reply to this email. Also feel free to reach out to us
+			adopters, just let us know. Also feel free to reach out to us
 			with any questions.
 		</p>
 		<p>
 			We hope everything works out and ${animal.name} can find ${
 		animal.sex === "male" ? "his" : "her"
-	} new home! Please feel free to reach out to us with
-			any questions.
+	} new home!
 		</p>
 		<br />
 		<div style="display: flex">
 			<span
 				><img
+					style="width: 90px; height: 75px; margin-right: 2rem"
 					src="https://firebasestorage.googleapis.com/v0/b/pals-of-paws-society.appspot.com/o/pop-logo.png?alt=media&token=0f0e9b62-d0c0-4a61-943b-a4ced0a2ab8e"
 			/></span>
 			<span>
 				<br />
 				<address>Pals of Paws Society</address>
-				<address>2466 Tragg Ave.</address>
+				<address>12 W Commerce St Unit 49</address>
 				<address>Hernando, MS 38632</address>
 			</span>
 		</div>

@@ -77,7 +77,7 @@ const VolunteerForm = () => {
 			/>
 			<p>
 				Something went wrong! We apologize for the inconvenience. You can still
-				reach out to us at palsofpawssociety@gmail.com.
+				reach out to us at support@palsofpawssociety.org.
 			</p>
 		</div>
 	);

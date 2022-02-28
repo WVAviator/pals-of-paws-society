@@ -43,7 +43,7 @@ const HeaderLogo = () => {
 					<meta itemProp="address" content="Hernando, MS" />
 					<meta itemProp="telephone" content="954-224-9779" />
 					<meta itemProp="areaServed" content="Northwest Mississippi" />
-					<meta itemProp="email" content="palsofpawssociety@gmail.com" />
+					<meta itemProp="email" content="info@palsofpawssociety.org" />
 					<link
 						itemProp="nonprofitStatus"
 						href="https://schema.org/Nonprofit501c3"
