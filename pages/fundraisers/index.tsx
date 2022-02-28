@@ -1,4 +1,4 @@
-import UnderConstruction from "/components/layout/UnderConstruction";
+import UnderConstruction from "../../components/layout/UnderConstruction";
 
 const Fundraisers = () => {
 	return <UnderConstruction />;
