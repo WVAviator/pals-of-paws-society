@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import ThankYouContent from "../../components/donate/ThankYouContent";
 import PawprintSection from "../../components/page-sections/PawprintSection";
 
-const thankyou = () => {
+const ThankYou = () => {
 	const router = useRouter();
 	const [confirmationDetails, setConfirmationDetails] = useState(null);
 
@@ -44,4 +44,4 @@ const thankyou = () => {
 	);
 };
 
-export default thankyou;
+export default ThankYou;

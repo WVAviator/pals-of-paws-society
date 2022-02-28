@@ -78,7 +78,7 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 				</div>
 			) : (
 				<div className={styles.sent}>
-					<p>We've forwarded your message to {animal.organization.name}!</p>
+					<p>We have forwarded your message to {animal.organization.name}!</p>
 					{contactNote("You may also want to check out")}
 				</div>
 			)}
@@ -117,7 +117,7 @@ const AnimalInquiry = ({ animal }: AnimalInquiryProps) => {
 					) : (
 						<div className={styles.formElements}>
 							<p>
-								Let {animal.organization.name} know that you're interested in{" "}
+								Let {animal.organization.name} know that you are interested in{" "}
 								{animal.name}.
 							</p>
 							<form onSubmit={handleSubmit} className={styles.form}>
