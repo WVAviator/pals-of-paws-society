@@ -14,29 +14,40 @@ export const getPetfinderAnimals = async (limit = 0) => {
 		const totalPages = response.data.pagination.total_pages;
 		console.log(`Total pages: ${totalPages}`);
 
-		const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
+		let animals: PetfinderAnimal[];
+		animals.push(response.data.animals);
 
-		for (let i = 2; i <= totalPages; i++) {
-			const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
-			apiCalls.push(promise);
+		let page = 2;
+
+		while (page <= totalPages) {
+			const response = await fetchAnimalData(token, `${url}/animals?page=${page}`);
+			animals.push(response.data.animals);
+			page++;
 		}
 
-		console.log(`Beginning to resolve promises...`);
+		// const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
-		//const responseArray = await Promise.all(apiCalls);
-		let responseArray = [];
-		for (let i = 0; i < apiCalls.length; i++) {
-			const response = await apiCalls[i];
-			responseArray.push(response);
-		}
+		// for (let i = 2; i <= totalPages; i++) {
+		// 	const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
+		// 	apiCalls.push(promise);
+		// }
+
+		// console.log(`Beginning to resolve promises...`);
+
+		// //const responseArray = await Promise.all(apiCalls);
+		// let responseArray = [];
+		// for (let i = 0; i < apiCalls.length; i++) {
+		// 	const response = await apiCalls[i];
+		// 	responseArray.push(response);
+		// }
 		
-		console.log("Promises resolved.");
+		// console.log("Promises resolved.");
 
-		const animals = responseArray
-			.map((res) => {
-				return res.data.animals as PetfinderAnimal[];
-			})
-			.flat();
+		// const animals = responseArray
+		// 	.map((res) => {
+		// 		return res.data.animals as PetfinderAnimal[];
+		// 	})
+		// 	.flat();
 
 		return filterResults(animals);
 	}
