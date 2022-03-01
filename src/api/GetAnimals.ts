@@ -5,15 +5,26 @@ import { convertShelterluvAnimal } from "./ShelterluvAdapter";
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
-import { getPetfinderAnimal } from "./Petfinder";
-import cache from "memory-cache";
+
+import redis from "../redis";
 
 class AnimalNotFoundError extends Error {}
 
 const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
-	//let allAnimals: Animal[] = cache.get("allAnimals");
+	const cachedAnimalsRaw = await redis.get("allAnimals");
+	console.log("Cached:", cachedAnimalsRaw);
+
+	if (cachedAnimalsRaw) {
+		const cachedAnimals: Animal[] = JSON.parse(cachedAnimalsRaw);
+		return cachedAnimals;
+	} else {
+		const allAnimals: Animal[] = await retrieveAnimalData();
+		const jsonAnimals = JSON.stringify(allAnimals);
+		redis.set("allAnimals", jsonAnimals, "EX", 3600);
+		return allAnimals;
+	}
 
 	//if (!allAnimals) {
 	// 	allAnimals = await retrieveAnimalData();
@@ -21,21 +32,36 @@ export const getAllAnimals = async () => {
 
 	// return cache.put("allAnimals", allAnimals, cacheTimeout);
 
-	const allAnimals = await retrieveAnimalData();
-	if (!allAnimals) throw new AnimalNotFoundError();
-	return allAnimals;
+	//const allAnimals = await retrieveAnimalData();
+	//if (!allAnimals) throw new AnimalNotFoundError();
+	//return allAnimals;
 };
 
-export const getAnimals = async (maxResults: number) => {
-	const animals = await retrieveAnimalData(maxResults * 2);
-	return animals.slice(0, maxResults);
+export const getInitialAnimals = async (maxResults: number) => {
+	const key = `animals-${maxResults}`;
+	const rawAnimals = await redis.get(key);
+	console.log("Cached:", rawAnimals);
+	if (rawAnimals) {
+		const animals: Animal[] = JSON.parse(rawAnimals);
+		return animals;
+	} else {
+		const animals = await retrieveAnimalData(maxResults * 2);
+		const jsonAnimals = JSON.stringify(animals);
+		redis.set(key, jsonAnimals, "EX", 3600);
+		return animals;
+	}
+
+	// //const animals = await retrieveAnimalData(maxResults * 2);
+	// return animals.slice(0, maxResults);
 };
 
 export const getAnimalById = async (animalId: string) => {
 	// console.log(`Getting animal with id: ${animalId}`);
 
-	// const allAnimals: Animal[] = await getAllAnimals();
-	// // const animalSearch = allAnimals.find((a) => a.id === animalId);
+	const allAnimals: Animal[] = await getAllAnimals();
+	const animalSearch = allAnimals.find((a) => a.id === animalId);
+	if (!animalSearch) throw new AnimalNotFoundError();
+	return animalSearch;
 	// // if (!animalSearch) console.log("Animal not found.");
 
 	// // if (animalSearch) return animalSearch;
@@ -52,29 +78,29 @@ export const getAnimalById = async (animalId: string) => {
 
 	// console.log("Animal. was not found");
 
-	const service = animalId.slice(0, 2);
-	const id = animalId.slice(2);
+	// const service = animalId.slice(0, 2);
+	// const id = animalId.slice(2);
 
-	let animal: Animal;
+	// let animal: Animal;
 
-	try {
-		if (service === "pf") {
-			const petfinderAnimal = await getPetfinderAnimal(id);
+	// try {
+	// 	if (service === "pf") {
+	// 		const petfinderAnimal = await getPetfinderAnimal(id);
 
-			animal = convertPetfinderAnimal(petfinderAnimal);
-		} else if (service === "sl") {
-			const shelterluvAnimal = await getShelterluvAnimal(id);
-			animal = convertShelterluvAnimal(shelterluvAnimal);
-		}
-	} catch (error) {
-		console.error(
-			`Error occurred while trying to retrieve animal by id ${animalId}`,
-			error
-		);
-	}
+	// 		animal = convertPetfinderAnimal(petfinderAnimal);
+	// 	} else if (service === "sl") {
+	// 		const shelterluvAnimal = await getShelterluvAnimal(id);
+	// 		animal = convertShelterluvAnimal(shelterluvAnimal);
+	// 	}
+	// } catch (error) {
+	// 	console.error(
+	// 		`Error occurred while trying to retrieve animal by id ${animalId}`,
+	// 		error
+	// 	);
+	// }
 
-	if (!animal) throw new AnimalNotFoundError();
-	return animal;
+	// if (!animal) throw new AnimalNotFoundError();
+	// return animal;
 };
 
 const retrieveAnimalData = async (limit = 0) => {
@@ -95,7 +121,7 @@ const retrievePetfinderData = async (limit = 0) => {
 			error
 		);
 	}
-	return pfAnimals.map((animal) => convertPetfinderAnimal(animal));
+	return pfAnimals?.map((animal) => convertPetfinderAnimal(animal)) ?? [];
 };
 
 const retrieveShelterluvData = async () => {
@@ -108,5 +134,7 @@ const retrieveShelterluvData = async () => {
 			error
 		);
 	}
-	return shelterluvAnimals.map((animal) => convertShelterluvAnimal(animal));
+	return (
+		shelterluvAnimals?.map((animal) => convertShelterluvAnimal(animal)) ?? []
+	);
 };

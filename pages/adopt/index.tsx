@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import PetCardContent from "../../components/page-sections/PetCardContent";
-import { getAllAnimals, getAnimals } from "../../src/api/GetAnimals";
+import { getAllAnimals, getInitialAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
 
 interface AdoptProps {
@@ -31,7 +31,7 @@ const Adopt = ({ initialAnimals }: AdoptProps) => {
 };
 
 export async function getStaticProps() {
-	const animals: Animal[] = await getAnimals(50); //TODO: Reduce back to 24 once caching is implemented
+	const animals: Animal[] = await getInitialAnimals(50); //TODO: Reduce back to 24 once caching is implemented
 	return {
 		props: {
 			initialAnimals: animals,
