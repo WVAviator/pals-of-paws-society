@@ -1,4 +1,4 @@
-import { Head } from "next/document";
+
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { FacebookProvider, Page } from "react-facebook";
 import styles from "./FacebookFeed.module.scss";
