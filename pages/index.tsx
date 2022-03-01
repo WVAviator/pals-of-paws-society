@@ -49,7 +49,7 @@ export default function Home() {
 			<PawprintSection
 				sectionTitle="Updates"
 				backgroundColor="white"
-				pawprintRotation={165}
+				pawprintRotation={175}
 				pawprintOpacity={0.05}
 			>
 				<UpdatesContent />
