@@ -16,7 +16,10 @@ const PetBio = ({ animal }: { animal: Animal }) => {
 						{animal.description}
 						{animal.link ? (
 							<span>
-								<a href={animal.link}> Read More</a>
+								<a href={`https://www.petfinder.com${animal.link}`}>
+									{" "}
+									Read More
+								</a>
 							</span>
 						) : null}
 					</p>

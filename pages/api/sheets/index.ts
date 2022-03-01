@@ -1,20 +1,54 @@
-import { google } from "googleapis";
+import { GoogleSpreadsheet } from "google-spreadsheet";
+
 import { NextApiRequest, NextApiResponse } from "next";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const auth = await google.auth.getClient({
-		scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
+const getSpreadsheet = async (spreadsheetId: string) => {
+	const doc = new GoogleSpreadsheet(spreadsheetId);
+	await doc.useServiceAccountAuth({
+		client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+		private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
 	});
-	const sheets = google.sheets({ version: "v4", auth });
+	await doc.loadInfo();
+	return doc;
+};
 
-	//const { id } = req.query;
-	const range = `'Dogs 2022'!A1:A50`;
-	const response = await sheets.spreadsheets.values.get({
-		spreadsheetId: process.env.SHEET_ID,
-		range,
-	});
-	const [title, content] = response.data.values;
-	res.send({ title, content });
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	const getData = async () => {
+		const { docId, sheetId } = req.query;
+		const doc = await getSpreadsheet(docId as string);
+		const sheet = doc.sheetsById[sheetId as string];
+		const rows = await sheet.getRows();
+		res.status(200).send(rows);
+	};
+
+	const addData = async () => {
+		const { docId, sheetId, data } = req.body;
+		const doc = await getSpreadsheet(docId as string);
+		const sheet = doc.sheetsById[sheetId as string];
+		data.forEach(async (row: any) => {
+			await sheet.addRow(row);
+		});
+		res.send(200);
+	};
+
+	switch (req.method) {
+		case "GET":
+			try {
+				await getData();
+			} catch (err) {
+				res.status(500).send(err);
+			}
+			break;
+		case "POST":
+			try {
+				await addData();
+			} catch (err) {
+				res.status(500).send(err);
+			}
+			break;
+		default:
+			res.status(405).send(`Method ${req.method} not allowed`);
+	}
 };
 
 export default handler;

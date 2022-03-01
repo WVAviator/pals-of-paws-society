@@ -19,7 +19,7 @@
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.23.0",
     "axios": "^0.25.0",
-    "googleapis": "^95.0.0",
+    "google-spreadsheet": "^3.2.0",
     "memory-cache": "^0.2.0",
     "micro": "^9.3.4",
     "next": "^12.1.0",
@@ -33,6 +33,7 @@
     "swr": "^1.2.1"
   },
   "devDependencies": {
+    "@types/google-spreadsheet": "^3.1.5",
     "@types/mdx": "^2.0.1",
     "@types/memory-cache": "^0.2.2",
     "@types/micro": "^7.3.6",
