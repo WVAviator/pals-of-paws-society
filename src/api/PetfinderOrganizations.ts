@@ -1,20 +1,27 @@
 import axios from "axios";
 import { Organization } from "../types/Organization";
 import getToken from "./PetfinderAuth";
-import cache from "memory-cache";
+import redis from "../redis";
 
 const url = "https://api.petfinder.com/v2/organizations";
-const cacheExpiration = 86400000; // 24 hours
-
+const cacheExpiration = 86400; // 24 hours
 
 const getAllOrganizations = async () => {
-	return (
-		(cache.get("orgs") as Organization[]) ?? (await retrieveNewOrganizations())
-	);
+	const cachedOrganizationsRaw = await redis.get("orgs");
+	if (cachedOrganizationsRaw) {
+		const cachedOrganizations: Organization[] = JSON.parse(
+			cachedOrganizationsRaw
+		);
+		return cachedOrganizations;
+	} else {
+		const organizations = await retrieveNewOrganizations();
+		const jsonOrganziations = JSON.stringify(organizations);
+		redis.set("orgs", jsonOrganziations, "EX", 86400);
+		return organizations;
+	}
 };
 
 const retrieveNewOrganizations = async () => {
-	
 	const token = await getToken();
 	const response = await axios.get(url, {
 		headers: {
@@ -26,7 +33,7 @@ const retrieveNewOrganizations = async () => {
 			limit: 100,
 		},
 	});
-	const organizations = cache.put("orgs", response.data.organizations as Organization[], cacheExpiration);
+	const organizations = response.data.organizations as Organization[];
 
 	return organizations;
 };
