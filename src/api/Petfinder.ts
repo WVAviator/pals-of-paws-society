@@ -25,7 +25,7 @@ export const getPetfinderAnimals = async (limit = 0) => {
 
 		//const responseArray = await Promise.all(apiCalls);
 		let responseArray;
-		for (let i = 0; i < responseArray.length; i++) {
+		for (let i = 0; i < apiCalls.length; i++) {
 			const response = await responseArray[i];
 			responseArray.push(response);
 		}
