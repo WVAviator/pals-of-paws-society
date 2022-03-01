@@ -1,0 +1,15 @@
+@use "/styles/variables" as *;
+
+.content {
+	@include restrict-width;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	min-height: 40rem;
+	@include mq-custom(50rem) {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+}
