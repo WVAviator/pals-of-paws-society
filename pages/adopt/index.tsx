@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
-import { getInitialAnimals } from "../../src/api/GetAnimals";
+import { getAllAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
 
 interface AdoptProps {
@@ -16,13 +16,13 @@ const Adopt = ({ initialAnimals }: AdoptProps) => {
 	const [animals, setAnimals] = useState<Animal[]>(initialAnimals);
 	//const { data, error } = useSWR("/api/animals", fetcher);
 
-	useEffect(() => {
-		const getAnimals = async () => {
-			const response = await axios.get("/api/animals");
-			setAnimals(response.data);
-		};
-		getAnimals();
-	}, []);
+	// useEffect(() => {
+	// 	const getAnimals = async () => {
+	// 		const response = await axios.get("/api/animals");
+	// 		setAnimals(response.data);
+	// 	};
+	// 	getAnimals();
+	// }, []);
 
 	return (
 		<div>
@@ -32,12 +32,12 @@ const Adopt = ({ initialAnimals }: AdoptProps) => {
 };
 
 export async function getStaticProps() {
-	const animals: Animal[] = await getInitialAnimals(24);
+	const animals: Animal[] = await getAllAnimals();
 	return {
 		props: {
 			initialAnimals: animals,
 		},
-		revalidate: 600,
+		revalidate: 3600,
 	};
 }
 
