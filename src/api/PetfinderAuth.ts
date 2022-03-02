@@ -12,11 +12,18 @@ const dataString = `grant_type=client_credentials&client_id=${apiKey}&client_sec
 class PetfinderAuthError extends Error {}
 
 const getToken = async () => {
-	const cachedToken = redis.get("pftoken");
+	const cachedToken = await redis.get("pftoken");
+	console.log(
+		cachedToken
+			? "Cached toke received:" + cachedToken
+			: "No cached token found. Retrieving new token..."
+	);
 
 	if (!cachedToken) {
 		const token = await retrieveNewToken();
 		redis.set("pftoken", token, "EX", 3600);
+		console.log("Cached new token for 3600 seconds.");
+
 		return token;
 	}
 	return cachedToken;
@@ -28,6 +35,7 @@ const retrieveNewToken = async () => {
 	try {
 		const response = await axios.post(authenticationUrl, dataString);
 		token = response.data.access_token;
+		console.log("New token retrieved: " + token);
 	} catch (error) {
 		console.error(
 			"Error occurred while attempting to retrieve Petfinder access token."

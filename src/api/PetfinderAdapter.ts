@@ -29,7 +29,7 @@ const extractBreed = ({ breeds }: PetfinderAnimal) => {
 };
 
 const capitalize = (str: string) => {
-	const words = str.split(" ");
+	const words = str.trim().split(" ");
 
 	return words
 		.map((word) => {
