@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
-import { getInitialAnimals } from "../../src/api/GetAnimals";
+import { getAllAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
 
 interface AdoptProps {
