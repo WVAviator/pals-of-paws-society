@@ -16,12 +16,12 @@ const fetcher: AnimalFetcher = (url) => axios.get(url).then((res) => res.data);
 
 const Adopt = ({ initialAnimals }: AdoptProps) => {
 	const [animals, setAnimals] = useState<Animal[]>(initialAnimals);
-	//const { data, error } = useSWR("/api/animals", fetcher);
+	const { data, error } = useSWR("/api/animals", fetcher);
 
-	// useEffect(() => {
-	// 	if (data) setAnimals(data);
-	// 	else setAnimals(initialAnimals);
-	// }, [data, initialAnimals]);
+	useEffect(() => {
+		if (data) setAnimals(data);
+		else setAnimals(initialAnimals);
+	}, [data, initialAnimals]);
 
 	return (
 		<div>
@@ -31,7 +31,7 @@ const Adopt = ({ initialAnimals }: AdoptProps) => {
 };
 
 export async function getStaticProps() {
-	const animals: Animal[] = await getInitialAnimals(50); //TODO: Reduce back to 24 once caching is implemented
+	const animals: Animal[] = await getInitialAnimals(24);
 	return {
 		props: {
 			initialAnimals: animals,

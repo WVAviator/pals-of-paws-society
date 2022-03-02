@@ -14,12 +14,15 @@ const cacheTimeout = 60 * 20 * 1000; // 20 minutes
 
 export const getAllAnimals = async () => {
 	const cachedAnimalsRaw = await redis.get("allAnimals");
-	console.log("Cached:", cachedAnimalsRaw);
 
 	if (cachedAnimalsRaw) {
+		console.log("Cached animals found. Returning parsed results.");
+
 		const cachedAnimals: Animal[] = JSON.parse(cachedAnimalsRaw);
 		return cachedAnimals;
 	} else {
+		console.log("No cache found for all animals. Retrieving new data...");
+
 		const allAnimals: Animal[] = await retrieveAnimalData();
 		const jsonAnimals = JSON.stringify(allAnimals);
 		redis.set("allAnimals", jsonAnimals, "EX", 3600);
@@ -38,18 +41,26 @@ export const getAllAnimals = async () => {
 };
 
 export const getInitialAnimals = async (maxResults: number) => {
-	const key = `animals-${maxResults}`;
-	const rawAnimals = await redis.get(key);
-	console.log("Cached:", rawAnimals);
-	if (rawAnimals) {
-		const animals: Animal[] = JSON.parse(rawAnimals);
-		return animals;
-	} else {
-		const animals = await retrieveAnimalData(maxResults * 2);
-		const jsonAnimals = JSON.stringify(animals);
-		redis.set(key, jsonAnimals, "EX", 3600);
+	const cachedAnimalsRaw = await redis.get("allAnimals");
+	if (!cachedAnimalsRaw) {
+		const animals: Animal[] = await retrieveAnimalData(maxResults * 2);
 		return animals;
 	}
+	const animals: Animal[] = JSON.parse(cachedAnimalsRaw);
+	return animals;
+
+	// const key = `animals-${maxResults}`;
+	// const rawAnimals = await redis.get(key);
+	// console.log("Cached:", rawAnimals);
+	// if (rawAnimals) {
+	// 	const animals: Animal[] = JSON.parse(rawAnimals);
+	// 	return animals;
+	// } else {
+	// 	const animals = await retrieveAnimalData(maxResults * 2);
+	// 	const jsonAnimals = JSON.stringify(animals);
+	// 	redis.set(key, jsonAnimals, "EX", 3600);
+	// 	return animals;
+	// }
 
 	// //const animals = await retrieveAnimalData(maxResults * 2);
 	// return animals.slice(0, maxResults);
