@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const cache = require("memory-cache");
+import redis from "../redis";
 
 const apiKey = process.env.NEXT_PUBLIC_PETFINDER_API_KEY;
 const secret = process.env.PETFINDER_SECRET_KEY;
@@ -13,9 +12,14 @@ const dataString = `grant_type=client_credentials&client_id=${apiKey}&client_sec
 class PetfinderAuthError extends Error {}
 
 const getToken = async () => {
-	//return (cache.get("token") as string) ?? (await retrieveNewToken());
-	const token = await retrieveNewToken();
-	return token;
+	const cachedToken = redis.get("pftoken");
+
+	if (!cachedToken) {
+		const token = await retrieveNewToken();
+		redis.set("pftoken", token, "EX", 3600);
+		return token;
+	}
+	return cachedToken;
 };
 
 const retrieveNewToken = async () => {
@@ -24,11 +28,6 @@ const retrieveNewToken = async () => {
 	try {
 		const response = await axios.post(authenticationUrl, dataString);
 		token = response.data.access_token;
-		// token = cache.put(
-		// 	"token",
-		// 	response.data.access_token as string,
-		// 	response.data.expires_in * 1000
-		// ) as string;
 	} catch (error) {
 		console.error(
 			"Error occurred while attempting to retrieve Petfinder access token."

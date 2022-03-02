@@ -36,7 +36,7 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 
 	const pagination = (
 		<div className={styles.pagination}>
-			{pageCount > 1 ? (
+			{true ? ( //TODO: Add caching so more than one page of data can be fetched
 				<Pagination
 					count={pageCount}
 					color="primary"
