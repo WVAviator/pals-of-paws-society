@@ -27,7 +27,7 @@ export const getPetfinderAnimals = async (limit = 0) => {
 
 		const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
-		for (let i = 2; i <= totalPages; i++) {
+		for (let i = 2; i <= 4; i++) {
 			const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
 			apiCalls.push(promise);
 		}
