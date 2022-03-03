@@ -2,7 +2,7 @@ import Head from "next/head";
 
 const AdoptMeta = () => {
     return 
-    (<>
+    (
         <Head>
             <title>Adoptions - Pals of Paws Society</title>
                 <meta
@@ -21,7 +21,7 @@ const AdoptMeta = () => {
                     content="These homeless pets are available for adoption from us and from other animal shelters and rescue organizations in Northwest Mississippi. Some of them are managed by Pals of Paws Society directly, and the rest are available publicly on Petfinder and displayed here for your convenience."
                 />
         </Head>
-    </>);
+    );
 }
 
 export default AdoptMeta;

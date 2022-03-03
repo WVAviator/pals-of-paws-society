@@ -3,7 +3,7 @@ import { Animal } from "../../src/types/Animal";
 
 const AnimalMeta = ({ animal }: { animal: Animal }) => {
     return 
-    (<>
+    (
         <Head>
             <title>{animal.name} - {animal.organization.name}</title>
                 <meta
@@ -24,7 +24,7 @@ const AnimalMeta = ({ animal }: { animal: Animal }) => {
                     content={`${animal.name} is a ${animal.sex} ${animal.breed} available for adoption from ${animal.organization.name} in ${animal.location}. Through our website at Pals of Paws Society, you can send a message to ${animal.organization.name} about ${animal.name}, or navigate to ${animal.sex === "male" ? "his" : "her"} Petfinder profile to learn more.`}
                 />
         </Head>
-    </>);
+    );
 }
 
 export default AnimalMeta;
