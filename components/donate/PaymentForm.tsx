@@ -32,7 +32,7 @@ const PaymentForm = () => {
 	};
 
 	const confirmParams = {
-		return_url: "http://localhost:3000/donate/thankyou",
+		return_url: "http://www.palsofpawssociety.org/donate/thankyou",
 		receipt_email: formData.email,
 	};
 
