@@ -1,32 +1,46 @@
+import { Modal } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
+import PetDisplay from "../../components/page-sections/PetDisplay";
 import { getAllAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
 
 interface AdoptProps {
-	initialAnimals: Animal[];
+	animals: Animal[];
 }
 
-// type AnimalFetcher = (url: string) => Promise<Animal[]>;
+const Adopt = ({ animals }: AdoptProps) => {
+	const router = useRouter();
+	const [selectedAnimal, setSelectedAnimal] = useState<Animal>(null);
+	//const [scrollPosition, setScrollPosition] = useState(0);
 
-// const fetcher: AnimalFetcher = (url) => axios.get(url).then((res) => res.data);
-
-const Adopt = ({ initialAnimals }: AdoptProps) => {
-	const [animals, setAnimals] = useState<Animal[]>(initialAnimals);
-	//const { data, error } = useSWR("/api/animals", fetcher);
-
-	// useEffect(() => {
-	// 	const getAnimals = async () => {
-	// 		const response = await axios.get("/api/animals");
-	// 		setAnimals(response.data);
-	// 	};
-	// 	getAnimals();
-	// }, []);
+	useEffect(() => {
+		if (router.query.animal) {
+			const urlAnimal = animals.find((a) => a.id === router.query.animal);
+			if (urlAnimal) {
+				setSelectedAnimal(urlAnimal);
+				//setScrollPosition(window.scrollY);
+			} else {
+				//window.scrollTo(0, scrollPosition);
+			}
+		}
+	}, []);
 
 	return (
 		<div>
-			<PetCardContent animals={animals} />
+			{selectedAnimal ? (
+				<PetDisplay
+					animal={selectedAnimal}
+					setSelectedAnimal={setSelectedAnimal}
+				/>
+			) : (
+				<PetCardContent
+					animals={animals}
+					setSelectedAnimal={setSelectedAnimal}
+				/>
+			)}
 		</div>
 	);
 };
@@ -35,7 +49,7 @@ export async function getStaticProps() {
 	const animals: Animal[] = await getAllAnimals();
 	return {
 		props: {
-			initialAnimals: animals,
+			animals,
 		},
 		revalidate: 3600,
 	};

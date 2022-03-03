@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 
 interface PetCardContentProps {
 	animals: Animal[];
+	setSelectedAnimal: any;
 }
 
 const pageOffset = 24;
 
-const PetCardContent = ({ animals }: PetCardContentProps) => {
+const PetCardContent = ({
+	animals,
+	setSelectedAnimal,
+}: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -24,7 +28,11 @@ const PetCardContent = ({ animals }: PetCardContentProps) => {
 		.map((animal, index) => {
 			return (
 				<div key={animal.id}>
-					<PetCard animal={animal} isPriority={index < 8} />
+					<PetCard
+						animal={animal}
+						isPriority={index < 8}
+						setSelectedAnimal={setSelectedAnimal}
+					/>
 				</div>
 			);
 		});

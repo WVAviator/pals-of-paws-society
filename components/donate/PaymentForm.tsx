@@ -7,18 +7,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Checkout from "../stripe/Checkout";
 import { Product } from "../../src/types/Product";
 import CustomButton from "../ui/CustomButton";
-
-export interface BillingInfo {
-	firstName: string;
-	lastName: string;
-	streetAddress: string;
-	aptOrSuite: string;
-	city: string;
-	state: string;
-	zip: string;
-	email: string;
-	receiveUpdates: boolean;
-}
+import InMemoryOf from "./InMemoryOf";
+import { BillingInfo } from "../../src/types/BillingInfo";
 
 const PaymentForm = () => {
 	const [donationAmount, setDonationAmount] = useState(0);
@@ -30,6 +20,7 @@ const PaymentForm = () => {
 		city: "",
 		state: "",
 		zip: "",
+		inMemory: "",
 		email: "",
 		receiveUpdates: false,
 	});
@@ -50,6 +41,7 @@ const PaymentForm = () => {
 			<Paper elevation={3} className={styles.form}>
 				<form action="" className={styles.formGroup} onSubmit={handleSubmit}>
 					<Donation setDonationAmount={setDonationAmount} />
+					<InMemoryOf formData={formData} setFormData={setFormData} />
 					<Billing formData={formData} setFormData={setFormData} />
 					<CustomButton
 						endIcon={<ArrowForwardIcon />}
