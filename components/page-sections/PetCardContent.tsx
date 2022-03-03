@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 interface PetCardContentProps {
 	animals: Animal[];
 	setSelectedAnimal: any;
+	page: number;
+	setPage: any;
 }
 
 const pageOffset = 24;
@@ -14,9 +16,10 @@ const pageOffset = 24;
 const PetCardContent = ({
 	animals,
 	setSelectedAnimal,
+	page,
+	setPage
 }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		if (!animals) return;
@@ -38,7 +41,7 @@ const PetCardContent = ({
 		});
 
 	const handlePageChange = (event: any, value: number) => {
-		setCurrentPage(value);
+		setPage(value);
 		window.scrollTo(0, 0);
 	};
 
@@ -48,7 +51,7 @@ const PetCardContent = ({
 				<Pagination
 					count={pageCount}
 					color="primary"
-					page={currentPage}
+					page={page}
 					onChange={handlePageChange}
 					size="large"
 				/>

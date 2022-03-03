@@ -13,7 +13,8 @@ interface AdoptProps {
 
 const Adopt = ({ animals }: AdoptProps) => {
 	const router = useRouter();
-	const [selectedAnimal, setSelectedAnimal] = useState<Animal>(null);
+	const [ selectedAnimal, setSelectedAnimal ] = useState<Animal>(null);
+	const [ page, setPage ] = useState(1);
 	//const [scrollPosition, setScrollPosition] = useState(0);
 
 	useEffect(() => {
@@ -39,6 +40,8 @@ const Adopt = ({ animals }: AdoptProps) => {
 				<PetCardContent
 					animals={animals}
 					setSelectedAnimal={setSelectedAnimal}
+					page={page}
+					setPage={setPage}
 				/>
 			)}
 		</div>
