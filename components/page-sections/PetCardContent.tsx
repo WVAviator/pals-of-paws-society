@@ -27,7 +27,7 @@ const PetCardContent = ({
 	}, [animals]);
 
 	const mappedAnimals = animals
-		.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
+		.slice(pageOffset * (page - 1), pageOffset * page)
 		.map((animal, index) => {
 			return (
 				<div key={animal.id}>
