@@ -67,6 +67,7 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 					transition: "all 150ms",
 					transform: usingOtherAmount ? "scaleY(100%)" : "scaleY(0%)",
 					width: "100%",
+					height: usingOtherAmount ? "3.5rem" : "0",
 				}}
 			>
 				<TextField

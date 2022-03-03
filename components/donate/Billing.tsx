@@ -4,7 +4,7 @@ import {
 	FormControlLabel,
 	TextField,
 } from "@mui/material";
-import { BillingInfo } from "./PaymentForm";
+import { BillingInfo } from "../../src/types/BillingInfo";
 import styles from "./AddressForm.module.scss";
 
 type BillingProps = {

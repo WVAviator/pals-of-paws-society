@@ -15,7 +15,7 @@ import styles from "./Checkout.module.scss";
 import { Product } from "../../src/types/Product";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
-import { BillingInfo } from "../donate/PaymentForm";
+import { BillingInfo } from "../../src/types/BillingInfo";
 
 type CheckoutProps = {
 	open: boolean;
