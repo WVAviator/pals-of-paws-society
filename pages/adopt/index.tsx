@@ -6,6 +6,8 @@ import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
 import { getAllAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
+import AnimalMeta from "../../components/meta/AnimalMeta";
+import AdoptMeta from "../../components/meta/AdoptMeta";
 
 interface AdoptProps {
 	animals: Animal[];
@@ -32,17 +34,23 @@ const Adopt = ({ animals }: AdoptProps) => {
 	return (
 		<div>
 			{selectedAnimal ? (
-				<PetDisplay
-					animal={selectedAnimal}
-					setSelectedAnimal={setSelectedAnimal}
-				/>
+				<>
+					<AnimalMeta animal={selectedAnimal} />
+					<PetDisplay
+						animal={selectedAnimal}
+						setSelectedAnimal={setSelectedAnimal}
+					/>
+				</>
 			) : (
-				<PetCardContent
-					animals={animals}
-					setSelectedAnimal={setSelectedAnimal}
-					page={page}
-					setPage={setPage}
-				/>
+				<>
+					<AdoptMeta />
+					<PetCardContent
+						animals={animals}
+						setSelectedAnimal={setSelectedAnimal}
+						page={page}
+						setPage={setPage}
+					/>
+				</>
 			)}
 		</div>
 	);
