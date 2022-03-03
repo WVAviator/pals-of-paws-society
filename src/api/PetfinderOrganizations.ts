@@ -6,7 +6,7 @@ import redis from "../redis";
 const url = "https://api.petfinder.com/v2/organizations";
 const cacheExpiration = 86400; // 24 hours
 
-const getAllOrganizations = async () => {
+export const getAllOrganizations = async () => {
 	const cachedOrganizationsRaw = await redis.get("orgs");
 	if (cachedOrganizationsRaw) {
 		const cachedOrganizations: Organization[] = JSON.parse(

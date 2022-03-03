@@ -1,4 +1,4 @@
-import getOrganization from "./PetfinderOrganizations";
+import getOrganization, { getAllOrganizations } from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
 import axios, { AxiosResponse } from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
@@ -113,10 +113,13 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 		}
 	});
 
-	//The org name is found at a different API endpoint
+	//Attach organization to animal (not all org fields are available in animal data)
+	const organizations = await getAllOrganizations();
+
 	for (let i = 0; i < filteredResults.length; i++) {
-		const org = await getOrganization(filteredResults[i].organization_id);
-		filteredResults[i].organization = org;
+		filteredResults[i].organization = organizations.find(
+			(org) => org.id === filteredResults[i].organization_id
+		);
 	}
 
 	return filteredResults;
