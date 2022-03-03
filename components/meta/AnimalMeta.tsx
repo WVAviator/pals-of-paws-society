@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Animal from "../../src/types/Animal";
+import { Animal } from "../../src/types/Animal";
 
 const AnimalMeta = ({ animal }: { animal: Animal }) => {
     return 
