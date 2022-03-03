@@ -38,6 +38,10 @@
 		font-size: 1.35rem;
 	}
 
+	p {
+		max-width: 60rem;
+	}
+
 	h4 {
 		color: $color-darkNavy;
 		font-weight: $fontWeight-regular;

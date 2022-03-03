@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AddressForm.module.scss";
 import Billing from "./Billing";
 import Donation from "./Donation";
@@ -9,6 +9,8 @@ import { Product } from "../../src/types/Product";
 import CustomButton from "../ui/CustomButton";
 import InMemoryOf from "./InMemoryOf";
 import { BillingInfo } from "../../src/types/BillingInfo";
+
+let return_url: string;
 
 const PaymentForm = () => {
 	const [donationAmount, setDonationAmount] = useState(0);
@@ -31,8 +33,12 @@ const PaymentForm = () => {
 		setCheckoutOpen(true);
 	};
 
+	useEffect(() => {
+		return_url = window.location.href + "/thankyou";
+	}, []);
+
 	const confirmParams = {
-		return_url: "http://www.palsofpawssociety.org/donate/thankyou",
+		return_url,
 		receipt_email: formData.email,
 	};
 

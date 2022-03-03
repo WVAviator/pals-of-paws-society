@@ -23,6 +23,7 @@
 
 		li {
 			transition: color $transition-hoverDuration ease-in-out 0ms;
+			cursor: pointer;
 
 			&:hover,
 			&:focus {
