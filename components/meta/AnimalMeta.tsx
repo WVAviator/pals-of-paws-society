@@ -25,15 +25,20 @@ const AnimalMeta = ({ animal }: { animal: Animal }) => {
 					content="pet adoption, animal shelter, animal rescue"
 				/>
 
-				<meta property="og:type" content="website" />
-				<meta property="og:title" content="Adoptions - Pals of Paws Society" />
+				<meta
+					property="og:title"
+					key="ogTitle"
+					content="Adoptions - Pals of Paws Society"
+				/>
 				<meta
 					property="og:url"
-					content="https://www.palsofpawssociety.org/adopt"
+					key="ogUrl"
+					content={`https://www.palsofpawssociety.org/adopt?animal=${animal.id}`}
 				/>
-				<meta property="og:image" content={animal.photos[0]} />
+				<meta property="og:image" key="ogImage" content={animal.photos[0]} />
 				<meta
 					property="og:description"
+					key="ogDescription"
 					content={`${animal.name} is a ${animal.sex} ${
 						animal.breed
 					} available for adoption from ${animal.organization.name} in ${

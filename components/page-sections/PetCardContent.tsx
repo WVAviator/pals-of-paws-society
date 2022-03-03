@@ -3,6 +3,7 @@ import PetCard from "../../components/content/PetCard";
 import { CircularProgress, Pagination } from "@mui/material";
 import { Animal } from "../../src/types/Animal";
 import { useEffect, useState } from "react";
+import AdoptMeta from "../meta/AdoptMeta";
 
 interface PetCardContentProps {
 	animals: Animal[];
@@ -17,7 +18,7 @@ const PetCardContent = ({
 	animals,
 	setSelectedAnimal,
 	page,
-	setPage
+	setPage,
 }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 
@@ -46,21 +47,24 @@ const PetCardContent = ({
 	};
 
 	const pagination = (
-		<div className={styles.pagination}>
-			{pageCount > 1 ? (
-				<Pagination
-					count={pageCount}
-					color="primary"
-					page={page}
-					onChange={handlePageChange}
-					size="large"
-				/>
-			) : (
-				<div className={styles.pageLoad}>
-					<CircularProgress />
-				</div>
-			)}
-		</div>
+		<>
+			<AdoptMeta />
+			<div className={styles.pagination}>
+				{pageCount > 1 ? (
+					<Pagination
+						count={pageCount}
+						color="primary"
+						page={page}
+						onChange={handlePageChange}
+						size="large"
+					/>
+				) : (
+					<div className={styles.pageLoad}>
+						<CircularProgress />
+					</div>
+				)}
+			</div>
+		</>
 	);
 
 	return (

@@ -14,13 +14,19 @@ const AdoptMeta = () => {
 					content="pet adoption, animal shelter, animal rescue"
 				/>
 
-				<meta property="og:title" content="Adoptions - Pals of Paws Society" />
+				<meta
+					property="og:title"
+					key="ogTitle"
+					content="Adoptions - Pals of Paws Society"
+				/>
 				<meta
 					property="og:url"
+					key="ogUrl"
 					content="https://www.palsofpawssociety.org/adopt"
 				/>
 				<meta
 					property="og:description"
+					key="ogDescription"
 					content="These homeless pets are available for adoption from us and from other animal shelters and rescue organizations in Northwest Mississippi. Some of them are managed by Pals of Paws Society directly, and the rest are available publicly on Petfinder and displayed here for your convenience."
 				/>
 			</Head>

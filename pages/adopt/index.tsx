@@ -35,7 +35,6 @@ const Adopt = ({ animals }: AdoptProps) => {
 		<div>
 			{selectedAnimal ? (
 				<>
-					<AnimalMeta animal={selectedAnimal} />
 					<PetDisplay
 						animal={selectedAnimal}
 						setSelectedAnimal={setSelectedAnimal}
@@ -43,7 +42,6 @@ const Adopt = ({ animals }: AdoptProps) => {
 				</>
 			) : (
 				<>
-					<AdoptMeta />
 					<PetCardContent
 						animals={animals}
 						setSelectedAnimal={setSelectedAnimal}

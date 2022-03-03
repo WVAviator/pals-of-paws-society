@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Animal } from "../../src/types/Animal";
 import PetCarousel from "../content/PetCarousel";
 import PetContent from "../layout/PetContent";
+import AnimalMeta from "../meta/AnimalMeta";
 import PawprintSection from "./PawprintSection";
 
 interface PetDisplayProps {
@@ -24,6 +25,7 @@ const PetDisplay = ({ animal, setSelectedAnimal }: PetDisplayProps) => {
 
 	return (
 		<>
+			<AnimalMeta animal={animal} />
 			<div
 				style={backStyle}
 				onClick={() => router.push(`/adopt`, undefined, { shallow: true })}
