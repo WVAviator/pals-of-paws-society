@@ -7,27 +7,26 @@ interface NavLinksProps {
 const NavLinks = ({ onClick = () => {} }: NavLinksProps) => {
 	return (
 		<ul>
-			<li onClick={onClick}>
-				<Link href="/">
+			<Link href="/" passHref>
+				<li onClick={onClick}>
 					<a>Home</a>
-				</Link>
-			</li>
-			<li onClick={onClick}>
-				<Link href="/about">
+				</li>
+			</Link>
+			<Link href="/about" passHref>
+				<li onClick={onClick}>
 					<a>About</a>
-				</Link>
-			</li>
-
-			<li onClick={onClick}>
-				<Link href="/fundraisers">
+				</li>
+			</Link>
+			<Link href="/fundraisers" passHref>
+				<li onClick={onClick}>
 					<a>Fundraisers</a>
-				</Link>
-			</li>
-			<li onClick={onClick}>
-				<Link href="/adopt">
+				</li>
+			</Link>
+			<Link href="/adopt" passHref>
+				<li onClick={onClick}>
 					<a>Adopt</a>
-				</Link>
-			</li>
+				</li>
+			</Link>
 		</ul>
 	);
 };
