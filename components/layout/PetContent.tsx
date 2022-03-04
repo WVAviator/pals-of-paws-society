@@ -4,7 +4,11 @@ import PetBio from "../content/PetBio";
 import AnimalInquiry from "../forms/AnimalInquiry";
 import styles from "./PetContent.module.scss";
 
-const PetContent = ({ animal }: { animal: Animal }) => {
+interface PetContentProps {
+	animal: Animal;
+}
+
+const PetContent = ({ animal }: PetContentProps) => {
 	return (
 		<div className={styles.content}>
 			<div className={styles.info}>

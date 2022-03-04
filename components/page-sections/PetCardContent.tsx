@@ -3,20 +3,24 @@ import PetCard from "../../components/content/PetCard";
 import { CircularProgress, Pagination } from "@mui/material";
 import { Animal } from "../../src/types/Animal";
 import { useEffect, useState } from "react";
+import AdoptMeta from "../meta/AdoptMeta";
 
 interface PetCardContentProps {
 	animals: Animal[];
-	setSelectedAnimal: any;
+	page: number;
+	setPage: (page: number) => void;
+	routeToAnimal: (animal: Animal) => void;
 }
 
 const pageOffset = 24;
 
 const PetCardContent = ({
 	animals,
-	setSelectedAnimal,
+	page,
+	setPage,
+	routeToAnimal,
 }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		if (!animals) return;
@@ -24,40 +28,43 @@ const PetCardContent = ({
 	}, [animals]);
 
 	const mappedAnimals = animals
-		.slice(pageOffset * (currentPage - 1), pageOffset * currentPage)
+		.slice(pageOffset * (page - 1), pageOffset * page)
 		.map((animal, index) => {
 			return (
 				<div key={animal.id}>
 					<PetCard
 						animal={animal}
 						isPriority={index < 8}
-						setSelectedAnimal={setSelectedAnimal}
+						routeToAnimal={routeToAnimal}
 					/>
 				</div>
 			);
 		});
 
 	const handlePageChange = (event: any, value: number) => {
-		setCurrentPage(value);
+		setPage(value);
 		window.scrollTo(0, 0);
 	};
 
 	const pagination = (
-		<div className={styles.pagination}>
-			{pageCount > 1 ? (
-				<Pagination
-					count={pageCount}
-					color="primary"
-					page={currentPage}
-					onChange={handlePageChange}
-					size="large"
-				/>
-			) : (
-				<div className={styles.pageLoad}>
-					<CircularProgress />
-				</div>
-			)}
-		</div>
+		<>
+			<AdoptMeta />
+			<div className={styles.pagination}>
+				{pageCount > 1 ? (
+					<Pagination
+						count={pageCount}
+						color="primary"
+						page={page}
+						onChange={handlePageChange}
+						size="large"
+					/>
+				) : (
+					<div className={styles.pageLoad}>
+						<CircularProgress />
+					</div>
+				)}
+			</div>
+		</>
 	);
 
 	return (

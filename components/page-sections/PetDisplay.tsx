@@ -1,16 +1,16 @@
 import { ArrowLeft } from "@mui/icons-material";
-import { useRouter } from "next/router";
 import { Animal } from "../../src/types/Animal";
 import PetCarousel from "../content/PetCarousel";
 import PetContent from "../layout/PetContent";
+import AnimalMeta from "../meta/AnimalMeta";
 import PawprintSection from "./PawprintSection";
 
 interface PetDisplayProps {
 	animal: Animal;
-	setSelectedAnimal: any;
+	routeBack: () => void;
 }
 
-const PetDisplay = ({ animal, setSelectedAnimal }: PetDisplayProps) => {
+const PetDisplay = ({ animal, routeBack }: PetDisplayProps) => {
 	const backStyle = {
 		backgroundColor: "#0f172a",
 		color: "white",
@@ -20,14 +20,10 @@ const PetDisplay = ({ animal, setSelectedAnimal }: PetDisplayProps) => {
 		cursor: "pointer",
 	};
 
-	const router = useRouter();
-
 	return (
 		<>
-			<div
-				style={backStyle}
-				onClick={() => router.push(`/adopt`, undefined, { shallow: true })}
-			>
+			<AnimalMeta animal={animal} />
+			<div style={backStyle} onClick={() => routeBack()}>
 				<ArrowLeft htmlColor="white" />
 				Back to Results
 			</div>

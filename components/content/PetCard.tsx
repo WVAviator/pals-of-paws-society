@@ -3,21 +3,18 @@ import placeholder from "/public/images/no-image.svg";
 import Image from "next/image";
 import { Animal } from "../../src/types/Animal";
 import AnimalIcons from "../ui/AnimalIcons";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 interface PetCardProps {
 	animal: Animal;
 	isPriority?: boolean;
-	setSelectedAnimal: any;
+	routeToAnimal: (animal: Animal) => void;
 }
 
 const PetCard = ({
 	animal,
 	isPriority = false,
-	setSelectedAnimal,
+	routeToAnimal,
 }: PetCardProps) => {
-	const router = useRouter();
 	const cardStyle =
 		animal.organization.name === "Pals of Paws Society"
 			? `${styles.card} ${styles.featured}`
@@ -30,11 +27,7 @@ const PetCard = ({
 	};
 
 	return (
-		<a
-			onClick={() =>
-				router.push(`/adopt?animal=${animal.id}`, undefined, { shallow: true })
-			}
-		>
+		<a onClick={() => routeToAnimal(animal)}>
 			<div key={animal.id} className={cardStyle}>
 				<div className={styles.content}>
 					<div className={styles.header}>
