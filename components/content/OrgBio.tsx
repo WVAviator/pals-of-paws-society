@@ -2,7 +2,11 @@ import { Paper } from "@mui/material";
 import { Organization } from "../../src/types/Organization";
 import styles from "./OrgBio.module.scss";
 
-const OrgBio = ({ org }: { org: Organization }) => {
+interface OrgBioProps {
+	org: Organization;
+}
+
+const OrgBio = ({ org }: OrgBioProps) => {
 	const orgSchema = (orgName: string) => {
 		return orgName.toLowerCase().includes("shelter")
 			? "https://schema.org/AnimalShelter"

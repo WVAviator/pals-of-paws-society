@@ -3,7 +3,11 @@ import { Animal } from "../../src/types/Animal";
 import AnimalIcons from "../ui/AnimalIcons";
 import styles from "./PetBio.module.scss";
 
-const PetBio = ({ animal }: { animal: Animal }) => {
+interface PetBioProps {
+	animal: Animal;
+}
+
+const PetBio = ({ animal }: PetBioProps) => {
 	return (
 		<article aria-label={`Bio for ${animal.name}`}>
 			<Paper elevation={3} className={styles.card}>

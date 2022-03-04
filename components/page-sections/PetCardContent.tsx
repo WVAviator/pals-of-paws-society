@@ -7,9 +7,8 @@ import AdoptMeta from "../meta/AdoptMeta";
 
 interface PetCardContentProps {
 	animals: Animal[];
-	setSelectedAnimal: any;
 	page: number;
-	setPage: any;
+	setPage: (page: number) => void;
 	routeToAnimal: (animal: Animal) => void;
 }
 
@@ -17,7 +16,6 @@ const pageOffset = 24;
 
 const PetCardContent = ({
 	animals,
-	setSelectedAnimal,
 	page,
 	setPage,
 	routeToAnimal,
@@ -37,7 +35,6 @@ const PetCardContent = ({
 					<PetCard
 						animal={animal}
 						isPriority={index < 8}
-						setSelectedAnimal={setSelectedAnimal}
 						routeToAnimal={routeToAnimal}
 					/>
 				</div>

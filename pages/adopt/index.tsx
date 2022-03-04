@@ -52,17 +52,12 @@ const Adopt = ({ animals }: AdoptProps) => {
 		<div>
 			{selectedAnimal ? (
 				<>
-					<PetDisplay
-						animal={selectedAnimal}
-						setSelectedAnimal={setSelectedAnimal}
-						routeBack={routeBack}
-					/>
+					<PetDisplay animal={selectedAnimal} routeBack={routeBack} />
 				</>
 			) : (
 				<>
 					<PetCardContent
 						animals={animals}
-						setSelectedAnimal={setSelectedAnimal}
 						page={page}
 						setPage={setPage}
 						routeToAnimal={routeToAnimal}
