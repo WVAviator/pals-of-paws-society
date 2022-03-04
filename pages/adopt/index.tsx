@@ -1,14 +1,9 @@
-import { Modal } from "@mui/material";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
 import { getAllAnimals } from "../../src/api/GetAnimals";
 import { Animal } from "../../src/types/Animal";
-import AnimalMeta from "../../components/meta/AnimalMeta";
-import AdoptMeta from "../../components/meta/AdoptMeta";
-
 interface AdoptProps {
 	animals: Animal[];
 }
@@ -17,19 +12,41 @@ const Adopt = ({ animals }: AdoptProps) => {
 	const router = useRouter();
 	const [selectedAnimal, setSelectedAnimal] = useState<Animal>(null);
 	const [page, setPage] = useState(1);
-	//const [scrollPosition, setScrollPosition] = useState(0);
 
 	useEffect(() => {
 		if (router.query.animal) {
 			const urlAnimal = animals.find((a) => a.id === router.query.animal);
 			if (urlAnimal) {
 				setSelectedAnimal(urlAnimal);
-				//setScrollPosition(window.scrollY);
-			} else {
-				//window.scrollTo(0, scrollPosition);
+			}
+		} else {
+			if (router.query.page) {
+				setPage(Number(router.query.page));
+			}
+			if (router.query.scrollY) {
+				window.scrollTo(0, Number(router.query.scrollY));
 			}
 		}
 	}, []);
+
+	const routeToAnimal = (animal: Animal) => {
+		router.push(
+			`/adopt?animal=${animal.id}&page=${page}&scrollY=${window.scrollY}`,
+			`/adopt?animal=${animal.id}`,
+			{ shallow: true }
+		);
+	};
+
+	const routeBack = () => {
+		const previousPage = router.query.page ?? "1";
+		const previousScroll = router.query.scrollY ?? "0";
+
+		router.push(
+			`/adopt?page=${previousPage}&scrollY=${previousScroll}`,
+			"/adopt",
+			{ shallow: true }
+		);
+	};
 
 	return (
 		<div>
@@ -38,6 +55,7 @@ const Adopt = ({ animals }: AdoptProps) => {
 					<PetDisplay
 						animal={selectedAnimal}
 						setSelectedAnimal={setSelectedAnimal}
+						routeBack={routeBack}
 					/>
 				</>
 			) : (
@@ -47,6 +65,7 @@ const Adopt = ({ animals }: AdoptProps) => {
 						setSelectedAnimal={setSelectedAnimal}
 						page={page}
 						setPage={setPage}
+						routeToAnimal={routeToAnimal}
 					/>
 				</>
 			)}

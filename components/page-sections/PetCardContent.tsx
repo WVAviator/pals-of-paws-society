@@ -10,6 +10,7 @@ interface PetCardContentProps {
 	setSelectedAnimal: any;
 	page: number;
 	setPage: any;
+	routeToAnimal: (animal: Animal) => void;
 }
 
 const pageOffset = 24;
@@ -19,6 +20,7 @@ const PetCardContent = ({
 	setSelectedAnimal,
 	page,
 	setPage,
+	routeToAnimal,
 }: PetCardContentProps) => {
 	const [pageCount, setPageCount] = useState(1);
 
@@ -36,6 +38,7 @@ const PetCardContent = ({
 						animal={animal}
 						isPriority={index < 8}
 						setSelectedAnimal={setSelectedAnimal}
+						routeToAnimal={routeToAnimal}
 					/>
 				</div>
 			);

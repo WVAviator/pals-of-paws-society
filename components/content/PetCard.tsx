@@ -10,12 +10,14 @@ interface PetCardProps {
 	animal: Animal;
 	isPriority?: boolean;
 	setSelectedAnimal: any;
+	routeToAnimal: (animal: Animal) => void;
 }
 
 const PetCard = ({
 	animal,
 	isPriority = false,
 	setSelectedAnimal,
+	routeToAnimal,
 }: PetCardProps) => {
 	const router = useRouter();
 	const cardStyle =
@@ -30,11 +32,7 @@ const PetCard = ({
 	};
 
 	return (
-		<a
-			onClick={() =>
-				router.push(`/adopt?animal=${animal.id}`, undefined, { shallow: true })
-			}
-		>
+		<a onClick={() => routeToAnimal(animal)}>
 			<div key={animal.id} className={cardStyle}>
 				<div className={styles.content}>
 					<div className={styles.header}>

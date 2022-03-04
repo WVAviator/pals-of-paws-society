@@ -9,9 +9,14 @@ import PawprintSection from "./PawprintSection";
 interface PetDisplayProps {
 	animal: Animal;
 	setSelectedAnimal: any;
+	routeBack: any;
 }
 
-const PetDisplay = ({ animal, setSelectedAnimal }: PetDisplayProps) => {
+const PetDisplay = ({
+	animal,
+	setSelectedAnimal,
+	routeBack,
+}: PetDisplayProps) => {
 	const backStyle = {
 		backgroundColor: "#0f172a",
 		color: "white",
@@ -26,10 +31,7 @@ const PetDisplay = ({ animal, setSelectedAnimal }: PetDisplayProps) => {
 	return (
 		<>
 			<AnimalMeta animal={animal} />
-			<div
-				style={backStyle}
-				onClick={() => router.push(`/adopt`, undefined, { shallow: true })}
-			>
+			<div style={backStyle} onClick={() => routeBack()}>
 				<ArrowLeft htmlColor="white" />
 				Back to Results
 			</div>
