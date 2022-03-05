@@ -13,8 +13,15 @@ import volunteerImage03 from "/public/images/dogAtVet.png";
 
 import MissionVision from "../components/homepage/MissionVision";
 import UpdatesContent from "../components/page-sections/UpdatesContent";
+import { GetStaticProps } from "next";
+import { getSpreadsheetData } from "../src/api/SheetData";
 
-export default function Home() {
+interface HomeProps {
+	catCount: number;
+	dogCount: number;
+}
+
+export default function Home({ catCount, dogCount }: HomeProps) {
 	return (
 		<>
 			<Hero />
@@ -52,7 +59,7 @@ export default function Home() {
 				pawprintRotation={175}
 				pawprintOpacity={0.05}
 			>
-				<UpdatesContent />
+				<UpdatesContent catCount={catCount} dogCount={dogCount} />
 			</PawprintSection>
 			<PawprintSection
 				sectionTitle="Our Mission and Vision"
@@ -96,3 +103,26 @@ export default function Home() {
 		</>
 	);
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+	const docId = "19VCKWp6Wq1224GB-etsKtA0LUXVPXHBuFoiZ5q0K0YY";
+	const dogSheetId = "0";
+	const catSheetId = "1046287395";
+
+	const dogSheetData = await getSpreadsheetData<any>({
+		docId,
+		sheetId: dogSheetId,
+	});
+	const catSheetData = await getSpreadsheetData<any>({
+		docId,
+		sheetId: catSheetId,
+	});
+
+	const catCount = catSheetData.length;
+	const dogCount = dogSheetData.length;
+
+	return {
+		props: { catCount, dogCount },
+		revalidate: 86400,
+	};
+};

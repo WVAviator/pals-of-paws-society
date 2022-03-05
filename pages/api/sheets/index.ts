@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 					docId: req.query.docId as string,
 					sheetId: req.query.sheetId as string,
 				};
-				rows = await getSpreadsheetData<any>({ sheetMeta });
+				rows = await getSpreadsheetData<any>(sheetMeta);
 			} catch (err) {
 				res.status(500).send(err);
 			}

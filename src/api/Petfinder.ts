@@ -14,34 +14,15 @@ export const getPetfinderAnimals = async (limit = 0) => {
 		const totalPages = response.data.pagination.total_pages;
 		console.log(`Total pages: ${totalPages}`);
 
-		// let animals: PetfinderAnimal[];
-		// animals.push(response.data.animals);
-
-		// let page = 2;
-
-		// while (page <= totalPages) {
-		// 	const response = await fetchAnimalData(token, `${url}/animals?page=${page}`);
-		// 	animals.push(response.data.animals);
-		// 	page++;
-		// }
-
 		const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
-		for (let i = 2; i <= 4; i++) {
+		for (let i = 2; i <= Math.min(4, totalPages); i++) {
 			const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
 			apiCalls.push(promise);
 		}
 
-		console.log(`Beginning to resolve promises...`);
-
 		const responseArray = await Promise.all(apiCalls);
-		// let responseArray = [];
-		// for (let i = 0; i < apiCalls.length; i++) {
-		// 	const response = await apiCalls[i];
-		// 	responseArray.push(response);
-		// }
 
-		console.log("Promises resolved.");
 		responseArray.unshift(response);
 
 		const animals = responseArray
@@ -138,6 +119,8 @@ const transformResult = (animal: PetfinderAnimal) => {
 
 	//Some orgs use an ampersand to denote two animals in one listing, but it comes through as &amp;
 	newName = newName.replace("&amp;", "&");
+
+	newName = newName.replace("&#39;", "'");
 
 	//Some orgs put "zcl" in the name, not sure why
 	newName = newName.replace("zcl ", "");

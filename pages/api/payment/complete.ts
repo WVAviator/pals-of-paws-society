@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.send(200);
 		}
 
-		console.log(paymentIntent.metadata);
+		console.log("Payment complete webhook received. ", paymentIntent.metadata);
 
 		const {
 			firstName,
@@ -52,7 +52,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			aptOrSuite ? " " + aptOrSuite : ""
 		}, ${city}, ${state} ${zip}`;
 
+		const date = new Date().toLocaleDateString();
+
 		const newPaymentRecord: PaymentRecord = {
+			["Date"]: date,
+			["Amount"]: paymentIntent.amount / 100,
 			["First Name"]: firstName,
 			["Last Name"]: lastName,
 			["Address"]: address,
