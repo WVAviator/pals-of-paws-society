@@ -19,7 +19,7 @@ export const getSpreadsheet = async (spreadsheetId: string) => {
 	return doc;
 };
 
-export const getSpreadsheetData = async <T>({ sheetMeta }: SheetData<T>) => {
+export const getSpreadsheetData = async <T>(sheetMeta: SheetMeta) => {
 	const doc = await getSpreadsheet(sheetMeta.docId as string);
 	const sheet = doc.sheetsById[sheetMeta.sheetId as string];
 	const rows: unknown = await sheet.getRows();

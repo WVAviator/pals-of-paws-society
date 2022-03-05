@@ -2,10 +2,15 @@ import FacebookFeed from "../content/FacebookFeed";
 import AnimalCounter from "../homepage/AnimalCounter";
 import styles from "./UpdatesContent.module.scss";
 
-const UpdatesContent = () => {
+interface UpdatesContentProps {
+	catCount: number;
+	dogCount: number;
+}
+
+const UpdatesContent = ({ catCount, dogCount }: UpdatesContentProps) => {
 	return (
 		<div className={styles.content}>
-			<AnimalCounter />
+			<AnimalCounter catCount={catCount} dogCount={dogCount} />
 			<FacebookFeed />
 		</div>
 	);

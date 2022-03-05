@@ -4,11 +4,15 @@ import styles from "./AnimalCounter.module.scss";
 import cat from "/public/images/cat-purple.svg";
 import dog from "/public/images/dog-purple.svg";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useEffect, useState } from "react";
+import { GetStaticProps } from "next";
 
-const AnimalCounter = () => {
-	const catCount = 72;
-	const dogCount = 36;
+interface AnimalCounterProps {
+	catCount: number;
+	dogCount: number;
+}
 
+const AnimalCounter = ({ catCount, dogCount }: AnimalCounterProps) => {
 	return (
 		<div className={styles.counters}>
 			<p>So far, in 2022, we have helped</p>
