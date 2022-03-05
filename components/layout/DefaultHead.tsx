@@ -7,7 +7,7 @@ const DefaultHead = () => {
 			<title>Pals of Paws Society</title>
 			<meta
 				name="description"
-				content="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and verterinary financial assistance for shelters, rescue groups, and individuals throughout Desoto, Tate, and Tunica counties, as well as Memphis, Tenessee, from our headquarters in Hernando."
+				content="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and veterinary financial assistance for shelters, rescue groups, and individuals throughout Desoto, Tate, and Tunica counties, as well as Memphis, Tennessee, from our headquarters in Hernando."
 			/>
 			<meta
 				name="keywords"
@@ -26,7 +26,7 @@ const DefaultHead = () => {
 			<meta
 				property="og:description"
 				key="ogDescription"
-				content="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and verterinary financial assistance for shelters, rescue groups, and individuals throughout northwest Mississippi from our headquarters in Hernando."
+				content="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and veterinary financial assistance for shelters, rescue groups, and individuals throughout northwest Mississippi from our headquarters in Hernando."
 			/>
 		</Head>
 	);
