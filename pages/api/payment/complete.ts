@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.send(200);
 		}
 
-		console.log(paymentIntent.metadata);
+		console.log("Payment complete webhook received. ", paymentIntent.metadata);
 
 		const {
 			firstName,
