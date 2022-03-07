@@ -11,7 +11,7 @@ const DefaultHead = () => {
 			/>
 			<meta
 				name="keywords"
-				content="pet adoption, animal transport, spay and nueter"
+				content="pet adoption, animal transport, spay and neuter"
 			/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
