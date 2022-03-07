@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import MDXPage from "../../components/content/MDXPage";
+import MDXIFrame from "../../components/mdx/MDXIFrame";
 import MDXImage from "../../components/mdx/MDXImage";
 import MDXLink from "../../components/mdx/MDXLink";
 import { getFileData, getPaths } from "../../src/event";
@@ -18,6 +19,7 @@ const components = {
 	a: MDXLink,
 	img: MDXImage,
 	MDXImage,
+	MDXIFrame,
 };
 
 const EventPage = ({ mdxSource, data }: EventPageProps) => {
