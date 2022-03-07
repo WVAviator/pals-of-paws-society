@@ -39,6 +39,9 @@ const capitalize = (str: string) => {
 };
 
 const fixDescription = (desc: string) => {
+	
+	if (!desc) return desc;
+	
 	let correctedDesc = desc;
 
 	correctedDesc = correctedDesc.replace("&amp;#39;", "'");
