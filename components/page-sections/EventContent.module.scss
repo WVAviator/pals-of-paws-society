@@ -11,8 +11,11 @@
 	display: flex;
 	align-items: center;
 
-	overflow-x: scroll;
-	padding: $padding-section;
+	justify-content: center;
+
+	@include mq-desktop {
+		justify-content: space-between;
+	}
 
 	gap: 2rem;
 }

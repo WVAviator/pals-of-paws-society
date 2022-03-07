@@ -1,23 +1,31 @@
 @use "/styles/variables" as *;
 
 .card {
-	width: min(25rem, 95vw);
-	height: 30rem;
+	width: min(25rem, 90vw);
+	height: 40rem;
 	border-radius: 0.625rem;
 	overflow: hidden;
 	position: relative;
 
 	h1 {
 		font-size: 1.75rem;
-		margin-bottom: 1em;
+		margin: 0;
 	}
 
 	p {
-		margin-bottom: 1em;
+		margin: 0;
 	}
 
 	&Text {
 		padding: $padding-section;
+		display: flex;
+		height: 50%;
+
+		gap: 1em;
+		flex-direction: column;
+		> *:last-child {
+			margin-top: auto;
+		}
 	}
 }
 
