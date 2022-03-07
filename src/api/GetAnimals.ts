@@ -11,12 +11,14 @@ import redis from "../redis";
 class AnimalNotFoundError extends Error {}
 
 export const getAllAnimals = async () => {
+	console.time("Retrieve All Animals")
 	const cachedAnimalsRaw = await redis.get("allAnimals");
 
 	if (cachedAnimalsRaw) {
 		console.log("Cached animals found. Returning parsed results.");
 
 		const cachedAnimals: Animal[] = JSON.parse(cachedAnimalsRaw);
+		console.timeEnd("Retrieve All Animals")
 		return cachedAnimals;
 	} else {
 		console.log("No cache found for all animals. Retrieving new data...");
@@ -24,6 +26,7 @@ export const getAllAnimals = async () => {
 		const allAnimals: Animal[] = await retrieveAnimalData();
 		const jsonAnimals = JSON.stringify(allAnimals);
 		redis.set("allAnimals", jsonAnimals, "EX", 3600);
+		console.timeEnd("Retrieve All Animals")
 		return allAnimals;
 	}
 };
