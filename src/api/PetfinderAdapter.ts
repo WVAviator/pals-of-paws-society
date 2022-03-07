@@ -14,7 +14,7 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 		organization: pfAnimal.organization,
 		organizationEmail: pfAnimal.contact.email,
 		organizationPhone: pfAnimal.contact.phone,
-		description: pfAnimal.description,
+		description: fixDescription(pfAnimal.description),
 		photos: pfAnimal.photos?.map((photo) => photo.large) ?? [],
 		link: pfAnimal.url,
 	};
@@ -37,3 +37,13 @@ const capitalize = (str: string) => {
 		})
 		.join(" ");
 };
+
+const fixDescription = (desc: string) => {
+	const correctedDesc = desc;
+
+	correctedDesc = correctedDesc.replace("&amp;#39;", "'");
+	correctedDesc = correctedDesc.replace("&amp;amp;", "&");
+	correctedDesc = correctedDesc.replace("&amp;", "&");
+
+	return correctedDesc;
+}
