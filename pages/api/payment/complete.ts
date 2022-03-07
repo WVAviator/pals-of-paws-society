@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.send(200);
 		}
 
-		console.log("Payment complete webhook received. ", paymentIntent.metadata);
+		if (!paymentIntent.metadata) return; //paid through stripe checkout via other links
 
 		const {
 			firstName,
