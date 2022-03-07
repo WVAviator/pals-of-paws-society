@@ -1,7 +1,8 @@
 export interface EventMeta {
 	slug: string;
 	title: string;
-	date: string;
+	startDate: string;
+	endDate: string;
 	image: string;
-	excerpt: string;
+	description: string;
 }

@@ -6,9 +6,12 @@ import styles from "./EventCard.module.scss";
 
 interface EventCardProps {
 	event: EventMeta;
+	active?: boolean;
 }
 
-const EventCard = ({ event }: EventCardProps) => {
+const EventCard = ({ event, active = false }: EventCardProps) => {
+	const isoDateString = new Date(event.endDate).toISOString();
+
 	return (
 		<Link href={`/fundraisers/${event.slug}`}>
 			<a>
@@ -16,8 +19,14 @@ const EventCard = ({ event }: EventCardProps) => {
 					<div className={styles.image}>
 						<Image src={event.image} layout="fill" objectFit="cover" />
 					</div>
-					<h1>{event.title}</h1>
-					<p>{event.excerpt}</p>
+					<div className={styles.cardText}>
+						<h1>{event.title}</h1>
+						<p>{event.description}</p>
+						<p className={styles.date}>
+							{active ? "Ends " : "Ended "}
+							<time dateTime={isoDateString}>{event.endDate}</time>
+						</p>
+					</div>
 				</Paper>
 			</a>
 		</Link>

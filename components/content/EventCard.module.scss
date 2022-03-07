@@ -5,9 +5,19 @@
 	height: 30rem;
 	border-radius: 0.625rem;
 	overflow: hidden;
+	position: relative;
 
 	h1 {
 		font-size: 1.75rem;
+		margin-bottom: 1em;
+	}
+
+	p {
+		margin-bottom: 1em;
+	}
+
+	&Text {
+		padding: $padding-section;
 	}
 }
 
@@ -15,4 +25,8 @@
 	width: 100%;
 	height: 50%;
 	position: relative;
+}
+
+.date {
+	color: gray;
 }

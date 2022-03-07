@@ -1,0 +1,28 @@
+@use "/styles/variables" as *;
+
+.contentContainer {
+	@include restrict-width;
+	overflow: hidden;
+	padding: 3rem $padding-section;
+	position: relative;
+}
+
+.cardContent {
+	display: flex;
+	align-items: center;
+
+	overflow-x: scroll;
+	padding: $padding-section;
+
+	gap: 2rem;
+}
+
+.heading {
+	font-size: 2.25rem;
+	margin-bottom: 1em;
+	text-align: center;
+	@include mq-desktop {
+		font-size: 3rem;
+		text-align: left;
+	}
+}
