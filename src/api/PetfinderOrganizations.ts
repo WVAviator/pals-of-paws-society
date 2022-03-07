@@ -16,7 +16,7 @@ export const getAllOrganizations = async () => {
 	} else {
 		const organizations = await retrieveNewOrganizations();
 		const jsonOrganziations = JSON.stringify(organizations);
-		redis.set("orgs", jsonOrganziations, "EX", 86400);
+		redis.set("orgs", jsonOrganziations, "EX", cacheExpiration);
 		return organizations;
 	}
 };
@@ -37,12 +37,3 @@ const retrieveNewOrganizations = async () => {
 
 	return organizations;
 };
-
-const getOrganization = async (orgId: string) => {
-	const organizations = await getAllOrganizations();
-	const result = organizations.find((org) => org.id === orgId);
-
-	return result;
-};
-
-export default getOrganization;

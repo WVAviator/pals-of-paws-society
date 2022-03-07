@@ -1,4 +1,4 @@
-import getOrganization, { getAllOrganizations } from "./PetfinderOrganizations";
+import { getAllOrganizations } from "./PetfinderOrganizations";
 import getToken from "./PetfinderAuth";
 import axios, { AxiosResponse } from "axios";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
@@ -7,9 +7,9 @@ const searchLocation = "34.688609, -90.000388";
 const searchRadius = "23";
 const url = "https://api.petfinder.com/v2";
 
-export const getPetfinderAnimals = async (limit = 0) => {
+export const getPetfinderAnimals = async () => {
 	const token = await getToken();
-	if (!limit) {
+	
 		const response = await fetchAnimalData(token, `${url}/animals`);
 		const totalPages = response.data.pagination.total_pages;
 		console.log(`Total pages: ${totalPages}`);
@@ -32,25 +32,6 @@ export const getPetfinderAnimals = async (limit = 0) => {
 			.flat();
 
 		return filterResults(animals);
-	}
-
-	const response = await fetchAnimalData(token, `${url}/animals`, limit);
-	return filterResults(response.data.animals as PetfinderAnimal[]);
-};
-
-export const getPetfinderAnimal = async (id: string) => {
-	const token = await getToken();
-	const response = await axios.get(`${url}/animals/${id}`, {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-
-	const animal = transformResult(response.data.animal as PetfinderAnimal);
-
-	animal.organization = await getOrganization(animal.organization_id);
-
-	return animal;
 };
 
 const fetchAnimalData = async (

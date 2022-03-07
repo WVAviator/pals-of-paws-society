@@ -15,14 +15,14 @@ const getToken = async () => {
 	const cachedToken = await redis.get("pftoken");
 	console.log(
 		cachedToken
-			? "Cached toke received:" + cachedToken
+			? "Cached token received:" + cachedToken
 			: "No cached token found. Retrieving new token..."
 	);
 
 	if (!cachedToken) {
-		const token = await retrieveNewToken();
-		redis.set("pftoken", token, "EX", 3600);
-		console.log("Cached new token for 3600 seconds.");
+		const { token, expiration } = await retrieveNewToken();
+		redis.set("pftoken", token, "EX", expiration);
+		console.log(`Cached new token for ${expiration} seconds.`);
 
 		return token;
 	}
@@ -31,10 +31,12 @@ const getToken = async () => {
 
 const retrieveNewToken = async () => {
 	let token: string;
+	let expiration: number;
 
 	try {
 		const response = await axios.post(authenticationUrl, dataString);
 		token = response.data.access_token;
+		expiration = response.data.expires_in;
 		console.log("New token retrieved: " + token);
 	} catch (error) {
 		console.error(
@@ -43,7 +45,7 @@ const retrieveNewToken = async () => {
 		throw new PetfinderAuthError(error);
 	}
 
-	return token;
+	return { token, expiration };
 };
 
 export default getToken;

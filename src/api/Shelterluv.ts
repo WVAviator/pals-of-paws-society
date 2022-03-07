@@ -12,14 +12,6 @@ export const getShelterluvAnimals = async () => {
 	return filterResults(animals);
 };
 
-export const getShelterluvAnimal = async (id: string) => {
-	const response = await fetchAnimalData(`${baseUrl}/animals/${id}`);
-
-	const animal = response.data as ShelterluvAnimal;
-
-	return animal;
-};
-
 const fetchAnimalData = async (queryUrl: string) => {
 	const response = await axios.get(queryUrl, {
 		headers: {
