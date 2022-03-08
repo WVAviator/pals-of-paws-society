@@ -1,0 +1,48 @@
+@use "/styles/variables" as *;
+
+.form {
+	padding: $padding-section;
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+
+	@include mq-custom(62.5rem) {
+		flex-direction: row;
+	}
+}
+
+.table {
+	background-color: $color-softPurple;
+	min-width: 22.5rem;
+}
+
+.shirtForm {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 37.5rem;
+	gap: 1rem;
+	flex-grow: 1;
+	width: 100%;
+}
+
+.btn {
+	width: min(37.5rem, 100%);
+	grid-column: span 3;
+}
+
+.image {
+	border-radius: 0.625rem;
+	overflow: hidden;
+}
+
+.shirtSelect {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+}
+
+.deleteIcon {
+	cursor: pointer;
+}
