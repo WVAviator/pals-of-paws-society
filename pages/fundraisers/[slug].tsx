@@ -8,6 +8,7 @@ import MDXIFrame from "../../components/mdx/MDXIFrame";
 import MDXImage from "../../components/mdx/MDXImage";
 import MDXLink from "../../components/mdx/MDXLink";
 import { getFileData, getPaths } from "../../src/event";
+import Head from "next/head";
 
 interface EventPageProps {
 	mdxSource: MDXRemoteSerializeResult<Record<string, unknown>>;
