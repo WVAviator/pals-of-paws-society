@@ -32,8 +32,8 @@ const EventPage = ({ mdxSource, data }: EventPageProps) => {
 		"name": ${data.title},
 		"description": ${data.description},
 		"image": ${data.image},
-		"startDate": ${Date.parse(data.startDate).toISOString()},  
-		"endDate": ${Date.parse(data.endDate).toISOString()}
+		"startDate": ${new Date(Date.parse(data.startDate)).toISOString()},  
+		"endDate": ${new Date(Date.parse(data.endDate)).toISOString()}
 		`
 	}
 	
