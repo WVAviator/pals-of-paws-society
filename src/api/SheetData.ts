@@ -39,8 +39,5 @@ export const addSpreadsheetData = async <T extends SheetsRowData>({
 	} else {
 		await sheet.addRows(data);
 	}
-	// data.forEach(async (row: any) => {
-	// 	console.log("Adding row: ", row);
-	// 	await sheet.addRow(row);
-	// });
 };
+
