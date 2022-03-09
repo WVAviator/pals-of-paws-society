@@ -42,6 +42,13 @@ const PaymentForm = () => {
 		receipt_email: formData.email,
 	};
 
+	const products: Product[] = [
+		{ name: "Donation", quantity: 1, priceTotal: donationAmount },
+	];
+
+	const productsString = JSON.stringify(products);
+	const metadata = { ...formData, products: productsString };
+
 	return (
 		<>
 			<Paper elevation={3} className={styles.form}>
@@ -61,13 +68,9 @@ const PaymentForm = () => {
 			<Checkout
 				open={checkoutOpen}
 				setOpen={setCheckoutOpen}
-				products={
-					[
-						{ name: "Donation", quantity: 1, priceTotal: donationAmount },
-					] as Product[]
-				}
+				products={products}
 				confirmParams={confirmParams}
-				metadata={formData}
+				metadata={metadata}
 			/>
 		</>
 	);

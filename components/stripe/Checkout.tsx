@@ -22,7 +22,7 @@ type CheckoutProps = {
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	products: Product[];
 	confirmParams: ConfirmPaymentData;
-	metadata: BillingInfo;
+	metadata: BillingInfo & { products: string };
 	description?: string;
 };
 

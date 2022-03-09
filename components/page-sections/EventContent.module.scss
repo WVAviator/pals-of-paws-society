@@ -10,14 +10,14 @@
 .cardContent {
 	display: flex;
 	align-items: center;
-
+	flex-wrap: wrap;
 	justify-content: center;
 
-	@include mq-desktop {
-		justify-content: space-between;
-	}
-
 	gap: 2rem;
+
+	@include mq-desktop {
+		justify-content: flex-start;
+	}
 }
 
 .heading {

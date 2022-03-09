@@ -3,10 +3,12 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import MDXPage from "../../components/content/MDXPage";
+import FeralShirtForm from "../../components/fundraisers/FeralShirtForm";
 import MDXIFrame from "../../components/mdx/MDXIFrame";
 import MDXImage from "../../components/mdx/MDXImage";
 import MDXLink from "../../components/mdx/MDXLink";
 import { getFileData, getPaths } from "../../src/event";
+import Head from "next/head";
 
 interface EventPageProps {
 	mdxSource: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -20,13 +22,33 @@ const components = {
 	img: MDXImage,
 	MDXImage,
 	MDXIFrame,
+	FeralShirtForm,
 };
 
 const EventPage = ({ mdxSource, data }: EventPageProps) => {
+
+	const schemaData = { __html: `
+		"@context": "https://schema.org",
+		"@type": "Event",
+		"name": ${data.title},
+		"description": ${data.description},
+		"image": ${data.image},
+		"startDate": ${new Date(Date.parse(data.startDate)).toISOString()},  
+		"endDate": ${new Date(Date.parse(data.endDate)).toISOString()}
+		`
+	}
+	
 	return (
 		<div>
+			<Head>
+				<script type="application/ld+json"
+				dangerouslySetInnerHTML={schemaData}
+				key="schema-jsonld"/>
+			</Head>
+
+			
 			<div>
-				<MDXPage meta={{ title: data.title, description: data.excerpt }}>
+				<MDXPage meta={{ title: data.title, description: data.description }}>
 					<MDXRemote {...mdxSource} components={components} />
 				</MDXPage>
 			</div>
