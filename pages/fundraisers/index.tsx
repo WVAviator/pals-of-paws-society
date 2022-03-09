@@ -14,10 +14,14 @@ interface FundraisersProps {
 }
 
 const Fundraisers = ({ events }: FundraisersProps) => {
-	const activeEvents = events.filter(
+	const sortedEvents = events.sort((a, b) => {
+		return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+	});
+
+	const activeEvents = sortedEvents.filter(
 		(event) => new Date(event.endDate) > new Date()
 	);
-	const pastEvents = events.filter(
+	const pastEvents = sortedEvents.filter(
 		(event) => new Date(event.endDate) < new Date()
 	);
 
