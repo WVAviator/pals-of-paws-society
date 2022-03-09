@@ -11,9 +11,34 @@
 	}
 }
 
+.billing {
+	padding: $padding-section;
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+	max-width: 31.25rem;
+	margin: 0 auto;
+}
+
 .table {
 	background-color: $color-softPurple;
-	min-width: 22.5rem;
+	width: 100%;
+	td,
+	th {
+		font-size: 0.75rem;
+		text-align: center;
+	}
+
+	@include mq-custom(38.4375rem) {
+		td,
+		th {
+			font-size: 1rem;
+		}
+	}
+
+	@include mq-custom(62.5rem) {
+		min-width: 22.5rem;
+	}
 }
 
 .shirtForm {

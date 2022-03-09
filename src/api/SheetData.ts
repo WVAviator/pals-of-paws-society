@@ -1,6 +1,7 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
+import { SheetsRowData } from "../types/SheetsRowData";
 
-interface SheetData<T> {
+interface SheetData<T extends SheetsRowData> {
 	sheetMeta: SheetMeta;
 	data?: T[];
 }
@@ -27,13 +28,19 @@ export const getSpreadsheetData = async <T>(sheetMeta: SheetMeta) => {
 	return rows as T[];
 };
 
-export const addSpreadsheetData = async <T>({
+export const addSpreadsheetData = async <T extends SheetsRowData>({
 	sheetMeta,
 	data,
 }: SheetData<T>) => {
 	const doc = await getSpreadsheet(sheetMeta.docId as string);
 	const sheet = doc.sheetsById[sheetMeta.sheetId as string];
-	data.forEach(async (row: any) => {
-		await sheet.addRow(row);
-	});
+	if (data.length === 1) {
+		await sheet.addRow(data[0]);
+	} else {
+		await sheet.addRows(data);
+	}
+	// data.forEach(async (row: any) => {
+	// 	console.log("Adding row: ", row);
+	// 	await sheet.addRow(row);
+	// });
 };

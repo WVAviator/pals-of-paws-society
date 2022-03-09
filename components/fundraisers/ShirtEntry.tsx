@@ -111,7 +111,7 @@ const ShirtEntry = ({ addShirt }: ShirtFormProps) => {
 						<MenuItem value="M">M</MenuItem>
 						<MenuItem value="L">L</MenuItem>
 						<MenuItem value="XL">XL</MenuItem>
-						<MenuItem value="XXL">2XL</MenuItem>
+						<MenuItem value="XXL">XXL</MenuItem>
 					</Select>
 				</FormControl>
 				<CustomButton type="submit" className={styles.btn}>

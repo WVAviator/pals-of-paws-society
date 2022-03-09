@@ -21,7 +21,7 @@ const ThankYouContent = ({ confirmationDetails }: ThankYouContentProps) => {
 					).toLocaleString("en-US", {
 						maximumFractionDigits: 2,
 						minimumFractionDigits: 2,
-					})} donation! A receipt has been sent to ${
+					})} contribution! A receipt has been sent to ${
 						confirmationDetails.receipt_email
 					}`}</p>
 

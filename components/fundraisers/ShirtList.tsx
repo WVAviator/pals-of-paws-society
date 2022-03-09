@@ -16,7 +16,7 @@ interface ShirtListProps {
 	setShirtOrder: any;
 }
 
-const SHIRT_PRICE = 25;
+export const SHIRT_PRICE = 25;
 
 const ShirtList = ({ shirtOrder, setShirtOrder }: ShirtListProps) => {
 	const { items } = shirtOrder;
@@ -41,18 +41,14 @@ const ShirtList = ({ shirtOrder, setShirtOrder }: ShirtListProps) => {
 
 	return (
 		<TableContainer component={Paper} className={styles.table}>
-			<Table
-				sx={{ minWidth: 300 }}
-				size="small"
-				aria-label="list of selected shirts"
-			>
+			<Table size="small" aria-label="list of selected shirts">
 				<TableHead>
 					<TableRow>
 						<TableCell>Color</TableCell>
 						<TableCell align="center">Size</TableCell>
-						<TableCell align="center">Quantity</TableCell>
+						<TableCell align="center">Qty</TableCell>
 						<TableCell align="center">Price</TableCell>
-						<TableCell align="center">Remove</TableCell>
+						<TableCell align="center"></TableCell>
 					</TableRow>
 				</TableHead>
 

@@ -1,4 +1,6 @@
-export interface PaymentRecord {
+import { SheetsRowData } from "./SheetsRowData";
+
+export interface DonationRecord extends SheetsRowData {
 	["Date"]: string;
 	["Amount"]: number;
 	["First Name"]: string;
