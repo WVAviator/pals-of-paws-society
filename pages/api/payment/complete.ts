@@ -17,7 +17,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const signature = req.headers["stripe-signature"];
 		try {
 			event = stripe.webhooks.constructEvent(buf, signature, endpointSecret);
-			console.log("Webhook event constructed.", event.type);
 		} catch (error) {
 			console.log("Webhook signature verification failed.", error.message);
 			return res.send(400);
@@ -27,7 +26,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		if (event.type === "payment_intent.succeeded") {
 			paymentIntent = event.data.object;
-			//res.send(200);
 		} else {
 			return res.send(200);
 		}
@@ -39,18 +37,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const products: Product[] = JSON.parse(paymentIntent.metadata.products);
 
-		console.log("Products stored in metadata:", products);
-
 		if (products[0].name === "Donation") {
-			console.log("Processing donation.");
 			await processDonation(paymentIntent);
-			console.log("Donation processed.");
 			return res.send(200);
 		}
-		console.log("Processing shirt order.");
-		await processShirtOrder(paymentIntent, products);
-		console.log("Shirt order processed.");
 
+		await processShirtOrder(paymentIntent, products);
 		return res.send(200);
 	}
 };
