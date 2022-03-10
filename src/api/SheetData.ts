@@ -1,6 +1,13 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { SheetsRowData } from "../types/SheetsRowData";
 
+class GoogleSpreadsheetAccessError extends Error {
+	constructor(message: string) {
+		super(message);
+		this.name = "GoogleSpreadsheetAccessError";
+	}
+}
+
 interface SheetData<T extends SheetsRowData> {
 	sheetMeta: SheetMeta;
 	data?: T[];
@@ -18,11 +25,15 @@ export const getSpreadsheet = async (spreadsheetId: string) => {
 	console.log("Obtaining authorization using credentials:");
 	console.log(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
 	console.log(process.env.GOOGLE_PRIVATE_KEY);
-
-	await doc.useServiceAccountAuth({
-		client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-		private_key: process.env.GOOGLE_PRIVATE_KEY,
-	});
+	try {
+		await doc.useServiceAccountAuth({
+			client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+			private_key: process.env.GOOGLE_PRIVATE_KEY,
+		});
+	} catch (error) {
+		console.error("Error while obtaining spreadsheet authorization: ", error);
+		throw new GoogleSpreadsheetAccessError(error.message);
+	}
 
 	console.log("Authorized. Loading document...");
 	await doc.loadInfo();
