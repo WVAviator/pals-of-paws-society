@@ -11,11 +11,20 @@ interface SheetMeta {
 }
 
 export const getSpreadsheet = async (spreadsheetId: string) => {
+	console.log(`Getting spreadsheet with id ${spreadsheetId}.`);
+
 	const doc = new GoogleSpreadsheet(spreadsheetId);
+
+	console.log("Obtaining authorization using credentials:");
+	console.log(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
+	console.log(process.env.GOOGLE_PRIVATE_KEY);
+
 	await doc.useServiceAccountAuth({
 		client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
 		private_key: process.env.GOOGLE_PRIVATE_KEY,
 	});
+
+	console.log("Authorized. Loading document...");
 	await doc.loadInfo();
 	console.log(`${doc.title} loaded.`);
 
