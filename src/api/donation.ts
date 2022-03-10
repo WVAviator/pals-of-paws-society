@@ -38,6 +38,9 @@ export const processDonation = async (paymentIntent: any) => {
 	};
 
 	console.log("Constructed donation record:", donationRecord);
+	console.log(
+		`Adding donation record to spreadsheet with document id ${sheetMeta.docId} and sheet id ${sheetMeta.sheetId}.`
+	);
 	await addSpreadsheetData<DonationRecord>({
 		sheetMeta,
 		data: [donationRecord],
