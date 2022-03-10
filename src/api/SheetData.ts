@@ -17,14 +17,15 @@ export const getSpreadsheet = async (spreadsheetId: string) => {
 		private_key: process.env.GOOGLE_PRIVATE_KEY,
 	});
 	await doc.loadInfo();
+	console.log(`${doc.title} loaded.`);
+
 	return doc;
 };
 
 export const getSpreadsheetData = async <T>(sheetMeta: SheetMeta) => {
-	const doc = await getSpreadsheet(sheetMeta.docId as string);
-	const sheet = doc.sheetsById[sheetMeta.sheetId as string];
+	const doc = await getSpreadsheet(sheetMeta.docId);
+	const sheet = doc.sheetsById[sheetMeta.sheetId];
 	const rows: unknown = await sheet.getRows();
-
 	return rows as T[];
 };
 
@@ -32,12 +33,8 @@ export const addSpreadsheetData = async <T extends SheetsRowData>({
 	sheetMeta,
 	data,
 }: SheetData<T>) => {
-	const doc = await getSpreadsheet(sheetMeta.docId as string);
-	const sheet = doc.sheetsById[sheetMeta.sheetId as string];
-	if (data.length === 1) {
-		await sheet.addRow(data[0]);
-	} else {
-		await sheet.addRows(data);
-	}
+	const doc = await getSpreadsheet(sheetMeta.docId);
+	const sheet = doc.sheetsById[sheetMeta.sheetId];
+	await sheet.addRows(data);
+	console.log("Added the following data to spreadsheet:", data);
 };
-
