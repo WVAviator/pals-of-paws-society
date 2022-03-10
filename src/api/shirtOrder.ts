@@ -52,7 +52,7 @@ export const processShirtOrder = async (
 		return shirtOrderRecord;
 	});
 
-	addSpreadsheetData<ShirtOrderRecord>({ sheetMeta, data });
+	await addSpreadsheetData<ShirtOrderRecord>({ sheetMeta, data });
 
 	const receiptEmailHtmlContent = `
     
@@ -108,9 +108,6 @@ export const processShirtOrder = async (
 		html: generateHtmlEmail(receiptEmailHtmlContent),
 	};
 
-	console.log("Sending receipt email to: ", receiptEmail.to);
-
 	await sendAutomatedEmail(receiptEmail);
-
 	console.log("Email confirmation sent successfully!");
 };

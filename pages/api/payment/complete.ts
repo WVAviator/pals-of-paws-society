@@ -26,21 +26,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		if (event.type === "payment_intent.succeeded") {
 			paymentIntent = event.data.object;
-			res.send(200);
 		} else {
 			return res.send(200);
 		}
 
-		if (!paymentIntent.metadata) return; //paid through stripe checkout via other links
+		if (!paymentIntent.metadata) {
+			console.log("No metadata found in payment intent.");
+			return res.send(200);
+		} //paid through stripe checkout via other links
 
 		const products: Product[] = JSON.parse(paymentIntent.metadata.products);
 
 		if (products[0].name === "Donation") {
-			processDonation(paymentIntent);
-			return;
+			await processDonation(paymentIntent);
+			return res.send(200);
 		}
 
-		processShirtOrder(paymentIntent, products);
+		await processShirtOrder(paymentIntent, products);
+		return res.send(200);
 	}
 };
 

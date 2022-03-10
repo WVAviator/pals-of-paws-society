@@ -37,5 +37,8 @@ export const processDonation = async (paymentIntent: any) => {
 		["Receive Updates"]: receiveUpdates ? "Yes" : "No",
 	};
 
-	addSpreadsheetData<DonationRecord>({ sheetMeta, data: [donationRecord] });
+	await addSpreadsheetData<DonationRecord>({
+		sheetMeta,
+		data: [donationRecord],
+	});
 };
