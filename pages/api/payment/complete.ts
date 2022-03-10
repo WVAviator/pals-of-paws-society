@@ -42,11 +42,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		console.log("Products stored in metadata:", products);
 
 		if (products[0].name === "Donation") {
-			processDonation(paymentIntent);
+			console.log("Processing donation.");
+			await processDonation(paymentIntent);
+			console.log("Donation processed.");
 			return;
 		}
-
-		processShirtOrder(paymentIntent, products);
+		console.log("Processing shirt order.");
+		await processShirtOrder(paymentIntent, products);
+		console.log("Shirt order processed.");
 	}
 };
 

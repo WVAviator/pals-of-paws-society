@@ -54,7 +54,7 @@ export const processShirtOrder = async (
 
 	console.log(`Adding ${data.length} records to spreadsheet.`);
 
-	addSpreadsheetData<ShirtOrderRecord>({ sheetMeta, data });
+	await addSpreadsheetData<ShirtOrderRecord>({ sheetMeta, data });
 
 	const receiptEmailHtmlContent = `
     
