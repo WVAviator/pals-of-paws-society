@@ -22,7 +22,11 @@ const DefaultHead = () => {
 				key="ogUrl"
 				content="https://www.palsofpawssociety.org/"
 			/>
-			<meta property="og:image" key="ogImage" content={logo} />
+			<meta
+				property="og:image"
+				key="ogImage"
+				content="/images/desktop-logo.svg"
+			/>
 			<meta
 				property="og:description"
 				key="ogDescription"
