@@ -26,8 +26,8 @@ const components = {
 };
 
 const EventPage = ({ mdxSource, data }: EventPageProps) => {
-
-	const schemaData = { __html: `
+	const schemaData = {
+		__html: `
 		"@context": "https://schema.org",
 		"@type": "Event",
 		"name": ${data.title},
@@ -35,18 +35,20 @@ const EventPage = ({ mdxSource, data }: EventPageProps) => {
 		"image": ${data.image},
 		"startDate": ${new Date(Date.parse(data.startDate)).toISOString()},  
 		"endDate": ${new Date(Date.parse(data.endDate)).toISOString()}
-		`
-	}
-	
+		`,
+	};
+
 	return (
 		<div>
 			<Head>
-				<script type="application/ld+json"
-				dangerouslySetInnerHTML={schemaData}
-				key="schema-jsonld"/>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={schemaData}
+					key="schema-jsonld"
+				/>
+				<meta property="og:image" key="ogImage" content={data.image} />
 			</Head>
 
-			
 			<div>
 				<MDXPage meta={{ title: data.title, description: data.description }}>
 					<MDXRemote {...mdxSource} components={components} />
