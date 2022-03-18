@@ -101,6 +101,7 @@ export const processShirtOrder = async (
 	const receiptEmail: EMailMessage = {
 		to: email,
 		from: "Pals of Paws Society <orders@palsofpawssociety.org>",
+		bcc: "palsofpawssociety@gmail.com",
 		replyTo: "info@palsofpawssociety.org",
 		subject: "Order Confirmation - Pals of Paws Society",
 
