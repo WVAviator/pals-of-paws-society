@@ -20,7 +20,7 @@ export const sendAutomatedEmail = async (message: EMailMessage) => {
 	}
 
 	try {
-		sgMail.send(message);
+		await sgMail.send(message);
 	} catch (error) {
 		throw new UndeliverableError(error.message);
 	}
