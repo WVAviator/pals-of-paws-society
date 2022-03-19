@@ -24,6 +24,7 @@ export const processShirtOrder = async (
 		zip,
 		email,
 		receiveUpdates,
+		phone,
 	} = paymentIntent.metadata;
 
 	console.log(`Generating records for ${products.length} products.`);
@@ -46,6 +47,7 @@ export const processShirtOrder = async (
 			["Amount Paid"]: product.priceTotal,
 			["Email"]: email,
 			["Receive Updates"]: receiveUpdates ? "Yes" : "No",
+			["Phone Number"]: phone,
 			["Address"]: address,
 		};
 
@@ -60,6 +62,13 @@ export const processShirtOrder = async (
     <p>We will be reaching out to you directly to arrange for the pickup of your order.</p>
     <p>If you have any questions, please contact us at <a href="mailto:info@palsofpawssociety.org">info@palsofpawssociety.org</a>.</p>
     <br/>
+	<h2>Customer Information</h2>
+	<p>${firstName} ${lastName}</p>
+	<address>${streetAddress}${
+		aptOrSuite ? " " + aptOrSuite : ""
+	}<br />${city}, ${state} ${zip}</address>
+	<p>${phone}</p>
+	<br />
     <h2>Order Details</h2>
     <table style="text-align: center;">
 
@@ -89,6 +98,11 @@ export const processShirtOrder = async (
     Thank you for your order!\n
     We will be reaching out to you directly to arrange for the pickup of your order.\n
     If you have any questions, please contact us at info@palsofpawssociety.org.\n\n
+	Customer Information:\n
+	${firstName} ${lastName}\n
+	${streetAddress}${aptOrSuite ? " " + aptOrSuite : ""}\n
+	${city}, ${state} ${zip}\n
+	${phone}\n
     Order Details:\n
     Item\tQuantity\tAmount Paid\n
     ${products.map((product) => {

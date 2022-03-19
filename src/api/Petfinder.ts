@@ -10,32 +10,32 @@ const url = "https://api.petfinder.com/v2";
 export const getPetfinderAnimals = async () => {
 	const token = await getToken();
 
-		console.time("Petfinder API Calls");
+	console.time("Petfinder API Calls");
 
-		const response = await fetchAnimalData(token, `${url}/animals`);
-		const totalPages = response.data.pagination.total_pages;
-		console.log(`Total pages: ${totalPages}`);
+	const response = await fetchAnimalData(token, `${url}/animals`);
+	const totalPages = response.data.pagination.total_pages;
+	console.log(`Total pages: ${totalPages}`);
 
-		const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
+	const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
-		for (let i = 2; i <= totalPages; i++) {
-			const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
-			apiCalls.push(promise);
-		}
+	for (let i = 2; i <= totalPages; i++) {
+		const promise = fetchAnimalData(token, `${url}/animals?page=${i}`);
+		apiCalls.push(promise);
+	}
 
-		const responseArray = await Promise.all(apiCalls);
+	const responseArray = await Promise.all(apiCalls);
 
-		responseArray.unshift(response);
+	responseArray.unshift(response);
 
-		const animals = responseArray
-			.map((res) => {
-				return res.data.animals as PetfinderAnimal[];
-			})
-			.flat();
+	const animals = responseArray
+		.map((res) => {
+			return res.data.animals as PetfinderAnimal[];
+		})
+		.flat();
 
-		console.timeEnd("Petfinder API Calls");
+	console.timeEnd("Petfinder API Calls");
 
-		return filterResults(animals);
+	return filterResults(animals);
 };
 
 const fetchAnimalData = async (
