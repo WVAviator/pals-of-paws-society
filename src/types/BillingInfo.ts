@@ -9,4 +9,5 @@ export interface BillingInfo {
 	inMemory?: string;
 	email: string;
 	receiveUpdates: boolean;
+	phone?: string;
 }

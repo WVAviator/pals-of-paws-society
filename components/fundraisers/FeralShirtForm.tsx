@@ -10,6 +10,7 @@ import Billing from "../donate/Billing";
 import CustomButton from "../ui/CustomButton";
 import Checkout from "../stripe/Checkout";
 import { Product } from "../../src/types/Product";
+import PhoneNumberEntry from "../forms/PhoneNumberEntry";
 
 let return_url: string;
 
@@ -98,6 +99,10 @@ const FeralShirtForm = () => {
 			<form onSubmit={handleSubmit}>
 				<Paper elevation={3} className={styles.billing}>
 					<Billing formData={billingInfo} setFormData={setBillingInfo} />
+					<PhoneNumberEntry
+						formData={billingInfo}
+						setFormData={setBillingInfo}
+					/>
 					<Collapse in={noItemsError}>
 						<Alert severity="error">
 							Please add at least one type of shirt to the list above.
