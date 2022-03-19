@@ -86,6 +86,13 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 		filteredResults[i].organization = organizations.find(
 			(org) => org.id === filteredResults[i].organization_id
 		);
+		if (!filteredResults[i].organization) {
+			console.log(
+				`Organization ${filteredResults[i].organization_id} not found.`,
+				filteredResults[i]
+			);
+			filteredResults.splice(i, 1);
+		}
 	}
 
 	return filteredResults;
