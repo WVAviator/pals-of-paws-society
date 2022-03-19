@@ -62,8 +62,19 @@ const fetchAnimalData = async (
 const filterResults = async (animals: PetfinderAnimal[]) => {
 	const filteredResults: PetfinderAnimal[] = [];
 
+	const organizations = await getAllOrganizations();
+
 	animals.forEach((animal) => {
 		const newAnimal = transformResult(animal);
+
+		animal.organization = organizations.find(
+			(org) => org.id === animal.organization_id
+		);
+
+		if (!animal.organization) {
+			console.log(`Organization ${animal.organization_id} not found.`, animal);
+			return;
+		}
 
 		//Some orgs post the same animal multiple times
 		if (
@@ -78,22 +89,6 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 			filteredResults.push(newAnimal);
 		}
 	});
-
-	//Attach organization to animal (not all org fields are available in animal data)
-	const organizations = await getAllOrganizations();
-
-	for (let i = 0; i < filteredResults.length; i++) {
-		filteredResults[i].organization = organizations.find(
-			(org) => org.id === filteredResults[i].organization_id
-		);
-		if (!filteredResults[i].organization) {
-			console.log(
-				`Organization ${filteredResults[i].organization_id} not found.`,
-				filteredResults[i]
-			);
-			filteredResults.splice(i, 1);
-		}
-	}
 
 	return filteredResults;
 };
