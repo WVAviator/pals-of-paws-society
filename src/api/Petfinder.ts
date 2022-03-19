@@ -65,6 +65,11 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 	animals.forEach((animal) => {
 		const newAnimal = transformResult(animal);
 
+		if (!animal.organization) {
+			console.log(`Organization ${animal.organization_id} not found.`, animal);
+			return;
+		}
+
 		//Some orgs post the same animal multiple times
 		if (
 			!filteredResults.find(
@@ -86,13 +91,6 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 		filteredResults[i].organization = organizations.find(
 			(org) => org.id === filteredResults[i].organization_id
 		);
-		if (!filteredResults[i].organization) {
-			console.log(
-				`Organization ${filteredResults[i].organization_id} not found.`,
-				filteredResults[i]
-			);
-			filteredResults.splice(i, 1);
-		}
 	}
 
 	return filteredResults;
