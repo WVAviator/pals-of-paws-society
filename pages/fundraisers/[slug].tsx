@@ -19,7 +19,6 @@ interface EventPageProps {
 
 const components = {
 	a: MDXLink,
-	img: MDXImage,
 	MDXImage,
 	MDXIFrame,
 	FeralShirtForm,
