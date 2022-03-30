@@ -31,7 +31,7 @@ const ThankYou = () => {
 		};
 
 		getConfirmationDetails();
-	}, [payment_intent]);
+	}, [payment_intent, payment_intent_client_secret]);
 
 	return (
 		<PawprintSection

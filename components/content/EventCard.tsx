@@ -17,14 +17,21 @@ const EventCard = ({ event, active = false }: EventCardProps) => {
 			<a>
 				<Paper className={styles.card} elevation={3}>
 					<div className={styles.image}>
-						<Image src={event.image} layout="fill" objectFit="cover" />
+						<Image
+							src={event.image}
+							alt={event.title}
+							layout="fill"
+							objectFit="cover"
+						/>
 					</div>
 					<div className={styles.cardText}>
 						<h1>{event.title}</h1>
 						<p>{event.description}</p>
 						<p className={styles.date}>
 							{active ? "Ends " : "Ended "}
-							<time dateTime={isoDateString}>{event.endDate}</time>
+							<time dateTime={isoDateString}>
+								{event.endDate}
+							</time>
 						</p>
 					</div>
 				</Paper>

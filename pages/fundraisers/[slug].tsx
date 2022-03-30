@@ -50,7 +50,9 @@ const EventPage = ({ mdxSource, data }: EventPageProps) => {
 			</Head>
 
 			<div>
-				<MDXPage meta={{ title: data.title, description: data.description }}>
+				<MDXPage
+					meta={{ title: data.title, description: data.description }}
+				>
 					<MDXRemote {...mdxSource} components={components} />
 				</MDXPage>
 			</div>

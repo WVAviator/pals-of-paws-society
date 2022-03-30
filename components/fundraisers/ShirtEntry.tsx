@@ -64,7 +64,11 @@ const ShirtEntry = ({ addShirt }: ShirtFormProps) => {
 	return (
 		<div className={styles.shirtSelect}>
 			<Paper elevation={3} className={styles.image}>
-				<Image src={image} priority />
+				<Image
+					src={image}
+					alt={`A ${color} colored shirt with the word feral and a silhouette of an angry cat with a knife`}
+					priority
+				/>
 			</Paper>
 			<form onSubmit={handleAddItem} className={styles.shirtForm}>
 				<FormControl fullWidth sx={{ gridColumn: "span 3" }}>

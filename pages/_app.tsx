@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			router.events.off("routeChangeComplete", changeComplete);
 			router.events.off("routeChangeError", changeComplete);
 		};
-	}, []);
+	}, [router.events]);
 
 	return (
 		<ThemeProvider theme={muiTheme}>

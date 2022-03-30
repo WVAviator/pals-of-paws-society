@@ -65,7 +65,7 @@ const Checkout = ({
 		})
 			.then((res) => res.json())
 			.then((data) => setClientSecret(data.clientSecret));
-	}, [open]);
+	}, [open, products, description, metadata]);
 
 	const renderedProducts = products.map((product) => {
 		return (
