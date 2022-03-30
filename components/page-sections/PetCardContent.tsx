@@ -43,7 +43,7 @@ const PetCardContent = ({
 
 	const handlePageChange = (event: any, value: number) => {
 		setPage(value);
-		window.scrollTo(0, 0);
+		// window.scrollTo(0, 0);
 	};
 
 	const pagination = (
@@ -72,9 +72,9 @@ const PetCardContent = ({
 			<div className={styles.header}>
 				<h1>Adopt your new best friend today</h1>
 				<p>
-					The animals available for adoption here are either directly managed by
-					Pals of Paws Society, or are listed publicly on Petfinder by other
-					organizations in Northwest Mississippi.
+					The animals available for adoption here are either directly
+					managed by Pals of Paws Society, or are listed publicly on
+					Petfinder by other organizations in Northwest Mississippi.
 				</p>
 			</div>
 			{pagination}

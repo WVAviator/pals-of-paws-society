@@ -1,0 +1,8 @@
+@use "/styles/variables" as *;
+
+.mobileDonate {
+	display: block;
+	@include mq-desktop {
+		display: none;
+	}
+}

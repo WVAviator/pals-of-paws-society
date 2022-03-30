@@ -7,7 +7,8 @@
 .card {
 	z-index: 2;
 	position: relative;
-
+	max-width: 58rem;
+	overflow: hidden;
 	margin: 0 auto;
 	grid: span 1;
 	padding: $padding-section;
@@ -24,8 +25,9 @@
 
 	p {
 		font-size: 1rem;
-		word-break: break-all;
+		word-break: normal;
 		white-space: normal;
+
 		@include mq-tablet {
 			font-size: 1.1rem;
 		}
@@ -33,6 +35,7 @@
 			font-size: 1.2rem;
 		}
 	}
+
 	h2 {
 		font-size: 1.3rem;
 		@include mq-tablet {

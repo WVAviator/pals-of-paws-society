@@ -41,7 +41,7 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 		setDonationAmount(
 			parseInt(usingOtherAmount ? otherAmount : buttonSelection)
 		);
-	}, [buttonSelection, otherAmount]);
+	}, [buttonSelection, otherAmount, usingOtherAmount, setDonationAmount]);
 
 	return (
 		<>
@@ -88,7 +88,9 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 						min: 1,
 					}}
 					InputProps={{
-						startAdornment: <InputAdornment position="start">$</InputAdornment>,
+						startAdornment: (
+							<InputAdornment position="start">$</InputAdornment>
+						),
 					}}
 				></TextField>
 			</div>
