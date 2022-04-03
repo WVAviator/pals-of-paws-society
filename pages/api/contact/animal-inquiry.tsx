@@ -7,10 +7,6 @@ import {
 } from "../../../src/api/emailTemplate";
 import { Animal } from "../../../src/types/Animal";
 import { ContactInformation } from "../../../src/types/ContactInformation";
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-const optOutEmailAddresses = ["hasadoptions@gmail.com"];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
@@ -79,7 +75,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const msg = {
 			to: animal.organization.email,
 			from: "Pals of Paws Society <adoptions@palsofpawssociety.org>",
-			replyTo: "kalacdurham@gmail.com", // Change to your verified sender
+			bcc: "palsofpawssociety@gmail.com",
+			replyTo: "palsofpawssociety@gmail.com",
 			subject: `Adopter for ${animal.name}`,
 			text: generateTextEmail(adoptionEmailText),
 			html: generateHtmlEmail(adoptionEmailHtml),
