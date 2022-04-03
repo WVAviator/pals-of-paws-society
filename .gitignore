@@ -2,6 +2,11 @@
 
 secrets.json
 
+
+# sanity
+/studio/dist
+/studio/node_modules
+
 # dependencies
 /node_modules
 /.pnp

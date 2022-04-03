@@ -32,7 +32,7 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 						heading="Adoption Marketing"
 						description="We provide our local animal shelters and rescue organizations with assistance in marketing animals for adoption."
 						callToAction="Learn More"
-						href="/about/adoption"
+						href="/about/adoption-management"
 						alt="A gray kitten"
 					/>
 					<InfoCard

@@ -1,25 +1,22 @@
 import { Paper } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
-import { EventMeta } from "../../src/types/EventMeta";
+import { Fundraiser } from "../../types";
+import SanityImage from "../sanity/SanityImage";
 import styles from "./EventCard.module.scss";
 
 interface EventCardProps {
-	event: EventMeta;
+	event: Fundraiser;
 	active?: boolean;
 }
 
 const EventCard = ({ event, active = false }: EventCardProps) => {
-	const isoDateString = new Date(event.endDate).toISOString();
-
 	return (
-		<Link href={`/fundraisers/${event.slug}`}>
+		<Link href={`/fundraisers/${event.pageUrl.current}`}>
 			<a>
 				<Paper className={styles.card} elevation={3}>
 					<div className={styles.image}>
-						<Image
-							src={event.image}
-							alt={event.title}
+						<SanityImage
+							source={event.mainImage}
 							layout="fill"
 							objectFit="cover"
 						/>
@@ -27,12 +24,33 @@ const EventCard = ({ event, active = false }: EventCardProps) => {
 					<div className={styles.cardText}>
 						<h1>{event.title}</h1>
 						<p>{event.description}</p>
-						<p className={styles.date}>
-							{active ? "Ends " : "Ended "}
-							<time dateTime={isoDateString}>
-								{event.endDate}
-							</time>
-						</p>
+						{event.endDate ? (
+							<p className={styles.date}>
+								{active ? "Ends " : "Ended "}
+								<time>
+									{new Date(event.endDate).toLocaleDateString(
+										"en-US",
+										{
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										}
+									)}
+								</time>
+							</p>
+						) : (
+							<p className={styles.date}>
+								Started{" "}
+								{new Date(event.startDate).toLocaleDateString(
+									"en-US",
+									{
+										year: "numeric",
+										month: "long",
+										day: "numeric",
+									}
+								)}
+							</p>
+						)}
 					</div>
 				</Paper>
 			</a>

@@ -1,13 +1,12 @@
-const withMDX = require("@next/mdx")({
-	extension: /\.mdx?$/,
-	options: {
-		remarkPlugins: [],
-		rehypePlugins: [],
-		providerInputSource: "@mdx-js/react",
-	},
-});
+const STUDIO_REWRITE = {
+	source: "/admin/:path*",
+	destination:
+		process.env.NODE_ENV === "development"
+			? "http://localhost:3000/admin/:path*"
+			: "/admin/index.html",
+};
 
-module.exports = withMDX({
+module.exports = {
 	images: {
 		domains: [
 			"www.shelterluv.com",
@@ -16,5 +15,6 @@ module.exports = withMDX({
 		],
 	},
 	reactStrictMode: true,
-	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-});
+	rewrites: () => [STUDIO_REWRITE],
+	pageExtensions: ["js", "jsx", "ts", "tsx"],
+};
