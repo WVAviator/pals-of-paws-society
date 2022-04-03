@@ -16,5 +16,4 @@ module.exports = {
 	},
 	reactStrictMode: true,
 	rewrites: () => [STUDIO_REWRITE],
-	pageExtensions: ["js", "jsx", "ts", "tsx"],
 };
