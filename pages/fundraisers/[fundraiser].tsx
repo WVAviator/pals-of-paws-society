@@ -7,7 +7,7 @@ interface PageProps {
 	fundraiser: Fundraiser;
 }
 
-const Fundraiser = ({ fundraiser }: PageProps) => {
+const FundraiserPage = ({ fundraiser }: PageProps) => {
 	return (
 		<div>
 			<SanityContent pageContent={fundraiser} />
@@ -55,4 +55,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	};
 };
 
-export default Fundraiser;
+export default FundraiserPage;

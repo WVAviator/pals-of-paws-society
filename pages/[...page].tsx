@@ -7,7 +7,7 @@ interface PageProps {
 	page: Page;
 }
 
-const Page = ({ page }: PageProps) => {
+const DynamicPage = ({ page }: PageProps) => {
 	return (
 		<div>
 			<SanityContent pageContent={page} />
@@ -63,4 +63,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	};
 };
 
-export default Page;
+export default DynamicPage;
