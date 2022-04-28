@@ -16,9 +16,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const signature = req.headers["stripe-signature"];
 		try {
-			event = stripe.webhooks.constructEvent(buf, signature, endpointSecret);
+			event = stripe.webhooks.constructEvent(
+				buf,
+				signature,
+				endpointSecret
+			);
 		} catch (error) {
-			console.log("Webhook signature verification failed.", error.message);
+			console.log(
+				"Webhook signature verification failed.",
+				error.message
+			);
 			return res.send(400);
 		}
 
@@ -30,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.send(200);
 		}
 
-		if (!paymentIntent.metadata) {
+		if (Object.keys(paymentIntent.metadata).length === 0) {
 			console.log("No metadata found in payment intent.");
 			return res.send(200);
 		} //paid through stripe checkout via other links
