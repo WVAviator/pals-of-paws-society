@@ -1,5 +1,4 @@
 import axios from "axios";
-import redis from "../redis";
 
 const apiKey = process.env.NEXT_PUBLIC_PETFINDER_API_KEY;
 const secret = process.env.PETFINDER_SECRET_KEY;
@@ -12,21 +11,8 @@ const dataString = `grant_type=client_credentials&client_id=${apiKey}&client_sec
 class PetfinderAuthError extends Error {}
 
 const getToken = async () => {
-	const cachedToken = await redis.get("pftoken");
-	console.log(
-		cachedToken
-			? "Cached token received:" + cachedToken
-			: "No cached token found. Retrieving new token..."
-	);
-
-	if (!cachedToken) {
-		const { token, expiration } = await retrieveNewToken();
-		redis.set("pftoken", token, "EX", expiration);
-		console.log(`Cached new token for ${expiration} seconds.`);
-
-		return token;
-	}
-	return cachedToken;
+	const { token, expiration } = await retrieveNewToken();
+	return token;
 };
 
 const retrieveNewToken = async () => {

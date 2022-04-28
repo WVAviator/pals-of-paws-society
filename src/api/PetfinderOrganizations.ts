@@ -1,28 +1,11 @@
 import axios from "axios";
 import { Organization } from "../types/Organization";
 import getToken from "./PetfinderAuth";
-import redis from "../redis";
 
 const url = "https://api.petfinder.com/v2/organizations";
 const cacheExpiration = 86400; // 24 hours
 
-export const getAllOrganizations = async () => {
-	const cachedOrganizationsRaw = await redis.get("orgs");
-	if (cachedOrganizationsRaw) {
-		const cachedOrganizations: Organization[] = JSON.parse(
-			cachedOrganizationsRaw
-		);
-		return cachedOrganizations;
-	} else {
-		const organizations = await retrieveNewOrganizations();
-		const jsonOrganziations = JSON.stringify(organizations);
-		redis.set("orgs", jsonOrganziations, "EX", cacheExpiration);
-		return organizations;
-	}
-};
-
-const retrieveNewOrganizations = async () => {
-	const token = await getToken();
+export const getAllOrganizations = async (token: string) => {
 	const response = await axios.get(url, {
 		headers: {
 			Authorization: `Bearer ${token}`,

@@ -35,7 +35,7 @@ export const getPetfinderAnimals = async () => {
 
 	console.timeEnd("Petfinder API Calls");
 
-	return filterResults(animals);
+	return filterResults(animals, token);
 };
 
 const fetchAnimalData = async (
@@ -59,10 +59,10 @@ const fetchAnimalData = async (
 	return response;
 };
 
-const filterResults = async (animals: PetfinderAnimal[]) => {
+const filterResults = async (animals: PetfinderAnimal[], token: string) => {
 	const filteredResults: PetfinderAnimal[] = [];
 
-	const organizations = await getAllOrganizations();
+	const organizations = await getAllOrganizations(token);
 
 	animals.forEach((animal) => {
 		const newAnimal = transformResult(animal);
@@ -72,7 +72,10 @@ const filterResults = async (animals: PetfinderAnimal[]) => {
 		);
 
 		if (!animal.organization) {
-			console.log(`Organization ${animal.organization_id} not found.`, animal);
+			console.log(
+				`Organization ${animal.organization_id} not found.`,
+				animal
+			);
 			return;
 		}
 

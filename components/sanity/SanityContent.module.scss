@@ -1,0 +1,85 @@
+@use "/styles/variables" as *;
+
+.articleSection {
+	@include restrict-width;
+}
+
+.content {
+	width: min(90vw, 65ch);
+	padding: $padding-section;
+
+	h1,
+	h2 {
+		padding: 1em 0;
+	}
+
+	h1 {
+		font-size: 2rem;
+		@include mq-desktop {
+			font-size: 2.5rem;
+		}
+	}
+	h2 {
+		font-size: 1.5rem;
+		@include mq-desktop {
+			font-size: 1.825rem;
+		}
+	}
+	h3,
+	h4 {
+		text-align: center;
+		@include mq-desktop {
+			text-align: left;
+		}
+	}
+
+	h3 {
+		font-size: 1.35rem;
+	}
+
+	p {
+		max-width: 60rem;
+	}
+
+	h4 {
+		color: $color-darkNavy;
+		font-weight: $fontWeight-regular;
+	}
+
+	ul {
+		padding: 2rem 1rem;
+		li {
+			margin-bottom: 0.5rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	a {
+		color: $color-highContrast;
+		text-decoration: none;
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	p,
+	a,
+	ul {
+		font-size: 1.15rem;
+		font-family: "Inter", sans-serif;
+		font-weight: 500;
+		@include mq-custom(28.75rem) {
+			font-size: 1.2rem;
+		}
+		@include mq-custom(41.8125rem) {
+			font-size: 1.25rem;
+		}
+		@include mq-desktop {
+			font-size: 1.3rem;
+		}
+		margin-bottom: 1em;
+	}
+}

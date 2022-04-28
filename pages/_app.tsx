@@ -1,19 +1,11 @@
 import PageLayout from "../components/layout/PageLayout";
 import "../styles/globals.scss";
-import MDXLink from "../components/mdx/MDXLink";
-import MDXImage from "../components/mdx/MDXImage";
 import { ThemeProvider } from "@mui/material";
 
 import { muiTheme } from "../styles/muiTheme";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Fallback from "../components/layout/Fallback";
-
-const mdxComponents = {
-	a: MDXLink,
-	img: MDXImage,
-	MDXImage,
-};
 
 interface AppProps {
 	Component: any;
@@ -42,11 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={muiTheme}>
 			<PageLayout>
-				{loadingPage ? (
-					<Fallback />
-				) : (
-					<Component {...pageProps} components={mdxComponents} />
-				)}
+				{loadingPage ? <Fallback /> : <Component {...pageProps} />}
 			</PageLayout>
 		</ThemeProvider>
 	);

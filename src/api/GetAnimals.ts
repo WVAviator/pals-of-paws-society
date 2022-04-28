@@ -6,26 +6,11 @@ import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 
-import redis from "../redis";
-
-class AnimalNotFoundError extends Error {}
-
 export const getAllAnimals = async () => {
-	const cachedAnimalsRaw = await redis.get("allAnimals");
+	console.log("Retrieving new animal data...");
 
-	if (cachedAnimalsRaw) {
-		console.log("Cached animals found. Returning parsed results.");
-
-		const cachedAnimals: Animal[] = JSON.parse(cachedAnimalsRaw);
-		return cachedAnimals;
-	} else {
-		console.log("No cache found for all animals. Retrieving new data...");
-
-		const allAnimals: Animal[] = await retrieveAnimalData();
-		const jsonAnimals = JSON.stringify(allAnimals);
-		redis.set("allAnimals", jsonAnimals, "EX", 3600);
-		return allAnimals;
-	}
+	const allAnimals: Animal[] = await retrieveAnimalData();
+	return allAnimals;
 };
 
 const retrieveAnimalData = async () => {
@@ -60,6 +45,7 @@ const retrieveShelterluvData = async () => {
 		);
 	}
 	return (
-		shelterluvAnimals?.map((animal) => convertShelterluvAnimal(animal)) ?? []
+		shelterluvAnimals?.map((animal) => convertShelterluvAnimal(animal)) ??
+		[]
 	);
 };
