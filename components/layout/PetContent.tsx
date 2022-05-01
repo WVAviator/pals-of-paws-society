@@ -1,4 +1,5 @@
 import { Animal } from "../../src/types/Animal";
+import AdoptionApplication from "../content/AdoptionApplication";
 import OrgBio from "../content/OrgBio";
 import PetBio from "../content/PetBio";
 import AnimalInquiry from "../forms/AnimalInquiry";
@@ -16,7 +17,11 @@ const PetContent = ({ animal }: PetContentProps) => {
 				<OrgBio org={animal.organization} />
 			</div>
 			<div className={styles.form}>
-				<AnimalInquiry animal={animal} />
+				{animal.organization.id === "1" ? (
+					<AdoptionApplication animal={animal} />
+				) : (
+					<AnimalInquiry animal={animal} />
+				)}
 			</div>
 		</div>
 	);
