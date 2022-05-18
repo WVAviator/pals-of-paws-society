@@ -23,7 +23,6 @@ const retrieveNewToken = async () => {
 		const response = await axios.post(authenticationUrl, dataString);
 		token = response.data.access_token;
 		expiration = response.data.expires_in;
-		console.log("New token retrieved: " + token);
 	} catch (error) {
 		console.error(
 			"Error occurred while attempting to retrieve Petfinder access token."
