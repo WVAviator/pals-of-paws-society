@@ -7,7 +7,7 @@ import { PetfinderAnimal } from "../types/PetfinderAnimal";
 import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 
 export const getAllAnimals = async () => {
-	console.log("Retrieving new animal data...");
+	console.log("Retrieving new animal data...", new Date());
 
 	const allAnimals: Animal[] = await retrieveAnimalData();
 	return allAnimals;
@@ -18,10 +18,14 @@ const retrieveAnimalData = async () => {
 		retrieveShelterluvData(),
 		retrievePetfinderData(),
 	]);
+	console.log("All animal data promises resolved.", new Date());
+
 	return animalData.flat();
 };
 
 const retrievePetfinderData = async () => {
+	console.log("Retrieving data from Petfinder...", new Date());
+
 	let pfAnimals: PetfinderAnimal[];
 	try {
 		pfAnimals = await getPetfinderAnimals();
@@ -31,10 +35,13 @@ const retrievePetfinderData = async () => {
 			error
 		);
 	}
+	console.log("Petfinder data retrieved.", new Date());
 	return pfAnimals?.map((animal) => convertPetfinderAnimal(animal)) ?? [];
 };
 
 const retrieveShelterluvData = async () => {
+	console.log("Retrieving data from Shelterluv...", new Date());
+
 	let shelterluvAnimals: ShelterluvAnimal[];
 	try {
 		shelterluvAnimals = await getShelterluvAnimals();
@@ -44,6 +51,8 @@ const retrieveShelterluvData = async () => {
 			error
 		);
 	}
+	console.log("Shelterluv data retrieved.", new Date());
+
 	return (
 		shelterluvAnimals?.map((animal) => convertShelterluvAnimal(animal)) ??
 		[]
