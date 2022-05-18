@@ -52,7 +52,6 @@ const Adopt = ({ animals }: AdoptProps) => {
 
 export async function getStaticProps() {
 	console.log("Retrieving static props...", new Date());
-
 	return {
 		props: {
 			animals: await getAllAnimals(),

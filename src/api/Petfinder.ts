@@ -8,9 +8,13 @@ const searchRadius = "23";
 const url = "https://api.petfinder.com/v2";
 
 export const getPetfinderAnimals = async () => {
+	console.log("Retrieving Petfinder token...", new Date());
+
 	const token = await getToken();
 
 	console.time("Petfinder API Calls");
+
+	console.log("Retrieving first page of Petfinder animals...", new Date());
 
 	const response = await fetchAnimalData(token, `${url}/animals?page=1`);
 	const totalPages = Math.min(response.data.pagination.total_pages, 4);
@@ -22,6 +26,7 @@ export const getPetfinderAnimals = async () => {
 		apiCalls.push(promise);
 	}
 
+	console.log("Retrieving all remaining Petfinder animals", new Date());
 	const responseArray = await Promise.all(apiCalls);
 
 	responseArray.unshift(response);
@@ -34,6 +39,10 @@ export const getPetfinderAnimals = async () => {
 
 	console.timeEnd("Petfinder API Calls");
 
+	console.log(
+		"All Petfinder data retrieved. Filtering and returning results...",
+		new Date()
+	);
 	return filterResults(animals, token);
 };
 

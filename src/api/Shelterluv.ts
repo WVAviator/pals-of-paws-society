@@ -5,9 +5,13 @@ const key = process.env.SHELTERLUV_API_KEY;
 const baseUrl = "https://www.shelterluv.com/api/v1";
 
 export const getShelterluvAnimals = async () => {
+	console.log("Retrieving data from Shelterluv...", new Date());
+
 	const response = await fetchAnimalData(`${baseUrl}/animals`);
 
 	const animals = response.data.animals as ShelterluvAnimal[];
+
+	console.log("Shelterluv data retrieved.", new Date());
 
 	return filterResults(animals);
 };
