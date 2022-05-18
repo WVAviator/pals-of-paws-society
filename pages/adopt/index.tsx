@@ -51,12 +51,13 @@ const Adopt = ({ animals }: AdoptProps) => {
 };
 
 export async function getStaticProps() {
-	const animals: Animal[] = await getAllAnimals();
+	console.log("Retrieving static props...", new Date());
+
 	return {
 		props: {
-			animals,
+			animals: await getAllAnimals(),
 		},
-		revalidate: 3600,
+		revalidate: 60,
 	};
 }
 
