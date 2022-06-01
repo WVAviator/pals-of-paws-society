@@ -14,7 +14,6 @@ export const getPetfinderAnimals = async () => {
 
 	const response = await fetchAnimalData(token, `${url}/animals?page=1`);
 	const totalPages = Math.min(response.data.pagination.total_pages, 4);
-	console.log(`Total pages: ${totalPages}`);
 
 	const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
@@ -43,8 +42,6 @@ const fetchAnimalData = async (
 	queryUrl: string,
 	limit: number = 100
 ) => {
-	console.log(`Retrieving ${limit} PF animals from ${queryUrl}`);
-
 	const response = await axios.get(queryUrl, {
 		headers: {
 			Authorization: `Bearer ${token}`,
