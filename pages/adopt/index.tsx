@@ -56,7 +56,7 @@ export async function getStaticProps() {
 		props: {
 			animals: await getAllAnimals(),
 		},
-		revalidate: 60,
+		revalidate: 600,
 	};
 }
 
