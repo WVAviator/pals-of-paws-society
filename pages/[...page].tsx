@@ -28,6 +28,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         category->{ categoryUrl }
       }`;
 
+	console.log("Retrieving static props for [...page]...", new Date());
+
 	const page: Page = await sanityClient.fetch(query, {
 		categoryUrl,
 		pageUrl,
@@ -46,6 +48,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         category->{ categoryUrl },
         pageUrl
     }`;
+
+	console.log("Fetching static paths for [...page]...", new Date());
 
 	const pages: Page[] = await sanityClient.fetch(query);
 
