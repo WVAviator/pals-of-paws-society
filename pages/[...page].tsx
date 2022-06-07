@@ -49,7 +49,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
         pageUrl
     }`;
 
+<<<<<<< HEAD
 	console.log("Fetching static paths for [...page]...", new Date());
+=======
+	console.log("Fetching static paths...", new Date());
+>>>>>>> f5c5b3361aea4ac85b5d0d60cab2ad0c57170d65
 
 	const pages: Page[] = await sanityClient.fetch(query);
 
