@@ -1,3 +1,5 @@
+import axios from "axios";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
@@ -50,14 +52,20 @@ const Adopt = ({ animals }: AdoptProps) => {
 	);
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
 	console.log("Retrieving static props...", new Date());
+	const url = {
+		production: "https://www.palsofpawssociety.org",
+		development: "http://localhost:3000",
+		test: "https://pals-of-paws-society-git-main-wvaviator.vercel.app",
+	}[process.env.NODE_ENV];
+	const response = await axios.get(url + "/api/animals");
 	return {
 		props: {
-			animals: await getAllAnimals(),
+			animals: response.data,
 		},
 		revalidate: 600,
 	};
-}
+};
 
 export default Adopt;

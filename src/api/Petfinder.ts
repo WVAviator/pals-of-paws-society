@@ -69,7 +69,7 @@ const filterResults = async (animals: PetfinderAnimal[], token: string) => {
 		);
 
 		if (!animal.organization) {
-			console.log(`Organization ${animal.organization_id} not found.`);
+			//console.log(`Organization ${animal.organization_id} not found.`);
 			return;
 		}
 
