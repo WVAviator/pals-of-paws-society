@@ -59,10 +59,19 @@ export const getStaticProps: GetStaticProps = async () => {
 		development: "http://localhost:3000",
 		test: "https://pals-of-paws-society-git-main-wvaviator.vercel.app",
 	}[process.env.NODE_ENV];
-	const response = await axios.get(url + "/api/animals");
+
+	let response;
+
+	try {
+		response = (await axios.get(url + "/api/animals")).data;
+	} catch (err) {
+		console.log(err);
+		response = await getAllAnimals();
+	}
+
 	return {
 		props: {
-			animals: response.data,
+			animals: response,
 		},
 		revalidate: 600,
 	};
