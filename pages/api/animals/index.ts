@@ -3,8 +3,6 @@ import { NextApiRequest } from "next";
 import { getAllAnimals } from "../../../src/api/GetAnimals";
 import redis from "../../../src/redis";
 
-const permittedTokens = ["2j294gh38fbu3487hd2uixn87dhr"];
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method !== "POST") {
 		return res.status(405).json({
@@ -14,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const token = req.headers.token as string;
 
-	if (!permittedTokens.includes(token)) {
+	if (token !== process.env.ANIMALS_TOKEN) {
 		return res.status(403).json({
 			message: "Token not permitted",
 		});
