@@ -54,24 +54,10 @@ const Adopt = ({ animals }: AdoptProps) => {
 
 export const getStaticProps: GetStaticProps = async () => {
 	console.log("Retrieving static props...", new Date());
-	const url = {
-		production: "https://www.palsofpawssociety.org",
-		development: "http://localhost:3000",
-		test: "https://pals-of-paws-society-git-main-wvaviator.vercel.app",
-	}[process.env.NODE_ENV];
-
-	let response;
-
-	try {
-		response = (await axios.get(url + "/api/animals")).data;
-	} catch (err) {
-		console.log(err);
-		response = await getAllAnimals();
-	}
 
 	return {
 		props: {
-			animals: response,
+			animals: await getAllAnimals(),
 		},
 		revalidate: 600,
 	};
