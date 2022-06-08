@@ -24,6 +24,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Call the cache refresh api endpoint
         run: |
-                  curl -X POST \
-                   'https://www.palsofpawssociety.org/api/animals' \
-                  -H 'token: ${{ secrets.API_TOKEN }}'
+          curl -XPOST -H 'token: ${{ secrets.API_TOKEN }}' 'https://www.palsofpawssociety.org/api/animals'
