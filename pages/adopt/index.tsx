@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
 import { getAllAnimals } from "../../src/api/GetAnimals";
+import redis from "../../src/redis";
 import { Animal } from "../../src/types/Animal";
 interface AdoptProps {
 	animals: Animal[];
@@ -55,11 +56,14 @@ const Adopt = ({ animals }: AdoptProps) => {
 export const getStaticProps: GetStaticProps = async () => {
 	console.log("Retrieving static props...", new Date());
 
+	const jsonAnimals = await redis.get("animals");
+	const animals: Animal[] = (await JSON.parse(jsonAnimals)) || [];
+
 	return {
 		props: {
-			animals: await getAllAnimals(),
+			animals,
 		},
-		revalidate: 600,
+		revalidate: 60,
 	};
 };
 
