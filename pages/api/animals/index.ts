@@ -12,13 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 	}
 
-	console.log("req.headers:", req.headers);
-
 	const token = req.headers.token as string;
-
-	console.log("token:", token);
-
-	console.log(`Permitted: ${permittedTokens}, Current: ${token}`);
 
 	if (!permittedTokens.includes(token)) {
 		return res.status(403).json({
@@ -27,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	const animals = await getAllAnimals();
-	console.log(`${animals.length} animals found`);
+	console.log(`${animals.length} animals retrieved and sent to redis cache.`);
 	const jsonAnimals = JSON.stringify(animals);
 
 	try {
