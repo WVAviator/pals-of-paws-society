@@ -1,8 +1,11 @@
+import axios from "axios";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
 import { getAllAnimals } from "../../src/api/GetAnimals";
+import redis from "../../src/redis";
 import { Animal } from "../../src/types/Animal";
 interface AdoptProps {
 	animals: Animal[];
@@ -50,14 +53,18 @@ const Adopt = ({ animals }: AdoptProps) => {
 	);
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
 	console.log("Retrieving static props...", new Date());
+
+	const jsonAnimals = await redis.get("animals");
+	const animals: Animal[] = (await JSON.parse(jsonAnimals)) || [];
+
 	return {
 		props: {
-			animals: await getAllAnimals(),
+			animals,
 		},
-		revalidate: 60,
+		revalidate: 3600,
 	};
-}
+};
 
 export default Adopt;

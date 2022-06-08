@@ -1,0 +1,13 @@
+name: animals
+on:
+    schedule:
+        - cron: "55 * * * *"
+jobs:
+    cron:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Refresh animals cache
+              run: |
+                  curl --request POST \
+                  --url 'https://www.palsofpawssociety.org/api/animals' \
+                  --header 'token: ${{ secrets.API_TOKEN }}'

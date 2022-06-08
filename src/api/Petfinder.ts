@@ -13,7 +13,7 @@ export const getPetfinderAnimals = async () => {
 	console.time("Petfinder API Calls");
 
 	const response = await fetchAnimalData(token, `${url}/animals?page=1`);
-	const totalPages = Math.min(response.data.pagination.total_pages, 4);
+	const totalPages = response.data.pagination.total_pages;
 
 	const apiCalls: Promise<AxiosResponse<any, any>>[] = [];
 
@@ -69,7 +69,7 @@ const filterResults = async (animals: PetfinderAnimal[], token: string) => {
 		);
 
 		if (!animal.organization) {
-			console.log(`Organization ${animal.organization_id} not found.`);
+			//console.log(`Organization ${animal.organization_id} not found.`);
 			return;
 		}
 
