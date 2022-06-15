@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
@@ -54,7 +54,7 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 	);
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	console.log("Retrieving static props...", new Date());
 
 	const jsonAnimals = await redis.get("animals");
@@ -64,8 +64,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			animals,
 			updatedAt: new Date().toISOString(),
-		},
-		revalidate: 3600,
+		}
 	};
 };
 
