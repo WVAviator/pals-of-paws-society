@@ -4,7 +4,6 @@ import { PetfinderAnimal } from "./../types/PetfinderAnimal";
 export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 	const animal: Animal = {
 		id: `pf${pfAnimal.id}`,
-		service: "petfinder",
 		name: capitalize(pfAnimal.name.toLowerCase()) ?? "Unnamed",
 		type: pfAnimal.type.toLowerCase() ?? "Other",
 		sex: pfAnimal.gender.toLowerCase() ?? "Unknown",
@@ -12,8 +11,6 @@ export const convertPetfinderAnimal = (pfAnimal: PetfinderAnimal) => {
 		breed: extractBreed(pfAnimal),
 		location: `${pfAnimal.contact.address.city}, ${pfAnimal.contact.address.state}`,
 		organization: pfAnimal.organization,
-		organizationEmail: pfAnimal.contact.email,
-		organizationPhone: pfAnimal.contact.phone,
 		description: fixDescription(pfAnimal.description),
 		photos: pfAnimal.photos?.map((photo) => photo.large) ?? [],
 		link: pfAnimal.url,
@@ -39,9 +36,8 @@ const capitalize = (str: string) => {
 };
 
 const fixDescription = (desc: string) => {
-	
 	if (!desc) return desc;
-	
+
 	let correctedDesc = desc;
 
 	correctedDesc = correctedDesc.replace("&amp;#39;", "'");
@@ -49,4 +45,4 @@ const fixDescription = (desc: string) => {
 	correctedDesc = correctedDesc.replace("&amp;", "&");
 
 	return correctedDesc;
-}
+};

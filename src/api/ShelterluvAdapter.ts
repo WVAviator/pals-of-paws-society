@@ -4,7 +4,6 @@ import { ShelterluvAnimal } from "../types/ShelterluvAnimal";
 export const convertShelterluvAnimal = (shelterluvAnimal: ShelterluvAnimal) => {
 	const animal: Animal = {
 		id: `sl${shelterluvAnimal["Internal-ID"]}`,
-		service: "shelterluv",
 		name: shelterluvAnimal.Name,
 		type: shelterluvAnimal.Type.toLowerCase(),
 		sex: shelterluvAnimal.Sex.toLowerCase(),
@@ -12,8 +11,6 @@ export const convertShelterluvAnimal = (shelterluvAnimal: ShelterluvAnimal) => {
 		breed: shelterluvAnimal.Breed,
 		location: "Hernando, MS",
 		organization: PalsOfPawsSociety,
-		organizationEmail: "adoptions@palsofpawssociety.org",
-		organizationPhone: "954-224-9779",
 		description: shelterluvAnimal.Description,
 		photos: shelterluvAnimal.Photos,
 	};
