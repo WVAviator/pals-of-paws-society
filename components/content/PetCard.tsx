@@ -50,15 +50,20 @@ const PetCard = ({
 						<li>Location: {animal.location}</li>
 					</ul>
 					<div
-						id="organization"
 						className={styles.org}
 						itemScope
 						itemType={orgSchema(animal.organization.name)}
 					>
 						<p itemProp="name">{animal.organization.name}</p>
 						<meta itemProp="location" content={animal.location} />
-						<meta itemProp="email" content={animal.organization.email} />
-						<meta itemProp="url" content={animal.organization.website} />
+						<meta
+							itemProp="email"
+							content={animal.organization.email}
+						/>
+						<meta
+							itemProp="url"
+							content={animal.organization.website}
+						/>
 					</div>
 				</div>
 			</div>
