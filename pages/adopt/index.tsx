@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			animals,
-			updatedAt: new Date(),
+			updatedAt: new Date().toISOString(),
 		},
 		revalidate: 3600,
 	};

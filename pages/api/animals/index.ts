@@ -24,6 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		redis.set("animals", jsonAnimals);
+		redis.set("timestamp", new Date().toISOString());
 		return res.status(200).json({
 			message: "Successfully updated the animals cache.",
 		});
