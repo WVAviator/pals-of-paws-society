@@ -1,17 +1,18 @@
-import axios from "axios";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
-import { getAllAnimals } from "../../src/api/GetAnimals";
 import redis from "../../src/redis";
 import { Animal } from "../../src/types/Animal";
 interface AdoptProps {
 	animals: Animal[];
+	updatedAt: string;
 }
 
-const Adopt = ({ animals }: AdoptProps) => {
+const Adopt = ({ animals, updatedAt }: AdoptProps) => {
+	console.log("Animals last updated at: ", updatedAt);
+
 	const router = useRouter();
 	const selectedAnimal = useRef<Animal>(
 		animals.find((a) => a.id === router.query.animal) || null
@@ -62,6 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			animals,
+			updatedAt: new Date(),
 		},
 		revalidate: 3600,
 	};
