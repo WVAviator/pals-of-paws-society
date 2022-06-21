@@ -9,12 +9,7 @@ function PetCarousel({ animal }: { animal: Animal }): JSX.Element {
 	const mappedPhotos = animal.photos.map((photo) => {
 		return (
 			<div key={photo} className={styles.imageContainer}>
-				<Image
-					src={photo}
-					alt={`A ${animal.breed} ${animal.type}`}
-					layout="fill"
-					objectFit="cover"
-				/>
+				<img src={photo} alt={`A ${animal.breed} ${animal.type}`} />
 				<p></p>
 			</div>
 		);

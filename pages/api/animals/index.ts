@@ -5,7 +5,6 @@ import redis from "../../../src/redis";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "GET") {
-		const page = req.query.page ? parseInt(req.query.page as string) : 1;
 		const animals = await redis.get(`animals`);
 		if (animals) {
 			return res.status(200).json(animals);

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
 import redis from "../../src/redis";
@@ -12,23 +11,20 @@ interface AdoptProps {
 }
 
 const Adopt = ({ animals, updatedAt }: AdoptProps) => {
-	console.log("Animals last updated at: ", updatedAt);
-
 	const [currentAnimals, setCurrentAnimals] = useState(animals);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [currentAnimal, setCurrentAnimal] = useState<Animal | null>(null);
 	const [savedScrollPosition, setSavedScrollPosition] = useState(0);
 
 	useEffect(() => {
+		console.log("Animals last updated at: ", updatedAt);
 		const getAnimalsForPage = async () => {
 			const newAnimals = (await axios.get(`/api/animals`))
 				.data as Animal[];
-			console.log(newAnimals);
 			setCurrentAnimals(newAnimals);
 		};
-
 		getAnimalsForPage();
-	}, []);
+	}, [updatedAt]);
 
 	const goToAnimal = (animal: Animal) => {
 		setSavedScrollPosition(window.scrollY);
