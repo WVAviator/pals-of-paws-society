@@ -4,6 +4,10 @@
 	width: min(100vw, 31.25rem);
 	height: min(100vw, 31.25rem);
 	position: relative;
+	img {
+		width: 100%;
+		object-fit: cover;
+	}
 }
 
 .carousel {

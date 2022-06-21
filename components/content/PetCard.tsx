@@ -35,13 +35,10 @@ const PetCard = ({
 						<AnimalIcons type={animal.type} sex={animal.sex} />
 					</div>
 					<div className={styles.image}>
-						<Image
+						<img
 							src={animal.photos[0] ?? placeholder}
 							alt={`A ${animal.breed} ${animal.type}`}
-							width={280}
-							height={280}
-							objectFit="cover"
-							priority={isPriority}
+							loading={isPriority ? "eager" : "lazy"}
 						/>
 					</div>
 					<ul>
