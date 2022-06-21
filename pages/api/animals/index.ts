@@ -4,6 +4,15 @@ import { getAllAnimals } from "../../../src/api/GetAnimals";
 import redis from "../../../src/redis";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	if (req.method === "GET") {
+		const animals = await redis.get(`animals`);
+		if (animals) {
+			return res.status(200).json(animals);
+		} else {
+			return res.status(500).json({ error: "Internal server error" });
+		}
+	}
+
 	if (req.method !== "POST") {
 		return res.status(405).json({
 			message: "Method not allowed",
@@ -20,10 +29,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const animals = await getAllAnimals();
 	console.log(`${animals.length} animals retrieved and sent to redis cache.`);
-	const jsonAnimals = JSON.stringify(animals);
+
+	const allAnimals = JSON.stringify(animals);
+	const firstPage = JSON.stringify(animals.slice(0, 24));
 
 	try {
-		redis.set("animals", jsonAnimals);
+		await redis.set(`animals:1`, firstPage);
+		await redis.set(`animals`, allAnimals);
+		await redis.set("timestamp", new Date().toISOString());
 		return res.status(200).json({
 			message: "Successfully updated the animals cache.",
 		});

@@ -35,13 +35,10 @@ const PetCard = ({
 						<AnimalIcons type={animal.type} sex={animal.sex} />
 					</div>
 					<div className={styles.image}>
-						<Image
+						<img
 							src={animal.photos[0] ?? placeholder}
 							alt={`A ${animal.breed} ${animal.type}`}
-							width={280}
-							height={280}
-							objectFit="cover"
-							priority={isPriority}
+							loading={isPriority ? "eager" : "lazy"}
 						/>
 					</div>
 					<ul>
@@ -50,15 +47,20 @@ const PetCard = ({
 						<li>Location: {animal.location}</li>
 					</ul>
 					<div
-						id="organization"
 						className={styles.org}
 						itemScope
 						itemType={orgSchema(animal.organization.name)}
 					>
 						<p itemProp="name">{animal.organization.name}</p>
 						<meta itemProp="location" content={animal.location} />
-						<meta itemProp="email" content={animal.organization.email} />
-						<meta itemProp="url" content={animal.organization.website} />
+						<meta
+							itemProp="email"
+							content={animal.organization.email}
+						/>
+						<meta
+							itemProp="url"
+							content={animal.organization.website}
+						/>
 					</div>
 				</div>
 			</div>
