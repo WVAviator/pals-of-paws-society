@@ -64,6 +64,11 @@ const filterResults = async (animals: PetfinderAnimal[], token: string) => {
 	animals.forEach((animal) => {
 		const newAnimal = transformResult(animal);
 
+		//exclude pals of paws society since its animals already come from shelterluv
+		if (animal.organization_id === "MS241") {
+			return;
+		}
+
 		animal.organization = organizations.find(
 			(org) => org.id === animal.organization_id
 		);
