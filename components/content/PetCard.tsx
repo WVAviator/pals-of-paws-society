@@ -1,6 +1,4 @@
 import styles from "./PetCard.module.scss";
-import placeholder from "/public/images/no-image.svg";
-import Image from "next/image";
 import { Animal } from "../../src/types/Animal";
 import AnimalIcons from "../ui/AnimalIcons";
 
@@ -36,7 +34,7 @@ const PetCard = ({
 					</div>
 					<div className={styles.image}>
 						<img
-							src={animal.photos[0] ?? placeholder}
+							src={animal.photos[0] ?? "images/no-image.svg"}
 							alt={`A ${animal.breed} ${animal.type}`}
 							loading={isPriority ? "eager" : "lazy"}
 						/>
