@@ -1463,10 +1463,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-input-mask@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/react-input-mask/-/react-input-mask-3.0.1.tgz#9cba08b3084fe1f9426274dff086e12b4696a3aa"
-  integrity sha512-rGOW8t2Ac558TAAnaq5ZZDGHu1siTblBeY30ggAQ9sX89y2MX0/FFVDLd2DT85QRpYIQOrb7QzkF9RCoV2+nZg==
+"@types/react-input-mask@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/react-input-mask/-/react-input-mask-2.0.4.tgz#9ecfa90b0b32cb8e2039120486dffbef710d5e52"
+  integrity sha512-9VAsmcTsFe8MBQcIiQFhigiDLm5IhLuYwHJ9iN1179goCzowHscWRpdB0J+jgFJm5rldibu4dv9uFnfb6gVOsA==
   dependencies:
     "@types/react" "*"
 
@@ -5323,7 +5323,7 @@ react-gallery-carousel@^0.2.9:
   resolved "https://registry.yarnpkg.com/react-gallery-carousel/-/react-gallery-carousel-0.2.9.tgz#6f18e9a0c21811095ca1011bdd2ec9778a7a2afa"
   integrity sha512-UQ2WPyGWC72DtzbHJfQ91gQ2h7RIehd1q/aNnDP4F7iFjqUGUho8mojCWAsz7xLqGCVK9W+QDkqDMtoklLzxJA==
 
-react-input-mask@^2.0.4:
+react-input-mask@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-input-mask/-/react-input-mask-2.0.4.tgz#9ade5cf8196f4a856dbf010820fe75a795f3eb14"
   integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
