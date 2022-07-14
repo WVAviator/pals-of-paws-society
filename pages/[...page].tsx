@@ -39,19 +39,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		props: {
 			page,
 		},
-		revalidate: 3600,
 	};
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const query = `*[_type == "page"]{
+	const pageQuery = `*[_type == "page"]{
         category->{ categoryUrl },
         pageUrl
     }`;
 
 	console.log("Fetching static paths for [...page]...", new Date());
 
-	const pages: Page[] = await sanityClient.fetch(query);
+	const pages: Page[] = await sanityClient.fetch(pageQuery);
 
 	return {
 		paths: pages.map((page) => {
