@@ -16,9 +16,9 @@ export default async function handler(
 		});
 	}
 
-	try {
-		const { categoryUrl, category, pageUrl, fundraiserUrl } = req.body;
+	const { categoryUrl, category, pageUrl, fundraiserUrl } = req.body;
 
+	try {
 		if (fundraiserUrl) {
 			await res.revalidate("/fundraisers");
 			await res.revalidate(`/fundraisers/${fundraiserUrl.current}`);
@@ -35,6 +35,17 @@ export default async function handler(
 		await res.revalidate(`/${categoryUrl.current}`);
 		return res.json({ revalidated: true });
 	} catch (err) {
-		return res.status(500).send(`Error revalidating: ${req.body}`);
+		let path = "";
+
+		if (fundraiserUrl) {
+			path = `/fundraisers/${fundraiserUrl.current}`;
+		} else if (pageUrl && category) {
+			path = `/${category.categoryUrl.current}/${pageUrl.current}`;
+		} else {
+			path = `/${categoryUrl.current}`;
+		}
+		return res
+			.status(500)
+			.send(`Error revalidating path: ${path}. Error: ${err}`);
 	}
 }
