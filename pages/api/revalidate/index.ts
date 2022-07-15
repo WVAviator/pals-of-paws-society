@@ -17,7 +17,7 @@ export default async function handler(
 	}
 
 	try {
-		const { categoryUrl, pageUrl, fundraiserUrl } = req.body;
+		const { categoryUrl, category, pageUrl, fundraiserUrl } = req.body;
 
 		if (fundraiserUrl) {
 			await res.revalidate("/fundraisers");
@@ -25,8 +25,10 @@ export default async function handler(
 			return res.json({ revalidated: true });
 		}
 
-		if (pageUrl) {
-			await res.revalidate(`/${categoryUrl.current}/${pageUrl.current}`);
+		if (pageUrl && category) {
+			await res.revalidate(
+				`/${category.categoryUrl.current}/${pageUrl.current}`
+			);
 			return res.json({ revalidated: true });
 		}
 
