@@ -8,8 +8,12 @@ export default async function handler(
 		return res.status(405).end("Method not allowed");
 	}
 
-	if (req.query.secret !== process.env.REVALIDATION_TOKEN) {
-		return res.status(401).json({ message: "Invalid token" });
+	const token = req.headers.token as string;
+
+	if (token !== process.env.REVALIDATION_TOKEN) {
+		return res.status(403).json({
+			message: "Token not permitted",
+		});
 	}
 
 	try {
