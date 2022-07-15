@@ -34,7 +34,7 @@ const components: Partial<PortableTextReactComponents> = {
 			</a>
 		),
 		internalLink: ({ children, value }) => (
-			<Link href={value.href}>
+			<Link href={value?.href || "#"}>
 				<a>{children}</a>
 			</Link>
 		),
