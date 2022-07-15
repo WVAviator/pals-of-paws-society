@@ -26,7 +26,10 @@ export const getSpreadsheet = async (spreadsheetId: string) => {
 			private_key: process.env.GOOGLE_PRIVATE_KEY,
 		});
 	} catch (error) {
-		console.error("Error while obtaining spreadsheet authorization: ", error);
+		console.error(
+			"Error while obtaining spreadsheet authorization: ",
+			error
+		);
 		throw new GoogleSpreadsheetAccessError(error.message);
 	}
 	await doc.loadInfo();
@@ -35,10 +38,15 @@ export const getSpreadsheet = async (spreadsheetId: string) => {
 };
 
 export const getSpreadsheetData = async <T>(sheetMeta: SheetMeta) => {
-	const doc = await getSpreadsheet(sheetMeta.docId);
-	const sheet = doc.sheetsById[sheetMeta.sheetId];
-	const rows: unknown = await sheet.getRows();
-	return rows as T[];
+	try {
+		const doc = await getSpreadsheet(sheetMeta.docId);
+		const sheet = doc.sheetsById[sheetMeta.sheetId];
+		const rows: unknown = await sheet.getRows();
+		return rows as T[];
+	} catch (err) {
+		console.error("Error while getting spreadsheet data: ", err);
+		return [];
+	}
 };
 
 export const addSpreadsheetData = async <T extends SheetsRowData>({
