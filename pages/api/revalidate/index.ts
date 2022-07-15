@@ -17,20 +17,18 @@ export default async function handler(
 
 		if (fundraiserUrl) {
 			await res.revalidate("/fundraisers");
-			await res.revalidate(`/fundraisers/${fundraiserUrl}`);
+			await res.revalidate(`/fundraisers/${fundraiserUrl.current}`);
 			return res.json({ revalidated: true });
 		}
 
 		if (pageUrl) {
-			await res.revalidate(`/${categoryUrl}/${pageUrl}`);
+			await res.revalidate(`/${categoryUrl.current}/${pageUrl.current}`);
 			return res.json({ revalidated: true });
 		}
 
-		await res.revalidate(`/${categoryUrl}`);
+		await res.revalidate(`/${categoryUrl.current}`);
 		return res.json({ revalidated: true });
 	} catch (err) {
-		// If there was an error, Next.js will continue
-		// to show the last successfully generated page
-		return res.status(500).send("Error revalidating");
+		return res.status(500).send(`Error revalidating: ${req.body}`);
 	}
 }
