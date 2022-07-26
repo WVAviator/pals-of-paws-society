@@ -19,8 +19,8 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 	useEffect(() => {
 		console.log("Animals last updated at: ", updatedAt);
 		const getAnimalsForPage = async () => {
-			const newAnimals = (await axios.get(`/api/animals`))
-				.data as Animal[];
+			const newJSONAnimals = (await axios.get(`/api/animals`)).data;
+			const newAnimals = JSON.parse(newJSONAnimals) as Animal[];
 			setCurrentAnimals(newAnimals);
 		};
 		getAnimalsForPage();
