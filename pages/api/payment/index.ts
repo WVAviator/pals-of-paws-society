@@ -19,6 +19,8 @@ const calculateAmount = (products: Product[]): number => {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	return res.status(429).json({ message: "Too many requests" });
+
 	if (req.method === "POST") {
 		const { products, description = "Donation", metadata } = req.body;
 
