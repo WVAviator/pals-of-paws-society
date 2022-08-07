@@ -42,19 +42,32 @@ const isRateLimited = async (email: string, ip: string) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
-		const { products, description = "Donation", metadata } = req.body;
+		const {
+			products,
+			description = "Donation",
+			metadata,
+			token,
+		} = req.body;
 
-		console.log(products);
-		console.log(description);
-		console.log(metadata);
+		const recaptchaResponse = await fetch(
+			`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}&remoteip=${req.socket.localAddress}`,
+			{
+				method: "POST",
+			}
+		);
+
+		const recaptchaData = await recaptchaResponse.json();
+		console.log("Recaptcha data", recaptchaData);
+
+		if (!recaptchaData.success || recaptchaData.score < 0.5) {
+			return res.status(403).send({ error: "Authorization failed" });
+		}
 
 		const [metadataVerified, metadataVerificationMessage] =
 			verifyMetadata(metadata);
 
 		if (!metadataVerified) {
-			return res.status(400).json({
-				message: metadataVerificationMessage,
-			});
+			return res.status(400).send({ error: metadataVerificationMessage });
 		}
 
 		if (await isRateLimited(metadata.email, req.socket.localAddress)) {

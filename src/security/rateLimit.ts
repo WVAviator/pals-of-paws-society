@@ -5,13 +5,17 @@ const rateLimit = async (
 	maxRequests: number,
 	timeWindow: number
 ) => {
-	const requests = await redis.incr(key);
-	if (requests > maxRequests) {
-		return { success: false, requests };
-	}
+	try {
+		const requests = await redis.incr(key);
+		if (requests > maxRequests) {
+			return { success: false, requests };
+		}
 
-	await redis.expire(key, timeWindow);
-	return { success: true, requests };
+		await redis.expire(key, timeWindow);
+		return { success: true, requests };
+	} catch {
+		return { success: false, requests: 0 };
+	}
 };
 
 export default rateLimit;

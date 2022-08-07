@@ -4487,7 +4487,7 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hoist-non-react-statics@^3.3.1:
+hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -6940,6 +6940,13 @@ react-gallery-carousel@^0.2.9:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/react-gallery-carousel/-/react-gallery-carousel-0.2.9.tgz#6f18e9a0c21811095ca1011bdd2ec9778a7a2afa"
   integrity sha512-UQ2WPyGWC72DtzbHJfQ91gQ2h7RIehd1q/aNnDP4F7iFjqUGUho8mojCWAsz7xLqGCVK9W+QDkqDMtoklLzxJA==
+
+react-google-recaptcha-v3@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.10.0.tgz#1ec46825fe9b857d7f4ef08ee89fea05e629a9f9"
+  integrity sha512-JBoqU107X8klQmS8tQSbQh1IMsT1fH3kVoArIqnia0rtn0rPNG9Ld+9rD/dHJMculIczSZpGvIJTXXwtsolMcg==
+  dependencies:
+    hoist-non-react-statics "^3.3.2"
 
 react-input-mask@^2.0.4:
   version "2.0.4"

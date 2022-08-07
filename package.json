@@ -30,6 +30,7 @@
 		"react-dom": "18.0.0",
 		"react-facebook": "^8.1.4",
 		"react-gallery-carousel": "^0.2.9",
+		"react-google-recaptcha-v3": "^1.10.0",
 		"react-input-mask": "^2.0.4",
 		"sass": "^1.49.7",
 		"stripe": "^8.203.0",

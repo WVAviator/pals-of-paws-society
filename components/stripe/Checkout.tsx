@@ -10,13 +10,14 @@ import {
 	loadStripe,
 	StripeElementsOptions,
 } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Checkout.module.scss";
 import { Product } from "../../src/types/Product";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { BillingInfo } from "../../src/types/BillingInfo";
 import CustomButton from "../ui/CustomButton";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type CheckoutProps = {
 	open: boolean;
@@ -25,6 +26,7 @@ type CheckoutProps = {
 	confirmParams: ConfirmPaymentData;
 	metadata: BillingInfo & { products: string };
 	description?: string;
+	alternateLink?: string;
 };
 
 const getTotal = (products: Product[]): number => {
@@ -46,7 +48,10 @@ const Checkout = ({
 	confirmParams,
 	description = "Donation",
 	metadata,
+	alternateLink = "https://buy.stripe.com/bIYg0Fgnje6g6MUdR0",
 }: CheckoutProps) => {
+	const { executeRecaptcha } = useGoogleReCaptcha();
+
 	const total = getTotal(products);
 
 	const [clientSecret, setClientSecret] = useState("");
@@ -63,23 +68,29 @@ const Checkout = ({
 
 		const getClientSecret = async () => {
 			try {
+				console.log("Fetching client authorization");
+				const token = await executeRecaptcha("checkout");
+
 				console.log("Fetching client secret");
 				const response = await fetch("/api/payment", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ products, description, metadata }),
+					body: JSON.stringify({
+						products,
+						description,
+						metadata,
+						token,
+					}),
 				});
 				const responseData = await response.json();
 
-				console.log(responseData);
-
 				if (responseData.error) {
+					console.error("Error: ", responseData.error);
 					setError(responseData.error);
 					return;
 				}
 
 				setClientSecret(responseData.clientSecret);
-				console.log("Client secret set");
 			} catch (error) {
 				console.error("Error:", error);
 				setError(error.message);
@@ -87,7 +98,7 @@ const Checkout = ({
 		};
 
 		getClientSecret();
-	}, [open, products, description, metadata]);
+	}, [open, products, description, metadata, executeRecaptcha]);
 
 	const renderedProducts = products.map((product) => {
 		return (
@@ -135,6 +146,9 @@ const Checkout = ({
 				<div className={styles.center}>
 					<p>Error loading payment form:</p>
 					<p style={{ marginBottom: "2rem" }}>{error}</p>
+					<a href={alternateLink} className={styles.alternateLink}>
+						Click here for another way to donate
+					</a>
 					<CustomButton
 						size="large"
 						variant="outlined"

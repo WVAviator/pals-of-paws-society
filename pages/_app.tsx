@@ -6,6 +6,7 @@ import { muiTheme } from "../styles/muiTheme";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Fallback from "../components/layout/Fallback";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 interface AppProps {
 	Component: any;
@@ -33,9 +34,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<ThemeProvider theme={muiTheme}>
-			<PageLayout>
-				{loadingPage ? <Fallback /> : <Component {...pageProps} />}
-			</PageLayout>
+			<GoogleReCaptchaProvider
+				reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+			>
+				<PageLayout>
+					{loadingPage ? <Fallback /> : <Component {...pageProps} />}
+				</PageLayout>
+			</GoogleReCaptchaProvider>
 		</ThemeProvider>
 	);
 }

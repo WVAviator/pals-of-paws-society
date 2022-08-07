@@ -22,12 +22,10 @@ const verifyMetadata = (metadata: Partial<BillingInfo>) => {
 		return [false, "Invalid name"];
 	}
 
-	//streetAddress should contain at least one number and at least one word
 	if (!/\d{1,6}\s+\w+/.test(metadata.streetAddress)) {
 		return [false, "Invalid street address"];
 	}
 
-	//state should be one of the 50 us states
 	if (
 		!/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/.test(
 			metadata.state
@@ -36,12 +34,10 @@ const verifyMetadata = (metadata: Partial<BillingInfo>) => {
 		return [false, "Invalid state"];
 	}
 
-	//zip should be 5 digits
 	if (!/^\d{5}$/.test(metadata.zip)) {
 		return [false, "Invalid zip"];
 	}
 
-	//email should be valid
 	if (!/^[^@]+@[^@]+\.[^@]+$/.test(metadata.email)) {
 		return [false, "Invalid email"];
 	}
