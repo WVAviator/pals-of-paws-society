@@ -10,12 +10,14 @@ import {
 	loadStripe,
 	StripeElementsOptions,
 } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Checkout.module.scss";
 import { Product } from "../../src/types/Product";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { BillingInfo } from "../../src/types/BillingInfo";
+import CustomButton from "../ui/CustomButton";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type CheckoutProps = {
 	open: boolean;
@@ -24,6 +26,7 @@ type CheckoutProps = {
 	confirmParams: ConfirmPaymentData;
 	metadata: BillingInfo & { products: string };
 	description?: string;
+	alternateLink?: string;
 };
 
 const getTotal = (products: Product[]): number => {
@@ -45,27 +48,57 @@ const Checkout = ({
 	confirmParams,
 	description = "Donation",
 	metadata,
+	alternateLink = "https://buy.stripe.com/bIYg0Fgnje6g6MUdR0",
 }: CheckoutProps) => {
+	const { executeRecaptcha } = useGoogleReCaptcha();
+
 	const total = getTotal(products);
 
 	const [clientSecret, setClientSecret] = useState("");
+	const [error, setError] = useState<string | null>(null);
 
 	const handleCancelled = () => {
 		setClientSecret("");
+		setError(null);
 		setOpen(false);
 	};
 
 	useEffect(() => {
 		if (!open) return;
 
-		fetch("/api/payment", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ products, description, metadata }),
-		})
-			.then((res) => res.json())
-			.then((data) => setClientSecret(data.clientSecret));
-	}, [open, products, description, metadata]);
+		const getClientSecret = async () => {
+			try {
+				console.log("Fetching client authorization");
+				const token = await executeRecaptcha("checkout");
+
+				console.log("Fetching client secret");
+				const response = await fetch("/api/payment", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						products,
+						description,
+						metadata,
+						token,
+					}),
+				});
+				const responseData = await response.json();
+
+				if (responseData.error) {
+					console.error("Error: ", responseData.error);
+					setError(responseData.error);
+					return;
+				}
+
+				setClientSecret(responseData.clientSecret);
+			} catch (error) {
+				console.error("Error:", error);
+				setError(error.message);
+			}
+		};
+
+		getClientSecret();
+	}, [open, products, description, metadata, executeRecaptcha]);
 
 	const renderedProducts = products.map((product) => {
 		return (
@@ -97,6 +130,44 @@ const Checkout = ({
 		appearance,
 	};
 
+	let elementsContents;
+	if (clientSecret) {
+		elementsContents = (
+			<Elements options={options} stripe={stripePromise}>
+				<CheckoutForm
+					confirmParams={confirmParams}
+					handleCancelled={handleCancelled}
+				/>
+			</Elements>
+		);
+	} else {
+		if (error) {
+			elementsContents = (
+				<div className={styles.center}>
+					<p>Error loading payment form:</p>
+					<p style={{ marginBottom: "2rem" }}>{error}</p>
+					<a href={alternateLink} className={styles.alternateLink}>
+						Click here for another way to donate
+					</a>
+					<CustomButton
+						size="large"
+						variant="outlined"
+						style={{ fontSize: "1rem" }}
+						onClick={handleCancelled}
+					>
+						Cancel
+					</CustomButton>
+				</div>
+			);
+		} else {
+			elementsContents = (
+				<div className={styles.center}>
+					<CircularProgress />
+				</div>
+			);
+		}
+	}
+
 	return (
 		<Dialog open={open} fullWidth maxWidth="md">
 			<DialogTitle>Secure Checkout</DialogTitle>
@@ -116,20 +187,7 @@ const Checkout = ({
 					</div>
 				</div>
 			</DialogContent>
-			<div className={styles.stripe}>
-				{clientSecret ? (
-					<Elements options={options} stripe={stripePromise}>
-						<CheckoutForm
-							confirmParams={confirmParams}
-							handleCancelled={handleCancelled}
-						/>
-					</Elements>
-				) : (
-					<div className={styles.center}>
-						<CircularProgress />
-					</div>
-				)}
-			</div>
+			<div className={styles.stripe}>{elementsContents}</div>
 		</Dialog>
 	);
 };
