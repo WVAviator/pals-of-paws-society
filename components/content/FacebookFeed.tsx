@@ -8,6 +8,9 @@ const FacebookFeed = () => {
 				Follow us on{" "}
 				<a href="https://www.facebook.com/palsofpawssociety">Facebook!</a>
 			</p>
+			<a href="#mission" style={{ position: "absolute", top: "3rem" }}>
+				Skip Facebook feed
+			</a>
 			<FacebookProvider appId="367458938719260">
 				<Page
 					href="https://www.facebook.com/palsofpawssociety/"
