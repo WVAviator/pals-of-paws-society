@@ -1,6 +1,8 @@
 import styles from "./PetCard.module.scss";
 import { Animal } from "../../src/types/Animal";
+import placeholder from "/public/images/no-image.svg";
 import AnimalIcons from "../ui/AnimalIcons";
+import Image from "next/image";
 
 interface PetCardProps {
 	animal: Animal;
@@ -33,10 +35,13 @@ const PetCard = ({
 						<AnimalIcons type={animal.type} sex={animal.sex} />
 					</div>
 					<div className={styles.image}>
-						<img
-							src={animal.photos[0] ?? "images/no-image.svg"}
+						<Image
+							src={animal.photos[0] ?? placeholder}
 							alt={`A ${animal.breed} ${animal.type}`}
-							loading={isPriority ? "eager" : "lazy"}
+							priority={isPriority}
+							width={280}
+							height={280}
+							objectFit="cover"
 						/>
 					</div>
 					<ul>
@@ -51,14 +56,8 @@ const PetCard = ({
 					>
 						<p itemProp="name">{animal.organization.name}</p>
 						<meta itemProp="location" content={animal.location} />
-						<meta
-							itemProp="email"
-							content={animal.organization.email}
-						/>
-						<meta
-							itemProp="url"
-							content={animal.organization.website}
-						/>
+						<meta itemProp="email" content={animal.organization.email} />
+						<meta itemProp="url" content={animal.organization.website} />
 					</div>
 				</div>
 			</div>
