@@ -28,4 +28,16 @@
 			font-size: 1.5rem;
 		}
 	}
+	a {
+		color: $color-highContrast;
+		text-decoration: none;
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.contactInfo {
+		font-size: 0.9rem;
+		color: gray;
+	}
 }

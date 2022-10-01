@@ -18,11 +18,24 @@ const OrgBio = ({ org }: OrgBioProps) => {
 			<Paper elevation={3} className={styles.card}>
 				<h2 itemProp="name">{org.name}</h2>
 				<p itemProp="location">{`${org.address?.city}, ${org.address?.state}`}</p>
-				<p>
-					<span itemProp="email">{org.email}</span> |{" "}
-					<span itemProp="telephone">{org.phone}</span>
-				</p>
-				{org.website ? <p itemProp="url">{org.website}</p> : null}
+				<p>&nbsp;</p>
+				<p className={styles.contactInfo}>Email</p>
+				<a href={`mailto:${org.email}`}>
+					<p itemProp="email">{org.email}</p>
+				</a>
+				<p className={styles.contactInfo}>Phone</p>
+				<a href={`tel:${org.phone}`}>
+					<p itemProp="telephone">{org.phone}</p>
+				</a>
+
+				{org.website ? (
+					<>
+						<p className={styles.contactInfo}>Website</p>
+						<a href={org.website}>
+							<p itemProp="url">{org.website}</p>
+						</a>
+					</>
+				) : null}
 			</Paper>
 		</article>
 	);
