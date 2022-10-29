@@ -30,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const animals = await getAllAnimals();
 	console.log(`${animals.length} animals retrieved and sent to redis cache.`);
 
-	const allAnimals = JSON.stringify(animals);
+	const allAnimals = JSON.stringify(animals.slice(0, 250));
 	const firstPage = JSON.stringify(animals.slice(0, 24));
 
 	try {
