@@ -13,6 +13,7 @@ interface PawprintSectionProps {
 	minimumHeight?: string;
 	addPawprints?: boolean;
 	pawprintColor?: string;
+	sectionId?: string;
 }
 
 const PawprintSection = ({
@@ -25,6 +26,7 @@ const PawprintSection = ({
 	sectionTitle,
 	minimumHeight = "20rem",
 	addPawprints = true,
+	sectionId = "",
 }: PawprintSectionProps) => {
 	const pawprintStyle = {
 		transform: `translate(-50%, -50%) rotate(${pawprintRotation}deg)`,
@@ -43,6 +45,7 @@ const PawprintSection = ({
 			aria-label={sectionTitle}
 			className={styles.section}
 			style={backgroundStyle}
+			id={sectionId}
 		>
 			{addPawprints ? (
 				<div className={styles.imageContainer} style={pawprintStyle}>

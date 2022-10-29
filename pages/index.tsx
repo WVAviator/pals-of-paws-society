@@ -66,6 +66,7 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 				pawprintRotation={5}
 				backgroundColor="white"
 				pawprintOpacity={0.05}
+				sectionId="mission"
 			>
 				<MissionVision />
 			</PawprintSection>
