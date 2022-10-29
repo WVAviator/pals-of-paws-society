@@ -1,3 +1,4 @@
+import { BeachAccessRounded } from "@mui/icons-material";
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "./../types/PetfinderAnimal";
 
@@ -27,6 +28,12 @@ const extractBreed = ({ breeds }: PetfinderAnimal) => {
 
 const capitalize = (str: string) => {
 	const words = str.trim().split(" ");
+
+	for (let i = 0; i < words.length; i++) {
+		if (!words[i]) {
+			words.splice(i, 1);
+		}
+	}
 
 	return words
 		.map((word) => {
