@@ -26,7 +26,7 @@ const PalsOfPawsSociety: Organization = {
 	id: "1",
 	name: "Pals of Paws Society",
 	email: "info@palsofpawssociety.org",
-	phone: "(954) 224-8463",
+	phone: "(954) 224-9779",
 	address: {
 		address1: "12 W Commerce St Unit 49",
 		city: "Hernando",
