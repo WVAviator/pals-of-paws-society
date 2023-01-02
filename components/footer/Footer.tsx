@@ -9,7 +9,7 @@ const Footer = () => {
 				<FooterNavigation />
 				<FooterLogo />
 				<div className={styles.copyright}>
-					<p>© 2022 Pals of Paws Society. All Rights Reserved.</p>
+					<p>© 2023 Pals of Paws Society. All Rights Reserved.</p>
 				</div>
 			</div>
 		</footer>

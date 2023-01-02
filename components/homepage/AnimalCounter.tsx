@@ -15,7 +15,7 @@ interface AnimalCounterProps {
 const AnimalCounter = ({ catCount, dogCount }: AnimalCounterProps) => {
 	return (
 		<div className={styles.counters}>
-			<p>So far, in 2022, we have helped</p>
+			<p>Since 2022, we have helped</p>
 			<div className={styles.petCounter}>
 				<div className={styles.icon}>
 					<Image
