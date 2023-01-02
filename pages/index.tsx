@@ -119,8 +119,8 @@ export const getStaticProps: GetStaticProps = async () => {
 		sheetId: catSheetId,
 	});
 
-	const catCount = catSheetData?.length || 381;
-	const dogCount = dogSheetData?.length || 160;
+	const catCount = catSheetData?.length || 751;
+	const dogCount = dogSheetData?.length || 208;
 
 	return {
 		props: { catCount, dogCount },
