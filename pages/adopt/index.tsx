@@ -1,18 +1,12 @@
-import axios from "axios";
-import { GetServerSideProps, GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 import { AnimalFilter } from "../../components/forms/AnimalFilter";
+import Fallback from "../../components/layout/Fallback";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
-import redis from "../../src/redis";
 import { Animal } from "../../src/types/Animal";
-interface AdoptProps {
-	animals: Animal[];
-	updatedAt: string;
-}
 
-const Adopt = ({ animals, updatedAt }: AdoptProps) => {
-	const [currentAnimals, setCurrentAnimals] = useState(animals);
+const Adopt = () => {
+	const [currentAnimals, setCurrentAnimals] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [currentAnimal, setCurrentAnimal] = useState<Animal | null>(null);
 	const [savedScrollPosition, setSavedScrollPosition] = useState(0);
@@ -26,7 +20,6 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 	});
 
 	useEffect(() => {
-		console.log("Animals last updated at: ", updatedAt);
 		const getAnimalsForPage = async () => {
 			const response = await fetch(`/api/animals`);
 			const responseJson = await response.json();
@@ -36,7 +29,7 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 			setLoading(false);
 		};
 		getAnimalsForPage();
-	}, [updatedAt]);
+	}, []);
 
 	const goToAnimal = (animal: Animal) => {
 		setSavedScrollPosition(window.scrollY);
@@ -63,6 +56,10 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 		return true;
 	});
 
+	if (loading) {
+		return <Fallback />;
+	}
+
 	return (
 		<div>
 			{currentAnimal ? (
@@ -84,20 +81,6 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 			)}
 		</div>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-	console.log("Retrieving animals...", new Date());
-
-	const jsonAnimals = await redis.get("animals:1");
-	const animals: Animal[] = (await JSON.parse(jsonAnimals)) || [];
-
-	return {
-		props: {
-			animals,
-			updatedAt: new Date().toISOString(),
-		},
-	};
 };
 
 export default Adopt;
