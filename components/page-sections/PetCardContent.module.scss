@@ -19,15 +19,39 @@
 .header {
 	@include restrict-width;
 	h1 {
-		margin-bottom: 1em;
+		margin-bottom: 0.5em;
+		text-align: center;
+	}
+	p {
+		font-size: small;
+		text-align: center;
+	}
+	@include mq-desktop {
+		h1 {
+			text-align: left;
+		}
+		p {
+			text-align: left;
+		}
 	}
 }
 
 .pagination {
 	width: 100%;
 	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
 	ul {
 		justify-content: center;
+	}
+	@include mq-desktop {
+		flex-direction: row;
+		ul {
+			justify-content: flex-start;
+		}
 	}
 }
 
