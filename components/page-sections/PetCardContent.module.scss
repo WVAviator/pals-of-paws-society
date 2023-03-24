@@ -21,6 +21,7 @@
 	h1 {
 		margin-bottom: 0.5em;
 		text-align: center;
+		font-size: 1.75rem;
 	}
 	p {
 		font-size: small;
@@ -29,9 +30,11 @@
 	@include mq-desktop {
 		h1 {
 			text-align: left;
+			font-size: 2rem;
 		}
 		p {
 			text-align: left;
+			font-size: medium;
 		}
 	}
 }

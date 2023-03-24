@@ -20,13 +20,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	console.log(`${animals.length} animals retrieved. Caching and returning...`);
 
 	const animalsJson = JSON.stringify(animals);
-	const animalsJsonFirstPage = JSON.stringify(animals.slice(0, 24));
 
 	try {
-		// First page of results does not expire for SSR (client request will replace after hydration)
-		await redis.set(`animals:1`, animalsJsonFirstPage);
 		await redis.set(`animals`, animalsJson, "EX", 120);
-		await redis.set("timestamp", new Date().toISOString());
 
 		return res.json(animalsJson);
 	} catch (err) {
