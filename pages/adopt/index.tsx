@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import PetDisplay from "../../components/page-sections/PetDisplay";
@@ -48,10 +48,7 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 		<div>
 			{currentAnimal ? (
 				<>
-					<PetDisplay
-						animal={currentAnimal}
-						routeBack={returnToSearch}
-					/>
+					<PetDisplay animal={currentAnimal} routeBack={returnToSearch} />
 				</>
 			) : (
 				<>
@@ -67,8 +64,8 @@ const Adopt = ({ animals, updatedAt }: AdoptProps) => {
 	);
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-	console.log("Retrieving static props...", new Date());
+export const getServerSideProps: GetServerSideProps = async () => {
+	console.log("Retrieving animals...", new Date());
 
 	const jsonAnimals = await redis.get("animals:1");
 	const animals: Animal[] = (await JSON.parse(jsonAnimals)) || [];
@@ -78,7 +75,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			animals,
 			updatedAt: new Date().toISOString(),
 		},
-		revalidate: 3600,
 	};
 };
 
