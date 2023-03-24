@@ -15,6 +15,7 @@ import MissionVision from "../components/homepage/MissionVision";
 import UpdatesContent from "../components/page-sections/UpdatesContent";
 import { GetStaticProps } from "next";
 import { getSpreadsheetData } from "../src/api/SheetData";
+import Petco from "../components/brand/Petco/Petco";
 
 interface HomeProps {
 	catCount: number;
@@ -100,6 +101,13 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 						alt="A bulldog sitting on an exam table at the vet"
 					/>
 				</CardContent>
+			</PawprintSection>
+			<PawprintSection
+				addPawprints={false}
+				sectionTitle="Partners"
+				minimumHeight="5rem"
+			>
+				<Petco />
 			</PawprintSection>
 		</>
 	);

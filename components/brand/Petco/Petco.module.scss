@@ -1,0 +1,31 @@
+@use "/styles/variables" as *;
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 1rem;
+	@include restrict-width;
+	h2 {
+		font-size: x-large;
+	}
+	@include mq-tablet {
+		flex-direction: row;
+		gap: 1rem;
+	}
+}
+
+.svg {
+	// Petco branding requirements:
+	// - SVG must be 70px tall minimum
+	// - SVG must have 40px of padding (size of the "o" in "love" when logo 70px tall)
+	// - Cannot change the color
+
+	padding: 40px;
+	height: calc(70px + 40px + 40px);
+	width: 288px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
