@@ -4,42 +4,27 @@ import { getAllAnimals } from "../../../src/api/GetAnimals";
 import redis from "../../../src/redis";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	if (req.method === "GET") {
-		const animals = await redis.get(`animals`);
-		if (animals) {
-			return res.status(200).json(animals);
-		} else {
-			return res.status(500).json({ error: "Internal server error" });
-		}
-	}
-
-	if (req.method !== "POST") {
+	if (req.method !== "GET") {
 		return res.status(405).json({
 			message: "Method not allowed",
 		});
 	}
 
-	const token = req.headers.token as string;
-
-	if (token !== process.env.ANIMALS_TOKEN) {
-		return res.status(403).json({
-			message: "Token not permitted",
-		});
+	const cachedAnimals = await redis.get(`animals`);
+	if (cachedAnimals) {
+		return res.status(200).json(cachedAnimals);
 	}
 
 	const animals = await getAllAnimals();
-	console.log(`${animals.length} animals retrieved and sent to redis cache.`);
 
-	const allAnimals = JSON.stringify(animals.slice(0, 250));
-	const firstPage = JSON.stringify(animals.slice(0, 24));
+	console.log(`${animals.length} animals retrieved. Caching and returning...`);
+
+	const animalsJson = JSON.stringify(animals);
 
 	try {
-		await redis.set(`animals:1`, firstPage);
-		await redis.set(`animals`, allAnimals);
-		await redis.set("timestamp", new Date().toISOString());
-		return res.status(200).json({
-			message: "Successfully updated the animals cache.",
-		});
+		await redis.set(`animals`, animalsJson, "EX", 120);
+
+		return res.json(animalsJson);
 	} catch (err) {
 		return res.status(500).json({
 			message: "Error updating the animals cache.",
