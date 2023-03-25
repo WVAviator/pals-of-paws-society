@@ -30,7 +30,7 @@ const InfoCard = ({
 						<div className={styles.cardImage}>
 							<Image src={image} alt={alt} width={357} height={357} />
 						</div>
-						<h2 id={`heading-${id}`}>{heading}</h2>
+						<h3 id={`heading-${id}`}>{heading}</h3>
 						<p id={`desc-${id}`}>{description}</p>
 						<div className={styles.cardAction}>
 							<span>{callToAction}</span>
