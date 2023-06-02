@@ -1,0 +1,11 @@
+@use "/styles/variables" as *;
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2.5rem;
+	svg {
+		transform: scale(1.15);
+	}
+}

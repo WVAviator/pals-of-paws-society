@@ -5,11 +5,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	padding: 1rem;
-	@include restrict-width;
-	h2 {
-		font-size: x-large;
-	}
+
 	@include mq-tablet {
 		flex-direction: row;
 		gap: 1rem;
