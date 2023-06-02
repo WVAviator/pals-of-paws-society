@@ -16,6 +16,8 @@ import UpdatesContent from "../components/page-sections/UpdatesContent";
 import { GetStaticProps } from "next";
 import { getSpreadsheetData } from "../src/api/SheetData";
 import Petco from "../components/brand/Petco/Petco";
+import Titos from "../components/brand/Titos/Titos";
+import Sponsors from "../components/brand/Sponsors/Sponsors";
 
 interface HomeProps {
 	catCount: number;
@@ -107,7 +109,10 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 				sectionTitle="Partners"
 				minimumHeight="5rem"
 			>
-				<Petco />
+				<Sponsors>
+					<Petco />
+					<Titos />
+				</Sponsors>
 			</PawprintSection>
 		</>
 	);

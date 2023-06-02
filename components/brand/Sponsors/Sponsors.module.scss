@@ -1,0 +1,24 @@
+@use "/styles/variables" as *;
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	@include mq-tablet {
+		gap: 2rem;
+	}
+}
+
+.outer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	@include restrict-width;
+	h2 {
+		font-size: 2rem;
+	}
+}
