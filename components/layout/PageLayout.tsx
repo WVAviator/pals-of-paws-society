@@ -1,4 +1,4 @@
-import { DefaultSeo } from "next-seo";
+import { DefaultSeo, LocalBusinessJsonLd } from "next-seo";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import ogImage from "/images/og/pop-og.png";
@@ -30,6 +30,38 @@ const PageLayout = ({ children }: PageLayoutProps) => {
 						},
 					],
 				}}
+			/>
+			<LocalBusinessJsonLd
+				type="NGO"
+				id="https://www.palsofpawssociety.org/"
+				name="Pals of Paws Society"
+				description="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and veterinary financial assistance for shelters, rescue groups, and individuals throughout Desoto, Tate, and Tunica counties, as well as Memphis, Tennessee, from our headquarters in Hernando."
+				url="https://www.palsofpawssociety.org/"
+				additionalType="http://www.productontology.org/id/Non-profit_organization"
+				images={[
+					"https://www.palsofpawssociety.org/images/og/pop-og.png",
+					"https://www.palsofpawssociety.org/images/pop-logo.png",
+				]}
+				telephone="+19014436336"
+				address={{
+					streetAddress: "12 W Commerce St Unit 49",
+					addressLocality: "Hernando",
+					addressRegion: "MS",
+					postalCode: "38632",
+					addressCountry: "US",
+				}}
+				geo={{ latitude: 34.823, longitude: -89.993 }}
+				areaServed={[
+					{
+						geoMidpoint: {
+							latitude: "34.823",
+							longitude: "-89.993",
+						},
+						geoRadius: "30",
+					},
+				]}
+				sameAs={["https://www.facebook.com/PalsofPawsSociety"]}
+				nonprofitStatus="http://schema.org/Nonprofit501c3"
 			/>
 			<Header />
 			<main id="main">{children}</main>
