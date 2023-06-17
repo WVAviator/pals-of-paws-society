@@ -12,10 +12,18 @@ interface AnimalIconsProps {
 
 const AnimalIcons = ({ sex, type }: AnimalIconsProps) => {
 	const sexIcon = (
-		<Image src={sex === "female" ? femaleIcon : maleIcon} alt={sex} />
+		<Image
+			aria-label={sex}
+			src={sex === "female" ? femaleIcon : maleIcon}
+			alt={sex}
+		/>
 	);
 	const typeIcon = (
-		<Image src={type === "dog" ? dogIcon : catIcon} alt={type} />
+		<Image
+			aria-label={type}
+			src={type === "dog" ? dogIcon : catIcon}
+			alt={type}
+		/>
 	);
 
 	return (
