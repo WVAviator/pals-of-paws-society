@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	try {
 		const response = await fetch(
-			`http://localhost:3000/api/animals/${animalId}`
+			`${process.env.NEXT_PUBLIC_URL}/api/animals/${animalId}`
 		);
 		const animal = await response.json();
 		return {
