@@ -1,30 +1,16 @@
 import { GetServerSideProps, NextPage } from "next";
-import React from "react";
-import useAdoptionBrowsingContext from "../../context/useAdoptionBrowsingContext";
-import { useRouter } from "next/router";
-import Fallback from "../../components/layout/Fallback";
-import PetDisplay from "../../components/page-sections/PetDisplay";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
+import PetDisplay from "../../components/page-sections/PetDisplay";
+import { Animal } from "../../src/types/Animal";
 
 interface AnimalPageProps {
-	animalId: string;
+	animal: Animal;
 	referrer: string;
 }
 
-const AnimalPage: NextPage<AnimalPageProps> = ({ animalId, referrer }) => {
-	const [animal, setAnimal] = React.useState(null);
-
-	const { currentAnimals } = useAdoptionBrowsingContext();
-
+const AnimalPage: NextPage<AnimalPageProps> = ({ animal, referrer }) => {
 	const router = useRouter();
-
-	React.useEffect(() => {
-		setAnimal(currentAnimals.find((animal) => animal.id === animalId));
-	}, [currentAnimals, animalId]);
-
-	if (!animal) {
-		return <Fallback />;
-	}
 
 	const handleRouteBack = () => {
 		if (referrer === "/adopt") {
@@ -70,12 +56,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { animalId } = context.query;
 	const referrer = context.req.headers.referer || "";
 
-	return {
-		props: {
-			animalId,
-			referrer,
-		},
-	};
+	try {
+		const response = await fetch(
+			`http://localhost:3000/api/animals/${animalId}`
+		);
+		const animal = await response.json();
+		return {
+			props: {
+				animal,
+				referrer,
+			},
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/adopt",
+			},
+			props: {},
+		};
+	}
 };
 
 export default AnimalPage;
