@@ -1,11 +1,10 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
-import Link from "next/link";
 
-import heroImage from "/public/images/hero.jpg";
-import styles from "./Hero.module.scss";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import CustomButton from "../ui/CustomButton";
+import styles from "./Hero.module.scss";
+import heroImage from "/public/images/hero.jpg";
 
 const widthToShiftImage = 1150;
 const mobileShift = "75%";

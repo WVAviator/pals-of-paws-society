@@ -1,9 +1,5 @@
 import {
-	FormControl,
-	FormHelperText,
 	InputAdornment,
-	InputLabel,
-	OutlinedInput,
 	TextField,
 	ToggleButton,
 	ToggleButtonGroup,
@@ -88,9 +84,7 @@ const Donation = ({ setDonationAmount }: DonationProps) => {
 						min: 1,
 					}}
 					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">$</InputAdornment>
-						),
+						startAdornment: <InputAdornment position="start">$</InputAdornment>,
 					}}
 				></TextField>
 			</div>

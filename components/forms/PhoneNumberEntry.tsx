@@ -1,7 +1,6 @@
-import { FormControl, Input, InputLabel, TextField } from "@mui/material";
-import React from "react";
+import { TextField } from "@mui/material";
+import InputMask from "react-input-mask";
 import { BillingInfo } from "../../src/types/BillingInfo";
-import InputMask, { Props } from "react-input-mask";
 
 interface PhoneNumberEntryProps {
 	formData: BillingInfo;
@@ -9,9 +8,7 @@ interface PhoneNumberEntryProps {
 }
 
 const PhoneNumberEntry = ({ formData, setFormData }: PhoneNumberEntryProps) => {
-	const handleChange = (event: {
-		target: { name: string; value: string };
-	}) => {
+	const handleChange = (event: { target: { name: string; value: string } }) => {
 		setFormData({
 			...formData,
 			phone: event.target.value,

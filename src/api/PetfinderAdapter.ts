@@ -1,4 +1,3 @@
-import { BeachAccessRounded } from "@mui/icons-material";
 import { Animal } from "../types/Animal";
 import { PetfinderAnimal } from "./../types/PetfinderAnimal";
 

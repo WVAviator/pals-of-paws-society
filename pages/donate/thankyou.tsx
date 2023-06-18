@@ -1,7 +1,6 @@
-import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ThankYouContent from "../../components/donate/ThankYouContent";
 import PawprintSection from "../../components/page-sections/PawprintSection";
 

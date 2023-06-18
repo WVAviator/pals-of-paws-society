@@ -23,7 +23,6 @@ const useAdoptionBrowsingContext = () => {
 
 			const response = await fetch(`/api/animals`);
 			const newAnimals: Animal[] = await response.json();
-			// const newAnimals: Animal[] = await JSON.parse(responseJson);
 
 			setCurrentAnimals(newAnimals);
 			setLoading(false);

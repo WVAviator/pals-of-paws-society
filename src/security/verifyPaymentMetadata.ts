@@ -1,5 +1,4 @@
 import { BillingInfo } from "../types/BillingInfo";
-import rateLimit from "./rateLimit";
 
 const verifyMetadata = (metadata: Partial<BillingInfo>) => {
 	if (

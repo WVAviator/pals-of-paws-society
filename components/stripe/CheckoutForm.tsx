@@ -1,10 +1,8 @@
 import {
 	Alert,
-	Button,
 	CircularProgress,
 	DialogActions,
 	DialogContent,
-	DialogTitle,
 } from "@mui/material";
 import {
 	PaymentElement,
@@ -12,7 +10,7 @@ import {
 	useStripe,
 } from "@stripe/react-stripe-js";
 import { ConfirmPaymentData } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CustomButton from "../ui/CustomButton";
 
 type CheckoutFormProps = {
