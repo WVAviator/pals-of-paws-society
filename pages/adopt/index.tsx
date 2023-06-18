@@ -17,10 +17,6 @@ const Adopt = () => {
 
 	useScrollMemory();
 
-	if (loading) {
-		return <Fallback />;
-	}
-
 	return (
 		<>
 			<NextSeo
@@ -35,24 +31,28 @@ const Adopt = () => {
 					images: [
 						{
 							url: "https://www.palsofpawssociety.org/images/og/pop-og.png",
-							width: 800,
-							height: 600,
+							width: 1200,
+							height: 630,
 							alt: "Adoptions - Pals of Paws Society",
 						},
 					],
 				}}
 			/>
-			<div>
-				<PetCardContent
-					animals={filteredAnimals}
-					page={currentPage}
-					setPage={changePage}
-					routeToAnimal={goToAnimal}
-					filter={filter}
-					setFilter={setFilter}
-					loading={loading}
-				/>
-			</div>
+			{loading ? (
+				<Fallback />
+			) : (
+				<div>
+					<PetCardContent
+						animals={filteredAnimals}
+						page={currentPage}
+						setPage={changePage}
+						routeToAnimal={goToAnimal}
+						filter={filter}
+						setFilter={setFilter}
+						loading={loading}
+					/>
+				</div>
+			)}
 		</>
 	);
 };
