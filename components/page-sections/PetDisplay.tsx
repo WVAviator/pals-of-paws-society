@@ -2,7 +2,6 @@ import ArrowLeft from "@mui/icons-material/ArrowLeft";
 import { Animal } from "../../src/types/Animal";
 import PetCarousel from "../content/PetCarousel";
 import PetContent from "../layout/PetContent";
-import AnimalMeta from "../meta/AnimalMeta";
 import PawprintSection from "./PawprintSection";
 
 interface PetDisplayProps {
@@ -22,7 +21,6 @@ const PetDisplay = ({ animal, routeBack }: PetDisplayProps) => {
 
 	return (
 		<>
-			<AnimalMeta animal={animal} />
 			<div style={backStyle} onClick={() => routeBack()}>
 				<ArrowLeft htmlColor="white" />
 				Back to Results

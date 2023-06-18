@@ -2,7 +2,6 @@ import { Paper } from "@mui/material";
 import { Animal } from "../../src/types/Animal";
 import AnimalIcons from "../ui/AnimalIcons";
 import styles from "./PetBio.module.scss";
-import { NextSeo } from "next-seo";
 
 interface PetBioProps {
 	animal: Animal;

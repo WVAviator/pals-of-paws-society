@@ -1,23 +1,22 @@
-import Head from "next/head";
+import InfoCard from "../components/content/InfoCard";
 import Hero from "../components/homepage/Hero";
 import CardContent from "../components/page-sections/CardContent";
-import InfoCard from "../components/content/InfoCard";
 import PawprintSection from "../components/page-sections/PawprintSection";
 
-import aboutImage01 from "/public/images/kitten01.jpg";
-import aboutImage02 from "/public/images/van.jpg";
-import aboutImage03 from "/public/images/rottweiler.jpg";
-import volunteerImage01 from "/public/images/dogWithTrainer.png";
-import volunteerImage02 from "/public/images/dogInHome.png";
 import volunteerImage03 from "/public/images/dogAtVet.png";
+import volunteerImage02 from "/public/images/dogInHome.png";
+import volunteerImage01 from "/public/images/dogWithTrainer.png";
+import aboutImage01 from "/public/images/kitten01.jpg";
+import aboutImage03 from "/public/images/rottweiler.jpg";
+import aboutImage02 from "/public/images/van.jpg";
 
+import { GetStaticProps } from "next";
+import Petco from "../components/brand/Petco/Petco";
+import Sponsors from "../components/brand/Sponsors/Sponsors";
+import Titos from "../components/brand/Titos/Titos";
 import MissionVision from "../components/homepage/MissionVision";
 import UpdatesContent from "../components/page-sections/UpdatesContent";
-import { GetStaticProps } from "next";
 import { getSpreadsheetData } from "../src/api/SheetData";
-import Petco from "../components/brand/Petco/Petco";
-import Titos from "../components/brand/Titos/Titos";
-import Sponsors from "../components/brand/Sponsors/Sponsors";
 
 interface HomeProps {
 	catCount: number;

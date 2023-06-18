@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import Fallback from "../../components/layout/Fallback";
 import PetCardContent from "../../components/page-sections/PetCardContent";
 import useAdoptionBrowsingContext from "../../context/useAdoptionBrowsingContext";
@@ -21,17 +22,38 @@ const Adopt = () => {
 	}
 
 	return (
-		<div>
-			<PetCardContent
-				animals={filteredAnimals}
-				page={currentPage}
-				setPage={changePage}
-				routeToAnimal={goToAnimal}
-				filter={filter}
-				setFilter={setFilter}
-				loading={loading}
+		<>
+			<NextSeo
+				title="Adoptions - Pals of Paws Society"
+				description="These homeless pets are available for adoption from us and from other animal shelters and rescue organizations in Northwest Mississippi."
+				canonical="https://www.palsofpawssociety.org/adopt"
+				openGraph={{
+					url: "https://www.palsofpawssociety.org/adopt",
+					title: "Adoptions - Pals of Paws Society",
+					description:
+						"These homeless pets are available for adoption from us and from other animal shelters and rescue organizations in Northwest Mississippi.",
+					images: [
+						{
+							url: "https://www.palsofpawssociety.org/images/og/pop-og.png",
+							width: 800,
+							height: 600,
+							alt: "Adoptions - Pals of Paws Society",
+						},
+					],
+				}}
 			/>
-		</div>
+			<div>
+				<PetCardContent
+					animals={filteredAnimals}
+					page={currentPage}
+					setPage={changePage}
+					routeToAnimal={goToAnimal}
+					filter={filter}
+					setFilter={setFilter}
+					loading={loading}
+				/>
+			</div>
+		</>
 	);
 };
 

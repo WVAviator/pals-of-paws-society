@@ -1,7 +1,6 @@
 import { DefaultSeo, LocalBusinessJsonLd } from "next-seo";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
-import ogImage from "/images/og/pop-og.png";
 
 interface PageLayoutProps {
 	children: React.ReactNode;
