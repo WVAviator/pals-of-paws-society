@@ -1,4 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 import { fetchAndCacheAllAnimals } from "../../../src/api/GetAnimals";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,10 +9,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 	}
 
+	const { animalId } = req.query;
+
 	try {
 		const animals = await fetchAndCacheAllAnimals();
 
-		return res.json(animals);
+		const animal = animals.find((animal) => animal.id === animalId);
+
+		if (!animal) {
+			return res.status(404).json({
+				message: "Animal not found",
+			});
+		}
+
+		return res.status(200).json(animal);
 	} catch (err) {
 		return res.status(500).json({
 			message: "Error fetching animals.",

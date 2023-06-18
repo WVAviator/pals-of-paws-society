@@ -7,32 +7,26 @@ interface OrgBioProps {
 }
 
 const OrgBio = ({ org }: OrgBioProps) => {
-	const orgSchema = (orgName: string) => {
-		return orgName.toLowerCase().includes("shelter")
-			? "https://schema.org/AnimalShelter"
-			: "https://schema.org/LocalBusiness";
-	};
-
 	return (
-		<article aria-label="Organization" itemScope itemType={orgSchema(org.name)}>
+		<article aria-labelledby={`org-${org.id}`}>
 			<Paper elevation={3} className={styles.card}>
-				<h2 itemProp="name">{org.name}</h2>
-				<p itemProp="location">{`${org.address?.city}, ${org.address?.state}`}</p>
+				<h2 id={`org-${org.id}`}>{org.name}</h2>
+				<p>{`${org.address?.city}, ${org.address?.state}`}</p>
 				<p>&nbsp;</p>
 				<p className={styles.contactInfo}>Email</p>
 				<a href={`mailto:${org.email}`}>
-					<p itemProp="email">{org.email}</p>
+					<p>{org.email}</p>
 				</a>
 				<p className={styles.contactInfo}>Phone</p>
 				<a href={`tel:${org.phone}`}>
-					<p itemProp="telephone">{org.phone}</p>
+					<p>{org.phone}</p>
 				</a>
 
 				{org.website ? (
 					<>
 						<p className={styles.contactInfo}>Website</p>
 						<a href={org.website}>
-							<p itemProp="url">{org.website}</p>
+							<p>{org.website}</p>
 						</a>
 					</>
 				) : null}

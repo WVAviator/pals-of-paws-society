@@ -3,7 +3,6 @@ import PetCard from "../../components/content/PetCard";
 import { CircularProgress, Pagination } from "@mui/material";
 import { Animal } from "../../src/types/Animal";
 import { useEffect, useState } from "react";
-import AdoptMeta from "../meta/AdoptMeta";
 import AnimalFilter, { AnimalFilter as Filter } from "../forms/AnimalFilter";
 
 interface PetCardContentProps {
@@ -55,7 +54,6 @@ const PetCardContent = ({
 
 	const pagination = (
 		<>
-			<AdoptMeta />
 			<div className={styles.pagination}>
 				{!loading ? (
 					<Pagination

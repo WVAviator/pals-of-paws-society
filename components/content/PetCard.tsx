@@ -20,12 +20,6 @@ const PetCard = ({
 			? `${styles.card} ${styles.featured}`
 			: styles.card;
 
-	const orgSchema = (orgName: string) => {
-		return orgName.toLowerCase().includes("shelter")
-			? "https://schema.org/AnimalShelter"
-			: "https://schema.org/LocalBusiness";
-	};
-
 	return (
 		<a onClick={() => routeToAnimal(animal)}>
 			<div key={animal.id} className={cardStyle}>
@@ -49,15 +43,8 @@ const PetCard = ({
 						<li>Breed: {animal.breed}</li>
 						<li>Location: {animal.location}</li>
 					</ul>
-					<div
-						className={styles.org}
-						itemScope
-						itemType={orgSchema(animal.organization.name)}
-					>
-						<p itemProp="name">{animal.organization.name}</p>
-						<meta itemProp="location" content={animal.location} />
-						<meta itemProp="email" content={animal.organization.email} />
-						<meta itemProp="url" content={animal.organization.website} />
+					<div className={styles.org}>
+						<p>{animal.organization.name}</p>
 					</div>
 				</div>
 			</div>

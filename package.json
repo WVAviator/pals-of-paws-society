@@ -25,6 +25,7 @@
 		"next": "^12.2.0",
 		"next-sanity": "^0.5.1",
 		"next-sanity-image": "^3.2.1",
+		"next-seo": "^6.0.0",
 		"nodeenv": "^3.0.74",
 		"react": "18.0.0",
 		"react-dom": "18.0.0",

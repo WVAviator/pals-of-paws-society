@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Fallback from "../components/layout/Fallback";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import AdoptionBrowsingProvider from "../context/AdoptionBrowsingProvider";
 
 interface AppProps {
 	Component: any;
@@ -37,9 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<GoogleReCaptchaProvider
 				reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 			>
-				<PageLayout>
-					{loadingPage ? <Fallback /> : <Component {...pageProps} />}
-				</PageLayout>
+				<AdoptionBrowsingProvider>
+					<PageLayout>
+						{loadingPage ? <Fallback /> : <Component {...pageProps} />}
+					</PageLayout>
+				</AdoptionBrowsingProvider>
 			</GoogleReCaptchaProvider>
 		</ThemeProvider>
 	);

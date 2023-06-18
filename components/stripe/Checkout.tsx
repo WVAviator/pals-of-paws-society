@@ -4,20 +4,20 @@ import {
 	DialogContent,
 	DialogTitle,
 } from "@mui/material";
+import { Elements } from "@stripe/react-stripe-js";
 import {
 	Appearance,
 	ConfirmPaymentData,
-	loadStripe,
 	StripeElementsOptions,
+	loadStripe,
 } from "@stripe/stripe-js";
-import React, { useCallback, useEffect, useState } from "react";
-import styles from "./Checkout.module.scss";
-import { Product } from "../../src/types/Product";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./CheckoutForm";
-import { BillingInfo } from "../../src/types/BillingInfo";
-import CustomButton from "../ui/CustomButton";
+import React, { useEffect, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { BillingInfo } from "../../src/types/BillingInfo";
+import { Product } from "../../src/types/Product";
+import CustomButton from "../ui/CustomButton";
+import styles from "./Checkout.module.scss";
+import CheckoutForm from "./CheckoutForm";
 
 type CheckoutProps = {
 	open: boolean;

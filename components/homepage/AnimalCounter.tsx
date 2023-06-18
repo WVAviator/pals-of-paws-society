@@ -1,11 +1,9 @@
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
 import CustomButton from "../ui/CustomButton";
 import styles from "./AnimalCounter.module.scss";
 import cat from "/public/images/cat-purple.svg";
 import dog from "/public/images/dog-purple.svg";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useEffect, useState } from "react";
-import { GetStaticProps } from "next";
 
 interface AnimalCounterProps {
 	catCount: number;

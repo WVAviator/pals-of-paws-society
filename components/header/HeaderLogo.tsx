@@ -11,18 +11,13 @@ const HeaderLogo = () => {
 	return (
 		<Link href="/">
 			<a>
-				<div
-					className={styles.logo}
-					itemScope
-					itemType="https://schema.org/LocalBusiness"
-				>
+				<div className={styles.logo}>
 					<div className={styles.mobile}>
 						<Image
 							src={mobileLogo}
 							alt={altText}
 							width={95}
 							height={95}
-							itemProp="image"
 							priority
 						/>
 					</div>
@@ -35,19 +30,9 @@ const HeaderLogo = () => {
 								height={95}
 								priority
 							/>
-							<h2 className={styles.logoText} itemProp="name">
-								Pals of Paws Society
-							</h2>
+							<h2 className={styles.logoText}>Pals of Paws Society</h2>
 						</div>
 					</div>
-					<meta itemProp="address" content="Hernando, MS" />
-					<meta itemProp="telephone" content="954-224-9779" />
-					<meta itemProp="areaServed" content="Northwest Mississippi" />
-					<meta itemProp="email" content="info@palsofpawssociety.org" />
-					<link
-						itemProp="nonprofitStatus"
-						href="https://schema.org/Nonprofit501c3"
-					/>
 				</div>
 			</a>
 		</Link>

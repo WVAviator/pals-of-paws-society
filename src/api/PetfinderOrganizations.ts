@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Organization } from "../types/Organization";
-import getToken from "./PetfinderAuth";
 
 const url = "https://api.petfinder.com/v2/organizations";
 const cacheExpiration = 86400; // 24 hours
