@@ -1,4 +1,4 @@
-import { ArrowLeft } from "@mui/icons-material";
+import ArrowLeft from "@mui/icons-material/ArrowLeft";
 import { Animal } from "../../src/types/Animal";
 import PetCarousel from "../content/PetCarousel";
 import PetContent from "../layout/PetContent";
