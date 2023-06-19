@@ -1,16 +1,16 @@
 import { Alert, Collapse, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
+import { BillingInfo } from "../../src/types/BillingInfo";
+import { Product } from "../../src/types/Product";
+import Billing from "../donate/Billing";
+import PhoneNumberEntry from "../forms/PhoneNumberEntry";
+import Checkout from "../stripe/Checkout";
+import CustomButton from "../ui/CustomButton";
+import styles from "./FeralShirtForm.module.scss";
 import { Shirt } from "./Shirt";
 import ShirtEntry from "./ShirtEntry";
 import ShirtList, { SHIRT_PRICE } from "./ShirtList";
 import { ShirtOrder } from "./ShirtOrder";
-import styles from "./FeralShirtForm.module.scss";
-import { BillingInfo } from "../../src/types/BillingInfo";
-import Billing from "../donate/Billing";
-import CustomButton from "../ui/CustomButton";
-import Checkout from "../stripe/Checkout";
-import { Product } from "../../src/types/Product";
-import PhoneNumberEntry from "../forms/PhoneNumberEntry";
 
 let return_url: string;
 
