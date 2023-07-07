@@ -1,11 +1,16 @@
 import {
 	Autocomplete,
 	Checkbox,
+	FormControl,
 	FormControlLabel,
+	InputLabel,
+	MenuItem,
+	Select,
 	TextField,
 } from "@mui/material";
 import { BillingInfo } from "../../src/types/BillingInfo";
 import styles from "./AddressForm.module.scss";
+import StateAutocomplete from "./StateAutocomplete";
 
 type BillingProps = {
 	formData: BillingInfo;
@@ -68,24 +73,9 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 					value={formData.city}
 					onChange={handleChange("city")}
 				/>
-				<Autocomplete
-					disablePortal
-					sx={{ gridColumn: "span 2" }}
+				<StateAutocomplete
 					value={formData.state}
-					autoSelect
-					autoHighlight
-					autoComplete
-					options={states}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							id="state"
-							label="State"
-							variant="outlined"
-							required
-							onChange={handleChange("state")}
-						/>
-					)}
+					onChange={(newValue) => setFormData({ ...formData, state: newValue })}
 				/>
 				<TextField
 					id="zip-code"
@@ -127,66 +117,3 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 };
 
 export default Billing;
-
-const states = [
-	"",
-	"AL",
-	"AK",
-	"AS",
-	"AZ",
-	"AR",
-	"CA",
-	"CO",
-	"CT",
-	"DE",
-	"DC",
-	"FM",
-	"FL",
-	"GA",
-	"GU",
-	"HI",
-	"ID",
-	"IL",
-	"IN",
-	"IA",
-	"KS",
-	"KY",
-	"LA",
-	"ME",
-	"MH",
-	"MD",
-	"MA",
-	"MI",
-	"MN",
-	"MS",
-	"MO",
-	"MT",
-	"NE",
-	"NV",
-	"NH",
-	"NJ",
-	"NM",
-	"NY",
-	"NC",
-	"ND",
-	"MP",
-	"OH",
-	"OK",
-	"OR",
-	"PW",
-	"PA",
-	"PR",
-	"RI",
-	"SC",
-	"SD",
-	"TN",
-	"TX",
-	"UT",
-	"VT",
-	"VI",
-	"VA",
-	"WA",
-	"WV",
-	"WI",
-	"WY",
-];
