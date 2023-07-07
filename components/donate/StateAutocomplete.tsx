@@ -83,10 +83,9 @@ const StateAutocomplete: React.FC<StateAutocompleteProps> = ({
 	const [error, setError] = React.useState(false);
 
 	return (
-		<FormControl>
+		<FormControl sx={{ gridColumn: "span 2" }}>
 			<InputLabel>State</InputLabel>
 			<Select
-				sx={{ gridColumn: "span 2" }}
 				value={value}
 				onChange={(event) => {
 					if (
