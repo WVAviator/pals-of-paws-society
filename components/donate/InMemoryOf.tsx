@@ -1,7 +1,7 @@
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useState } from "react";
 import { BillingInfo } from "../../src/types/BillingInfo";
-import AddressForm, { Address } from "./AddressForm";
+import AddressForm from "./AddressForm";
 import styles from "./AddressForm.module.scss";
 
 type MemoryProps = {
@@ -12,15 +12,6 @@ type MemoryProps = {
 const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 	const [fieldVisible, setFieldVisible] = useState(false);
 	const [addressVisible, setAddressVisible] = useState(false);
-	const [address, setAddress] = useState<Address>({
-		firstName: "",
-		lastName: "",
-		streetAddress: "",
-		aptOrSuite: "",
-		city: "",
-		state: "",
-		zip: "",
-	});
 
 	const handleChange =
 		(prop: keyof BillingInfo) =>
@@ -88,8 +79,10 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 					}}
 				>
 					<AddressForm
-						value={address}
-						onChange={(address) => setAddress(address)}
+						value={formData.inMemoryAddress}
+						onChange={(address) => {
+							setFormData({ ...formData, inMemoryAddress: address });
+						}}
 						required={addressVisible}
 					/>
 				</div>

@@ -1,3 +1,4 @@
+import { BillingInfo } from "../types/BillingInfo";
 import { DonationRecord } from "../types/DonationRecord";
 import { addSpreadsheetData } from "./SheetData";
 
@@ -7,18 +8,11 @@ const DONATIONS_SHEET_ID = "0";
 export const processDonation = async (paymentIntent: any) => {
 	const sheetMeta = { docId: DOC_ID, sheetId: DONATIONS_SHEET_ID };
 
-	const {
-		firstName,
-		lastName,
-		streetAddress,
-		aptOrSuite,
-		city,
-		state,
-		zip,
-		inMemory,
-		email,
-		receiveUpdates,
-	} = paymentIntent.metadata;
+	const billingInfo: BillingInfo = paymentIntent.metadata as BillingInfo;
+
+	const { firstName, lastName, streetAddress, aptOrSuite, city, state, zip } =
+		billingInfo.billingAddress;
+	const { inMemory, email, receiveUpdates } = billingInfo;
 
 	const address = `${streetAddress}${
 		aptOrSuite ? " " + aptOrSuite : ""

@@ -2,16 +2,7 @@ import { TextField } from "@mui/material";
 import React from "react";
 import StateAutocomplete from "./StateAutocomplete";
 import styles from "./AddressForm.module.scss";
-
-export interface Address {
-	firstName: string;
-	lastName: string;
-	streetAddress: string;
-	aptOrSuite: string;
-	city: string;
-	state: string;
-	zip: string;
-}
+import { Address } from "../../src/types/Address";
 
 interface AddressFormProps {
 	value: Address;
