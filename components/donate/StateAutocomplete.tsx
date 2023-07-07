@@ -11,6 +11,7 @@ import React from "react";
 interface StateAutocompleteProps {
 	value: string;
 	onChange: (value: string) => void;
+	required: boolean;
 }
 
 const states = [
@@ -79,6 +80,7 @@ const states = [
 const StateAutocomplete: React.FC<StateAutocompleteProps> = ({
 	value,
 	onChange,
+	required = false,
 }) => {
 	const [error, setError] = React.useState(false);
 
@@ -98,7 +100,7 @@ const StateAutocomplete: React.FC<StateAutocompleteProps> = ({
 					onChange(event.target.value);
 				}}
 				label="State"
-				required
+				required={required}
 				variant="outlined"
 				error={error}
 			>

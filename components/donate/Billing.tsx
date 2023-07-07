@@ -76,6 +76,7 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 				<StateAutocomplete
 					value={formData.state}
 					onChange={(newValue) => setFormData({ ...formData, state: newValue })}
+					required
 				/>
 				<TextField
 					id="zip-code"

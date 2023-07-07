@@ -1,6 +1,8 @@
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useState } from "react";
 import { BillingInfo } from "../../src/types/BillingInfo";
+import AddressForm, { Address } from "./AddressForm";
+import styles from "./AddressForm.module.scss";
 
 type MemoryProps = {
 	formData: BillingInfo;
@@ -9,6 +11,16 @@ type MemoryProps = {
 
 const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 	const [fieldVisible, setFieldVisible] = useState(false);
+	const [addressVisible, setAddressVisible] = useState(false);
+	const [address, setAddress] = useState<Address>({
+		firstName: "",
+		lastName: "",
+		streetAddress: "",
+		aptOrSuite: "",
+		city: "",
+		state: "",
+		zip: "",
+	});
 
 	const handleChange =
 		(prop: keyof BillingInfo) =>
@@ -22,7 +34,7 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 	};
 
 	return (
-		<div>
+		<div className={styles.inmemory}>
 			<FormControlLabel
 				control={
 					<Checkbox
@@ -37,12 +49,12 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 			/>
 			<div
 				style={{
-					margin: "1em 0",
+					// margin: "1em 0",
 					transformOrigin: "top",
 					transition: "all 150ms",
 					transform: fieldVisible ? "scaleY(100%)" : "scaleY(0%)",
 					width: "100%",
-					height: fieldVisible ? "3.5rem" : "0",
+					height: fieldVisible ? "auto" : "0",
 				}}
 			>
 				<TextField
@@ -53,6 +65,34 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 					value={formData.inMemory}
 					onChange={handleChange("inMemory")}
 				/>
+				<FormControlLabel
+					control={
+						<Checkbox
+							checked={addressVisible}
+							onChange={(event) => {
+								setAddressVisible(event.target.checked);
+							}}
+						/>
+					}
+					label="Send Acknowledgment?"
+					sx={{ gridColumn: "span 4", marginTop: "1em" }}
+				/>
+				<div
+					style={{
+						// margin: "1em 0",
+						transformOrigin: "top",
+						transition: "all 150ms",
+						transform: addressVisible ? "scaleY(100%)" : "scaleY(0%)",
+						width: "100%",
+						height: addressVisible ? "auto" : "0",
+					}}
+				>
+					<AddressForm
+						value={address}
+						onChange={(address) => setAddress(address)}
+						required={addressVisible}
+					/>
+				</div>
 			</div>
 		</div>
 	);
