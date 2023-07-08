@@ -3,6 +3,7 @@ import { buffer } from "micro";
 import { Product } from "../../../src/types/Product";
 import { processDonation } from "../../../src/api/donation";
 import { processShirtOrder } from "../../../src/api/shirtOrder";
+import { BillingInfo } from "../../../src/types/BillingInfo";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -16,16 +17,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		const signature = req.headers["stripe-signature"];
 		try {
-			event = stripe.webhooks.constructEvent(
-				buf,
-				signature,
-				endpointSecret
-			);
+			event = stripe.webhooks.constructEvent(buf, signature, endpointSecret);
 		} catch (error) {
-			console.log(
-				"Webhook signature verification failed.",
-				error.message
-			);
+			console.log("Webhook signature verification failed.", error.message);
 			return res.send(400);
 		}
 
@@ -42,14 +36,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.send(200);
 		} //paid through stripe checkout via other links
 
-		const products: Product[] = JSON.parse(paymentIntent.metadata.products);
+		const metadata: BillingInfo & { products: string } = JSON.parse(
+			paymentIntent.metadata.metadata
+		);
+		const products: Product[] = JSON.parse(metadata.products);
+		const amount = paymentIntent.amount / 100;
 
 		if (products[0].name === "Donation") {
-			await processDonation(paymentIntent);
+			await processDonation(metadata, amount);
 			return res.send(200);
 		}
 
-		await processShirtOrder(paymentIntent, products);
+		await processShirtOrder(metadata, products);
 		return res.send(200);
 	}
 };

@@ -13,12 +13,6 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 	const [fieldVisible, setFieldVisible] = useState(false);
 	const [addressVisible, setAddressVisible] = useState(false);
 
-	const handleChange =
-		(prop: keyof BillingInfo) =>
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setFormData({ ...formData, [prop]: event.target.value });
-		};
-
 	const handleChecked = (event: any) => {
 		setFieldVisible(event.target.checked);
 		if (!fieldVisible) setFormData({ ...formData, inMemory: "" });
@@ -54,7 +48,9 @@ const InMemoryOf = ({ formData, setFormData }: MemoryProps) => {
 					sx={{ width: "100%" }}
 					variant="outlined"
 					value={formData.inMemory}
-					onChange={handleChange("inMemory")}
+					onChange={(event) => {
+						setFormData({ ...formData, inMemory: event.target.value });
+					}}
 				/>
 				<FormControlLabel
 					control={

@@ -4,28 +4,21 @@ import { ShirtOrderRecord } from "../types/ShirtOrderRecord";
 import { generateHtmlEmail, generateTextEmail } from "./emailTemplate";
 import { addSpreadsheetData } from "./SheetData";
 import { sendAutomatedEmail } from "./automatedMail";
+import { BillingInfo } from "../types/BillingInfo";
 
 const DOC_ID = "1fUp_l6xWGQyY_o80YhfVrE2OE8THF8oR66n0Bcm4qkU";
 const SHIRT_ORDERS_SHEET_ID = "1396892371";
 
 export const processShirtOrder = async (
-	paymentIntent: any,
+	metadata: BillingInfo,
 	products: Product[]
 ) => {
 	const sheetMeta = { docId: DOC_ID, sheetId: SHIRT_ORDERS_SHEET_ID };
 
-	const {
-		firstName,
-		lastName,
-		streetAddress,
-		aptOrSuite,
-		city,
-		state,
-		zip,
-		email,
-		receiveUpdates,
-		phone,
-	} = paymentIntent.metadata;
+	const { firstName, lastName, streetAddress, aptOrSuite, city, state, zip } =
+		metadata.billingAddress;
+
+	const { email, receiveUpdates, phone } = metadata;
 
 	console.log(`Generating records for ${products.length} products.`);
 

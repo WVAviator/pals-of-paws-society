@@ -15,11 +15,11 @@ const AddressForm: React.FC<AddressFormProps> = ({
 	onChange,
 	required = false,
 }) => {
-	const [address, setAddress] = React.useState<Address>(value);
+	// const [address, setAddress] = React.useState<Address>(value);
 
 	const handleChange =
 		(prop: keyof Address) => (event: React.ChangeEvent<HTMLInputElement>) => {
-			setAddress({ ...address, [prop]: event.target.value });
+			onChange({ ...value, [prop]: event.target.value });
 		};
 
 	return (
@@ -30,7 +30,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				required={required}
 				sx={{ gridColumn: "span 2" }}
 				variant="outlined"
-				value={address.firstName}
+				value={value.firstName}
 				onChange={handleChange("firstName")}
 			/>
 			<TextField
@@ -39,7 +39,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				required={required}
 				sx={{ gridColumn: "span 2" }}
 				variant="outlined"
-				value={address.lastName}
+				value={value.lastName}
 				onChange={handleChange("lastName")}
 			/>
 			<TextField
@@ -48,7 +48,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				required={required}
 				sx={{ gridColumn: "span 4", marginTop: "1em" }}
 				variant="outlined"
-				value={address.streetAddress}
+				value={value.streetAddress}
 				onChange={handleChange("streetAddress")}
 			/>
 			<TextField
@@ -56,7 +56,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				label="Apt/Suite/Bldg"
 				sx={{ gridColumn: "span 2" }}
 				variant="outlined"
-				value={address.aptOrSuite}
+				value={value.aptOrSuite}
 				onChange={handleChange("aptOrSuite")}
 			/>
 			<TextField
@@ -65,12 +65,12 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				required={required}
 				sx={{ gridColumn: "span 2" }}
 				variant="outlined"
-				value={address.city}
+				value={value.city}
 				onChange={handleChange("city")}
 			/>
 			<StateAutocomplete
-				value={address.state}
-				onChange={(newValue) => setAddress({ ...address, state: newValue })}
+				value={value.state}
+				onChange={(newValue) => onChange({ ...value, state: newValue })}
 				required={required}
 			/>
 			<TextField
@@ -79,7 +79,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				required={required}
 				sx={{ gridColumn: "span 2" }}
 				variant="outlined"
-				value={address.zip}
+				value={value.zip}
 				onChange={handleChange("zip")}
 			/>
 		</div>
