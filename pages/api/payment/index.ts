@@ -42,12 +42,7 @@ const isRateLimited = async (email: string, ip: string) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "POST") {
-		const {
-			products,
-			description = "Donation",
-			metadata,
-			token,
-		} = req.body;
+		const { products, description = "Donation", metadata, token } = req.body;
 
 		const recaptchaResponse = await fetch(
 			`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}&remoteip=${req.socket.localAddress}`,
@@ -74,6 +69,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(429).send({ error: "Too many requests" });
 		}
 
+		const metadataString = JSON.stringify(metadata);
+
 		const paymentIntent = await stripe.paymentIntents.create({
 			amount: calculateAmount(products),
 			currency: "usd",
@@ -81,7 +78,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				enabled: true,
 			},
 			description,
-			metadata,
+			metadata: {
+				metadata: metadataString,
+			},
 		});
 
 		res.send({

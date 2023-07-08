@@ -19,13 +19,15 @@ const FeralShirtForm = () => {
 		items: [],
 	});
 	const [billingInfo, setBillingInfo] = useState<BillingInfo>({
-		firstName: "",
-		lastName: "",
-		streetAddress: "",
-		aptOrSuite: "",
-		city: "",
-		state: "",
-		zip: "",
+		billingAddress: {
+			firstName: "",
+			lastName: "",
+			streetAddress: "",
+			aptOrSuite: "",
+			city: "",
+			state: "",
+			zip: "",
+		},
 		inMemory: "",
 		email: "",
 		receiveUpdates: false,

@@ -72,6 +72,8 @@ const Checkout = ({
 				const token = await executeRecaptcha("checkout");
 
 				console.log("Fetching client secret");
+
+				console.log("Preparing metadata: ", metadata);
 				const response = await fetch("/api/payment", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
