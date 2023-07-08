@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import SanityContent from "../components/sanity/SanityContent";
 import sanityClient from "../src/sanity";
 import { Page } from "../types";
+import { NextSeo } from "next-seo";
 
 interface PageProps {
 	page: Page;
@@ -9,9 +10,29 @@ interface PageProps {
 
 const DynamicPage = ({ page }: PageProps) => {
 	return (
-		<div>
-			<SanityContent pageContent={page} />
-		</div>
+		<>
+			<NextSeo
+				title={page.title}
+				description={page.description}
+				canonical={`https://www.palsofpawssociety.org/${page.category.categoryUrl.current}/${page.pageUrl.current}`}
+				openGraph={{
+					title: page.title, //
+					description: page.description,
+					url: `https://www.palsofpawssociety.org/${page.category.categoryUrl.current}/${page.pageUrl.current}`,
+					images: [
+						{
+							url: `https://www.palsofpawssociety.org/images/og/pop-og.png`,
+							width: 1200,
+							height: 630,
+							alt: page.title,
+						},
+					],
+				}}
+			/>
+			<div>
+				<SanityContent pageContent={page} />
+			</div>
+		</>
 	);
 };
 
@@ -56,10 +77,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		paths: pages.map((page) => {
 			return {
 				params: {
-					page: [
-						page.category.categoryUrl.current,
-						page.pageUrl.current,
-					],
+					page: [page.category.categoryUrl.current, page.pageUrl.current],
 				},
 			};
 		}),

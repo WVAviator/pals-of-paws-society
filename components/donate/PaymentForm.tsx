@@ -15,14 +15,25 @@ let return_url: string;
 const PaymentForm = () => {
 	const [donationAmount, setDonationAmount] = useState(0);
 	const [formData, setFormData] = useState<BillingInfo>({
-		firstName: "",
-		lastName: "",
-		streetAddress: "",
-		aptOrSuite: "",
-		city: "",
-		state: "",
-		zip: "",
+		billingAddress: {
+			firstName: "",
+			lastName: "",
+			streetAddress: "",
+			aptOrSuite: "",
+			city: "",
+			state: "",
+			zip: "",
+		},
 		inMemory: "",
+		inMemoryAddress: {
+			firstName: "",
+			lastName: "",
+			streetAddress: "",
+			aptOrSuite: "",
+			city: "",
+			state: "",
+			zip: "",
+		},
 		email: "",
 		receiveUpdates: false,
 	});

@@ -33,7 +33,7 @@
 	z-index: 1;
 
 	@include mq-desktop {
-		height: 60rem;
+		min-height: 60rem;
 	}
 }
 

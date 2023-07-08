@@ -35,7 +35,7 @@ const AnimalPage: NextPage<AnimalPageProps> = ({ animal, referrer }) => {
 				} Petfinder profile to learn more.`}
 				openGraph={{
 					title: `Adopt ${animal.name} today!`,
-					description: animal.description,
+					description: animal.organization.name,
 					url: `https://www.palsofpawssociety.org/adopt/${animal.id}`,
 					images: [
 						{

@@ -1,11 +1,17 @@
 import {
 	Autocomplete,
 	Checkbox,
+	FormControl,
 	FormControlLabel,
+	InputLabel,
+	MenuItem,
+	Select,
 	TextField,
 } from "@mui/material";
 import { BillingInfo } from "../../src/types/BillingInfo";
 import styles from "./AddressForm.module.scss";
+import StateAutocomplete from "./StateAutocomplete";
+import AddressForm from "./AddressForm";
 
 type BillingProps = {
 	formData: BillingInfo;
@@ -23,78 +29,12 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 		<div>
 			<h2>Billing Information</h2>
 			<div className={styles.address}>
-				<TextField
-					id="first-name"
-					label="First Name"
+				<AddressForm
+					value={formData.billingAddress}
+					onChange={(address) => {
+						setFormData({ ...formData, billingAddress: address });
+					}}
 					required
-					sx={{ gridColumn: "span 2" }}
-					variant="outlined"
-					value={formData.firstName}
-					onChange={handleChange("firstName")}
-				/>
-				<TextField
-					id="last-name"
-					label="Last Name"
-					required
-					sx={{ gridColumn: "span 2" }}
-					variant="outlined"
-					value={formData.lastName}
-					onChange={handleChange("lastName")}
-				/>
-
-				<TextField
-					id="street-address"
-					label="Address"
-					required
-					sx={{ gridColumn: "span 4", marginTop: "1em" }}
-					variant="outlined"
-					value={formData.streetAddress}
-					onChange={handleChange("streetAddress")}
-				/>
-				<TextField
-					id="apt-suite"
-					label="Apt/Suite/Bldg"
-					sx={{ gridColumn: "span 2" }}
-					variant="outlined"
-					value={formData.aptOrSuite}
-					onChange={handleChange("aptOrSuite")}
-				/>
-				<TextField
-					id="city"
-					label="City"
-					required
-					sx={{ gridColumn: "span 2" }}
-					variant="outlined"
-					value={formData.city}
-					onChange={handleChange("city")}
-				/>
-				<Autocomplete
-					disablePortal
-					sx={{ gridColumn: "span 2" }}
-					value={formData.state}
-					autoSelect
-					autoHighlight
-					autoComplete
-					options={states}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							id="state"
-							label="State"
-							variant="outlined"
-							required
-							onChange={handleChange("state")}
-						/>
-					)}
-				/>
-				<TextField
-					id="zip-code"
-					label="Zip Code"
-					required
-					sx={{ gridColumn: "span 2" }}
-					variant="outlined"
-					value={formData.zip}
-					onChange={handleChange("zip")}
 				/>
 				<TextField
 					id="email"
@@ -127,66 +67,3 @@ const Billing = ({ formData, setFormData }: BillingProps) => {
 };
 
 export default Billing;
-
-const states = [
-	"",
-	"AL",
-	"AK",
-	"AS",
-	"AZ",
-	"AR",
-	"CA",
-	"CO",
-	"CT",
-	"DE",
-	"DC",
-	"FM",
-	"FL",
-	"GA",
-	"GU",
-	"HI",
-	"ID",
-	"IL",
-	"IN",
-	"IA",
-	"KS",
-	"KY",
-	"LA",
-	"ME",
-	"MH",
-	"MD",
-	"MA",
-	"MI",
-	"MN",
-	"MS",
-	"MO",
-	"MT",
-	"NE",
-	"NV",
-	"NH",
-	"NJ",
-	"NM",
-	"NY",
-	"NC",
-	"ND",
-	"MP",
-	"OH",
-	"OK",
-	"OR",
-	"PW",
-	"PA",
-	"PR",
-	"RI",
-	"SC",
-	"SD",
-	"TN",
-	"TX",
-	"UT",
-	"VT",
-	"VI",
-	"VA",
-	"WA",
-	"WV",
-	"WI",
-	"WY",
-];

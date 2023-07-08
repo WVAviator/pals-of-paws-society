@@ -1,12 +1,9 @@
+import { Address } from "./Address";
+
 export interface BillingInfo {
-	firstName: string;
-	lastName: string;
-	streetAddress: string;
-	aptOrSuite?: string;
-	city: string;
-	state: string;
-	zip: string;
+	billingAddress: Address;
 	inMemory?: string;
+	inMemoryAddress?: Address;
 	email: string;
 	receiveUpdates: boolean;
 	phone?: string;
