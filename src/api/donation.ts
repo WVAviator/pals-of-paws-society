@@ -93,7 +93,7 @@ const formatDonationHtml = (billingInfo: BillingInfo, amount: Number) => {
 				billingInfo.inMemoryAddress.firstName
 			} ${billingInfo.inMemoryAddress.lastName}<br>${
 				billingInfo.inMemoryAddress.streetAddress
-			}<br>${billingInfo.inMemoryAddress.aptOrSuite + "<br>" || ""}${
+			} ${billingInfo.inMemoryAddress.aptOrSuite || ""}<br>${
 				billingInfo.inMemoryAddress.city
 			} ${billingInfo.inMemoryAddress.state} ${
 				billingInfo.inMemoryAddress.zip
@@ -101,9 +101,9 @@ const formatDonationHtml = (billingInfo: BillingInfo, amount: Number) => {
 		}
 	}
 
-	donationHtml += `<p>Donor Billing Address:<br>${firstName} ${lastName}<br>${streetAddress}<br>${
-		aptOrSuite ? aptOrSuite + "<br>" : ""
-	}${city}, ${state} ${zip}</p>`;
+	donationHtml += `<p>Donor Billing Address:<br>${firstName} ${lastName}<br>${streetAddress} ${
+		aptOrSuite || ""
+	}<br>${city}, ${state} ${zip}</p>`;
 	donationHtml += `<p>Email: ${email}</p>`;
 	if (receiveUpdates) {
 		donationHtml +=
