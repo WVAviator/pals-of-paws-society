@@ -1,6 +1,9 @@
 {
 	"name": "pals-of-paws-society",
 	"private": true,
+	"engines": {
+		"node": "18.x"
+	},
 	"scripts": {
 		"dev": "concurrently \"next --port $PORT\" \"cd studio && sanity start\"",
 		"build": "echo 'Building Sanity to public/admin' && cd studio && sanity build ../public/admin -y && cd .. && next build",
