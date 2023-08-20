@@ -14,6 +14,7 @@ function PetCarousel({ animal }: { animal: Animal }): JSX.Element {
 					alt={`A ${animal.breed} ${animal.type}`}
 					layout="fill"
 					objectFit="cover"
+					unoptimized
 				/>
 				<p></p>
 			</div>

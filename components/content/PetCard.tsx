@@ -36,6 +36,7 @@ const PetCard = ({
 							width={280}
 							height={280}
 							objectFit="cover"
+							unoptimized
 						/>
 					</div>
 					<ul>
