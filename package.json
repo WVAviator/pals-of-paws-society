@@ -1,6 +1,9 @@
 {
 	"name": "pals-of-paws-society",
 	"private": true,
+	"engines": {
+		"node": "18.x"
+	},
 	"scripts": {
 		"dev": "concurrently \"next --port $PORT\" \"cd studio && sanity start\"",
 		"build": "echo 'Building Sanity to public/admin' && cd studio && sanity build ../public/admin -y && cd .. && next build",
@@ -14,7 +17,7 @@
 		"@emotion/styled": "^11.6.0",
 		"@mui/icons-material": "^5.4.2",
 		"@mui/material": "^5.4.2",
-		"@portabletext/react": "^1.0.6",
+		"@portabletext/react": "^3.0.4",
 		"@sendgrid/mail": "^7.6.1",
 		"@stripe/react-stripe-js": "^1.7.0",
 		"@stripe/stripe-js": "^1.23.0",
