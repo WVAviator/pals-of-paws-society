@@ -31,7 +31,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
 				}}
 			/>
 			<LocalBusinessJsonLd
-				type="Lhttps://schema.org/LocalBusiness"
+				type="LocalBusiness"
 				id="https://www.palsofpawssociety.org/"
 				name="Pals of Paws Society"
 				description="Pals of Paws Society is a nonprofit organization dedicated to fighting the pet overpopulation problem in Northwest Mississippi. We provide adoption, animal transport, and veterinary financial assistance for shelters, rescue groups, and individuals throughout Desoto, Tate, and Tunica counties, as well as Memphis, Tennessee, from our headquarters in Hernando."

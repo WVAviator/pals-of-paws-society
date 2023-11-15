@@ -9,6 +9,7 @@ import volunteerImage01 from "/public/images/dogWithTrainer.png";
 import aboutImage01 from "/public/images/kitten01.jpg";
 import aboutImage03 from "/public/images/rottweiler.jpg";
 import aboutImage02 from "/public/images/van.jpg";
+import heroImage from "/public/images/hero.jpg";
 
 import { GetStaticProps } from "next";
 import Petco from "../components/brand/Petco/Petco";
@@ -26,7 +27,7 @@ interface HomeProps {
 export default function Home({ catCount, dogCount }: HomeProps) {
 	return (
 		<>
-			<Hero />
+			<Hero image={heroImage} />
 			<PawprintSection sectionTitle="About Us" pawprintRotation={10}>
 				<CardContent>
 					<InfoCard

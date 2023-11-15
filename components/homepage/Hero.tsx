@@ -1,25 +1,36 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import CustomButton from "../ui/CustomButton";
 import styles from "./Hero.module.scss";
-import heroImage from "/public/images/hero.jpg";
 
-const widthToShiftImage = 1150;
-const mobileShift = "75%";
-const desktopShift = "center 15%";
+interface HeroProps {
+	image: string | StaticImageData;
+	imagePositionBreakpoint?: number;
+	mobileImagePosition?: string | number;
+	desktopImagePosition?: string | number;
+}
 
-const Hero = () => {
+const Hero: React.FC<HeroProps> = ({
+	image,
+	imagePositionBreakpoint = 1150,
+	mobileImagePosition = "75%",
+	desktopImagePosition = "center 15%",
+}) => {
 	const { height, width } = useWindowDimensions();
 
 	return (
 		<section className={styles.background}>
 			<Image
-				src={heroImage}
+				src={image}
 				alt="A dog in a grassy field"
 				objectFit="cover"
-				objectPosition={width > widthToShiftImage ? desktopShift : mobileShift}
+				objectPosition={
+					width > imagePositionBreakpoint
+						? desktopImagePosition
+						: mobileImagePosition
+				}
 				layout="fill"
 				className={styles.image}
 				priority
