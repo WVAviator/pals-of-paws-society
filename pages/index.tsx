@@ -18,6 +18,7 @@ import Titos from "../components/brand/Titos/Titos";
 import MissionVision from "../components/homepage/MissionVision";
 import UpdatesContent from "../components/page-sections/UpdatesContent";
 import { getSpreadsheetData } from "../src/api/SheetData";
+import CallToAction from "../components/homepage/CallToAction";
 
 interface HomeProps {
 	catCount: number;
@@ -27,7 +28,12 @@ interface HomeProps {
 export default function Home({ catCount, dogCount }: HomeProps) {
 	return (
 		<>
-			<Hero image={heroImage} />
+			<Hero image={heroImage}>
+				<CallToAction
+					message="Fighting pet overpopulation one adoption at a time"
+					action="Learn About Us"
+				/>
+			</Hero>
 			<PawprintSection sectionTitle="About Us" pawprintRotation={10}>
 				<CardContent>
 					<InfoCard
