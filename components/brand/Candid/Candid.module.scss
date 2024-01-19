@@ -1,0 +1,29 @@
+
+@use "/styles/variables" as *;
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2.5rem;
+	svg {
+		transform: scale(1.15);
+	}
+}
+
+.cls_1, .cls_2, .cls_3, .cls_4 {
+  stroke-width: 0px;
+}
+
+.cls_2 {
+  fill: #231f20;
+}
+
+.cls_3 {
+  fill: #d3aa41;
+}
+
+.cls_4 {
+  fill: #fff;
+}
+
