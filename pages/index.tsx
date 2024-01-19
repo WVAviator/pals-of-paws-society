@@ -17,6 +17,7 @@ import Titos from "../components/brand/Titos/Titos";
 import MissionVision from "../components/homepage/MissionVision";
 import UpdatesContent from "../components/page-sections/UpdatesContent";
 import { getSpreadsheetData } from "../src/api/SheetData";
+import Candid from "../components/brand/Candid/Candid";
 
 interface HomeProps {
 	catCount: number;
@@ -111,6 +112,7 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 				<Sponsors>
 					<Petco />
 					<Titos />
+					<Candid />
 				</Sponsors>
 			</PawprintSection>
 		</>
