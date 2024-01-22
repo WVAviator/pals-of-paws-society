@@ -7,6 +7,7 @@ import FeralShirtForm from "../fundraisers/FeralShirtForm";
 import VolunteerForm from "../forms/VolunteerForm";
 import Head from "next/head";
 import Link from "next/link";
+import SanityGoogleCalendar from "./SanityGoogleCalendar";
 
 interface SanityContentProps {
 	pageContent: PageContent;
@@ -22,6 +23,11 @@ const components: Partial<PortableTextReactComponents> = {
 		facebookPost: ({ value }) => (
 			<div>
 				<SanityFacebookIFrame src={value.url} />
+			</div>
+		),
+		googleCalendar: ({ value }) => (
+			<div>
+				<SanityGoogleCalendar src={value.url} />
 			</div>
 		),
 		shirtForm: () => <FeralShirtForm />,
@@ -50,11 +56,7 @@ const SanityContent = ({ pageContent }: SanityContentProps) => {
 				<meta name="description" content={pageContent.description} />
 
 				<meta property="og:type" key="ogType" content="website" />
-				<meta
-					property="og:title"
-					key="ogTitle"
-					content={pageContent.title}
-				/>
+				<meta property="og:title" key="ogTitle" content={pageContent.title} />
 				<meta
 					property="og:url"
 					key="ogUrl"
@@ -73,10 +75,7 @@ const SanityContent = ({ pageContent }: SanityContentProps) => {
 			>
 				<article className={styles.content}>
 					<h1>{pageContent.title}</h1>
-					<PortableText
-						value={pageContent.body}
-						components={components}
-					/>
+					<PortableText value={pageContent.body} components={components} />
 				</article>
 			</section>
 		</>
