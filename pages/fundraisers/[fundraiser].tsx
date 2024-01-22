@@ -93,7 +93,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 				fundraiser: fundraiser.pageUrl.current,
 			},
 		})),
-		fallback: false,
+		fallback: "blocking",
 	};
 };
 
