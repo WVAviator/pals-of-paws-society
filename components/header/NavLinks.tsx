@@ -32,6 +32,12 @@ const NavLinks = ({ onClick = () => {} }: NavLinksProps) => {
 				</Link>
 			</li>
 
+			<li onClick={onClick}>
+				<Link href="/fundraisers/vaccinated-and-loved">
+					<a>Vaccinated and Loved</a>
+				</Link>
+			</li>
+
 			<li onClick={onClick} className={styles.mobileDonate}>
 				<Link href="/donate">
 					<a>Donate</a>
