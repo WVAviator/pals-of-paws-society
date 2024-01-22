@@ -116,6 +116,34 @@ export default {
     },
     {
       type: "object",
+      name: "jotForm",
+      title: "JotForm Embed",
+      fields: [
+        {
+          name: "src",
+          type: "url",
+          title: "IFrame 'src' Link",
+          description:
+            "The 'src' link from the JotForm IFrame code. Go to Publish > Embed > IFrame, and copy the url from the code for 'src'",
+        },
+        {
+          name: "title",
+          type: "string",
+          title: "IFrame Title",
+          description:
+            "The form title as displayed in the JotForm IFrame code. Go to Publish > Embed > IFrame, and copy the url from the code for 'title'",
+        },
+        {
+          name: "id",
+          type: "string",
+          title: "IFrame ID",
+          description:
+            "The form id as displayed in the JotForm IFrame code. Go to Publish > Embed > IFrame, and copy the url from the code for 'id'",
+        },
+      ],
+    },
+    {
+      type: "object",
       name: "shirtForm",
       title: "Shirt Form",
       fields: [
