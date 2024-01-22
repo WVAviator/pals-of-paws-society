@@ -21,7 +21,7 @@ const FundraiserPage = ({ fundraiser }: PageProps) => {
 					url: `https://www.palsofpawssociety.org/fundraisers/${fundraiser.pageUrl.current}`,
 					images: [
 						{
-							url: fundraiser.mainImage.asset.url,
+							url: fundraiser.mainImage?.asset.url ?? "/images/no-image.png",
 							width: 500,
 							height: 500,
 							alt: fundraiser.title,
@@ -35,7 +35,7 @@ const FundraiserPage = ({ fundraiser }: PageProps) => {
 				description={fundraiser.description}
 				startDate={fundraiser.startDate}
 				endDate={fundraiser.endDate}
-				images={[fundraiser.mainImage.asset.url]}
+				images={[fundraiser.mainImage?.asset.url ?? "/images/no-image.png"]}
 				eventStatus="EventScheduled"
 				organizer={{
 					type: "Organization",

@@ -18,8 +18,8 @@ const SanityImage = ({
 
 	const imageOptions = {
 		fill: {
-			src: imageProps.src,
-			loader: imageProps.loader,
+			src: imageProps?.src ?? "/images/no-image.png",
+			loader: imageProps?.loader,
 		},
 		responsive: {
 			...imageProps,
@@ -36,7 +36,7 @@ const SanityImage = ({
 	return (
 		<Image
 			{...imageOptions[layout]}
-			alt={source.alt ?? ""}
+			alt={source?.alt ?? ""}
 			layout={layout}
 			{...rest}
 		/>
