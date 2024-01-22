@@ -8,6 +8,7 @@ import VolunteerForm from "../forms/VolunteerForm";
 import Head from "next/head";
 import Link from "next/link";
 import SanityGoogleCalendar from "./SanityGoogleCalendar";
+import SanityJotForm from "./SanityJotForm";
 
 interface SanityContentProps {
 	pageContent: PageContent;
@@ -28,6 +29,11 @@ const components: Partial<PortableTextReactComponents> = {
 		googleCalendar: ({ value }) => (
 			<div>
 				<SanityGoogleCalendar src={value.url} />
+			</div>
+		),
+		jotForm: ({ value }) => (
+			<div>
+				<SanityJotForm id={value.id} title={value.title} src={value.src} />
 			</div>
 		),
 		shirtForm: () => <FeralShirtForm />,
