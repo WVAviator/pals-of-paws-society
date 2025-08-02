@@ -2,7 +2,7 @@
 	"name": "pals-of-paws-society",
 	"private": true,
 	"engines": {
-		"node": "18.x"
+		"node": "22.x"
 	},
 	"scripts": {
 		"dev": "concurrently \"next --port $PORT\" \"cd studio && sanity start\"",
