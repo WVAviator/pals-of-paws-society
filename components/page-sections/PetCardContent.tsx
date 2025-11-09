@@ -84,9 +84,8 @@ const PetCardContent = ({
 			<div className={styles.header}>
 				<h1>Adopt your new best friend today</h1>
 				<p>
-					The animals available for adoption here are either directly managed by
-					Pals of Paws Society, or are listed publicly on Petfinder by other
-					organizations in Northwest Mississippi.
+					As of December 2025, due to changes in Petfinder&apos;s policy, we can
+					no longer show adoptable animals from other rescues.
 				</p>
 			</div>
 			{pagination}
