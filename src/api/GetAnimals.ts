@@ -36,7 +36,7 @@ export const fetchAndCacheAllAnimals = async (): Promise<Animal[]> => {
 const retrieveAnimalData = async () => {
 	const animalData = await Promise.all([
 		retrieveShelterluvData(),
-		retrievePetfinderData(),
+		// retrievePetfinderData(), // Petfinder deprecated support for public API December 2025
 	]);
 
 	return animalData.flat();
