@@ -1,5 +1,8 @@
 {
 	"rewrites": [
-		{ "source": "/admin/(.*)", "destination": "/admin/index.html" }
+		{ "source": "/studio/(.*)", "destination": "/studio/index.html" }
+	],
+	"redirects": [
+		{ "source": "/admin/(.*)", "destination": "/studio/$1", "permanent": true }
 	]
 }
