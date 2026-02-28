@@ -1,9 +1,15 @@
 const STUDIO_REWRITE = {
-	source: "/admin/:path*",
+	source: "/studio/:path*",
 	destination:
 		process.env.NODE_ENV === "development"
-			? "http://localhost:3000/admin/:path*"
-			: "/admin/index.html",
+			? "http://localhost:3000/studio/:path*"
+			: "/studio/index.html",
+};
+
+const ADMIN_REDIRECT = {
+	source: "/admin/:path*",
+	destination: "/studio/:path*",
+	permanent: true,
 };
 
 module.exports = {
@@ -16,4 +22,5 @@ module.exports = {
 	},
 	reactStrictMode: true,
 	rewrites: () => [STUDIO_REWRITE],
+	redirects: () => [ADMIN_REDIRECT],
 };

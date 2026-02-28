@@ -2,7 +2,7 @@
 	"root": true,
 	"project": {
 		"name": "Pals of Paws Society",
-		"basePath": "/admin"
+		"basePath": "/studio"
 	},
 	"api": {
 		"projectId": "s60wukgz",
