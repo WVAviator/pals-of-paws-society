@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const pageQuery = `*[_type == "page"]{
+	const pageQuery = `*[_type == "page" && hidden != true]{
         category->{ categoryUrl },
         pageUrl
     }`;

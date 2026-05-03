@@ -35,6 +35,14 @@ export default {
 				"This is the description that will appear in the meta tags for the page (good for search engines).",
 		},
 		{
+			name: "hidden",
+			title: "Hidden",
+			type: "boolean",
+			description:
+				"If checked, this page will not appear on the site or in search engines.",
+			initialValue: false,
+		},
+		{
 			name: "body",
 			title: "Body",
 			type: "blockContent",
