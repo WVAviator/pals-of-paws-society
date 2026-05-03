@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const pageQuery = `*[_type == "page" && hidden != true]{
+	const pageQuery = `*[_type == "page"]{
         category->{ categoryUrl },
         pageUrl
     }`;
@@ -86,7 +86,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 				},
 			};
 		}),
-		fallback: "blocking",
+		fallback: false,
 	};
 };
 
