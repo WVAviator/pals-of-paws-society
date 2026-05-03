@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	][0]{
         body,
         description,
+        hidden,
         title,
         pageUrl,
         category->{ categoryUrl }
@@ -55,6 +56,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		categoryUrl,
 		pageUrl,
 	});
+
+	if (!page || page.hidden) {
+		return { notFound: true };
+	}
 
 	return {
 		props: {
