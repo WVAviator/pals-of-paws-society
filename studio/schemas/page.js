@@ -17,6 +17,14 @@ export default {
 				"This is what will appear in the browser tab and at the top of the page.",
 		},
 		{
+			name: "hidden",
+			title: "Hidden",
+			type: "boolean",
+			description:
+				"If checked, this page will not appear on the site or in search engines.",
+			initialValue: false,
+		},
+		{
 			name: "pageUrl",
 			title: "Page URL",
 			type: "slug",
@@ -33,14 +41,6 @@ export default {
 			type: "text",
 			description:
 				"This is the description that will appear in the meta tags for the page (good for search engines).",
-		},
-		{
-			name: "hidden",
-			title: "Hidden",
-			type: "boolean",
-			description:
-				"If checked, this page will not appear on the site or in search engines.",
-			initialValue: false,
 		},
 		{
 			name: "body",

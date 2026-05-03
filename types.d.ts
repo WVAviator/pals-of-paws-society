@@ -20,6 +20,7 @@ export interface SanityItem {
 export interface PageContent extends SanityItem {
 	title: string;
 	pageUrl: { current: string };
+	hidden: boolean;
 	description: string;
 	body: any;
 }
