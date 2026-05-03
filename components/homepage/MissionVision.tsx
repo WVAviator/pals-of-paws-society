@@ -15,12 +15,10 @@ const MissionVision = () => {
 					<div className={styles.description}>
 						<h2>Our mission</h2>
 						<p>
-							Our mission is to increase adoption visibility for animal rescue
-							and shelter organizations, arrange transportation for animals into
-							areas of higher adoption demand, and remediate animal
-							overpopulation through community outreach, education, financial
-							assistance for veterinary care, and coordination with local,
-							national, and international animal rescue groups.
+							Pals of Paws Society works to reduce pet overpopulation in
+							Northwest Mississippi through spay/neuter assistance, adoption,
+							and community education - giving every animal a chance at a loving
+							home.
 						</p>
 					</div>
 					<div className={styles.missionSummary}>
@@ -40,7 +38,7 @@ const MissionVision = () => {
 								width={128}
 								height={128}
 							/>
-							<p>Provide veterinary financial assistance</p>
+							<p>Improving access to veterinary care</p>
 						</div>
 						<div className={styles.missionSummaryItem}>
 							<Image
@@ -72,14 +70,12 @@ const MissionVision = () => {
 							and the overcrowding of local animal shelters.
 						</p>
 						<p>
-							Pals of Paws Society also aims to tackle the problem at its source
-							– by providing community outreach and education regarding the
-							importance of spaying and neutering pets, and by providing
-							individuals and organizations with the financial means to do so.
-							Through our fundraising and networking efforts, we hope to
-							eliminate the pet overpopulation problem in our community.
+							Pals of Paws Society aims to tackle the overpopulation problem at
+							its source – by providing community outreach and education
+							regarding the importance of spaying and neutering pets. Through
+							our fundraising and networking efforts, we hope to eliminate the
+							pet overpopulation problem in our community.
 						</p>
-
 						<CustomButton
 							variant="outlined"
 							endIcon={<ArrowForwardIcon />}

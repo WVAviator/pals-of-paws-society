@@ -32,8 +32,8 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 				<CardContent>
 					<InfoCard
 						image={aboutImage01}
-						heading="Adoption Marketing"
-						description="We provide our local animal shelters and rescue organizations with assistance in marketing animals for adoption."
+						heading="Adoption & Fostering"
+						description="We provide our local animal shelters and rescue organizations with assistance in sharing pets available for adoption or rehoming."
 						callToAction="Learn More"
 						href="/about/adoption-management"
 						alt="A gray kitten"
@@ -48,8 +48,8 @@ export default function Home({ catCount, dogCount }: HomeProps) {
 					/>
 					<InfoCard
 						image={aboutImage03}
-						heading="Spay & Neuter Financing"
-						description="We provide financial assistance for spays and neuters through our vet partners."
+						heading="Low Cost Spay & Neuter"
+						description="We assist with access to low-cost spays and neuters through our veterinary partners."
 						callToAction="Learn More"
 						href="/about/spayneuter"
 						alt="A rottweiler"
